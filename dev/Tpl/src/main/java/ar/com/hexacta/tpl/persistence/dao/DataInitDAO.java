@@ -12,6 +12,7 @@ import ar.com.hexacta.tpl.model.BookCategory;
 import ar.com.hexacta.tpl.model.BookCopy;
 import ar.com.hexacta.tpl.model.Comment;
 import ar.com.hexacta.tpl.model.Loan;
+import ar.com.hexacta.tpl.model.User;
 import ar.com.hexacta.tpl.model.builder.BookBuilder;
 import ar.com.hexacta.tpl.model.builder.BookCategoryBuilder;
 import ar.com.hexacta.tpl.model.builder.BookCopyBuilder;
@@ -29,6 +30,9 @@ public class DataInitDAO implements DataInitRepository {
 
 	@Autowired
 	private BookCategoryDAO bookCategoryDAO;
+	
+	@Autowired
+	private UserDAO userDAO;
 
 	@Autowired
 	private GenericDAO genericDAO;
@@ -127,6 +131,13 @@ public class DataInitDAO implements DataInitRepository {
 		Loan loan = new Loan("user1", bookCopy1, new Date(), new Date());
 		genericDAO.saveOrUpdate(loan);
 		genericDAO.saveOrUpdate(book1);
+		
+		//Users
+		User userAdmin = new User("admin", "admin", "admin@hexacta.com");
+		userDAO.save(userAdmin);
+		
+		User user2 = new User("edu", "malvino", "emalvino@hexacta.com", false);
+		userDAO.save(user2);
 
 	}
 

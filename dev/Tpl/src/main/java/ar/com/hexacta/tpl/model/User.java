@@ -6,6 +6,7 @@ public class User extends Entity {
 	private String username;
 	private String email;
 	private String password;
+	private boolean enabled;
 	
 	// Hibernate needs
 	public User() {
@@ -17,6 +18,7 @@ public class User extends Entity {
 		super();
 		this.username = username;
 		this.password = pass;
+		this.enabled = true;
 	}
 	
 	public User(String username, String pass, String email){
@@ -24,6 +26,15 @@ public class User extends Entity {
 		this.username = username;
 		this.password = pass;
 		this.email = email;
+		this.enabled = true;
+	}
+	
+	public User(String username, String pass, String email, boolean enabled){
+		super();
+		this.username = username;
+		this.password = pass;
+		this.email = email;
+		this.enabled = enabled;
 	}
 	
 	public String getUsername(){
@@ -48,5 +59,17 @@ public class User extends Entity {
 	
 	public void setEmail(String email){
 		this.email = email;
+	}
+	
+	public boolean isEnabled(){
+		return this.enabled;
+	}
+	
+	public void setEnable(){
+		this.enabled = true;
+	}
+	
+	public void setDisable(){
+		this.enabled = false;
 	}
 }
