@@ -50,7 +50,10 @@
 								{{book.publisher}}
 							</td>
 							<td>
-								{{book.bookCategories}}
+								<ul ng-repeat="Categorie in book.bookCategories" class="list-inline">
+								<li>{{Categorie.name}}
+								</li>
+								</ul>
 							</td>
 							<!-- End Fields -->
 	
