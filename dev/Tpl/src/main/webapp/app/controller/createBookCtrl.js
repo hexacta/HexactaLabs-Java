@@ -1,5 +1,15 @@
 booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 		$http) {
+	
+	$scope.categories = [
+	                 { id: 1, name: 'eBook', descripcion: 'Libro en formato digital'},
+	                 { id: 1, name: 'Fisico', descripcion: 'Libro en formato fisico'}
+	               ];
+	$scope.selection = [];
+	$scope.selectedCategory = function selectedCategory() {
+	      return filterFilter($scope.category, { selected: true });
+	    };
+	
 	$scope.newBook = {};
 	$scope.save = function(aBook) {
 		var jsonBook = angular.toJson(aBook);
