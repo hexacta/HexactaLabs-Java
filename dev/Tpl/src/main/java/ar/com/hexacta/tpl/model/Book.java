@@ -1,25 +1,51 @@
 package ar.com.hexacta.tpl.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class Book extends Entidad {
+// @Entity
+public class Book extends Entidad implements Serializable {
 
     private static final long serialVersionUID = 604529088687479075L;
 
+    // @Id
+    // @Column(name = "BOOK_ID")
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // private Long id;
+
+    // @Version
+    // @Column(name = "VERSION")
+    // private Long version;
+
+    // @Column(name = "NAME")
     private String name;
 
+    // @Column(name = "DESCRIPTION")
     private String description;
 
+    // @Column(name = "PUBLISHER")
     private String publisher;
 
+    // @Column(name = "COUNTRY")
     private String country;
 
+    // @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    // @Column(name = "BOOK_CATEGORY")
     private Set<BookCategory> bookCategories;
 
+    // @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    // @Column(name = "BOOK_COPY")
     private Set<BookCopy> bookCopies;
 
+    // @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    // @Column(name = "BOOK_COMMENT")
     private Set<Comment> bookComments;
 
+    /*
+     * <list name="bookComments" table="COMENTARIOS"
+     * cascade="all-delete-orphan"> <key column="BOOK_ID" /> <one-to-many
+     * column="COMMENT_ID" class="ar.com.hexacta.tpl.model.Comment" /> </list>
+     */
     // Hibernate needs this
 
     public Book() {

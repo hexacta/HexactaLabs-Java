@@ -1,7 +1,16 @@
-<form class="navbar-form navbar-right" role="search"  ng-submit="validateUser(user)">
+
+<div ng-controller="mainController">
+<form class="navbar-form navbar-right" ng-show="mostrarLogin()" novalidate name="logInForm" role="search"  ng-submit="logInForm.$valid && validateUser(user)">
 	<div class="form-group">
-		<input type="text" ng-model="user.name" class="form-control input-sm" placeholder="User" />
-		<input type="password" ng-model="user.pass" class="form-control input-sm" placeholder="Password" />
+		<input type="text" ng-model="user.name" ng-pattern="/^[A-Z][A-Z0-9_]*\@[A-Z0-9_]*\.[A-Z]{2,3}(\.[A-Z]{2})?$/i" class="form-control input-sm" placeholder="User" />
+		<input type="password" ng-model="user.pass" ng-pattern="/^[A-Za-z0-9][A-Za-z0-9]{5,11}$/" class="form-control input-sm" placeholder="Password" />
 	</div>
 	<button type="submit" class="btn btn-hexacta-primary input-sm">Entrar</button>
 </form>
+
+<form class="navbar-form navbar-right" novalidate name="logForm">
+	<div ng-show="mostrarUser()">
+		<div id="Usuario" style="display: table-cell; vertical-align:middle; padding-top: 7px; padding-right: 5px;">{{getNombreUsuario()}} </div>
+	</div>
+</form>
+</div>

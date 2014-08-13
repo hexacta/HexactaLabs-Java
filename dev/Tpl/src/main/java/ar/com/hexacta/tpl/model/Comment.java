@@ -5,17 +5,29 @@ package ar.com.hexacta.tpl.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-
-@Entity
+// @Entity
+// @Table(name = "COMMENTS")
 public class Comment extends Entidad implements Serializable {
 
     private static final long serialVersionUID = 537917183637872456L;
 
+    // @Id
+    // @Column(name = "COMMENT_ID")
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // private Long id;
+
+    /*
+     * @Version
+     *
+     * @Column(name = "VERSION") private Long version;
+     */
+    // @Column(name = "BOOK")
     private Book book;
 
+    // @Column(name = "USER")
     private String user;
 
+    // @Column(name = "BODY")
     private String body;
 
     // Hibernate needs
