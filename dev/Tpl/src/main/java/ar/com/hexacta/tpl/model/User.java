@@ -1,6 +1,6 @@
 package ar.com.hexacta.tpl.model;
 
-public class User extends Entity {
+public class User extends Entidad {
 	private static final long serialVersionUID = -2599013520313365015L;
 	
 	private String username;

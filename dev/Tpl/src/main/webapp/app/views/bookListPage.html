@@ -49,8 +49,11 @@
 							<td>
 								{{book.publisher}}
 							</td>
-							<td>
-								{{book.bookCategories}}
+							<td style="padding-top: 20px; display: inline-flex; border: 0px none;">
+								<ul ng-repeat="Categorie in book.bookCategories" class="list-inline">
+								<li>{{Categorie.name}}
+								</li>
+								</ul>
 							</td>
 							<!-- End Fields -->
 	

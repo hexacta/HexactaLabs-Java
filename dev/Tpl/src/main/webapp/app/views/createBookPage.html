@@ -35,7 +35,7 @@
 					</select>
 				</div>
 
-				<!-- CHECKBOX CATEGORIAS -->
+				<!-- CHECKBOX CATEGORIAS 
 				<div class="form-group">
 					<label class="">Categorias:</label>
 					<div class="col-md-8 col-md-offset-2 checkbox">
@@ -44,6 +44,18 @@
 							class="checkbox-inline"><input class=""
 							id="selectCheckBox2" type="checkbox" /> F&iacute;sico</label>
 					</div>
+				</div>-->
+				
+				<div class="form-group">
+					<label class=""> Categorias:</label>
+					<div class="col-md-8 col-md-offset-2 checkbox">
+					<label ng-repeat="category in categories" class="checkbox-inline">
+					<input type="checkbox" name="selectedCategory[]" value="{{category}}" ng-model="category.selected"
+					ng-checked="selection.indexOf(category) > -1" ng-click="toggleSelection(category)" > 
+					{{category.name}}<br/>
+					</label>
+					</div>
+					
 				</div>
 				<!-- BOTONES -->
 				<div class="col-md-8 col-md-offset-2">

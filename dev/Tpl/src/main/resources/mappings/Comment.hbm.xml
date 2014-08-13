@@ -11,15 +11,10 @@
 			<generator class="identity" />
 		</id>
 		
-		<many-to-one name="book" column="BOOK_ID" not-null="true" />
-		
-		<!-- <property name="book" column="BOOK" type="ar.com.hexacta.tpl.model.Book" />  -->
-		
-		<!-- 
-		<many-to-one name="book" class="ar.com.hexacta.tpl.model.Book" fetch="select" cascade="save-update">
-			<column name="BOOK_ID" not-null="true" />
+		<many-to-one name="book" class="ar.com.hexacta.tpl.model.Book" fetch="select">
+			<column name="BOOK_ID"/>
 		</many-to-one>
-		-->	
+			
 		<property name="user" column="USER" />
 		
 		<property name="body" column="BODY" />		
