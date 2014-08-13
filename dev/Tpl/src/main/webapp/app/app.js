@@ -49,7 +49,6 @@ booksApp.directive('userIngreso',function() {
 					//$http.post('/Tpl/rest/login', jsonUser).success(
 					//		function(data, status, headers, config) {
 					//			if (status = 200) {
-					//				console.log("Data: " + data);
 									$scope.sessionData = data;
 					
 					//				console.log("Con stringify: " + sessionStorage.sessionData);
