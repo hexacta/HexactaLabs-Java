@@ -10,9 +10,9 @@ public class BookCopy extends Entidad implements Serializable {
 
     /*
      * @Id
-     * 
+     *
      * @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-     * 
+     *
      * @Version private Long version;
      */
     public static final String BOOK_RATE_BAD = "Bad";
@@ -32,7 +32,7 @@ public class BookCopy extends Entidad implements Serializable {
     // @Column(name = "CODE")
     private String code = "";
 
-    // @Column(name = "BOOK_RATE")
+    // @Column(name = "BOOK_RATE", unique=true, nullable=false)
     private String bookRate;
 
     // @Column(name = "STATE")
@@ -70,11 +70,11 @@ public class BookCopy extends Entidad implements Serializable {
     }
     /*
      * public Long getId() { return id; }
-     * 
+     *
      * public void setId(final Long id) { this.id = id; }
-     * 
+     *
      * public Long getVersion() { return version; }
-     * 
+     *
      * public void setVersion(final Long version) { this.version = version; }
      */
 }

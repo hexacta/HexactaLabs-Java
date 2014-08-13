@@ -7,15 +7,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 // @Entity
+// @Table(name = "LOANS")
 public class Loan extends Entidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /*
      * @Id
-     * 
+     *
      * @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-     * 
+     *
      * @Version private Long version;
      */
     // @Column(name = "USER")
@@ -60,11 +61,11 @@ public class Loan extends Entidad implements Serializable {
     }
     /*
      * public Long getId() { return id; }
-     * 
+     *
      * public void setId(final Long id) { this.id = id; }
-     * 
+     *
      * public Long getVersion() { return version; }
-     * 
+     *
      * public void setVersion(final Long version) { this.version = version; }
      */
 }

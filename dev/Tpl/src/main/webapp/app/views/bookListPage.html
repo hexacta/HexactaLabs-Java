@@ -74,14 +74,8 @@
 			</table>
 		</div>
 
-		<!--div class="form-group col-md-3">
-			<button type="button" class="btn btn-hexacta-primary col-md-12" ng-click="linkToRegister()">Registrarse</button>
-		</div-->
-		
-	</div>
-
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
+				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -91,7 +85,7 @@
 						
 							<div>
 								<h4>{{selectedBook.description}}</h4>
-								<h4>- {{selectedBook.publisher}}</h4>
+								<cite>- {{selectedBook.publisher}}</cite>
 								<h4>{{selectedBook.country}}</h4>
 							</div>
 							
@@ -99,7 +93,7 @@
 							
 							Comentarios:
 							<blockquote ng-repeat="comment in selectedBook.bookComments">
-								{{comment.body}}
+								{{comment.body}} </br>
 								<cite>Por: {{comment.user}}</cite>
 							</blockquote>
 							<form role="form" name="commentForm" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
@@ -124,7 +118,6 @@
 					</div>
 				</div>
 			</div>
-
-		</div>
+	</div>
 
 </section>
