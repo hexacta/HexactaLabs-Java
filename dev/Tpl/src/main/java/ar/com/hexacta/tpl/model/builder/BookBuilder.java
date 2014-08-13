@@ -56,5 +56,14 @@ public class BookBuilder {
         publisher = aPublisher;
         return this;
     }
-
+    
+    public BookBuilder withCountry(final String aCountry){
+    	country = aCountry;
+    	return this;
+    }
+    
+    public BookBuilder withISBN(final String aISBN){
+    	isbn = aISBN;
+    	return this;
+    }
 }
