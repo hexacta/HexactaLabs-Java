@@ -50,11 +50,12 @@
 					<label class=""> Categorias:</label>
 					<div class="col-md-8 col-md-offset-2 checkbox">
 					<label ng-repeat="category in categories" class="checkbox-inline">
-					<input type="checkbox" name="selectedCategory[]" value="{{category}}" ng-model="category.selected"> 
-					{{category.name}}
-					
+					<input type="checkbox" name="selectedCategory[]" value="{{category}}" ng-model="category.selected"
+					ng-checked="selection.indexOf(category) > -1" ng-click="toggleSelection(category)" > 
+					{{category.name}}<br/>
 					</label>
 					</div>
+					
 				</div>
 				<!-- BOTONES -->
 				<div class="col-md-8 col-md-offset-2">

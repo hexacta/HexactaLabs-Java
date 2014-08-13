@@ -3,14 +3,20 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 	
 	$scope.categories = [
 	                 { id: 1, name: 'eBook', descripcion: 'Libro en formato digital'},
-	                 { id: 1, name: 'Fisico', descripcion: 'Libro en formato fisico'}
+	                 { id: 2, name: 'Fisico', descripcion: 'Libro en formato fisico'}
 	               ];
 	$scope.selection = [];
 	$scope.selectedCategory = function selectedCategory() {
 	      return filterFilter($scope.category, { selected: true });
 	    };
 	
-	$scope.newBook = {};
+    $scope.$watch('categories|filter:{selected:true}', function (nv) {
+        $scope.selection = nv.map(function (category) {
+          return category;
+        });
+      }, true);
+	    
+
 	$scope.save = function(aBook) {
 		var jsonBook = angular.toJson(aBook);
 		$http.post('/Tpl/rest/books', jsonBook).success(
