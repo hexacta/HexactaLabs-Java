@@ -82,14 +82,12 @@ public class UserWS {
 		try {
 			User user = parseUser(jsonUser);
 			user.setId(new Long(userId));
-			boolean validation = userService.updateUser(user);
 			
-			if (validation){
-				return Response.ok().build();
+			if (userService.findUser(new Long(userId)).isEnabled()){
+				return makeUpdate(user);
 			}else{
 				return Response.serverError().build();
 			}
-
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 			return Response.serverError().build();
@@ -105,16 +103,32 @@ public class UserWS {
 		}
 	}
 	
+	private Response makeUpdate(User user){
+		boolean validation = userService.updateUser(user);
+		
+		if (validation){
+			return Response.ok().build();
+		}else{
+			return Response.serverError().build();
+		}
+
+	}
+	
 	@DELETE
 	@Path("/{userId}")
-	public void deleteUser(@PathParam("userId") final String userId) {
-		userService.deleteUserById(new Long(userId));
+	public Response deleteUser(@PathParam("userId") final String userId) {
+		//userService.deleteUserById(new Long(userId));
+		User user = userService.findUser(new Long(userId));
+		user.setDisable();
+		return makeUpdate(user);
 	}
+		
 	
 	private User parseUser(final String jsonUser) throws JsonParseException, JsonMappingException, IOException {
 		User newUser = new User();
 		ObjectMapper mapper = new ObjectMapper();
 		newUser = mapper.readValue(jsonUser, User.class);
+		newUser.setEnable();
 		return newUser;
 	}
 	
