@@ -44,7 +44,13 @@ public class LoginWS {
 			if (!user.getPassword().equals(password)){//the password is incorrect for that username
 				return Response.serverError().build();
 			}
-			return Response.ok(user).build();
+			
+			if (user.isEnabled()){
+				return Response.ok(user).build();
+			}else{
+				return Response.serverError().build();
+			}
+			
 		} catch (IOException e) {
 			return Response.status(401).build();
 		}
