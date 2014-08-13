@@ -17,6 +17,8 @@ public class BookBuilder {
     private String publisher = "defaultPublisher";
 
     private String country = "defaultCountry";
+    
+    private String isbn = "defaultISBN";
 
     private Set<BookCategory> bookCategories = new HashSet<BookCategory>(0);
 
@@ -25,7 +27,7 @@ public class BookBuilder {
     private Set<Comment> bookComments = new HashSet<Comment>(0);
 
     public Book build() {
-        return new Book(name, description, publisher, country, bookCategories, bookCopies, bookComments);
+        return new Book(name, description, publisher, country, isbn, bookCategories, bookCopies, bookComments);
     }
 
     public BookBuilder withBookCopy(final BookCopy... aCopy) {
