@@ -58,7 +58,7 @@ public class BookCopy extends Entidad implements Serializable {
     }
 
     public String getBookRate() {
-        return bookRate;
+        return bookRate;	
     }
 
     public String getCode() {

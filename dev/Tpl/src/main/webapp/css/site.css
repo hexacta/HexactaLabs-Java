@@ -96,7 +96,7 @@ button:focus {
 
 /* Nuevo color standard  RGB(107,155,32)*/
 
-textarea { resize:both; } /* none|horizontal|vertical|both */
+textarea { resize:vertical; } /* none|horizontal|vertical|both */
 
 textarea.vert { resize:vertical; }
 

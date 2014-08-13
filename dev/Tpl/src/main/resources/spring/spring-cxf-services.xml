@@ -36,10 +36,6 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
             <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
         </jaxrs:providers>
 	</jaxrs:server>
-  
-  
-   
-	
 	
 
 	<bean id="commentWS" class="ar.com.hexacta.tpl.resource.CommentWS">
@@ -47,7 +43,35 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
 
 	</bean>
 	
+	<jaxrs:server id="UserCXFService" address="/users">
+		<jaxrs:serviceBeans>
+			<ref bean="userWS" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+        </jaxrs:providers>
+	</jaxrs:server>
 	
+
+	<bean id="userWS" class="ar.com.hexacta.tpl.resource.UserWS">
 	
+
+	</bean>
+
+	<jaxrs:server id="LoginCXFService" address="/login">
+		<jaxrs:serviceBeans>
+			<ref bean="loginWS" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+        </jaxrs:providers>
+	</jaxrs:server>
+	
+
+	<bean id="loginWS" class="ar.com.hexacta.tpl.resource.LoginWS">
+	
+
+	</bean>
+
 	
 </beans>
