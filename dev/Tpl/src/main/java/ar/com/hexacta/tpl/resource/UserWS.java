@@ -119,7 +119,7 @@ public class UserWS {
 	public Response deleteUser(@PathParam("userId") final String userId) {
 		//userService.deleteUserById(new Long(userId));
 		User user = userService.findUser(new Long(userId));
-		user.Disable();
+		user.disable();
 		return makeUpdate(user);
 	}
 		
@@ -128,7 +128,7 @@ public class UserWS {
 		User newUser = new User();
 		ObjectMapper mapper = new ObjectMapper();
 		newUser = mapper.readValue(jsonUser, User.class);
-		newUser.Enable();
+		newUser.enable();
 		return newUser;
 	}
 	

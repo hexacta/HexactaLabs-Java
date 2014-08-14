@@ -65,11 +65,11 @@ public class User extends Entidad {
 		return this.enabled;
 	}
 	
-	public void Enable(){
+	public void enable(){
 		this.enabled = true;
 	}
 	
-	public void Disable(){
+	public void disable(){
 		this.enabled = false;
 	}
 }
