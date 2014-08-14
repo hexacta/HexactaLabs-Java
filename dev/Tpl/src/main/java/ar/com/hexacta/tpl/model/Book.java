@@ -30,6 +30,8 @@ public class Book extends Entidad implements Serializable {
     private String country;
     
     private String isbn;
+    
+    private boolean enabled;
 
     // @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     // @Column(name = "BOOK_CATEGORY")
@@ -52,11 +54,13 @@ public class Book extends Entidad implements Serializable {
 
     public Book() {
         super();
+        this.enabled = true;
     }
 
     public Book(final String name) {
         super();
         this.name = name;
+        this.enabled = true;
     }
 
     public Book(final String aName, final String aDescription, final String aPublisher, final String aCountry, final String isbn,
@@ -72,6 +76,7 @@ public class Book extends Entidad implements Serializable {
         this.bookCopies = bookCopies;
         this.bookComments = bookComments;
         this.isbn = isbn;
+        this.enabled = true;
     }
 
     public Set<BookCategory> getBookCategories() {
@@ -143,4 +148,15 @@ public class Book extends Entidad implements Serializable {
     	return this.isbn;
     }
     
+    public boolean isEnabled(){
+    	return this.enabled;
+    }
+    
+    public void enable(){
+    	this.enabled = true;
+    }
+    
+    public void disable(){
+    	this.enabled = false;
+    }
 }

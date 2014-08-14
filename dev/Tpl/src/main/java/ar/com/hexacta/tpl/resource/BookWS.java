@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.hexacta.tpl.model.Book;
+import ar.com.hexacta.tpl.model.User;
 import ar.com.hexacta.tpl.service.IBooksService;
 import ar.com.hexacta.tpl.service.impl.BooksServiceImpl;
 
@@ -84,7 +85,12 @@ public class BookWS {
         try {
             Book book = parseBook(jsonBook);
             book.setId(new Long(bookId));
-            bookService.updateBook(book);
+            
+            if (bookService.findBook(new Long(bookId)).isEnabled()){
+            	return makeUpdate(book);
+            }else{
+            	return Response.serverError().build();
+            }
 
         } catch (JsonParseException e) {
             e.printStackTrace();
@@ -99,15 +105,22 @@ public class BookWS {
             e.printStackTrace();
             return Response.serverError().build();
         }
-        return Response.ok().build();
     }
 
     @DELETE
     @Path("/{bookId}")
-    public void deleteBook(@PathParam("bookId") final String bookId) {
-        bookService.deleteBookById(new Long(bookId));
+    public Response deleteBook(@PathParam("bookId") final String bookId) {
+        //bookService.deleteBookById(new Long(bookId));
+        Book book = bookService.findBook(new Long(bookId));
+        book.disable();
+        return makeUpdate(book);
     }
 
+	private Response makeUpdate(Book book){
+		bookService.updateBook(book);
+		return Response.ok().build();
+	}
+    
     private Book parseBook(final String jsonBook) throws JsonParseException, JsonMappingException, IOException {
         Book newBook = new Book();
         ObjectMapper mapper = new ObjectMapper();
