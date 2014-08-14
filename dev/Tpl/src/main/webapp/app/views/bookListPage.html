@@ -31,6 +31,7 @@
 							<th class="text-center"> T&iacute;tulo </th>
 							<th class="text-center"> Descripci&oacute;n </th>
 							<th class="text-center"> Editorial </th>
+							<th class="text-center"> ISBN </th>
 							<th class="text-center"> Categor&iacute;a </th>
 							<!--  este colspan es temporal, buscar una solucion mas elegante -->
 							<th class="text-center" colspan="3"> Acciones </th>
@@ -48,6 +49,9 @@
 							</td>
 							<td>
 								{{book.publisher}}
+							</td>
+							<td>
+								{{book.isbn}}
 							</td>
 							<td style="padding-top: 20px; display: inline-flex; border: 0px none;">
 								<ul ng-repeat="Categorie in book.bookCategories" class="list-inline">
@@ -86,7 +90,8 @@
 							<div>
 								<h4>{{selectedBook.description}}</h4>
 								<cite>- {{selectedBook.publisher}}</cite>
-								<h4>{{selectedBook.country}}</h4>
+								<h4>ISBN: {{selectedBook.isbn}}</h4>
+								<h4>Pa&iacute;s de Origen: {{selectedBook.country}}</h4>
 							</div>
 							
 							<!-- TODO: en algun momento se va a agregar una foto para poner aca -->
