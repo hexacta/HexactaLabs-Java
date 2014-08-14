@@ -31,8 +31,6 @@ booksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
 		});
 }]);
 
-//sessionStorage.sessionData = "";
-
 booksApp.directive('userIngreso',function() {
 	return {
 		restrict: 'E',
@@ -50,12 +48,8 @@ booksApp.directive('userIngreso',function() {
 					//		function(data, status, headers, config) {
 					//			if (status = 200) {
 									$scope.sessionData = data;
-					
-					//				console.log("Con stringify: " + sessionStorage.sessionData);
 									// Ok message and go back
 									var usuario = $scope.sessionData;
-									console.log("Login Completed.\nUser name: "
-											+ usuario.name);
 					//				$location.path("/");
 					//			}
 					//		}).error(function(data, status, headers, config) {
@@ -65,32 +59,6 @@ booksApp.directive('userIngreso',function() {
 
 		}]
 	}
-
-});
-
-booksApp.controller('mainController', function($scope){
-	
-$scope.mostrarLogin = function(){
-	if($scope.sessionData == undefined){
-		return true;
-	}else {
-		return false;
-	}
-	
-};
-
-$scope.mostrarUser = function(){
-	if($scope.sessionData == undefined){
-		return false;
-	}else {
-		return true;
-	}
-};
-
-$scope.getNombreUsuario = function(){
-	if($scope.sessionData != undefined)
-		document.getElementById("Usuario").innerHTML = "Nombre: " + $scope.sessionData.name;
-};
 
 });
 

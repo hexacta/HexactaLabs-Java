@@ -1,13 +1,3 @@
-<style>
-.ng-invalid.ng-dirty{
-	border-color: 'red';
-}
-
-.ng-valid.ng-dirty{
-	border-color: 'green';
-}
-</style>
-
 <section id="bookListPage">
 <div ng-controller="bookListCtrl" >
 
@@ -49,10 +39,9 @@
 							<td>
 								{{book.publisher}}
 							</td>
-							<td style="padding-top: 20px; display: inline-flex; border: 0px none;">
+							<td id="categoria">
 								<ul ng-repeat="Categorie in book.bookCategories" class="list-inline">
-								<li>{{Categorie.name}}
-								</li>
+									<li>{{Categorie.name}}</li>
 								</ul>
 							</td>
 							<!-- End Fields -->

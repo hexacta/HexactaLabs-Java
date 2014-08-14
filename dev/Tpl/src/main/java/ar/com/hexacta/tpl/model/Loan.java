@@ -14,9 +14,9 @@ public class Loan extends Entidad implements Serializable {
 
     /*
      * @Id
-     *
+     * 
      * @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-     *
+     * 
      * @Version private Long version;
      */
     // @Column(name = "USER")
@@ -32,7 +32,7 @@ public class Loan extends Entidad implements Serializable {
     // @Column(name = "TO_DATE")
     private Date toDate;
 
-    protected Loan() {
+    public Loan() {
         super();
     }
 
@@ -61,11 +61,11 @@ public class Loan extends Entidad implements Serializable {
     }
     /*
      * public Long getId() { return id; }
-     *
+     * 
      * public void setId(final Long id) { this.id = id; }
-     *
+     * 
      * public Long getVersion() { return version; }
-     *
+     * 
      * public void setVersion(final Long version) { this.version = version; }
      */
 }

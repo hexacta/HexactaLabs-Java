@@ -1,6 +1,5 @@
 package ar.com.hexacta.tpl.resource;
 
-
 import java.io.IOException;
 
 import javax.ws.rs.GET;
@@ -18,43 +17,41 @@ import ar.com.hexacta.tpl.service.ILoginService;
 
 @Service
 public class LoginWS {
-	
-	@Autowired
-	private ILoginService loginService;
-	
-	public LoginWS(){}
 
-	@GET
-	@Path("/")
-	@Produces("application/json")
-	public Response validateUser(@HeaderParam("Authorization") String auth){
-		String basic = "Basic ";
-		auth = auth.substring(basic.length());
-		BASE64Decoder decoder = new BASE64Decoder();
-		try {
-			byte[] decodedBytes = decoder.decodeBuffer(auth);
-			String decoded = new String (decodedBytes);
-			String username = decoded.substring(0, decoded.indexOf(':'));
-			String password = decoded.substring (decoded.indexOf(':') + 1);
-			
-			User user = loginService.findUserByUsername(username);
-			if (user == null){ //there's no user with such username
-				return Response.serverError().build();
-			}
-			if (!user.getPassword().equals(password)){//the password is incorrect for that username
-				return Response.serverError().build();
-			}
-			
-			if (user.isEnabled()){
-				return Response.ok(user).build();
-			}else{
-				return Response.serverError().build();
-			}
-			
-		} catch (IOException e) {
-			return Response.status(401).build();
-		}
-		
-	}
-	
+    @Autowired
+    private ILoginService loginService;
+
+    public LoginWS() {
+    }
+
+    @GET
+    @Path("/")
+    @Produces("application/json")
+    public Response validateUser(@HeaderParam("Authorization") String auth) {
+        String basic = "Basic ";
+        auth = auth.substring(basic.length());
+        BASE64Decoder decoder = new BASE64Decoder();
+        try {
+            byte[] decodedBytes = decoder.decodeBuffer(auth);
+            String decoded = new String(decodedBytes);
+            String username = decoded.substring(0, decoded.indexOf(':'));
+            String password = decoded.substring(decoded.indexOf(':') + 1);
+
+            User user = loginService.findUserByUsername(username);
+            if (user == null)
+                return Response.serverError().build();
+            if (!user.getPassword().equals(password))
+                return Response.serverError().build();
+
+            if (user.getEnabled())
+                return Response.ok(user).build();
+            else
+                return Response.serverError().build();
+
+        } catch (IOException e) {
+            return Response.status(401).build();
+        }
+
+    }
+
 }

@@ -22,7 +22,8 @@ public class UserDAO extends AbstractDAO<User> implements UserRepository{
 		return (User)criteria.uniqueResult();
 	}
 
-	public User findByUser(String username) {
+	@Override
+    public User findByUser(String username) {
 		Criteria criteria = this.getSession().createCriteria(User.class);
 		criteria.add(Restrictions.ilike("username", username));
 		return(User)criteria.uniqueResult();

@@ -20,41 +20,47 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.com.hexacta.tpl.model.Book;
-import ar.com.hexacta.tpl.service.IBooksService;
-import ar.com.hexacta.tpl.service.impl.BooksServiceImpl;
+import ar.com.hexacta.tpl.model.Loan;
+import ar.com.hexacta.tpl.service.ILoansService;
 
 @Service
-public class BookWS {
+public class LoansWS {
 
-    public BookWS() {
+    public LoansWS() {
 
     }
 
     @Autowired
-    private IBooksService bookService;
+    private ILoansService loanService;
 
     @GET
     @Path("/")
     @Produces("application/json")
-    public List<Book> findAllBooks() {
-        return bookService.findAllBooks();
+    public List<Loan> findAllLoans() {
+        return loanService.findAllLoans();
     }
 
     @GET
-    @Path("/{bookId}")
+    @Path("/{loanId}")
     @Produces("application/json")
-    public Book findBook(@PathParam("bookId") final String bookId) {
-        return bookService.findBook(new Long(bookId));
+    public Loan findLoan(@PathParam("loanId") final String loanId) {
+        return loanService.findLoan(new Long(loanId));
+    }
+
+    @GET
+    @Path("/byBook/{bookId}")
+    @Produces("application/json")
+    public List<Loan> findLoansByBookId(@PathParam("bookId") final String bookId) {
+        return loanService.findLoansByBookId(new Long(bookId));
     }
 
     @POST
     @Path("/")
     @Consumes("application/json")
-    public Response createBook(@Multipart(value = "book2", type = "application/json") final String jsonBook) {
+    public Response createLoan(@Multipart(value = "newLoan", type = "application/json") final String jsonLoan) {
         try {
 
-            bookService.createBook(parseBook(jsonBook));
+            loanService.createLoan(parseLoan(jsonLoan));
 
         } catch (JsonParseException e) {
             e.printStackTrace();
@@ -74,13 +80,13 @@ public class BookWS {
     }
 
     @PUT
-    @Path("/{bookId}")
+    @Path("/{loanId}")
     @Consumes("application/json")
-    public Response updateBook(@PathParam("bookId") final String bookId, final String jsonBook) {
+    public Response updateLoan(@PathParam("loanId") final String loanId, final String jsonLoan) {
         try {
-            Book book = parseBook(jsonBook);
-            book.setId(new Long(bookId));
-            bookService.updateBook(book);
+            Loan loan = parseLoan(jsonLoan);
+            loan.setId(new Long(loanId));
+            loanService.updateLoan(loan);
 
         } catch (JsonParseException e) {
             e.printStackTrace();
@@ -99,24 +105,24 @@ public class BookWS {
     }
 
     @DELETE
-    @Path("/{bookId}")
-    public void deleteBook(@PathParam("bookId") final String bookId) {
-        bookService.deleteBookById(new Long(bookId));
+    @Path("/{loanId}")
+    public void deleteComment(@PathParam("loanId") final String loanId) {
+        loanService.deleteLoanById(new Long(loanId));
     }
 
-    private Book parseBook(final String jsonBook) throws JsonParseException, JsonMappingException, IOException {
-        Book newBook = new Book();
+    private Loan parseLoan(final String jsonLoan) throws JsonParseException, JsonMappingException, IOException {
+        Loan newLoan = new Loan();
         ObjectMapper mapper = new ObjectMapper();
-        newBook = mapper.readValue(jsonBook, Book.class);
-        return newBook;
+        newLoan = mapper.readValue(jsonLoan, Loan.class);
+        return newLoan;
     }
 
-    public IBooksService getBookService() {
-        return bookService;
+    public ILoansService getLoanService() {
+        return loanService;
     }
 
-    public void setBookService(final BooksServiceImpl bookService) {
-        this.bookService = bookService;
+    public void setLoanService(final ILoansService loanService) {
+        this.loanService = loanService;
     }
 
 }

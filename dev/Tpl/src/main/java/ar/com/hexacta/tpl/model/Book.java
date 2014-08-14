@@ -41,11 +41,6 @@ public class Book extends Entidad implements Serializable {
     // @Column(name = "BOOK_COMMENT")
     private Set<Comment> bookComments;
 
-    /*
-     * <list name="bookComments" table="COMENTARIOS"
-     * cascade="all-delete-orphan"> <key column="BOOK_ID" /> <one-to-many
-     * column="COMMENT_ID" class="ar.com.hexacta.tpl.model.Comment" /> </list>
-     */
     // Hibernate needs this
 
     public Book() {

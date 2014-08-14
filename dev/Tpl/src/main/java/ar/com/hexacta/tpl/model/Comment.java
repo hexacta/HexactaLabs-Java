@@ -16,11 +16,10 @@ public class Comment extends Entidad implements Serializable {
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
     // private Long id;
 
-    /*
-     * @Version
-     *
-     * @Column(name = "VERSION") private Long version;
-     */
+    // @Version
+    // @Column(name = "VERSION")
+    // private Long version;
+
     // @Column(name = "BOOK")
     private Book book;
 
