@@ -40,4 +40,11 @@ public class LoanDAO extends AbstractDAO<Loan> implements LoanRepository {
         return criteria.list();
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Loan> findAll() {
+        Criteria criteria = this.getSession().createCriteria(Loan.class);
+        return criteria.list();
+    }
+
 }

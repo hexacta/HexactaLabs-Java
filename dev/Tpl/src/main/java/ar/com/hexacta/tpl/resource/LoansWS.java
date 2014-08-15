@@ -106,7 +106,7 @@ public class LoansWS {
 
     @DELETE
     @Path("/{loanId}")
-    public void deleteComment(@PathParam("loanId") final String loanId) {
+    public void deleteLoan(@PathParam("loanId") final String loanId) {
         loanService.deleteLoanById(new Long(loanId));
     }
 

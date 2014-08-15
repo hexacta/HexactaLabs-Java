@@ -90,29 +90,30 @@ public class DataInitDAO implements DataInitRepository {
         // Copias
         BookCopy bookCopy1 = new BookCopyBuilder().withCode("1").withState(BookCopy.STATE_FREE).build();
         BookCopy bookCopy2 = new BookCopyBuilder().withCode("2").withState(BookCopy.STATE_LOANED).build();
-        BookCopy bookCopy3 = new BookCopyBuilder().withCode("3").build();
+        BookCopy bookCopy3 = new BookCopyBuilder().withCode("3").isEnabled(false).build();
         BookCopy bookCopy4 = new BookCopyBuilder().withCode("4").build();
 
         // Libros
         Book book1 = new BookBuilder().withName("El principito")
                 .withDescription("Best-seller del escritor frances Antoine de Saint-Exupery.")
                 .withPublisher("Editorial Planeta").withCategory(physicalCategory).withBookCopy(bookCopy1, bookCopy2)
-                .build();
+                .withCountry("Argentina").build();
         bookDAO.saveOrUpdate(book1);
         LOG.info("Created book " + book1.getId());
         Book book2 = new BookBuilder().withName("El codigo Da Vinci")
                 .withDescription("Novela de misterio del escritor Dan Brown.").withPublisher("Editorial Estrada")
-                .withCategory(physicalCategory).withBookCopy(bookCopy3).build();
+                .withCategory(physicalCategory).withBookCopy(bookCopy3).withCountry("Argentina").build();
         bookDAO.saveOrUpdate(book2);
         LOG.info("Created book " + book2.getId());
 
         Book book3 = new BookBuilder().withName("El Hobbit").withDescription("Novela fantastica de J. R. R. Tolkien.")
-                .withPublisher("Editorial Atlantida").withCategory(eBookCategory).withBookCopy(bookCopy4).build();
+                .withPublisher("Editorial Atlantida").withCategory(eBookCategory).withBookCopy(bookCopy4)
+                .withCountry("Brasil").build();
         bookDAO.saveOrUpdate(book3);
         LOG.info("Created book " + book3.getId());
 
         // Prestamos
-        Loan loan = new Loan("user1", bookCopy1, new Date(), new Date());
+        Loan loan = new Loan("user2", bookCopy1, new Date(), new Date());
         genericDAO.saveOrUpdate(loan);
         genericDAO.saveOrUpdate(book1);
 

@@ -30,9 +30,6 @@ public class BookCopy extends Entidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // @Column(name = "ENABLED")
-    private boolean enabled = true;
-
     // @Column(name = "CODE")
     private String code = "";
 
@@ -41,6 +38,9 @@ public class BookCopy extends Entidad implements Serializable {
 
     // @Column(name = "STATE")
     private String state;
+
+    // @Column(name = "ENABLED")
+    private boolean enabled;
 
     public BookCopy() {
 

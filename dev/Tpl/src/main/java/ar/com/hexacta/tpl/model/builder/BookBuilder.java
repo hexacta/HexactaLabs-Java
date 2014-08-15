@@ -55,4 +55,9 @@ public class BookBuilder {
         return this;
     }
 
+    public BookBuilder withCountry(final String aCountry) {
+        country = aCountry;
+        return this;
+    }
+
 }
