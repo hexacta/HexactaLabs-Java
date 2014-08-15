@@ -95,12 +95,15 @@
 							</div>
 							
 							<!-- TODO: en algun momento se va a agregar una foto para poner aca -->
+							<img ng-src="{{selectedBook.image}}"></img>						
 							
-							Comentarios:
-							<blockquote ng-repeat="comment in selectedBook.bookComments">
-								{{comment.body}} </br>
-								<cite>Por: {{comment.user}}</cite>
-							</blockquote>
+							<div>
+								Comentarios:
+								<blockquote ng-repeat="comment in selectedBook.bookComments">
+									{{comment.body}} </br>
+									<cite>Por: {{comment.user}}</cite>
+								</blockquote>
+							</div>
 							<form role="form" name="commentForm" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
 								<div class="form-group">
 									<label for="txtCommentText">Comentario</label>
@@ -124,5 +127,6 @@
 				</div>
 			</div>
 	</div>
+
 
 </section>
