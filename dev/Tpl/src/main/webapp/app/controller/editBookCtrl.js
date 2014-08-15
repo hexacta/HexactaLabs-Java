@@ -29,7 +29,7 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 		}
 	}).success(function(data, status, headers, config) {
 
-		if (status = 200) {
+		if (status == 200) {
 			$scope.currentBook = data;
 			console.log("Book's Country: " + $scope.currentBook.country);
 		}
