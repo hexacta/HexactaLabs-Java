@@ -10,8 +10,7 @@
 		<id name="id" column="LOAN_ID">
 			<generator class="identity" />
 		</id>
-		
-		<property name="user" type="java.lang.String" />
+		<property name="user" column="user_id" type="long" />
 		
 		<one-to-one name="book" class="ar.com.hexacta.tpl.model.BookCopy" />
 		

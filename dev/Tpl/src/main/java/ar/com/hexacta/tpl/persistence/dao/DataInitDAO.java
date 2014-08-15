@@ -1,5 +1,7 @@
 package ar.com.hexacta.tpl.persistence.dao;
 
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,7 +41,7 @@ public class DataInitDAO implements DataInitRepository {
 	private void createData() {
 
 		// Comentarios
-		Comment comment1 = new Comment("El principito", "yo@mail.com",
+		/*Comment comment1 = new Comment("El principito", "yo@mail.com",
 				"El mejor libro sobre dinosaurios!");
 		commentDAO.save(comment1);
 		LOG.info("Created comment " + comment1.getId());
@@ -54,10 +56,10 @@ public class DataInitDAO implements DataInitRepository {
 		Comment comment4 = new Comment("Book Not Found", "User Not Found",
 				"Me hubiese gustado que el libro tuviese algo escrito");
 		commentDAO.save(comment4);
-		LOG.info("Created comment " + comment4.getId());
+		LOG.info("Created comment " + comment4.getId());*/
 
 		// TESTING Comentarios
-		LOG.info("\n <<<<<<<<<<<<< Retrieving Comments... >>>>>>>>>>>>>>>>>");
+		/*LOG.info("\n <<<<<<<<<<<<< Retrieving Comments... >>>>>>>>>>>>>>>>>");
 
 		Comment commentTest = commentDAO.findById(comment1.getId());
 		LOG.info("Comment " + commentTest.getId() + "\n" + ">>Book: "
@@ -81,7 +83,7 @@ public class DataInitDAO implements DataInitRepository {
 				+ commentTest.getBody());
 
 		LOG.info("\n <<<<<<<<<<<<< END OF COMMENTS >>>>>>>>>>>>>>>>>");
-
+*/
 		// Categorias
 		BookCategory eBookCategory = new BookCategoryBuilder()
 				.withName("ebook")
@@ -126,9 +128,9 @@ public class DataInitDAO implements DataInitRepository {
 		LOG.info("Created book " + book3.getId());
 
 		// Prestamos
-		Loan loan = new Loan("user1", bookCopy1, new Date(), new Date());
+		/*Loan loan = new Loan("user1", bookCopy1, new Date(), new Date());
 		genericDAO.saveOrUpdate(loan);
-		genericDAO.saveOrUpdate(book1);
+		genericDAO.saveOrUpdate(book1);*/
 		
 		//Users
 		User userAdmin = new User("admin", "admin", "admin@hexacta.com");
