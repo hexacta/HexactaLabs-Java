@@ -31,7 +31,7 @@ public class Book extends Entidad implements Serializable {
     
     private String isbn;
     
-    private boolean enabled;
+    private Boolean enabled;
 
     // @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     // @Column(name = "BOOK_CATEGORY")
@@ -54,13 +54,13 @@ public class Book extends Entidad implements Serializable {
 
     public Book() {
         super();
-        this.enabled = true;
+        this.enabled = new Boolean(true);
     }
 
     public Book(final String name) {
         super();
         this.name = name;
-        this.enabled = true;
+        this.enabled = new Boolean(true);
     }
 
     public Book(final String aName, final String aDescription, final String aPublisher, final String aCountry, final String isbn,
@@ -76,7 +76,7 @@ public class Book extends Entidad implements Serializable {
         this.bookCopies = bookCopies;
         this.bookComments = bookComments;
         this.isbn = isbn;
-        this.enabled = true;
+        this.enabled = new Boolean(true);
     }
 
     public Set<BookCategory> getBookCategories() {
@@ -87,7 +87,7 @@ public class Book extends Entidad implements Serializable {
         return description;
     }
 
-    public BookCopy getFreeBookCopy() {
+    public BookCopy getBookCopies() {
         for (BookCopy bookCopy : bookCopies) {
             if (bookCopy.getState().equals(BookCopy.STATE_FREE))
                 return bookCopy;
@@ -107,6 +107,10 @@ public class Book extends Entidad implements Serializable {
         this.bookCategories = bookCategories;
     }
 
+    public void setBookCopies(final Set<BookCopy> bookCopies){
+    	this.bookCopies = bookCopies;
+    }
+    
     public void setDescription(final String description) {
         this.description = description;
     }
@@ -147,16 +151,12 @@ public class Book extends Entidad implements Serializable {
     public String getISBN (){
     	return this.isbn;
     }
+
+    public void setEnabled(boolean enable){
+    	this.enabled = new Boolean(enable);
+    }
     
-    public boolean isEnabled(){
+    public boolean getEnabled(){
     	return this.enabled;
-    }
-    
-    public void enable(){
-    	this.enabled = true;
-    }
-    
-    public void disable(){
-    	this.enabled = false;
     }
 }

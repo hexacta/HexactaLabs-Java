@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.hexacta.tpl.model.Book;
-import ar.com.hexacta.tpl.model.User;
 import ar.com.hexacta.tpl.service.IBooksService;
 import ar.com.hexacta.tpl.service.impl.BooksServiceImpl;
 
@@ -86,7 +85,7 @@ public class BookWS {
             Book book = parseBook(jsonBook);
             book.setId(new Long(bookId));
             
-            if (bookService.findBook(new Long(bookId)).isEnabled()){
+            if (bookService.findBook(new Long(bookId)).getEnabled()){
             	return makeUpdate(book);
             }else{
             	return Response.serverError().build();
@@ -112,7 +111,7 @@ public class BookWS {
     public Response deleteBook(@PathParam("bookId") final String bookId) {
         //bookService.deleteBookById(new Long(bookId));
         Book book = bookService.findBook(new Long(bookId));
-        book.disable();
+        book.setEnabled(false);
         return makeUpdate(book);
     }
 

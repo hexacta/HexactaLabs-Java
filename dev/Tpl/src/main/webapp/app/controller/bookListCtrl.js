@@ -42,7 +42,6 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	    		console.log("An Error occurred while trying to connect to Google API");
 	    		$scope.selectedBook.image = "";
 	    	}) ;
-		
 	};
 	
 	$scope.loadBooks = function(){
@@ -67,13 +66,16 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	
 	$scope.comment = {};
 	$scope.addComment = function(book){
-		$scope.comment.book = book.id;
+		$scope.comment.book = book;
+		var image = $scope.selectedBook.image;
+		delete $scope.selectedBook.image;
 		
 		if (!book.bookComments){  //FIXME: SACAR ESTO
 			book.bookComments = [];  
 		}
 		
 		var jsonComment = angular.toJson($scope.comment);
+		console.log(jsonComment);
 		$http.post('/Tpl/rest/comments', jsonComment).success(function(data, status, headers, config){
     		if(status == 200){
     			console.log("Comment Creation Completed.");
@@ -81,7 +83,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
     	}).error(function(data, status, headers, config){
     		console.log("An Error occurred while trying to store a comment");
     	}) ;
-		
+		$scope.selectedBook.image = image; 
 		book.bookComments.push($scope.comment); //FIXME: SACAR ESTO
 		$scope.loadBooks();
 		
