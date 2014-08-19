@@ -41,9 +41,6 @@ public class Book extends Entidad implements Serializable {
     // @Column(name = "BOOK_COPY")
     private Set<BookCopy> bookCopies;
 
-    // @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    // @Column(name = "BOOK_COMMENT")
-    private Set<Comment> bookComments;
 
     /*
      * <list name="bookComments" table="COMENTARIOS"
@@ -74,7 +71,6 @@ public class Book extends Entidad implements Serializable {
         country = aCountry;
         this.bookCategories = bookCategories;
         this.bookCopies = bookCopies;
-        this.bookComments = bookComments;
         this.isbn = isbn;
         this.enabled = new Boolean(true);
     }
@@ -129,19 +125,6 @@ public class Book extends Entidad implements Serializable {
 
     public void setCountry(final String country) {
         this.country = country;
-    }
-
-    public Set<Comment> getBookComments() {
-        return bookComments;
-    }
-
-    public void setBookComments(final Set<Comment> bookComments) {
-        this.bookComments = bookComments;
-    }
-
-    public void addBookComment(final Comment aComment) {
-        aComment.setBook(this);
-        bookComments.add(aComment);
     }
 
     public void setISBN (final String isbn){

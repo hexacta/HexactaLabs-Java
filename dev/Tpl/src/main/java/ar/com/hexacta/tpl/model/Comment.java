@@ -22,7 +22,7 @@ public class Comment extends Entidad implements Serializable {
      * @Column(name = "VERSION") private Long version;
      */
     // @Column(name = "BOOK")
-    private Book book;
+    private Long bookId;
 
     // @Column(name = "USER")
     private String user;
@@ -35,9 +35,9 @@ public class Comment extends Entidad implements Serializable {
         super();
     }
 
-    public Comment(final Book book, final String user, final String body) {
+    public Comment(final Long bookId, final String user, final String body) {
         super();
-        this.book = book;
+        this.bookId = bookId;
         this.user = user;
         this.body = body;
     }
@@ -58,12 +58,12 @@ public class Comment extends Entidad implements Serializable {
         this.body = body;
     }
 
-    public Book getBook() {
-        return book;
+    public Long getBookId() {
+        return bookId;
     }
 
-    public void setBook(final Book book) {
-        this.book = book;
+    public void setBookId(final Long bookId) {
+        this.bookId = bookId;
     }
-
+    
 }

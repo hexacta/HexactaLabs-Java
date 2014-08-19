@@ -27,6 +27,23 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	$scope.modifyModal=function(book){
 		$scope.selectedBook = book;
 		
+		//Getting comments
+		var bookId = $scope.selectedBook.id;
+		$http({
+			method : 'GET',
+			url: '/Tpl/rest/comments/byBook/' + bookId,
+			headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
+			}).success(function(data, status, headers, config){
+				if (status == 200 ){
+					$scope.selectedBook.bookComments = data;
+				}
+			}).error(function(data, status, headers, config){
+	    		console.log("An Error occurred while trying to get comments for the book " + $scope.selectedBook.name);
+	    		$scope.selectedBook.comments = "";
+	    	}) ;
+		
+		
+		//image from google rest service
 		var find = '-';
 		var re = new RegExp(find, 'g');
 		var isbn = $scope.selectedBook.isbn.replace(re , '');
@@ -66,7 +83,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	
 	$scope.comment = {};
 	$scope.addComment = function(book){
-		$scope.comment.book = book;
+		$scope.comment.bookId = book.id;
 		var image = $scope.selectedBook.image;
 		delete $scope.selectedBook.image;
 		

@@ -29,12 +29,15 @@ public class CommentDAO extends AbstractDAO<Comment> implements
 		System.out.println("<< OK >>");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Comment> findByBookId(final Long bookId) {
-		System.out.println("CommentDAO.findByBookId( " + bookId + " )...");
+		/*System.out.println("CommentDAO.findByBookId( " + bookId + " )...");
 		System.out.println("<< Unsupported Operation >>");
-		throw new UnsupportedOperationException();
-
+		throw new UnsupportedOperationException();*/
+		Criteria criteria = this.getSession().createCriteria(Comment.class);
+		criteria.add(Restrictions.like("bookId", bookId));
+		return (List<Comment>) criteria.list();
 	}
 
 }
