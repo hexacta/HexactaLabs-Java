@@ -9,10 +9,9 @@
 				<!-- SELECT AVAILABLE COPY -->
 				<div class="form-group">
 					<label>Copias Disponibles:</label><select class="form-control ng-required="true">
-						<option>Copia libre 1</option>
-						<option>Copia libre 2</option>
-						<option>Copia libre 3</option>
+						<option ng-repeat="copy in currentBook.freeBookCopy">{{copy.bookRate}}</option>
 					</select>
+					
 				</div>
 				
 				<!-- SELECT USUARIOS -->

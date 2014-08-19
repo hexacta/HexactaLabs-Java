@@ -1,10 +1,13 @@
 booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $routeParams, $http) {
+	
 	$scope.books = $rootScope.books;
-
+	$scope.bookId = $routeParams.bookId;
+	$scope.book = null;
+	
 	$scope.backToHome = function(){
     	$location.path("/");
     };
-    
+   
     $scope.loadUsers = function(){
 		$http({
 			method : 'GET',
@@ -18,14 +21,30 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 				$scope.users = $rootScope.users;
 			}
 		}).error(function(data, status, headers, config){
-			console.log("An Error occurred while trying to get all u");
+			console.log("An Error occurred while trying to get all users");
 		});
 	}
 	$scope.loadUsers();
+	
+	$scope.loadBook = function(){
+		$http({
+			method : 'GET',
+			url : '/Tpl/rest/books/1',
+			headers : {
+				'Content-type' : 'application/json',
+				'Accept' : 'application/json'
+			}
+		}).success(function(data, status, headers, config) {
+			if (status = 200) {
+				$scope.currentBook = data;
+			}
+		}).error(function(data, status, headers, config){
+			console.log("An Error occurred while trying to get book:" + $scope.bookId);
+		});
+	}
+	$scope.loadBook();
 
 });
-
-    
 
 var DatepickerDemoCtrl = function ($scope) {
 	$scope.today = function() {
