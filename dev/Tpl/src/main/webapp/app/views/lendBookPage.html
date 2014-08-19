@@ -8,7 +8,7 @@
 				<legend>Prestar un libro</legend>
 				<!-- SELECT AVAILABLE COPY -->
 				<div class="form-group">
-					<label>Copia:</label><select class="form-control ng-required="true">
+					<label>Copias Disponibles:</label><select class="form-control ng-required="true">
 						<option>Copia libre 1</option>
 						<option>Copia libre 2</option>
 						<option>Copia libre 3</option>
@@ -17,10 +17,8 @@
 				
 				<!-- SELECT USUARIOS -->
 				<div class="form-group">
-					<label class="">Prestar a: </label> <select class="form-control" ng-required="true">
-						<option>Dummy User 1</option>
-						<option>Dummy User 2</option>
-						<option>Dummy User 3</option>
+					<label class="">Prestar a: </label> <select class="form-control" ng-required="true" >
+						<option ng-repeat="user in users" ng-show="user.enabled">{{user.username}}</option>
 					</select>
 				</div>
 				<!-- SELECT TIME -->

@@ -1,11 +1,30 @@
 booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $routeParams, $http) {
 	$scope.books = $rootScope.books;
-	
+
 	$scope.backToHome = function(){
     	$location.path("/");
     };
     
-});    
+    $scope.loadUsers = function(){
+		$http({
+			method : 'GET',
+			url: '/Tpl/rest/users',
+			headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
+		}).success(function(data, status, headers, config){
+			if(status = 200)
+			{
+				$rootScope.users = [];
+				$rootScope.users = data;
+				$scope.users = $rootScope.users;
+			}
+		}).error(function(data, status, headers, config){
+			console.log("An Error occurred while trying to get all u");
+		});
+	}
+	$scope.loadUsers();
+
+});
+
     
 
 var DatepickerDemoCtrl = function ($scope) {
