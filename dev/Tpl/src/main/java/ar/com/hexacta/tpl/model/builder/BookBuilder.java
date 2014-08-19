@@ -30,9 +30,20 @@ public class BookBuilder {
 
     public BookBuilder withBookCopy(final BookCopy... aCopy) {
         for (BookCopy bookCopy : aCopy) {
-            bookCopies.add(bookCopy);
+            if (bookCopy.getState().equals(BookCopy.STATE_FREE)) {
+                bookCopies.add(bookCopy);
+            }
         }
         return this;
+    }
+
+    public Set<BookCopy> getFreeBookCopies() {
+        for (BookCopy bookCopy : bookCopies) {
+            if (bookCopy.getState().equals(BookCopy.STATE_FREE)) {
+                bookCopies.add(bookCopy);
+            }
+        }
+        return bookCopies;
     }
 
     public BookBuilder withCategory(final BookCategory aCategory) {

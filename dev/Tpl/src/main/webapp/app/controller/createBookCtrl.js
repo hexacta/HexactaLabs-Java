@@ -23,8 +23,7 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 				function(data, status, headers, config) {
 					if (status = 200) {
 						// Ok message and go back
-						console.log("Creation Completed.\nBook's Country: "
-								+ $scope.newBook.country);
+						console.log("Creation Completed.\n");
 						$location.path("/");
 					}
 				}).error(function(data, status, headers, config) {
