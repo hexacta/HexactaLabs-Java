@@ -1,11 +1,12 @@
-booksApp.controller('lendBookCtrl', function ($scope,$location,$rootScope) {
+booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $routeParams, $http) {
 	$scope.books = $rootScope.books;
 	
 	$scope.backToHome = function(){
     	$location.path("/");
     };
     
-});
+});    
+    
 
 var DatepickerDemoCtrl = function ($scope) {
 	$scope.today = function() {

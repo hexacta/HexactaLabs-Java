@@ -22,6 +22,7 @@ import ar.com.hexacta.tpl.persistence.repository.DataInitRepository;
 public class DataInitDAO implements DataInitRepository {
 	private static final Logger LOG = Logger.getLogger(DataInitDAO.class);
 
+
 	@Autowired
 	private BookDAO bookDAO;
 
@@ -128,9 +129,7 @@ public class DataInitDAO implements DataInitRepository {
 		LOG.info("Created book " + book3.getId());
 
 		// Prestamos
-		/*Loan loan = new Loan("user1", bookCopy1, new Date(), new Date());
-		genericDAO.saveOrUpdate(loan);
-		genericDAO.saveOrUpdate(book1);*/
+		
 		
 		//Users
 		User userAdmin = new User("admin", "admin", "admin@hexacta.com");
@@ -138,7 +137,10 @@ public class DataInitDAO implements DataInitRepository {
 		
 		User user2 = new User("edu", "malvino", "emalvino@hexacta.com", false);
 		userDAO.save(user2);
-
+		
+		Loan loan = new Loan(userAdmin, bookCopy1, new Date(), new Date());
+		genericDAO.saveOrUpdate(loan);
+		genericDAO.saveOrUpdate(book1);
 	}
 
 	@Override

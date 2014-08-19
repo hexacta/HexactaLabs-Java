@@ -6,6 +6,15 @@
 			<div class="col-md-8 col-md-offset-2" id="feedbackPanel" />
 			<fieldset>
 				<legend>Prestar un libro</legend>
+				<!-- SELECT AVAILABLE COPY -->
+				<div class="form-group">
+					<label>Copia:</label><select class="form-control ng-required="true">
+						<option>Copia libre 1</option>
+						<option>Copia libre 2</option>
+						<option>Copia libre 3</option>
+					</select>
+				</div>
+				
 				<!-- SELECT USUARIOS -->
 				<div class="form-group">
 					<label class="">Prestar a: </label> <select class="form-control" ng-required="true">
@@ -39,16 +48,13 @@
 				          </span>
 				      </div>
 				    </div>
-
-
     <button type="button" class="btn btn-sm btn-hexacta-primary" ng-click="today()">Today</button>
     <button type="button" class="btn btn-sm btn-hexacta-primary" ng-click="clear()">Clear</button>
    <hr />
 </div>
-				
 				<!-- BOTONES -->
 				<div class="col-md-8 col-md-offset-2">
-					<button type="button" class="btn btn-hexacta-primary btn-block"
+					<button type="button" class="btn btn-hexacta-green btn-block"
 						ng-click="save(newBook)">Prestar</button>
 					<!-- <button type="button" class="btn btn-default btn-block"
 						ng-click="reset()">Cancelar</button> -->

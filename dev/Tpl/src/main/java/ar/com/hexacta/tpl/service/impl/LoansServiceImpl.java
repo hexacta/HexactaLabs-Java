@@ -38,16 +38,12 @@ public class LoansServiceImpl implements ILoansService{
 
 	@Override
 	public boolean updateLoan(Loan loan) {
-		
-		return false;
-	
-		
+		return false;	
 	}
 
 	@Override
 	public void deleteLoanById(Long loanId) {
 		loanRepository.deleteById(loanId);
-		
 	}
 
 	@Override
@@ -66,11 +62,11 @@ public class LoansServiceImpl implements ILoansService{
 	}
 	
 	private boolean validateLoan(User user, BookCopy bookCopy) {	
-		return validateUser(user)&&availableCopy(bookCopy)?true:false;
+		return validateUser(user)&&availableCopy(bookCopy);
 	}
 	
 	private boolean availableCopy(BookCopy bookCopy) {
-		return bookCopy.getState().equals("Loaned")?false:true;
+		return bookCopy.getState().equals("Loaned");
 	}
 
 }
