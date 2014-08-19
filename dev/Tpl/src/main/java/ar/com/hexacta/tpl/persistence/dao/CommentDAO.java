@@ -36,7 +36,7 @@ public class CommentDAO extends AbstractDAO<Comment> implements
 		System.out.println("<< Unsupported Operation >>");
 		throw new UnsupportedOperationException();*/
 		Criteria criteria = this.getSession().createCriteria(Comment.class);
-		criteria.add(Restrictions.like("bookId", bookId));
+		criteria.add(Restrictions.like("book.id", bookId));
 		return (List<Comment>) criteria.list();
 	}
 
