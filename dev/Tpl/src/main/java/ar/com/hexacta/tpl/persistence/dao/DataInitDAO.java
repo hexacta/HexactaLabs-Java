@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.com.hexacta.tpl.model.Book;
 import ar.com.hexacta.tpl.model.BookCategory;
 import ar.com.hexacta.tpl.model.BookCopy;
-import ar.com.hexacta.tpl.model.Comment;
 import ar.com.hexacta.tpl.model.Loan;
 import ar.com.hexacta.tpl.model.User;
 import ar.com.hexacta.tpl.model.builder.BookBuilder;
@@ -21,6 +20,7 @@ import ar.com.hexacta.tpl.persistence.repository.DataInitRepository;
 @Repository
 public class DataInitDAO implements DataInitRepository {
 	private static final Logger LOG = Logger.getLogger(DataInitDAO.class);
+
 
 	@Autowired
 	private BookDAO bookDAO;
@@ -39,9 +39,6 @@ public class DataInitDAO implements DataInitRepository {
 
 	@Transactional
 	private void createData() {
-
-		
-
 		// Categorias
 		BookCategory eBookCategory = new BookCategoryBuilder()
 				.withName("ebook")
@@ -60,7 +57,8 @@ public class DataInitDAO implements DataInitRepository {
 				.withState(BookCopy.STATE_LOANED).build();
 		BookCopy bookCopy3 = new BookCopyBuilder().withCode("3").build();
 		BookCopy bookCopy4 = new BookCopyBuilder().withCode("4").build();
-
+		BookCopy bookCopy5 = new BookCopyBuilder().withCode("5").build();
+		
 		// Libros
 		Book book1 = new BookBuilder()
 				.withName("El principito")
@@ -136,10 +134,15 @@ public class DataInitDAO implements DataInitRepository {
 		LOG.info("\n <<<<<<<<<<<<< END OF COMMENTS >>>>>>>>>>>>>>>>>");
 
 */
+		Book book4 = new BookBuilder().withName("Ender's Game")
+				.withDescription("Novela de ciencia ficción de Scott")
+				.withPublisher("Editorial pepin")
+				.withCategory(physicalCategory).withBookCopy(bookCopy5).build();
+		bookDAO.saveOrUpdate(book4);
+		LOG.info("Created book " + book4.getId());
+
 		// Prestamos
-		Loan loan = new Loan("user1", bookCopy1, new Date(), new Date());
-		genericDAO.saveOrUpdate(loan);
-		genericDAO.saveOrUpdate(book1);
+		
 		
 		//Users
 		User userAdmin = new User("admin", "admin", "admin@hexacta.com");
@@ -147,7 +150,10 @@ public class DataInitDAO implements DataInitRepository {
 		
 		User user2 = new User("edu", "malvino", "emalvino@hexacta.com", false);
 		userDAO.save(user2);
-
+		
+		Loan loan = new Loan(userAdmin, bookCopy1, new Date(), new Date());
+		genericDAO.saveOrUpdate(loan);
+		genericDAO.saveOrUpdate(book1);
 	}
 
 	@Override

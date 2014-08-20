@@ -185,3 +185,9 @@ input.ng-invalid.ng-dirty {
     display: block;
     margin-top: 10px;
 }
+
+#category{
+	padding-top: 20px; 
+	display: inline-flex; 
+	border: 0px none;
+}
