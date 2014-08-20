@@ -25,7 +25,7 @@
 		
 		<property name="enabled" column="ENABLED"  />
 		
-		<set name="bookCategories" lazy="false" table="BOOK_CATEGORY" cascade="save-update">
+		<set name="bookCategories" lazy="false" table="BOOK_CATEGORY" cascade="all">
 			<key column="BOOK_ID" />
 			<many-to-many column="BOOK_CATEGORY_ID" class="ar.com.hexacta.tpl.model.BookCategory" />
 		</set>
