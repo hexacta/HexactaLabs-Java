@@ -21,7 +21,7 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 		var jsonBook = angular.toJson(aBook);
 		$http.post('/Tpl/rest/books', jsonBook).success(
 				function(data, status, headers, config) {
-					if (status = 200) {
+					if (status == 200) {
 						// Ok message and go back
 						console.log("Creation Completed.\n");
 						$location.path("/");

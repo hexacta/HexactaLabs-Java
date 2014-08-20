@@ -27,7 +27,7 @@ booksApp.controller('registerCtrl', function($scope, $location, $rootScope, $htt
 			var jsonUser = angular.toJson(aUser);
 			$http.post('/Tpl/rest/users', jsonUser).success(
 					function(data, status, headers, config) {
-						if (status = 200) {
+						if (status == 200) {
 							// Ok message and go back
 							console.log("User Creation Completed.\n");
 							$location.path("/");
@@ -50,13 +50,13 @@ booksApp.controller('registerCtrl', function($scope, $location, $rootScope, $htt
 	$scope.reset();
 	
 	$scope.backToHome = function() {
-		if ($scope.pass == $scope.pass2) {
+		if ($scope.newUser.password == $scope.password2) {
 			$location.path("/");
 		} else {
 			$scope.addAlert("Cuidado!","Las password no coinciden.", "danger");
-			$scope.pass = "";
-			$scope.pass2 = "";
-			document.getElementById('pass').focus();
+			$scope.newUser.password = "";
+			$scope.password2 = "";
+			document.getElementById('password').focus();
 		}
 	};
 });

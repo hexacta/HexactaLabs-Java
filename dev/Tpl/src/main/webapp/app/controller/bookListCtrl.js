@@ -35,7 +35,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 			headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
 		}).success(function(data, status, headers, config){
 
-			if(status = 200)
+			if(status == 200)
 			{
 				$rootScope.books = [];
 				$rootScope.books = data;
@@ -58,7 +58,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		
 		var jsonComment = angular.toJson($scope.comment);
 		$http.post('/Tpl/rest/comments', jsonComment).success(function(data, status, headers, config){
-    		if(status = 200){
+    		if(status == 200){
     			console.log("Comment Creation Completed.");
     		}
     	}).error(function(data, status, headers, config){
