@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import org.apache.cxf.service.invoker.SessionFactory;
-import org.hibernate.Criteria;
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -31,19 +30,19 @@ public abstract class AbstractDAO<T> extends HibernateDaoSupport {
     }
 
     public void delete(final T entity) {
-    	this.getSession().delete(entity);
+    	this.getHibernateTemplate().delete(entity);
     }
 
     public void update(final T entity) {
-    	this.getSession().update(entity);
+    	this.getHibernateTemplate().update(entity);
     }
 
     public void saveOrUpdate(final T entity) {
-    	this.getSession().saveOrUpdate(entity);
+    	this.getHibernateTemplate().saveOrUpdate(entity);
     }
 
     public T findById(final Serializable id) {
-        return (T)this.getSession().get(this.getPersistentClass(), id);
+        return (T)this.getHibernateTemplate().get(this.getPersistentClass(), id);
     }
 
     @SuppressWarnings(UNCHECKED)
@@ -53,16 +52,11 @@ public abstract class AbstractDAO<T> extends HibernateDaoSupport {
 
     public void deleteById(final Serializable id) {
         T obj = this.findById(id);
-        this.getSession().delete(obj);
+        this.delete(obj);
     }
 
-    public void flushAndClear() {
-    	this.getSession().flush();
-    	this.getSession().clear();
-    }
-
-    protected Criteria createCriteria() {
-        return this.getSession().createCriteria(this.getPersistentClass());
+    protected DetachedCriteria createCriteria() {
+        return DetachedCriteria.forClass(this.getPersistentClass());
     }
     
     @Autowired

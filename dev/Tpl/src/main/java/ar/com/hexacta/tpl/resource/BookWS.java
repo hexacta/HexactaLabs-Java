@@ -32,7 +32,6 @@ import ar.com.hexacta.tpl.service.impl.BooksServiceImpl;
 public class BookWS {
 
     public BookWS() {
-
     }
 
     @Autowired
@@ -60,15 +59,6 @@ public class BookWS {
 
             bookService.createBook(parseBook(jsonBook));
 
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
@@ -91,15 +81,6 @@ public class BookWS {
             	return Response.serverError().build();
             }
 
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
@@ -109,7 +90,6 @@ public class BookWS {
     @DELETE
     @Path("/{bookId}")
     public Response deleteBook(@PathParam("bookId") final String bookId) {
-        //bookService.deleteBookById(new Long(bookId));
         Book book = bookService.findBook(new Long(bookId));
         book.setEnabled(false);
         return makeUpdate(book);

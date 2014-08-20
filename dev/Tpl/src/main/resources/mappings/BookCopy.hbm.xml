@@ -11,9 +11,9 @@
 			<generator class="identity" />
 		</id>
 	
-		<version name="version" column="VERSION" type="long" />	
+		<version name="version" column="VERSION" type="long"/>	
 		
-		<property name="code" column="CODE"  unique="true" not-null="true" type="java.lang.String"/>
+		<property name="code" column="CODE" unique="true" not-null="true" type="java.lang.String"/>
 		
 		<property name="bookRate" column="BOOK_RATE" type="java.lang.String"/>
 		

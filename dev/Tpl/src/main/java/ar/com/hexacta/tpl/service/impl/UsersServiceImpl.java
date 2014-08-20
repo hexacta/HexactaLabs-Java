@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.hexacta.tpl.model.User;
 import ar.com.hexacta.tpl.service.IUsersService;
@@ -19,16 +20,19 @@ public class UsersServiceImpl implements IUsersService {
 	UserRepository userRepository;
 	
 	@Override
+	@Transactional(readOnly = true)
 	public List<User> findAllUsers() {
 		return userRepository.findAll();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public User findUser(Long userId) {
 		return userRepository.findById(userId);
 	}
 	
 	@Override
+	@Transactional
 	public boolean createUser(User user) {
 		if (validateUser(user)){
 			userRepository.save(user);
@@ -39,6 +43,7 @@ public class UsersServiceImpl implements IUsersService {
 	}
 
 	@Override
+	@Transactional
 	public boolean updateUser(User user) {
 		if (validateUser(user)){
 			userRepository.update(user);
@@ -49,11 +54,13 @@ public class UsersServiceImpl implements IUsersService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteUser(User user) {
 		userRepository.delete(user);
 	}
 
 	@Override
+	@Transactional
 	public void deleteUserById(Long userId) {
 		userRepository.deleteById(userId);
 	}

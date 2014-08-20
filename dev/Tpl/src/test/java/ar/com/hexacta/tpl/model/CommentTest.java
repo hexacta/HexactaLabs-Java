@@ -1,4 +1,4 @@
-package ar.com.hexacta.tpl.test;
+package ar.com.hexacta.tpl.model;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,13 +20,13 @@ public class CommentTest {
 
         String testUser = "test@mail.com";
         String testBody = "Test comment body";
-        Long testBook = new Long(1);
+        Book testBook = new Book();
 
         Comment comment = new Comment(testBook, testUser, testBody);
 
         Assert.assertTrue(comment.getUser() == testUser);
         Assert.assertTrue(comment.getBody() == testBody);
-        Assert.assertTrue(comment.getBookId() == testBook);
+        Assert.assertTrue(comment.getBook() == testBook);
     }
 
     @Test

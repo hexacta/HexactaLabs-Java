@@ -21,7 +21,7 @@ public class BookCategoriesServiceImpl implements IBookCategoriesService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<BookCategory> findAllCategories() {
         return categoriesRepository.findAll();
     }
