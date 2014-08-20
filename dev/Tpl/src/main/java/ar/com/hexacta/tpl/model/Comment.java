@@ -65,5 +65,5 @@ public class Comment extends Entidad implements Serializable {
     public void setBook(final Book book) {
         this.book = book;
     }
-
+    
 }

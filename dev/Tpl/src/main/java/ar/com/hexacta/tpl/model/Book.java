@@ -28,6 +28,10 @@ public class Book extends Entidad implements Serializable {
 
     // @Column(name = "COUNTRY")
     private String country;
+    
+    private String isbn;
+    
+    private Boolean enabled;
 
     // @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     // @Column(name = "BOOK_CATEGORY")
@@ -37,9 +41,6 @@ public class Book extends Entidad implements Serializable {
     // @Column(name = "BOOK_COPY")
     private Set<BookCopy> bookCopies;
 
-    // @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    // @Column(name = "BOOK_COMMENT")
-    private Set<Comment> bookComments;
 
     /*
      * <list name="bookComments" table="COMENTARIOS"
@@ -50,14 +51,16 @@ public class Book extends Entidad implements Serializable {
 
     public Book() {
         super();
+        this.enabled = new Boolean(true);
     }
 
     public Book(final String name) {
         super();
         this.name = name;
+        this.enabled = new Boolean(true);
     }
 
-    public Book(final String aName, final String aDescription, final String aPublisher, final String aCountry,
+    public Book(final String aName, final String aDescription, final String aPublisher, final String aCountry, final String isbn,
 
     final Set<BookCategory> bookCategories, final Set<BookCopy> bookCopies, final Set<Comment> bookComments) {
 
@@ -68,8 +71,8 @@ public class Book extends Entidad implements Serializable {
         country = aCountry;
         this.bookCategories = bookCategories;
         this.bookCopies = bookCopies;
-        this.bookComments = bookComments;
-
+        this.isbn = isbn;
+        this.enabled = new Boolean(true);
     }
 
     public Set<BookCategory> getBookCategories() {
@@ -80,7 +83,7 @@ public class Book extends Entidad implements Serializable {
         return description;
     }
 
-    public BookCopy getFreeBookCopy() {
+    public BookCopy getBookCopies() {
         for (BookCopy bookCopy : bookCopies) {
             if (bookCopy.getState().equals(BookCopy.STATE_FREE))
                 return bookCopy;
@@ -100,6 +103,10 @@ public class Book extends Entidad implements Serializable {
         this.bookCategories = bookCategories;
     }
 
+    public void setBookCopies(final Set<BookCopy> bookCopies){
+    	this.bookCopies = bookCopies;
+    }
+    
     public void setDescription(final String description) {
         this.description = description;
     }
@@ -120,17 +127,19 @@ public class Book extends Entidad implements Serializable {
         this.country = country;
     }
 
-    public Set<Comment> getBookComments() {
-        return bookComments;
+    public void setISBN (final String isbn){
+    	this.isbn = isbn;
+    }
+    
+    public String getISBN (){
+    	return this.isbn;
     }
 
-    public void setBookComments(final Set<Comment> bookComments) {
-        this.bookComments = bookComments;
+    public void setEnabled(boolean enable){
+    	this.enabled = new Boolean(enable);
     }
-
-    public void addBookComment(final Comment aComment) {
-        aComment.setBook(this);
-        bookComments.add(aComment);
+    
+    public boolean getEnabled(){
+    	return this.enabled;
     }
-
 }

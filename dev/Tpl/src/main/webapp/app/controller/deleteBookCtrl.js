@@ -12,7 +12,7 @@ booksApp.controller('deleteBookCtrl', function ($scope,$location,$rootScope) {
 		var jsonBook = angular.toJson(bookId);
 		$http.put('/Tpl/rest/books', jsonBook).success(
 				function(data, status, headers, config) {
-					if (status = 200) {
+					if (status == 200) {
 						// Ok message and go back
 						// alert('ok');
 						console.log("Deletion Completed.\n");

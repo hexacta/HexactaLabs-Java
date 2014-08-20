@@ -21,6 +21,10 @@
 		
 		<property name="country" column="COUNTRY"  />
 		
+		<property name="isbn" column="ISBN"  />
+		
+		<property name="enabled" column="ENABLED"  />
+		
 		<set name="bookCategories" lazy="false" table="BOOK_CATEGORY" cascade="save-update">
 			<key column="BOOK_ID" />
 			<many-to-many column="BOOK_CATEGORY_ID" class="ar.com.hexacta.tpl.model.BookCategory" />
@@ -31,10 +35,6 @@
 			<many-to-many column="BOOK_COPY_ID" class="ar.com.hexacta.tpl.model.BookCopy" />		
 		</set>
 		
-		<set name="bookComments" table="COMMENTS" inverse="true">
-			<key column="BOOK_ID" not-null="true" />
-			<one-to-many class="ar.com.hexacta.tpl.model.Comment" />
-		</set>
  	</class>
 	
 </hibernate-mapping>
