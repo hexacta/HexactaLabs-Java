@@ -38,6 +38,7 @@ public class LoansServiceImpl implements ILoansService{
 
 	@Override
 	public boolean updateLoan(Loan loan) {
+		
 		return false;	
 	}
 
@@ -66,7 +67,13 @@ public class LoansServiceImpl implements ILoansService{
 	}
 	
 	private boolean availableCopy(BookCopy bookCopy) {
-		return bookCopy.getState().equals("Loaned");
+		return bookCopy.getState().equals("Free");
+	}
+
+	@Override
+	public boolean createLoan(Loan Loan) {
+		
+		return false;
 	}
 
 }

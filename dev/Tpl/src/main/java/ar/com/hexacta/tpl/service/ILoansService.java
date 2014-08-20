@@ -21,4 +21,6 @@ public interface ILoansService {
 	
 	Loan findLoanByBookCopyId (Long bookCopyId);
 
+	boolean createLoan(Loan parseLoan);
+
 }

@@ -103,7 +103,8 @@ public class DataInitDAO implements DataInitRepository {
 				.withState(BookCopy.STATE_LOANED).build();
 		BookCopy bookCopy3 = new BookCopyBuilder().withCode("3").build();
 		BookCopy bookCopy4 = new BookCopyBuilder().withCode("4").build();
-
+		BookCopy bookCopy5 = new BookCopyBuilder().withCode("5").build();
+		
 		// Libros
 		Book book1 = new BookBuilder()
 				.withName("El principito")
@@ -128,6 +129,12 @@ public class DataInitDAO implements DataInitRepository {
 		bookDAO.saveOrUpdate(book3);
 		LOG.info("Created book " + book3.getId());
 
+		Book book4 = new BookBuilder().withName("Ender's Game")
+				.withDescription("Novela de ciencia ficción de Scott")
+				.withPublisher("Editorial pepin")
+				.withCategory(physicalCategory).withBookCopy(bookCopy5).build();
+		bookDAO.saveOrUpdate(book4);
+		LOG.info("Created book " + book4.getId());
 		// Prestamos
 		
 		

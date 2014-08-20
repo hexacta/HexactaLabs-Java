@@ -8,9 +8,8 @@
 				<legend>Prestar un libro</legend>
 				<!-- SELECT AVAILABLE COPY -->
 				<div class="form-group">
-					<label>Copias Disponibles:</label><select class="form-control ng-required="true">
-						<option ng-repeat="copy in currentBook.freeBookCopy">{{copy.bookRate}}</option>
-					</select>
+					<label>Copia numero:</label>
+					<label>{{copyCode.code}}</label>
 					
 				</div>
 				
@@ -45,8 +44,8 @@
 				          </span>
 				      </div>
 				    </div>
-    <button type="button" class="btn btn-sm btn-hexacta-primary" ng-click="today()">Today</button>
-    <button type="button" class="btn btn-sm btn-hexacta-primary" ng-click="clear()">Clear</button>
+    <button type="button" class="btn btn-sm btn-hexacta-primary" ng-click="today()">Hoy</button>
+    <button type="button" class="btn btn-sm btn-hexacta-primary" ng-click="clear()">Borrar</button>
    <hr />
 </div>
 				<!-- BOTONES -->

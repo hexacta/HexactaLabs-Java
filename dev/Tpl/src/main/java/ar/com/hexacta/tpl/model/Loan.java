@@ -32,7 +32,7 @@ public class Loan extends Entidad implements Serializable {
     // @Column(name = "TO_DATE")
     private Date toDate;
 
-    protected Loan() {
+    public Loan() {
         super();
     }
 

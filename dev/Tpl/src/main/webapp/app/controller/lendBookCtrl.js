@@ -3,6 +3,7 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 	$scope.books = $rootScope.books;
 	$scope.bookId = $routeParams.bookId;
 	$scope.book = null;
+	$scope.copyCode = null;
 	
 	$scope.backToHome = function(){
     	$location.path("/");
@@ -37,12 +38,14 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 		}).success(function(data, status, headers, config) {
 			if (status = 200) {
 				$scope.currentBook = data;
+				$scope.copyCode = $scope.currentBook.freeBookCopy;
 			}
 		}).error(function(data, status, headers, config){
 			console.log("An Error occurred while trying to get book:" + $scope.bookId);
 		});
 	}
 	$scope.loadBook();
+	
 
 });
 
