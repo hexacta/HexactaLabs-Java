@@ -20,7 +20,7 @@ public class Loan extends Entidad implements Serializable {
      * @Version private Long version;
      */
     // @Column(name = "USER")
-    private String user;
+    private User user;
 
     // @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     // @Column(name = "BOOK")
@@ -32,11 +32,11 @@ public class Loan extends Entidad implements Serializable {
     // @Column(name = "TO_DATE")
     private Date toDate;
 
-    protected Loan() {
+    public Loan() {
         super();
     }
 
-    public Loan(final String user, final BookCopy book, final Date fromDate, final Date toDate) {
+    public Loan(final User user, final BookCopy book, final Date fromDate, final Date toDate) {
         super();
         this.user = user;
         this.book = book;
@@ -44,7 +44,7 @@ public class Loan extends Entidad implements Serializable {
         this.toDate = toDate;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
