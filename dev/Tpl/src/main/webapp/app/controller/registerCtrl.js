@@ -1,4 +1,4 @@
-booksApp.controller('registerCtrl', function($scope, $location, $rootScope) {
+booksApp.controller('registerCtrl', function($scope, $location, $rootScope, $http) {
 
 	document.getElementById('user').focus();
 	
@@ -22,14 +22,41 @@ booksApp.controller('registerCtrl', function($scope, $location, $rootScope) {
 	};
 	//End of alerts
 	
+	$scope.save = function(aUser) {
+		if ($scope.newUser.password == $scope.password2) {
+			var jsonUser = angular.toJson(aUser);
+			$http.post('/Tpl/rest/users', jsonUser).success(
+					function(data, status, headers, config) {
+						if (status == 200) {
+							// Ok message and go back
+							console.log("User Creation Completed.\n");
+							$location.path("/");
+						}
+					}).error(function(data, status, headers, config) {
+				console.log("An Error occurred while trying to create a new user");
+			})
+		} else {
+			$scope.addAlert("Cuidado!","Las password no coinciden.", "danger");
+			$scope.newUser.password = "";
+			$scope.password2 = "";
+			document.getElementById('password').focus();			
+		}
+	};
+	
+	$scope.reset = function() {
+		$scope.newUser = {};
+	};
+
+	$scope.reset();
+	
 	$scope.backToHome = function() {
-		if ($scope.pass == $scope.pass2) {
+		if ($scope.newUser.password == $scope.password2) {
 			$location.path("/");
 		} else {
 			$scope.addAlert("Cuidado!","Las password no coinciden.", "danger");
-			$scope.pass = "";
-			$scope.pass2 = "";
-			document.getElementById('pass').focus();
+			$scope.newUser.password = "";
+			$scope.password2 = "";
+			document.getElementById('password').focus();
 		}
 	};
 });

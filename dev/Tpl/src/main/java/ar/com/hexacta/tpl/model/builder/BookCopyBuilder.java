@@ -13,8 +13,10 @@ public class BookCopyBuilder {
 
     private String state = BookCopy.STATE_FREE;
 
+    private boolean enabled = true;
+
     public BookCopy build() {
-        return new BookCopy(code, bookRate, state);
+        return new BookCopy(code, bookRate, state, enabled);
     }
 
     public BookCopyBuilder withCode(final String aCode) {
@@ -24,6 +26,11 @@ public class BookCopyBuilder {
 
     public BookCopyBuilder withState(final String aState) {
         state = aState;
+        return this;
+    }
+
+    public BookCopyBuilder isEnabled(final boolean aEnabled) {
+        enabled = aEnabled;
         return this;
     }
 

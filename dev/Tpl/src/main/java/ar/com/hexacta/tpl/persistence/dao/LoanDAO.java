@@ -2,43 +2,33 @@ package ar.com.hexacta.tpl.persistence.dao;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
-
-import ar.com.hexacta.tpl.model.Loan;
-import ar.com.hexacta.tpl.persistence.repository.LoanRepositoy;
-
 import org.springframework.stereotype.Repository;
 
+import ar.com.hexacta.tpl.model.Loan;
+import ar.com.hexacta.tpl.persistence.repository.LoanRepository;
+
 @Repository
-public class LoanDAO extends AbstractDAO<Loan> implements LoanRepositoy{
+public class LoanDAO extends AbstractDAO<Loan> implements LoanRepository {
+    @Override
+    public void deleteById(final Long loanId) {
+        super.deleteById(loanId);
+    }
 
-	@Override
-	public void deleteById(Long loanId) {
-		super.deleteById(loanId);	
-	}
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Loan> findByBookId(final Long bookId) {
+        DetachedCriteria criteria = this.createCriteria();
+        criteria.add(Restrictions.ilike("book", bookId));
+        return (List<Loan>) this.getHibernateTemplate().findByCriteria(criteria);
+    }
 
-	@Override
-	public Loan findById(final Long loanId) {
-		Criteria criteria = this.getSession().createCriteria(Loan.class);
-		criteria.add(Restrictions.like("id", loanId));
-		return (Loan) criteria.uniqueResult();
-	}
-
-	@Override
-	public Loan findByCopyId(Long bookCopyId) {
-		Criteria criteria = this.getSession().createCriteria(Loan.class);
-		criteria.add(Restrictions.like("copy_id", bookCopyId));
-		return (Loan) criteria.uniqueResult();	
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Loan> findByUserId(Long userId) {
-		Criteria criteria = this.getSession().createCriteria(Loan.class);
-		criteria.add(Restrictions.like("user_id", userId));
-		return criteria.list();
-	}
-	
-
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Loan> findByUser(final String user) {
+        DetachedCriteria criteria = this.createCriteria();
+        criteria.add(Restrictions.ilike("user", user));
+        return (List<Loan>) this.getHibernateTemplate().findByCriteria(criteria);
+    }
 }

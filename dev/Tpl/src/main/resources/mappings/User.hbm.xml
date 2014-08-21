@@ -19,8 +19,7 @@
 		
 		<property name="email" column="EMAIL"/>
 		
-		<property name="enabled" column="ENABLED"/>
-		
+		<property name="enabled" column="ENABLED"/>	
 		
  </class>
 	

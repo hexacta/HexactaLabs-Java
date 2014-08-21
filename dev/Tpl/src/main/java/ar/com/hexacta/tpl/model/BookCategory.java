@@ -3,6 +3,7 @@ package ar.com.hexacta.tpl.model;
 import java.io.Serializable;
 
 // @Entity
+// @Table(name = "BOOK_CATEGORIES")
 public class BookCategory extends Entidad implements Serializable {
 
     private static final long serialVersionUID = -8084614446913836469L;
@@ -28,7 +29,6 @@ public class BookCategory extends Entidad implements Serializable {
         super();
         name = aName;
         description = aDescription;
-
     }
 
     public String getName() {
@@ -48,11 +48,11 @@ public class BookCategory extends Entidad implements Serializable {
     }
     /*
      * public Long getId() { return id; }
-     * 
+     *
      * public void setId(final Long id) { this.id = id; }
-     * 
+     *
      * public Long getVersion() { return version; }
-     * 
+     *
      * public void setVersion(final Long version) { this.version = version; }
      */
 }

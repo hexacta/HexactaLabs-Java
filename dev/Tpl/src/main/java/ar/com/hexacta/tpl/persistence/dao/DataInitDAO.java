@@ -2,7 +2,6 @@ package ar.com.hexacta.tpl.persistence.dao;
 
 import java.util.Date;
 import java.util.logging.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -89,51 +88,6 @@ public class DataInitDAO implements DataInitRepository {
 		bookDAO.saveOrUpdate(book3);
 		LOG.info("Created book " + book3.getId());
 
-		// Comentarios
-		/*Comment comment1 = new Comment(book1, "yo@mail.com",
-				"El mejor libro sobre dinosaurios!");
-		commentDAO.save(comment1);
-		LOG.info("Created comment " + comment1.getId());
-		Comment comment2 = new Comment("Godzila", "sdlkfj@gmail.com",
-				"No me gusto que no mencionen Hello Kitty");
-		commentDAO.save(comment2);
-		LOG.info("Created comment " + comment2.getId());
-		Comment comment3 = new Comment("Jesus Reloaded", "religioso@islam.com",
-				"Por Al-lah!");
-		commentDAO.save(comment3);
-		LOG.info("Created comment " + comment3.getId());
-		Comment comment4 = new Comment("Book Not Found", "User Not Found",
-				"Me hubiese gustado que el libro tuviese algo escrito");
-		commentDAO.save(comment4);
-		LOG.info("Created comment " + comment4.getId());
-
-		// TESTING Comentarios
-		LOG.info("\n <<<<<<<<<<<<< Retrieving Comments... >>>>>>>>>>>>>>>>>");
-
-		Comment commentTest = commentDAO.findById(comment1.getId());
-		LOG.info("Comment " + commentTest.getId() + "\n" + ">>Book: "
-				+ commentTest.getBook() + "\n" + ">>User: "
-				+ commentTest.getUser() + "\n" + ">>Body: "
-				+ commentTest.getBody());
-		commentTest = commentDAO.findById(comment2.getId());
-		LOG.info("Comment " + commentTest.getId() + "\n" + ">>Book: "
-				+ commentTest.getBook() + "\n" + ">>User: "
-				+ commentTest.getUser() + "\n" + ">>Body: "
-				+ commentTest.getBody());
-		commentTest = commentDAO.findById(comment3.getId());
-		LOG.info("Comment " + commentTest.getId() + "\n" + ">>Book: "
-				+ commentTest.getBook() + "\n" + ">>User: "
-				+ commentTest.getUser() + "\n" + ">>Body: "
-				+ commentTest.getBody());
-		commentTest = commentDAO.findById(comment4.getId());
-		LOG.info("Comment " + commentTest.getId() + "\n" + ">>Book: "
-				+ commentTest.getBook() + "\n" + ">>User: "
-				+ commentTest.getUser() + "\n" + ">>Body: "
-				+ commentTest.getBody());
-
-		LOG.info("\n <<<<<<<<<<<<< END OF COMMENTS >>>>>>>>>>>>>>>>>");
-
-*/
 		Book book4 = new BookBuilder().withName("Ender's Game")
 				.withDescription("Novela de ciencia ficción de Scott")
 				.withPublisher("Editorial pepin")
@@ -141,9 +95,6 @@ public class DataInitDAO implements DataInitRepository {
 		bookDAO.saveOrUpdate(book4);
 		LOG.info("Created book " + book4.getId());
 
-		// Prestamos
-		
-		
 		//Users
 		User userAdmin = new User("admin", "admin", "admin@hexacta.com");
 		userDAO.save(userAdmin);

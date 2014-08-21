@@ -31,7 +31,6 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 
 		if (status == 200) {
 			$scope.currentBook = data;
-			console.log("Book's Country: " + $scope.currentBook.country);
 		}
 
 	}).error(function(data, status, headers, config){
@@ -41,7 +40,7 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
     $scope.save = function(aBook) {
        	var jsonBook = angular.toJson(aBook);
        	$http.put('/Tpl/rest/books/'+$scope.bookId, jsonBook).success(function(data, status, headers, config){
-       		if(status = 200)
+       		if(status == 200)
        		{
        	    	console.log("Book Saved");
        	    	$location.path("/");

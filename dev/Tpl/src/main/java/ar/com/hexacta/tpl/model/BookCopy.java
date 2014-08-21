@@ -6,6 +6,7 @@ package ar.com.hexacta.tpl.model;
 import java.io.Serializable;
 
 // @Entity
+// @Table(name = "BOOK_COPIES")
 public class BookCopy extends Entidad implements Serializable {
 
     /*
@@ -38,6 +39,9 @@ public class BookCopy extends Entidad implements Serializable {
     // @Column(name = "STATE")
     private String state;
 
+    // @Column(name = "ENABLED")
+    private boolean enabled;
+
     public BookCopy() {
     	super();
     }
@@ -47,6 +51,15 @@ public class BookCopy extends Entidad implements Serializable {
         this.code = code;
         this.bookRate = bookRate;
         this.state = state;
+        enabled = true;
+    }
+
+    public BookCopy(final String code, final String bookRate, final String state, final boolean enabled) {
+        super();
+        this.code = code;
+        this.bookRate = bookRate;
+        this.state = state;
+        this.enabled = enabled;
     }
 
     public void changeToFree() {
@@ -58,7 +71,7 @@ public class BookCopy extends Entidad implements Serializable {
     }
 
     public String getBookRate() {
-        return bookRate;	
+        return bookRate;
     }
 
     public String getCode() {
@@ -68,13 +81,22 @@ public class BookCopy extends Entidad implements Serializable {
     public String getState() {
         return state;
     }
+
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(final boolean enabled) {
+        this.enabled = enabled;
+    }
+
     /*
      * public Long getId() { return id; }
-     *
+     * 
      * public void setId(final Long id) { this.id = id; }
-     *
+     * 
      * public Long getVersion() { return version; }
-     *
+     * 
      * public void setVersion(final Long version) { this.version = version; }
      */
 }

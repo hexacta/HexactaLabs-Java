@@ -5,16 +5,17 @@ import java.util.List;
 import ar.com.hexacta.tpl.model.User;
 
 public interface IUsersService {
-	List<User> findAllUsers();
 
-	User findUser(Long userId);
-	
-	boolean createUser(final User user);
+    List<User> findAllUsers();
 
-	boolean updateUser(final User user);
+    User findUser(Long userId);
 
-	void deleteUser(final User user);
+    boolean createUser(final User user);
 
-	void deleteUserById(Long userId);
+    boolean updateUser(final User user);
+
+    void deleteUser(final User user);
+
+    void deleteUserById(Long userId);
 
 }

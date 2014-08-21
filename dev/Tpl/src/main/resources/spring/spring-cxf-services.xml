@@ -72,6 +72,20 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
 	
 
 	</bean>
+	
+		<jaxrs:server id="LoanCXFService" address="/loans">
+		<jaxrs:serviceBeans>
+			<ref bean="loansWS" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+        </jaxrs:providers>
+	</jaxrs:server>
+	
+	<bean id="loansWS" class="ar.com.hexacta.tpl.resource.LoansWS">
+	
+
+	</bean>
 
 		<jaxrs:server id="CategoryCXFService" address="/categories">
 		<jaxrs:serviceBeans>
