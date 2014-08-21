@@ -59,18 +59,7 @@ public class LoansWS {
     @Consumes("application/json")
     public Response createLoan(@Multipart(value = "newLoan", type = "application/json") final String jsonLoan) {
         try {
-
             loanService.createLoan(parseLoan(jsonLoan));
-
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
@@ -88,15 +77,6 @@ public class LoansWS {
             loan.setId(new Long(loanId));
             loanService.updateLoan(loan);
 
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();

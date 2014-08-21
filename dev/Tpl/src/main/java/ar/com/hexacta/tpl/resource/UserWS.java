@@ -58,15 +58,6 @@ public class UserWS {
             else
                 return Response.serverError().build();
 
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
@@ -85,15 +76,6 @@ public class UserWS {
                 return makeUpdate(user);
             else
                 return Response.serverError().build();
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();

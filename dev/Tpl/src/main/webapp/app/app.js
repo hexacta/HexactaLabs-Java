@@ -56,7 +56,6 @@ booksApp.directive('userIngreso',function() {
 					//	console.log("An Error occurred while trying to store the user:" + jsonUser);
 					//});
 				}
-
 		}]
 	}
 

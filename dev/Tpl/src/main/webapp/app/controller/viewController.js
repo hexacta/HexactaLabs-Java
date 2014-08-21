@@ -18,8 +18,11 @@ $scope.mostrarUser = function(){
 };
 
 $scope.getNombreUsuario = function(){
-	if($scope.sessionData != undefined)
-		document.getElementById("Usuario").innerHTML = "Bienvenido: " + $scope.sessionData.name;
+	if($scope.sessionData != undefined){
+//		document.getElementById("Usuario").innerHTML = "Bienvenido: " + $scope.sessionData.name;
+		$scope.usuario = "Bienvenido: " + $scope.sessionData.name;
+	}
 };
 
 });
+

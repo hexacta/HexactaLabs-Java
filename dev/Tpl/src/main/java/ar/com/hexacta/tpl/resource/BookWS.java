@@ -56,15 +56,6 @@ public class BookWS {
 
             bookService.createBook(parseBook(jsonBook));
 
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
@@ -82,15 +73,6 @@ public class BookWS {
             book.setId(new Long(bookId));
             bookService.updateBook(book);
 
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();

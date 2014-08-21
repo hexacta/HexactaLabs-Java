@@ -1,6 +1,6 @@
 booksApp.controller('registerCtrl', function($scope, $location, $rootScope, $http) {
 
-	document.getElementById('user').focus();
+//	document.getElementById('user').focus();
 	
 	//Start of alerts
 	//Use for controllers that need alerts
@@ -37,26 +37,15 @@ booksApp.controller('registerCtrl', function($scope, $location, $rootScope, $htt
 			})
 		} else {
 			$scope.addAlert("Cuidado!","Las password no coinciden.", "danger");
-			$scope.newUser.password = "";
 			$scope.password2 = "";
-			document.getElementById('password').focus();			
+			$scope.newUser.password = "";
 		}
 	};
-	
+
 	$scope.reset = function() {
 		$scope.newUser = {};
 	};
 
 	$scope.reset();
 	
-	$scope.backToHome = function() {
-		if ($scope.newUser.password == $scope.password2) {
-			$location.path("/");
-		} else {
-			$scope.addAlert("Cuidado!","Las password no coinciden.", "danger");
-			$scope.newUser.password = "";
-			$scope.password2 = "";
-			document.getElementById('password').focus();
-		}
-	};
 });
