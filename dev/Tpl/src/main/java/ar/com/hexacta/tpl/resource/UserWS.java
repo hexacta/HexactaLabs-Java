@@ -26,6 +26,10 @@ import ar.com.hexacta.tpl.service.IUsersService;
 @Service
 public class UserWS {
 	
+	public static int HTTP_OK_CREATED = 201;
+	public static int HTTP_OK = 200;
+	public static int HTTP_DELETE = 204;
+	
 	@Autowired
 	private IUsersService userService;
 	
@@ -55,7 +59,7 @@ public class UserWS {
 		try {
 			boolean validation = userService.createUser(parseUser(jsonUser));
 			if (validation){
-				return Response.ok().build();
+				return Response.status(HTTP_OK_CREATED).build();
 			}else{
 				return Response.serverError().build();
 			}
@@ -75,7 +79,7 @@ public class UserWS {
 			user.setId(new Long(userId));
 			
 			if (userService.findUser(new Long(userId)).isEnabled()){
-				return makeUpdate(user);
+				return makeUpdate(user, HTTP_OK);
 			}else{
 				return Response.serverError().build();
 			}
@@ -85,11 +89,11 @@ public class UserWS {
 		}
 	}
 	
-	private Response makeUpdate(User user){
+	private Response makeUpdate(User user, int responseCode){
 		boolean validation = userService.updateUser(user);
 		
 		if (validation){
-			return Response.ok().build();
+			return Response.status(responseCode).build();
 		}else{
 			return Response.serverError().build();
 		}
@@ -102,7 +106,7 @@ public class UserWS {
 		//userService.deleteUserById(new Long(userId));
 		User user = userService.findUser(new Long(userId));
 		user.disable();
-		return makeUpdate(user);
+		return makeUpdate(user, HTTP_DELETE);
 	}
 		
 	

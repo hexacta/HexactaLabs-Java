@@ -19,6 +19,8 @@ import ar.com.hexacta.tpl.service.ILoginService;
 @Service
 public class LoginWS {
 	
+	public static int HTTP_UNAUTHORIZED = 401;
+	
 	@Autowired
 	private ILoginService loginService;
 	
@@ -52,7 +54,7 @@ public class LoginWS {
 			}
 			
 		} catch (IOException e) {
-			return Response.status(401).build();
+			return Response.status(HTTP_UNAUTHORIZED).build();
 		}
 		
 	}

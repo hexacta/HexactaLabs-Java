@@ -32,9 +32,6 @@ public class CommentDAO extends AbstractDAO<Comment> implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Comment> findByBookId(final Long bookId) {
-		/*System.out.println("CommentDAO.findByBookId( " + bookId + " )...");
-		System.out.println("<< Unsupported Operation >>");
-		throw new UnsupportedOperationException();*/
 		Criteria criteria = this.getSession().createCriteria(Comment.class);
 		criteria.add(Restrictions.like("book.id", bookId));
 		return (List<Comment>) criteria.list();

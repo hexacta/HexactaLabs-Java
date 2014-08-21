@@ -39,7 +39,16 @@ public class BooksServiceImpl implements IBooksService {
     @Transactional
     public void updateBook(final Book book) {
         // TODO: Add validation logic
-        booksRepository.save(book);
+    	Book persistedBook = booksRepository.findById(book.getId());
+    	System.out.println(persistedBook.getBookCategories());
+    	persistedBook.setCountry(book.getCountry());
+    	persistedBook.setDescription(book.getDescription());
+    	persistedBook.setISBN(book.getISBN());
+    	persistedBook.setName(book.getName());
+    	persistedBook.setPublisher(book.getPublisher());
+    	persistedBook.clearBookCategories();
+    	persistedBook.addBookCategories(book.getBookCategories());
+        booksRepository.save(persistedBook);
     }
 
     @Override

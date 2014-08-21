@@ -2,6 +2,19 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 		$routeParams, $http) {
 	$scope.books = $rootScope.books;
 	
+	$http({
+		method : 'GET',
+		url: '/Tpl/rest/categories',
+		headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
+	}).success(function(data, status, headers, config){
+		if(status == 200){
+			$scope.categories = [];
+			$scope.categories = data;
+		}
+	}).error(function(data, status, headers, config){
+		console.log("An Error occurred while trying to get all categories");
+	});
+	
 	$scope.backToHome = function() {
 		$location.path("/");
 	};
@@ -31,14 +44,19 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 
 		if (status == 200) {
 			$scope.currentBook = data;
-			console.log("Book's Country: " + $scope.currentBook.country);
+			for (var i = 0; i < $scope.currentBook.bookCategories.length; i++){
+				$scope.categories[$scope.currentBook.bookCategories[i].id -1].selected = true;
+			}
 		}
-
 	}).error(function(data, status, headers, config){
 		console.log("An Error occurred while trying to get book:" + $scope.bookId);
 	});
     
     $scope.save = function(aBook) {
+    	for (var i = 0; i < aBook.bookCategories.length; i++){
+			delete aBook.bookCategories[i].selected;
+		}
+    	
        	var jsonBook = angular.toJson(aBook);
        	$http.put('/Tpl/rest/books/'+$scope.bookId, jsonBook).success(function(data, status, headers, config){
        		if(status = 200)
@@ -52,4 +70,20 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
        	$scope.newBook = angular.copy(aBook);
 		$rootScope.books[$rootScope.books.length] = aBook;	
     };
+    
+    $scope.toggleSelection = function(category, book){
+		if (!book.bookCategories){
+			book.bookCategories = [];
+		}
+		var selected = !category.selected; //it's toggling, so the new state it's the opposite to the current state  
+		
+		if (selected){
+			book.bookCategories.push(category);
+		}else{
+			var index = book.bookCategories.indexOf(category);
+			if (index > -1){
+				book.bookCategories.splice(index,1);
+			}
+		}
+	};
 });
