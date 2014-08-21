@@ -43,17 +43,15 @@ public class BooksServiceImpl implements IBooksService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Book> findAllBooks() {
         return booksRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Book findBook(final Long bookId) {
         return booksRepository.findById(bookId);
-    }
-
-    public BookRepository getBookRepository() {
-        return booksRepository;
     }
 
     public void setBookRepository(final BookRepository bookRepository) {

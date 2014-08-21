@@ -216,9 +216,4 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-<<<<<<< HEAD
->>>>>>> c60cb932830c16bf804efeb1742931a3cbd678b6
-=======
-*.classpath
->>>>>>> 90524d7ddcb6a5b99ec517222f6b3c64ed880f5f
 dev/Tpl/.classpath

@@ -3,6 +3,8 @@ package ar.com.hexacta.tpl.model;
 import java.io.Serializable;
 import java.util.Set;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 // @Entity
 public class Book extends Entidad implements Serializable {
 
@@ -28,6 +30,10 @@ public class Book extends Entidad implements Serializable {
 
     // @Column(name = "COUNTRY")
     private String country;
+    
+    private String isbn;
+
+    private Boolean enabled;
 
     // @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     // @Column(name = "BOOK_CATEGORY")
@@ -37,34 +43,29 @@ public class Book extends Entidad implements Serializable {
     // @Column(name = "BOOK_COPY")
     private Set<BookCopy> bookCopies;
 
-    // @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    // @Column(name = "BOOK_COMMENT")
-    private Set<Comment> bookComments;
 
     // Hibernate needs this
 
     public Book() {
         super();
+        this.enabled = Boolean.TRUE;
     }
 
     public Book(final String name) {
-        super();
+        this();
         this.name = name;
     }
 
-    public Book(final String aName, final String aDescription, final String aPublisher, final String aCountry,
+    public Book(final String aName, final String aDescription, final String aPublisher, final String aCountry, final String isbn,
 
     final Set<BookCategory> bookCategories, final Set<BookCopy> bookCopies, final Set<Comment> bookComments) {
-
-        super();
-        name = aName;
-        description = aDescription;
-        publisher = aPublisher;
-        country = aCountry;
+        this(aName);
+        this.description = aDescription;
+        this.publisher = aPublisher;
+        this.country = aCountry;
         this.bookCategories = bookCategories;
         this.bookCopies = bookCopies;
-        this.bookComments = bookComments;
-
+        this.isbn = isbn;
     }
 
     public Set<BookCategory> getBookCategories() {
@@ -75,12 +76,9 @@ public class Book extends Entidad implements Serializable {
         return description;
     }
 
-    public BookCopy getFreeBookCopy() {
-        for (BookCopy bookCopy : bookCopies) {
-            if (bookCopy.getState().equals(BookCopy.STATE_FREE))
-                return bookCopy;
-        }
-        return null;
+    @JsonIgnore
+    public Set<BookCopy> getBookCopies() {
+        return this.bookCopies;
     }
 
     public String getName() {
@@ -95,6 +93,10 @@ public class Book extends Entidad implements Serializable {
         this.bookCategories = bookCategories;
     }
 
+    public void setBookCopies(final Set<BookCopy> bookCopies){
+    	this.bookCopies = bookCopies;
+    }
+    
     public void setDescription(final String description) {
         this.description = description;
     }
@@ -115,17 +117,20 @@ public class Book extends Entidad implements Serializable {
         this.country = country;
     }
 
-    public Set<Comment> getBookComments() {
-        return bookComments;
+    public void setISBN (final String isbn){
+    	this.isbn = isbn;
+    }
+    
+    public String getISBN (){
+    	return this.isbn;
     }
 
-    public void setBookComments(final Set<Comment> bookComments) {
-        this.bookComments = bookComments;
+    public void setEnabled(Boolean enable){
+    	this.enabled = enable;
     }
-
-    public void addBookComment(final Comment aComment) {
-        aComment.setBook(this);
-        bookComments.add(aComment);
+    
+    @JsonIgnore
+    public boolean getEnabled(){
+    	return this.enabled;
     }
-
 }

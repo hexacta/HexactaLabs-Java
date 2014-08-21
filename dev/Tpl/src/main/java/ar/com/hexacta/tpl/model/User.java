@@ -25,7 +25,7 @@ public class User extends Entidad implements Serializable {
     private String password;
 
     // @Column(name = "ENABLED")
-    private boolean enabled;
+    private Boolean enabled;
 
     // Hibernate needs
     public User() {
@@ -33,25 +33,19 @@ public class User extends Entidad implements Serializable {
     }
 
     public User(final String username, final String pass) {
-        super();
+        this();
         this.username = username;
-        password = pass;
-        enabled = true;
+        this.password = pass;
+        this.enabled = true;
     }
 
     public User(final String username, final String pass, final String email) {
-        super();
-        this.username = username;
-        password = pass;
+        this(username, pass);
         this.email = email;
-        enabled = true;
     }
 
     public User(final String username, final String pass, final String email, final boolean enabled) {
-        super();
-        this.username = username;
-        password = pass;
-        this.email = email;
+        this(username, pass, email);
         this.enabled = enabled;
     }
 
@@ -79,12 +73,11 @@ public class User extends Entidad implements Serializable {
         this.email = email;
     }
 
-    public boolean getEnabled() {
+    public Boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(final boolean enabled) {
+    public void setEnabled(final Boolean enabled) {
         this.enabled = enabled;
     }
-
 }

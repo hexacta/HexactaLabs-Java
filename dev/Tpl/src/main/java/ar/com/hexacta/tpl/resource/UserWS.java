@@ -95,7 +95,6 @@ public class UserWS {
     @DELETE
     @Path("/{userId}")
     public Response deleteUser(@PathParam("userId") final String userId) {
-        // userService.deleteUserById(new Long(userId));
         User user = userService.findUser(new Long(userId));
         user.setEnabled(false);
         return makeUpdate(user);

@@ -25,12 +25,21 @@
 						ng-required="true" id="publisher" />
 
 				</div>
+				<!-- ISBN -->
+				<div class="form-group">
+					<label class="">ISBN: </label> <input type="text"
+						class="form-control" ng-model="newBook.isbn"
+						ng-required="true" id="isbn" />
+
+				</div>			
 				<!-- SELECT PAISES -->
 				<div class="form-group">
 					<label class="">Pa&iacute;s: </label> <select class="form-control"
 						ng-model="newBook.country" ng-required="true">
 						<option>Argentina</option>
 						<option>Brasil</option>
+						<option>EEUU</option>
+						<option>Inglaterra</option>
 						<option>Uruguay</option>
 					</select>
 				</div>
@@ -48,12 +57,12 @@
 				
 				<div class="form-group">
 					<label class=""> Categorias:</label>
-					<div class="col-md-8 col-md-offset-2 checkbox">
-					<label ng-repeat="category in categories" class="checkbox-inline">
-					<input type="checkbox" name="selectedCategory[]" value="{{category}}" ng-model="category.selected"
-					ng-checked="selection.indexOf(category) > -1" ng-click="toggleSelection(category)" > 
-					{{category.name}}<br/>
-					</label>
+					<div class="col-md-8 col-md-offset-2 checkbox" ng-repeat="category in categories">
+						<label  class="checkbox-inline">
+						<input type="checkbox" name="selectedCategory[]" value="{{category}}" ng-model="category.selected"
+						ng-click="toggleSelection(category, newBook)" > 
+						{{category.name}}<br/>
+						</label>
 					</div>
 					
 				</div>

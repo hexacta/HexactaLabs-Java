@@ -19,5 +19,4 @@ public interface ILoansService {
     List<Loan> findLoansByBookId(Long bookId);
 
     List<Loan> findLoansByUser(String user);
-
 }

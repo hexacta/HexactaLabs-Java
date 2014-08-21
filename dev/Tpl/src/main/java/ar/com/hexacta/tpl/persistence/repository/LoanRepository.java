@@ -1,5 +1,6 @@
 package ar.com.hexacta.tpl.persistence.repository;
 
+import java.io.Serializable;
 import java.util.List;
 
 import ar.com.hexacta.tpl.model.Loan;
@@ -16,7 +17,7 @@ public interface LoanRepository {
 
     List<Loan> findAll();
 
-    Loan findById(Long loanId);
+    Loan findById(final Serializable id);
 
     List<Loan> findByBookId(Long bookId);
 

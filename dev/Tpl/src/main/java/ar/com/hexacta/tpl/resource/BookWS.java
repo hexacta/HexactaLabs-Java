@@ -28,7 +28,6 @@ import ar.com.hexacta.tpl.service.impl.BooksServiceImpl;
 public class BookWS {
 
     public BookWS() {
-
     }
 
     @Autowired
@@ -71,21 +70,32 @@ public class BookWS {
         try {
             Book book = parseBook(jsonBook);
             book.setId(new Long(bookId));
-            bookService.updateBook(book);
+            
+            if (bookService.findBook(new Long(bookId)).getEnabled()){
+            	return makeUpdate(book);
+            }else{
+            	return Response.serverError().build();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
         }
-        return Response.ok().build();
     }
 
     @DELETE
     @Path("/{bookId}")
-    public void deleteBook(@PathParam("bookId") final String bookId) {
-        bookService.deleteBookById(new Long(bookId));
+    public Response deleteBook(@PathParam("bookId") final String bookId) {
+        Book book = bookService.findBook(new Long(bookId));
+        book.setEnabled(false);
+        return makeUpdate(book);
     }
 
+	private Response makeUpdate(Book book){
+		bookService.updateBook(book);
+		return Response.ok().build();
+	}
+    
     private Book parseBook(final String jsonBook) throws JsonParseException, JsonMappingException, IOException {
         Book newBook = new Book();
         ObjectMapper mapper = new ObjectMapper();

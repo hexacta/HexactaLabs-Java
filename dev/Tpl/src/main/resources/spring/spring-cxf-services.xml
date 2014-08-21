@@ -87,5 +87,18 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
 
 	</bean>
 
+		<jaxrs:server id="CategoryCXFService" address="/categories">
+		<jaxrs:serviceBeans>
+			<ref bean="categoryWS" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+        </jaxrs:providers>
+	</jaxrs:server>
 	
+
+	<bean id="categoryWS" class="ar.com.hexacta.tpl.resource.CategoryWS">
+	
+
+	</bean>
 </beans>

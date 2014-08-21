@@ -8,16 +8,10 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
        
       <!-- Transaction manager for a single JDBC DataSource -->
-      <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+      <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
             <property name="sessionFactory" ref="sessionFactory" />
-            <property name="jdbcExceptionTranslator" ref="jdbcExceptionTranslator" />
       </bean>
       
-      <bean name="jdbcExceptionTranslator" class="org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator">
-            <constructor-arg>
-                  <ref bean="dbSource" />
-            </constructor-arg>
-      </bean>
       <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
 </beans>

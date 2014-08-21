@@ -17,11 +17,13 @@ public class CommentServiceImpl implements ICommentService {
 	CommentRepository commentRepository;
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Comment> findAllComments() {
 		return commentRepository.findAll();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Comment findComment(final Long commentId) {
 		return commentRepository.findById(commentId);
 	}
@@ -48,6 +50,7 @@ public class CommentServiceImpl implements ICommentService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Comment> findCommentsByBookId(final Long bookId) {
 		return commentRepository.findByBookId(bookId);
 	}

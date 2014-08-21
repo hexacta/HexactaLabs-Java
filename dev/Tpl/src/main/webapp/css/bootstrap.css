@@ -6201,4 +6201,8 @@ button.close {
     display: none !important;
   }
 }
+
+.col-p{
+	padding-bottom:30px;
+}
 /*# sourceMappingURL=bootstrap.css.map */

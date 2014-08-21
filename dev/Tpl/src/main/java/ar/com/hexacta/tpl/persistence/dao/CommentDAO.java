@@ -2,7 +2,7 @@ package ar.com.hexacta.tpl.persistence.dao;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -13,13 +13,18 @@ import ar.com.hexacta.tpl.persistence.repository.CommentRepository;
 public class CommentDAO extends AbstractDAO<Comment> implements
 		CommentRepository {
 
-	// TODO Remove prints!!
-
 	@Override
+	@SuppressWarnings("unchecked")
 	public Comment findById(final Long commentId) {
-		Criteria criteria = this.getSession().createCriteria(Comment.class);
+		DetachedCriteria criteria = this.createCriteria();
 		criteria.add(Restrictions.like("id", commentId));
-		return (Comment) criteria.uniqueResult();
+		List<Comment> result = (List<Comment>) this.getHibernateTemplate().findByCriteria(criteria);
+		if(result.size() == 0){
+			return null;
+		}
+		else{
+			return result.get(0);
+		}
 	}
 
 	@Override
@@ -29,12 +34,12 @@ public class CommentDAO extends AbstractDAO<Comment> implements
 		System.out.println("<< OK >>");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Comment> findByBookId(final Long bookId) {
-		System.out.println("CommentDAO.findByBookId( " + bookId + " )...");
-		System.out.println("<< Unsupported Operation >>");
-		throw new UnsupportedOperationException();
-
+		DetachedCriteria criteria = this.createCriteria();
+		criteria.add(Restrictions.like("book.id", bookId));
+		return (List<Comment>) this.getHibernateTemplate().findByCriteria(criteria);
 	}
 
 }

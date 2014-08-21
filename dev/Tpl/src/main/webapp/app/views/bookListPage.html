@@ -21,6 +21,7 @@
 							<th class="text-center"> T&iacute;tulo </th>
 							<th class="text-center"> Descripci&oacute;n </th>
 							<th class="text-center"> Editorial </th>
+							<th class="text-center"> ISBN </th>
 							<th class="text-center"> Categor&iacute;a </th>
 							<!--  este colspan es temporal, buscar una solucion mas elegante -->
 							<th class="text-center" colspan="3"> Acciones </th>
@@ -38,6 +39,9 @@
 							</td>
 							<td>
 								{{book.publisher}}
+							</td>
+							<td>
+								{{book.isbn}}
 							</td>
 							<td id="categoria">
 								<ul ng-repeat="Categorie in book.bookCategories" class="list-inline">
@@ -75,16 +79,19 @@
 							<div>
 								<h4>{{selectedBook.description}}</h4>
 								<cite>- {{selectedBook.publisher}}</cite>
-								<h4>{{selectedBook.country}}</h4>
+								<h4>ISBN: {{selectedBook.isbn}}</h4>
+								<h4>Pa&iacute;s de Origen: {{selectedBook.country}}</h4>
 							</div>
 							
-							<!-- TODO: en algun momento se va a agregar una foto para poner aca -->
+							<img ng-src="{{selectedBook.image}}"></img>						
 							
-							Comentarios:
-							<blockquote ng-repeat="comment in selectedBook.bookComments">
-								{{comment.body}} </br>
-								<cite>Por: {{comment.user}}</cite>
-							</blockquote>
+							<div>
+								Comentarios:
+								<blockquote ng-repeat="comment in selectedBook.bookComments" >
+									<p>{{comment.body}}</p>
+									<footer>{{comment.user}}</footer>
+								</blockquote>
+							</div>
 							<form role="form" name="commentForm" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
 								<div class="form-group">
 									<label for="txtCommentText">Comentario</label>
@@ -108,5 +115,6 @@
 				</div>
 			</div>
 	</div>
+
 
 </section>

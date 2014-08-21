@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC 
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-access="field">
 
@@ -21,7 +21,11 @@
 		
 		<property name="country" column="COUNTRY"  />
 		
-		<set name="bookCategories" lazy="false" table="BOOK_CATEGORY" cascade="save-update">
+		<property name="isbn" column="ISBN"  />
+		
+		<property name="enabled" column="ENABLED" type="java.lang.Boolean"/>
+		
+		<set name="bookCategories" lazy="false" table="BOOK_CATEGORY" cascade="all">
 			<key column="BOOK_ID" />
 			<many-to-many column="BOOK_CATEGORY_ID" class="ar.com.hexacta.tpl.model.BookCategory" />
 		</set>
@@ -31,10 +35,6 @@
 			<many-to-many column="BOOK_COPY_ID" class="ar.com.hexacta.tpl.model.BookCopy" />		
 		</set>
 		
-		<set name="bookComments" table="COMMENTS" inverse="true">
-			<key column="BOOK_ID" not-null="true" />
-			<one-to-many class="ar.com.hexacta.tpl.model.Comment" />
-		</set>
  	</class>
 	
 </hibernate-mapping>

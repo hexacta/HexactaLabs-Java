@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC 
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-access="field">
 
@@ -11,9 +11,9 @@
 			<generator class="identity" />
 		</id>
 	
-		<version name="version" column="VERSION" type="long" />	
+		<version name="version" column="VERSION" type="long"/>	
 		
-		<property name="code" column="CODE"  unique="true" not-null="true" type="java.lang.String"/>
+		<property name="code" column="CODE" unique="true" not-null="true" type="java.lang.String"/>
 		
 		<property name="bookRate" column="BOOK_RATE" type="java.lang.String"/>
 		
