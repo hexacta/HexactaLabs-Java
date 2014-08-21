@@ -47,7 +47,7 @@ public abstract class AbstractDAO<T> extends HibernateDaoSupport {
 
     @SuppressWarnings(UNCHECKED)
     public List<T> findAll() {
-        return this.getHibernateTemplate().find("from " + this.getPersistentClass().getName() + " o");
+        return (List<T>) this.getHibernateTemplate().find("from " + this.getPersistentClass().getName() + " o");
     }
 
     public void deleteById(final Serializable id) {

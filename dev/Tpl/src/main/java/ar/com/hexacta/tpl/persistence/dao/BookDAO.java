@@ -16,7 +16,7 @@ public class BookDAO extends AbstractDAO<Book> implements BookRepository {
 	public List<Book> findAll() {
 		DetachedCriteria criteria = this.createCriteria();
 		criteria.add(Restrictions.eq("enabled", true));
-		return this.getHibernateTemplate().findByCriteria(criteria);
+		return (List<Book>) this.getHibernateTemplate().findByCriteria(criteria);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class BookDAO extends AbstractDAO<Book> implements BookRepository {
 		DetachedCriteria criteria = this.createCriteria();
 		criteria.add(Restrictions.like("id", bookId));
 		criteria.add(Restrictions.eq("enabled", true));
-		List<Book> result = this.getHibernateTemplate().findByCriteria(criteria);
+		List<Book> result = (List<Book>) this.getHibernateTemplate().findByCriteria(criteria);
 		if(result.size() == 0){
 			return null;
 		}
