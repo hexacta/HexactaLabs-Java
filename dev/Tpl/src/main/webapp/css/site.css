@@ -1,6 +1,14 @@
 @charset "utf-8";
 /* CSS Document */
 
+html,body{
+	height: 100%;
+}
+
+.container{
+	min-height: calc(100% - 50px);
+}
+
 .btn-hexacta-primary {
   color: #fff;
   background-color: #009292;
@@ -144,6 +152,7 @@ input.ng-invalid.ng-dirty {
 }
 .form-signin input[type="email"]
 {
+	margin-top: 10px;
     margin-bottom: 10px;
 }
 .form-signin input[type="password"]
@@ -186,8 +195,33 @@ input.ng-invalid.ng-dirty {
     margin-top: 10px;
 }
 
-#category{
-	padding-top: 20px; 
-	display: inline-flex; 
+#categoria
+{
+	padding-top: 20px;
+	display: flex; 
+	justify-content: center; 
 	border: 0px none;
+}
+
+#footer
+{
+	padding-left: 40px; 
+	position: relative;
+	height: 50px;
+	bottom: 10px;
+}
+
+#Usuario
+{
+	vertical-align: middle;
+	padding-top: 7px;
+	padding-right: 12px;"
+}
+
+.ng-invalid.ng-dirty{
+	border-color: 'red';
+}
+
+.ng-valid.ng-dirty{
+	border-color: 'green';
 }

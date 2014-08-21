@@ -24,10 +24,6 @@ import ar.com.hexacta.tpl.model.Book;
 import ar.com.hexacta.tpl.service.IBooksService;
 import ar.com.hexacta.tpl.service.impl.BooksServiceImpl;
 
-/**
- * @author lnapoli
- *
- */
 @Service
 public class BookWS {
 	

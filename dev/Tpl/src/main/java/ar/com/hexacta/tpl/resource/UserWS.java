@@ -25,6 +25,7 @@ import ar.com.hexacta.tpl.service.IUsersService;
 
 @Service
 public class UserWS {
+
 	
 	public static int HTTP_OK_CREATED = 201;
 	public static int HTTP_OK = 200;
@@ -125,4 +126,5 @@ public class UserWS {
 	public void setUserService(final IUsersService userService) {
 		this.userService = userService;
 	}
+
 }

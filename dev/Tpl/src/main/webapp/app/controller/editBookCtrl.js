@@ -59,7 +59,7 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
     	
        	var jsonBook = angular.toJson(aBook);
        	$http.put('/Tpl/rest/books/'+$scope.bookId, jsonBook).success(function(data, status, headers, config){
-       		if(status = 200)
+       		if(status == 200)
        		{
        	    	console.log("Book Saved");
        	    	$location.path("/");

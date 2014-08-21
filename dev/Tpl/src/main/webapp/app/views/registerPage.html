@@ -17,25 +17,30 @@
 						src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
 						alt="">
 					<form novalidate name="registerForm" class="form-signin"
-						ng-submit="registerForm.$valid && backToHome()">
-						<input type="email" ng-model="user" class="form-control" 
-							ng-minlength="3" ng-maxlength="16" id="user"
-							placeholder="usuario@email.com" ng-required="true" autofocus>
-						<input ng-model="pass" id="pass" ng-minlength="6" ng-maxlength="12"
+						ng-submit="registerForm.$valid && save(newUser)">
+						<input ng-model="newUser.username" class="form-control" 
+							ng-minlength="3" ng-maxlength="12" id="user"
+							placeholder="Nombre de Usuario" ng-required="true" autofocus>
+						<input ng-model="newUser.email" type="email" class="form-control" 
+							ng-minlength="3" ng-maxlength="16" id="email"
+							placeholder="usuario@email.com" ng-required="true">
+						<input ng-model="newUser.password" id="password" ng-minlength="6" ng-maxlength="12"
 							placeholder="Ingrese aqui su password..." class="form-control"
 							type="password" ng-required="true"> 
-						<input ng-model="pass2" id="pass2" ng-minlength="6" ng-maxlength="12"
+						<input ng-model="password2" id="password2" ng-minlength="6" ng-maxlength="12"
 							placeholder="Repita aqui su password..." class="form-control"
 							type="password" ng-required="true">
 						<button type="submit"
 							class="btn btn-lg btn-hexacta-primary btn-block">
 							Registrar</button>
 						<label class="checkbox pull-left"> <input type="checkbox"
-							value="remember-me"> Recordar
-						</label> <a href="#" class="pull-right need-help">Ayuda? </a>
+							value="remember-me"> Recordar </label>
+						
+						<a href="#" class="pull-right need-help">Ayuda? </a>
 						<span class="clearfix"></span>
 					</form>
 				</div>
+				<a href="#" class="text-center new-account">Volver </a>
 			</div>
 		</div>
 	</div>

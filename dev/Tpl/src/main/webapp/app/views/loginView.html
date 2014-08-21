@@ -1,5 +1,5 @@
 
-<div ng-controller="mainController">
+<div ng-controller="viewController">
 <form class="navbar-form navbar-right" ng-show="mostrarLogin()" novalidate name="logInForm" role="search"  ng-submit="logInForm.$valid && validateUser(user)">
 	<div class="form-group">
 		<input type="text" ng-model="user.name" ng-pattern="/^[A-Z][A-Z0-9_]*\@[A-Z0-9_]*\.[A-Z]{2,3}(\.[A-Z]{2})?$/i" class="form-control input-sm" placeholder="User" />
@@ -10,7 +10,7 @@
 
 <form class="navbar-form navbar-right" novalidate name="logForm">
 	<div ng-show="mostrarUser()">
-		<div id="Usuario" style="display: table-cell; vertical-align:middle; padding-top: 7px; padding-right: 5px;">{{getNombreUsuario()}} </div>
+		<div id="Usuario" >{{getNombreUsuario()}} </div>
 	</div>
 </form>
 </div>

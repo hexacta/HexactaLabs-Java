@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 public abstract class AbstractDAO<T> extends HibernateDaoSupport {
 
@@ -47,7 +47,7 @@ public abstract class AbstractDAO<T> extends HibernateDaoSupport {
 
     @SuppressWarnings(UNCHECKED)
     public List<T> findAll() {
-        return this.getHibernateTemplate().find("from " + this.getPersistentClass().getName() + " o");
+        return (List<T>) this.getHibernateTemplate().find("from " + this.getPersistentClass().getName() + " o");
     }
 
     public void deleteById(final Serializable id) {
