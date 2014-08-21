@@ -27,7 +27,6 @@ import ar.com.hexacta.tpl.service.ICommentService;
 public class CommentWS {
 
 	public CommentWS() {
-
 	}
 
 	@Autowired
@@ -64,15 +63,6 @@ public class CommentWS {
 
 			commentService.createComment(parseComment(jsonComment));
 
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-			return Response.serverError().build();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-			return Response.serverError().build();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return Response.serverError().build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Response.serverError().build();
@@ -92,15 +82,6 @@ public class CommentWS {
 			comment.setId(new Long(commentId));
 			commentService.updateComment(comment);
 
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-			return Response.serverError().build();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-			return Response.serverError().build();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return Response.serverError().build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Response.serverError().build();

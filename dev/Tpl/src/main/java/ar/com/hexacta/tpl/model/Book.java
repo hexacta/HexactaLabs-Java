@@ -3,6 +3,8 @@ package ar.com.hexacta.tpl.model;
 import java.io.Serializable;
 import java.util.Set;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 // @Entity
 public class Book extends Entidad implements Serializable {
 
@@ -30,7 +32,7 @@ public class Book extends Entidad implements Serializable {
     private String country;
     
     private String isbn;
-    
+
     private Boolean enabled;
 
     // @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -51,28 +53,24 @@ public class Book extends Entidad implements Serializable {
 
     public Book() {
         super();
-        this.enabled = new Boolean(true);
+        this.enabled = Boolean.TRUE;
     }
 
     public Book(final String name) {
-        super();
+        this();
         this.name = name;
-        this.enabled = new Boolean(true);
     }
 
     public Book(final String aName, final String aDescription, final String aPublisher, final String aCountry, final String isbn,
 
     final Set<BookCategory> bookCategories, final Set<BookCopy> bookCopies, final Set<Comment> bookComments) {
-
-        super();
-        name = aName;
-        description = aDescription;
-        publisher = aPublisher;
-        country = aCountry;
+        this(aName);
+        this.description = aDescription;
+        this.publisher = aPublisher;
+        this.country = aCountry;
         this.bookCategories = bookCategories;
         this.bookCopies = bookCopies;
         this.isbn = isbn;
-        this.enabled = new Boolean(true);
     }
 
     public Set<BookCategory> getBookCategories() {
@@ -83,12 +81,9 @@ public class Book extends Entidad implements Serializable {
         return description;
     }
 
-    public BookCopy getBookCopies() {
-        for (BookCopy bookCopy : bookCopies) {
-            if (bookCopy.getState().equals(BookCopy.STATE_FREE))
-                return bookCopy;
-        }
-        return null;
+    @JsonIgnore
+    public Set<BookCopy> getBookCopies() {
+        return this.bookCopies;
     }
 
     public String getName() {
@@ -135,10 +130,11 @@ public class Book extends Entidad implements Serializable {
     	return this.isbn;
     }
 
-    public void setEnabled(boolean enable){
-    	this.enabled = new Boolean(enable);
+    public void setEnabled(Boolean enable){
+    	this.enabled = enable;
     }
     
+    @JsonIgnore
     public boolean getEnabled(){
     	return this.enabled;
     }

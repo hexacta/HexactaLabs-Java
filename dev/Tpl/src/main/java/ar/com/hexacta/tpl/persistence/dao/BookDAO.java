@@ -2,7 +2,7 @@ package ar.com.hexacta.tpl.persistence.dao;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -14,17 +14,24 @@ public class BookDAO extends AbstractDAO<Book> implements BookRepository {
 
 	@SuppressWarnings("unchecked")
 	public List<Book> findAll() {
-		Criteria criteria = this.getSession().createCriteria(Book.class);
+		DetachedCriteria criteria = this.createCriteria();
 		criteria.add(Restrictions.eq("enabled", true));
-		return criteria.list();
+		return this.getHibernateTemplate().findByCriteria(criteria);
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Book findById(final Long bookId) {
-		Criteria criteria = this.getSession().createCriteria(Book.class);
+		DetachedCriteria criteria = this.createCriteria();
 		criteria.add(Restrictions.like("id", bookId));
 		criteria.add(Restrictions.eq("enabled", true));
-		return (Book) criteria.uniqueResult();
+		List<Book> result = this.getHibernateTemplate().findByCriteria(criteria);
+		if(result.size() == 0){
+			return null;
+		}
+		else{
+			return result.get(0);
+		}
 	}
 
 	@Override

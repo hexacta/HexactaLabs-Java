@@ -15,25 +15,19 @@ public class User extends Entidad {
 	
 	
 	public User(String username, String pass){
-		super();
+		this();
 		this.username = username;
 		this.password = pass;
 		this.enabled = true;
 	}
 	
 	public User(String username, String pass, String email){
-		super();
-		this.username = username;
-		this.password = pass;
+		this(username, pass);
 		this.email = email;
-		this.enabled = true;
 	}
 	
 	public User(String username, String pass, String email, boolean enabled){
-		super();
-		this.username = username;
-		this.password = pass;
-		this.email = email;
+		this(username, pass, email);
 		this.enabled = enabled;
 	}
 	

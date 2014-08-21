@@ -23,7 +23,7 @@
 		
 		<property name="isbn" column="ISBN"  />
 		
-		<property name="enabled" column="ENABLED"  />
+		<property name="enabled" column="ENABLED" type="java.lang.Boolean"/>
 		
 		<set name="bookCategories" lazy="false" table="BOOK_CATEGORY" cascade="all">
 			<key column="BOOK_ID" />

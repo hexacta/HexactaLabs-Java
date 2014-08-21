@@ -14,11 +14,11 @@ booksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
 			templateUrl: 'app/views/editBookPage.html',
 			controller: 'editBookCtrl'
 		}).
-        when('/lendBook/:bookid', {
+        when('/lendBook/:bookId', {
             templateUrl: 'app/views/lendBookPage.html',
             controller: 'lendBookCtrl'
         }).
-        when('/deleteBook/:bookid', {
+        when('/deleteBook/:bookId', {
             templateUrl: 'app/views/deleteBookPage.html',
             controller: 'deleteBookCtrl'
         }).
