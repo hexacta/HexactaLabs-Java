@@ -43,6 +43,27 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
 
 	</bean>
 	
+	
+	
+	<jaxrs:server id="BookCopyCXFService" address="/bookCopies">
+		<jaxrs:serviceBeans>
+			<ref bean="bookCopyWS" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+        </jaxrs:providers>
+	</jaxrs:server>
+	
+
+	<bean id="bookCopyWS" class="ar.com.hexacta.tpl.resource.BookCopyWS">
+	
+
+	</bean>
+	
+	
+	
+	
+	
 	<jaxrs:server id="UserCXFService" address="/users">
 		<jaxrs:serviceBeans>
 			<ref bean="userWS" />
