@@ -12,6 +12,20 @@ public class BookCopyDAO extends AbstractDAO<BookCopy> implements BookCopyReposi
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public BookCopy findById(final long bookCopyId) {
+		DetachedCriteria criteria = this.createCriteria();
+		criteria.add(Restrictions.like("id", bookCopyId));
+		List<BookCopy> result = (List<BookCopy>) this.getHibernateTemplate().findByCriteria(criteria);
+		if(result.size() == 0){
+			return null;
+		}
+		else{
+			return result.get(0);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<BookCopy> findByBookId(Long bookId) {
 		DetachedCriteria criteria = this.createCriteria();
 		criteria.add(Restrictions.like("book_id", bookId));
@@ -31,18 +45,6 @@ public class BookCopyDAO extends AbstractDAO<BookCopy> implements BookCopyReposi
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public BookCopy findById(long bookCopyId) {
-		DetachedCriteria criteria = this.createCriteria();
-		criteria.add(Restrictions.like("id", bookCopyId));
-		List<BookCopy> result = (List<BookCopy>) this.getHibernateTemplate().findByCriteria(criteria);
-		if(result.size() == 0){
-			return null;
-		}
-		else{
-			return result.get(0);
-		}
-	}
+	
 
 }

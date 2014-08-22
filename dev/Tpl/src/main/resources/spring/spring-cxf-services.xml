@@ -44,10 +44,9 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
 	</bean>
 	
 	
-	
 	<jaxrs:server id="BookCopyCXFService" address="/bookCopies">
 		<jaxrs:serviceBeans>
-			<ref bean="bookCopyWS" />
+			<ref bean="copyWS" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
             <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
@@ -55,7 +54,7 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
 	</jaxrs:server>
 	
 
-	<bean id="bookCopyWS" class="ar.com.hexacta.tpl.resource.BookCopyWS">
+	<bean id="copyWS" class="ar.com.hexacta.tpl.resource.CopyWS">
 	
 
 	</bean>

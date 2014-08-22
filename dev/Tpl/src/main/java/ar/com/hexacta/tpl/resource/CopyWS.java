@@ -22,9 +22,9 @@ import ar.com.hexacta.tpl.service.IBookCopiesService;
 
 
 @Service
-public class BookCopyWS {
+public class CopyWS {
 	
-	public BookCopyWS(){	
+	public CopyWS(){	
 	}
 	
 	@Autowired
