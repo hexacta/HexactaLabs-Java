@@ -134,11 +134,4 @@ public class Book extends Entidad implements Serializable {
     	return this.enabled;
     }
     
-    public void clearBookCategories(){
-    	this.bookCategories.clear();
-    }
-    
-    public void addBookCategories(Set<BookCategory> added){
-    	this.bookCategories.addAll(added);
-    }
 }

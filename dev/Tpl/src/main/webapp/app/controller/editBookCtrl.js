@@ -10,6 +10,9 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 		if(status == 200){
 			$scope.categories = [];
 			$scope.categories = data;
+			for (var i = 0; i < $scope.categories.length; i++){
+				$scope.categories[i].selected = false;
+			}
 		}
 	}).error(function(data, status, headers, config){
 		console.log("An Error occurred while trying to get all categories");
@@ -17,11 +20,6 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 	
 	$scope.backToHome = function() {
 		$location.path("/");
-	};
-
-	$scope.save = function(aBook) {
-		$scope.newBook = angular.copy(aBook);
-		$rootScope.books[$rootScope.books.length] = aBook;
 	};
 
 	$scope.reset = function() {
@@ -80,7 +78,14 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 		if (selected){
 			book.bookCategories.push(category);
 		}else{
-			var index = book.bookCategories.indexOf(category);
+			var index = -1;
+			
+			for (var i = 0; i < book.bookCategories.length; i++){
+				if (book.bookCategories[i].id == category.id){
+					index = i;
+				}
+			}
+			
 			if (index > -1){
 				book.bookCategories.splice(index,1);
 			}

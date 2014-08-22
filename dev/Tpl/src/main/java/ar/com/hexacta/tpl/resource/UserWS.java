@@ -79,7 +79,7 @@ public class UserWS {
 			User user = parseUser(jsonUser);
 			user.setId(new Long(userId));
 			
-			if (userService.findUser(new Long(userId)).isEnabled()){
+			if (userService.findUser(new Long(userId)).getEnabled()){
 				return makeUpdate(user, HTTP_OK);
 			}else{
 				return Response.serverError().build();
@@ -106,7 +106,7 @@ public class UserWS {
 	public Response deleteUser(@PathParam("userId") final String userId) {
 		//userService.deleteUserById(new Long(userId));
 		User user = userService.findUser(new Long(userId));
-		user.disable();
+		user.setEnabled(false);
 		return makeUpdate(user, HTTP_DELETE);
 	}
 		
@@ -115,7 +115,7 @@ public class UserWS {
 		User newUser = new User();
 		ObjectMapper mapper = new ObjectMapper();
 		newUser = mapper.readValue(jsonUser, User.class);
-		newUser.enable();
+		newUser.setEnabled(true);
 		return newUser;
 	}
 	
