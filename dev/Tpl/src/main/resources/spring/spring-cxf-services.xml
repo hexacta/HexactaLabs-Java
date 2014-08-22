@@ -44,7 +44,7 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
 	</bean>
 	
 	
-	<jaxrs:server id="BookCopyCXFService" address="/bookCopies">
+	<jaxrs:server id="BookCopyCXFService" address="/copies">
 		<jaxrs:serviceBeans>
 			<ref bean="copyWS" />
 		</jaxrs:serviceBeans>

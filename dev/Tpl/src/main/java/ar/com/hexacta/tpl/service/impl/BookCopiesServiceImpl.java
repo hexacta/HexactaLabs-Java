@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.hexacta.tpl.model.BookCopy;
@@ -14,7 +13,7 @@ import ar.com.hexacta.tpl.persistence.repository.BookCopyRepository;
 @Service
 public class BookCopiesServiceImpl implements IBookCopiesService{
 	
-	@Autowired
+
 	BookCopyRepository bookCopyRepository;
 
 	@Override
