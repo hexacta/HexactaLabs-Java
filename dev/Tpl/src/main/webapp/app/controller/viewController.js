@@ -1,5 +1,6 @@
 booksApp.controller('viewController', function($scope, $http){
 
+	
 	$scope.mostrarLogin = function(){
 		if($scope.sessionData == undefined){
 			return true;
@@ -7,14 +8,6 @@ booksApp.controller('viewController', function($scope, $http){
 			return false;
 		}
 
-<<<<<<< HEAD
-$scope.getNombreUsuario = function(){
-	if($scope.sessionData != undefined){
-//		document.getElementById("Usuario").innerHTML = "Bienvenido: " + $scope.sessionData.name;
-		$scope.usuario = "Bienvenido: " + $scope.sessionData.name;
-	}
-};
-=======
 	};
 
 	$scope.mostrarUser = function(){
@@ -47,7 +40,6 @@ $scope.getNombreUsuario = function(){
 			console.log("An Error occurred while trying to login");
 		});
 	};
->>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 
 });
 

@@ -41,7 +41,7 @@ booksApp.directive('userIngreso',function() {
 	
 			$scope.validateUser = function(aUser) {
 				  			  
-				data = {name: aUser.name, pass: aUser.pass, sessionKey: "123456"}
+				data = {name: aUser.username, pass: aUser.password, sessionKey: "123456"}
 					var jsonUser = angular.toJson(aUser);
 				
 					//$http.post('/Tpl/rest/login', jsonUser).success(
