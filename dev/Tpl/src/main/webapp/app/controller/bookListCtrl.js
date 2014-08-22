@@ -26,7 +26,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 
 	$scope.modifyModal=function(book){
 		$scope.selectedBook = book;
-		
+		$scope.selectedBook.image = "";
 		//Getting comments
 		var bookId = $scope.selectedBook.id;
 		$http({
