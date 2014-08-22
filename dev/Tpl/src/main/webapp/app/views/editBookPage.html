@@ -34,25 +34,28 @@
 					</div>
 					<!-- SELECT PAISES -->
 					<div class="form-group">
-						<label class=""> Pa&iacute;s: </label> <select ng-required="true"
-							ng-model="currentBook.country" class="form-control">
+						<label class="">Pa&iacute;s: </label> <select class="form-control"
+							ng-model="currentBook.country" ng-required="true">
 							<option>Argentina</option>
 							<option>Brasil</option>
+							<option>EEUU</option>
+							<option>Inglaterra</option>
 							<option>Uruguay</option>
 						</select>
 					</div>
 					<!-- CHECKBOX CATEGORIAS -->
 					<div class="form-group">
-						<label class="">Categorias:</label>
-						<!--  <input class=""
-						wicket:id="selectCheckBox" id="selectCheckBox1" type="checkbox" />
-					<strong><span wicket:id="name" id="name" /></strong> -->
-						<div class="col-md-8 col-md-offset-2 checkbox">
-							<label class="checkbox-inline"><input class=""
-								id="selectCheckBox1" type="checkbox" /> eBook</label> <label
-								class="checkbox-inline"><input class=""
-								id="selectCheckBox2" type="checkbox" /> F&iacute;sico</label>
+						<label class=""> Categorias:</label>
+						<div class="col-md-8 col-md-offset-2 checkbox"
+							ng-repeat="category in categories">
+							<label class="checkbox-inline"> <input type="checkbox"
+								name="selectedCategory[]" value="{{category}}"
+								ng-model="category.selected"
+								ng-click="toggleSelection(category, currentBook)">
+								{{category.name}}<br />
+							</label>
 						</div>
+
 					</div>
 
 

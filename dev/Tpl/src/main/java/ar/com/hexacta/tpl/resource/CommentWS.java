@@ -26,6 +26,8 @@ import ar.com.hexacta.tpl.service.ICommentService;
 @Service
 public class CommentWS {
 
+	public static int HTTP_OK_CREATED = 201;
+	
 	public CommentWS() {
 	}
 
@@ -67,7 +69,7 @@ public class CommentWS {
 			e.printStackTrace();
 			return Response.serverError().build();
 		}
-		return Response.ok().build();
+		return Response.status(HTTP_OK_CREATED).build();
 
 	}
 
