@@ -27,7 +27,7 @@ booksApp.controller('registerCtrl', function($scope, $location, $rootScope, $htt
 			var jsonUser = angular.toJson(aUser);
 			$http.post('/Tpl/rest/users', jsonUser).success(
 					function(data, status, headers, config) {
-						if (status == 200) {
+						if (status == 201) {
 							// Ok message and go back
 							console.log("User Creation Completed.\n");
 							$location.path("/");

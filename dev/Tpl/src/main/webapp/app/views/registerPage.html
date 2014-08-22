@@ -19,10 +19,10 @@
 					<form novalidate name="registerForm" class="form-signin"
 						ng-submit="registerForm.$valid && save(newUser)">
 						<input ng-model="newUser.username" class="form-control" 
-							ng-minlength="3" ng-maxlength="12" id="user"
+							ng-minlength="6" ng-maxlength="12" id="user"
 							placeholder="Nombre de Usuario" ng-required="true" autofocus>
 						<input ng-model="newUser.email" type="email" class="form-control" 
-							ng-minlength="3" ng-maxlength="16" id="email"
+							ng-minlength="3" id="email"
 							placeholder="usuario@email.com" ng-required="true">
 						<input ng-model="newUser.password" id="password" ng-minlength="6" ng-maxlength="12"
 							placeholder="Ingrese aqui su password..." class="form-control"
