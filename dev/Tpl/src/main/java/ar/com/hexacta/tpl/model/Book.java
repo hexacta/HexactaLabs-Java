@@ -127,10 +127,20 @@ public class Book extends Entidad implements Serializable {
 
     public void setEnabled(Boolean enable){
     	this.enabled = enable;
+<<<<<<< HEAD
     }
     
     @JsonIgnore
     public boolean getEnabled(){
     	return this.enabled;
     }
+=======
+    }
+    
+    @JsonIgnore
+    public boolean getEnabled(){
+    	return this.enabled;
+    }
+    
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 }

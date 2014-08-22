@@ -84,9 +84,15 @@
 								<h4>Pa&iacute;s de Origen: {{selectedBook.country}}</h4>
 							</div>
 							
+<<<<<<< HEAD
 							<img class="col-md-3 img-responsive img-circle" ng-src="{{selectedBook.image}}"></img>						
 							
 							<div class="col-md-12">
+=======
+							<img ng-src="{{selectedBook.image}}"></img>						
+							
+							<div>
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 								Comentarios:
 								<blockquote ng-repeat="comment in selectedBook.bookComments" >
 									<p>{{comment.body}}</p>
@@ -117,6 +123,7 @@
 			</div>
 	</div>
 </div>
+
 
 
 </section>

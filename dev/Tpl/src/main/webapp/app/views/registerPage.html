@@ -18,11 +18,16 @@
 						alt="">
 					<form novalidate name="registerForm" class="form-signin"
 						ng-submit="registerForm.$valid && save(newUser)">
+<<<<<<< HEAD
 						<input ng-model="newUser.username"  ng-focus="" class="form-control" 
 							ng-minlength="3" ng-maxlength="12" id="user"
+=======
+						<input ng-model="newUser.username" class="form-control" 
+							ng-minlength="6" ng-maxlength="12" id="user"
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 							placeholder="Nombre de Usuario" ng-required="true" autofocus>
 						<input ng-model="newUser.email" type="email" class="form-control" 
-							ng-minlength="3" ng-maxlength="16" id="email"
+							ng-minlength="3" id="email"
 							placeholder="usuario@email.com" ng-required="true">
 						<input ng-model="newUser.password" id="password" ng-minlength="6" ng-maxlength="12"
 							placeholder="Ingrese aqui su password..." class="form-control"

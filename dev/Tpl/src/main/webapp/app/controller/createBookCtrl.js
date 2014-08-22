@@ -22,7 +22,11 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 		console.log(jsonBook );
 		$http.post('/Tpl/rest/books', jsonBook).success(
 				function(data, status, headers, config) {
+<<<<<<< HEAD
 					if (status == 200) {
+=======
+					if (status == 201) {
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 						$location.path("/");
 					}
 				}).error(function(data, status, headers, config) {
@@ -54,6 +58,10 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 				book.bookCategories.splice(index,1);
 			}
 		}
+<<<<<<< HEAD
 	}
+=======
+	};
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 
 });

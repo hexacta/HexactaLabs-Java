@@ -26,6 +26,10 @@ import ar.com.hexacta.tpl.service.impl.BooksServiceImpl;
 
 @Service
 public class BookWS {
+	
+	public static int HTTP_OK_CREATED = 201;
+	public static int HTTP_OK = 200;
+	public static int HTTP_DELETE = 204;
 
     public BookWS() {
     }
@@ -59,8 +63,7 @@ public class BookWS {
             e.printStackTrace();
             return Response.serverError().build();
         }
-        return Response.ok().build();
-
+        return Response.status(HTTP_OK_CREATED).build();
     }
 
     @PUT
@@ -71,8 +74,14 @@ public class BookWS {
             Book book = parseBook(jsonBook);
             book.setId(new Long(bookId));
             
+<<<<<<< HEAD
             if (bookService.findBook(new Long(bookId)).getEnabled()){
             	return makeUpdate(book);
+=======
+            Book persistedBook = bookService.findBook(new Long(bookId)); 
+            if (persistedBook.getEnabled()){
+            	return makeUpdate(book, HTTP_OK);
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
             }else{
             	return Response.serverError().build();
             }
@@ -88,12 +97,21 @@ public class BookWS {
     public Response deleteBook(@PathParam("bookId") final String bookId) {
         Book book = bookService.findBook(new Long(bookId));
         book.setEnabled(false);
+<<<<<<< HEAD
         return makeUpdate(book);
     }
 
 	private Response makeUpdate(Book book){
 		bookService.updateBook(book);
 		return Response.ok().build();
+=======
+        return makeUpdate(book, HTTP_DELETE);
+    }
+
+	private Response makeUpdate(Book book, int responseCode){
+		bookService.updateBook(book);
+		return Response.status(responseCode).build();
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 	}
     
     private Book parseBook(final String jsonBook) throws JsonParseException, JsonMappingException, IOException {

@@ -2,7 +2,10 @@ package ar.com.hexacta.tpl.persistence.dao;
 
 import java.util.Date;
 import java.util.logging.Logger;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +22,13 @@ import ar.com.hexacta.tpl.persistence.repository.DataInitRepository;
 
 @Repository
 public class DataInitDAO implements DataInitRepository {
+<<<<<<< HEAD
 	private static final Logger LOG = Logger.getLogger(DataInitDAO.class
 			.getName());
+=======
+	private static final Logger LOG = Logger.getLogger(DataInitDAO.class.getName());
+
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 
 	@Autowired
 	private BookDAO bookDAO;
@@ -30,7 +38,11 @@ public class DataInitDAO implements DataInitRepository {
 
 	@Autowired
 	private BookCategoryDAO bookCategoryDAO;
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 	@Autowired
 	private UserDAO userDAO;
 
@@ -58,43 +70,71 @@ public class DataInitDAO implements DataInitRepository {
 		BookCopy bookCopy3 = new BookCopyBuilder().withCode("3").build();
 		BookCopy bookCopy4 = new BookCopyBuilder().withCode("4").build();
 		BookCopy bookCopy5 = new BookCopyBuilder().withCode("5").build();
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 		// Libros
 		Book book1 = new BookBuilder()
 				.withName("El principito")
 				.withDescription(
 						"Best-seller del escritor frances Antoine de Saint-Exupery.")
 				.withPublisher("Editorial Planeta")
+<<<<<<< HEAD
 				.withCategory(physicalCategory).withCountry("EEUU")
+=======
+				.withCategory(physicalCategory)
+				.withCountry("EEUU")
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 				.withISBN("978-0-152-16415-7")
 				.withBookCopy(bookCopy1, bookCopy2).build();
 		bookDAO.saveOrUpdate(book1);
 		LOG.info("Created book " + book1.getId());
 		Book book2 = new BookBuilder().withName("El codigo Da Vinci")
 				.withDescription("Novela de misterio del escritor Dan Brown.")
+<<<<<<< HEAD
 				.withPublisher("Editorial Estrada").withCountry("EEUU")
 				.withISBN("84-95618-60-5").withCategory(physicalCategory)
 				.withBookCopy(bookCopy3).build();
+=======
+				.withPublisher("Editorial Estrada")
+				.withCountry("EEUU")
+				.withISBN("84-95618-60-5")
+				.withCategory(physicalCategory).withBookCopy(bookCopy3).build();
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 		bookDAO.saveOrUpdate(book2);
 		LOG.info("Created book " + book2.getId());
 
 		Book book3 = new BookBuilder().withName("El Hobbit")
 				.withDescription("Novela fantastica de J. R. R. Tolkien.")
 				.withPublisher("Editorial Atlantida")
+<<<<<<< HEAD
 				.withCountry("United Kingdom").withISBN("84-450-7037-1")
+=======
+				.withCountry("United Kingdom")
+				.withISBN("84-450-7037-1")
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 				.withCategory(eBookCategory).withBookCopy(bookCopy4).build();
 		bookDAO.saveOrUpdate(book3);
 		LOG.info("Created book " + book3.getId());
 
+<<<<<<< HEAD
 		Book book4 = new BookBuilder()
 				.withName("Ender's Game")
 				.withDescription(
 						"Novela de ciencia ficción de Orson Scott Card")
 				.withPublisher("Editorial pepin").withISBN("9780812550702")
+=======
+		Book book4 = new BookBuilder().withName("Ender's Game")
+				.withDescription("Novela de ciencia ficción de Scott")
+				.withPublisher("Editorial pepin")
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 				.withCategory(physicalCategory).withBookCopy(bookCopy5).build();
 		bookDAO.saveOrUpdate(book4);
 		LOG.info("Created book " + book4.getId());
 
+<<<<<<< HEAD
 		// Users
 		User userAdmin = new User("admin", "admin", "admin@hexacta.com");
 		userDAO.save(userAdmin);
@@ -102,6 +142,15 @@ public class DataInitDAO implements DataInitRepository {
 		User user2 = new User("edu", "malvino", "emalvino@hexacta.com", false);
 		userDAO.save(user2);
 
+=======
+		//Users
+		User userAdmin = new User("admin", "admin", "admin@hexacta.com");
+		userDAO.save(userAdmin);
+		
+		User user2 = new User("edu", "malvino", "emalvino@hexacta.com", false);
+		userDAO.save(user2);
+		
+>>>>>>> ee4c7d4f195a05e7e64b4422afee0982dba1b329
 		Loan loan = new Loan(userAdmin, bookCopy1, new Date(), new Date());
 		genericDAO.saveOrUpdate(loan);
 		genericDAO.saveOrUpdate(book1);
