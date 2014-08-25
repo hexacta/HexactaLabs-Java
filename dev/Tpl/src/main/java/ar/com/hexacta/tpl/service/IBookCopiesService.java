@@ -8,16 +8,6 @@ public interface IBookCopiesService {
 	
 	List <BookCopy> findAllCopies();
 	
-	BookCopy findCopyById(final long BookCopyId);
-	
-	void createCopy(final BookCopy bookCopy);
-	
-	void deleteCopy(final BookCopy bookCopy);
-	
-	void updateCopy(final BookCopy bookCopy);
-	
-	List<BookCopy> findByBookId (final long bookId);
-	
-	BookCopy findFreeCopyByBookId (final long bookId);
+	BookCopy findFreeCopyByBook(long bookId);
 
 }
