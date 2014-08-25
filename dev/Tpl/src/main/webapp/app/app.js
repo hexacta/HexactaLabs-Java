@@ -1,4 +1,4 @@
-var booksApp = angular.module('booksApp', ['ngRoute','ui.bootstrap']);
+var booksApp = angular.module('booksApp', ['ngRoute','ui.bootstrap', 'ngStorage']);
 
 booksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 	$routeProvider.
