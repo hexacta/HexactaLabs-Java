@@ -78,14 +78,14 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 		if (selected){
 			book.bookCategories.push(category);
 		}else{
-			/*var index = -1;
+			var index = -1;
 			
 			for (var i = 0; i < book.bookCategories.length; i++){
 				if (book.bookCategories[i].id == category.id){
 					index = i;
 				}
-			}*/
-			var index = book.bookCategories.indexOf(category);
+			} // este else es el que guarda si se esta desseleccionando una categoría
+//			var index = book.bookCategories.indexOf(category);
 			
 			if (index > -1){
 				book.bookCategories.splice(index,1);

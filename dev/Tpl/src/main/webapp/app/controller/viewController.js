@@ -30,10 +30,11 @@ booksApp.controller('viewController', function($scope, $http, $rootScope, $sessi
 				sessionStorage.user = JSON.stringify(data);
 				sessionStorage.loggedIn = true;
 				$rootScope.loggedIn = true;
-				$scope.user = JSON.parse(sessionStorage.user).username; 
+				$scope.user = "Bienvenido: " + JSON.parse(sessionStorage.user).username + "!"; 
 			}
 		}).error(function(data, status, headers, config){
-			console.log("An Error occurred while trying to login");
+			alert("El usuario " + user.username + " no esta registrado o escribio mal la password.");
+			$scope.user.password="";
 		});
 	};
 
