@@ -26,93 +26,105 @@ import ar.com.hexacta.tpl.service.IUsersService;
 @Service
 public class UserWS {
 
-    @Autowired
-    private IUsersService userService;
+	
+	public static int HTTP_OK_CREATED = 201;
+	public static int HTTP_OK = 200;
+	public static int HTTP_DELETE = 204;
+	
+	@Autowired
+	private IUsersService userService;
+	
+	public UserWS(){
+		
+	}
+	
+	@GET
+	@Path("/")
+	@Produces("application/json")
+	public List<User> findAllUsers() {
+		return userService.findAllUsers();
+	}
+	
+	@GET
+	@Path("/{userId}")
+	@Produces("application/json")
+	public User findComment(@PathParam("userId") final String userId) {
+		return userService.findUser(new Long(userId));
+	}
+	
 
-    public UserWS() {
+	@POST
+	@Path("/")
+	@Consumes("application/json")
+	public Response createUser(	@Multipart(value = "newUser", type = "application/json") final String jsonUser) {
+		try {
+			boolean validation = userService.createUser(parseUser(jsonUser));
+			if (validation){
+				return Response.status(HTTP_OK_CREATED).build();
+			}else{
+				return Response.serverError().build();
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
+	}
+	
+	@PUT
+	@Path("/{userId}")
+	@Consumes("application/json")
+	public Response updateUser(	@PathParam("userId") final String userId, final String jsonUser) {
+		try {
+			User user = parseUser(jsonUser);
+			user.setId(new Long(userId));
+			
+			if (userService.findUser(new Long(userId)).getEnabled()){
+				return makeUpdate(user, HTTP_OK);
+			}else{
+				return Response.serverError().build();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
+	}
+	
+	private Response makeUpdate(User user, int responseCode){
+		boolean validation = userService.updateUser(user);
+		
+		if (validation){
+			return Response.status(responseCode).build();
+		}else{
+			return Response.serverError().build();
+		}
 
-    }
+	}
+	
+	@DELETE
+	@Path("/{userId}")
+	public Response deleteUser(@PathParam("userId") final String userId) {
+		//userService.deleteUserById(new Long(userId));
+		User user = userService.findUser(new Long(userId));
+		user.setEnabled(false);
+		return makeUpdate(user, HTTP_DELETE);
+	}
+		
+	
+	private User parseUser(final String jsonUser) throws JsonParseException, JsonMappingException, IOException {
+		User newUser = new User();
+		ObjectMapper mapper = new ObjectMapper();
+		newUser = mapper.readValue(jsonUser, User.class);
+		newUser.setEnabled(true);
+		return newUser;
+	}
+	
+	public IUsersService getUsersService() {
+		return userService;
+	}
 
-    @GET
-    @Path("/")
-    @Produces("application/json")
-    public List<User> findAllUsers() {
-        return userService.findAllUsers();
-    }
+	public void setUserService(final IUsersService userService) {
+		this.userService = userService;
+	}
 
-    @GET
-    @Path("/{userId}")
-    @Produces("application/json")
-    public User findComment(@PathParam("userId") final String userId) {
-        return userService.findUser(new Long(userId));
-    }
-
-    @POST
-    @Path("/")
-    @Consumes("application/json")
-    public Response createUser(@Multipart(value = "newUser", type = "application/json") final String jsonUser) {
-        try {
-            boolean validation = userService.createUser(parseUser(jsonUser));
-            if (validation)
-                return Response.ok().build();
-            else
-                return Response.serverError().build();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        }
-    }
-
-    @PUT
-    @Path("/{userId}")
-    @Consumes("application/json")
-    public Response updateUser(@PathParam("userId") final String userId, final String jsonUser) {
-        try {
-            User user = parseUser(jsonUser);
-            user.setId(new Long(userId));
-
-            if (userService.findUser(new Long(userId)).getEnabled())
-                return makeUpdate(user);
-            else
-                return Response.serverError().build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        }
-    }
-
-    private Response makeUpdate(final User user) {
-        boolean validation = userService.updateUser(user);
-
-        if (validation)
-            return Response.ok().build();
-        else
-            return Response.serverError().build();
-
-    }
-
-    @DELETE
-    @Path("/{userId}")
-    public Response deleteUser(@PathParam("userId") final String userId) {
-        User user = userService.findUser(new Long(userId));
-        user.setEnabled(false);
-        return makeUpdate(user);
-    }
-
-    private User parseUser(final String jsonUser) throws JsonParseException, JsonMappingException, IOException {
-        User newUser = new User();
-        ObjectMapper mapper = new ObjectMapper();
-        newUser = mapper.readValue(jsonUser, User.class);
-        newUser.setEnabled(true);
-        return newUser;
-    }
-
-    public IUsersService getUsersService() {
-        return userService;
-    }
-
-    public void setUserService(final IUsersService userService) {
-        this.userService = userService;
-    }
 }
