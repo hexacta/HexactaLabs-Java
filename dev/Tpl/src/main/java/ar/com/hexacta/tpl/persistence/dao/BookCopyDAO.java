@@ -28,7 +28,7 @@ public class BookCopyDAO extends AbstractDAO<BookCopy> implements BookCopyReposi
 	@Override
 	public List<BookCopy> findByBookId(Long bookId) {
 		DetachedCriteria criteria = this.createCriteria();
-		criteria.add(Restrictions.like("book_id", bookId));
+		criteria.add(Restrictions.like("book.id", bookId));
 		return (List<BookCopy>) this.getHibernateTemplate().findByCriteria(criteria);
 	}
 

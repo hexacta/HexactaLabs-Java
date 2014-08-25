@@ -55,10 +55,7 @@ public class BookCopy extends Entidad implements Serializable {
     }
 
     public BookCopy(final String code, final String bookRate, final String state, final boolean enabled) {
-        super();
-        this.code = code;
-        this.bookRate = bookRate;
-        this.state = state;
+        this(code, bookRate, state);
         this.enabled = enabled;
     }
 
