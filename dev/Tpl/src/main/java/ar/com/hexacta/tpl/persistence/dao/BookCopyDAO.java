@@ -16,7 +16,7 @@ public class BookCopyDAO extends AbstractDAO<BookCopy> implements BookCopyReposi
 	@Override
 	public BookCopy findFreeCopy(final long bookId) {
 		DetachedCriteria criteria = this.createCriteria();
-		criteria.add(Restrictions.like("book.id", bookId));
+		criteria.add(Restrictions.like("book_id", bookId));
 		criteria.add(Restrictions.eq("free", true));
 		List<BookCopy> result = (List<BookCopy>) this.getHibernateTemplate().findByCriteria(criteria);
 		if(result.size()==0){

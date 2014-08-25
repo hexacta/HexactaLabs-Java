@@ -50,7 +50,7 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 	$scope.loadFreeCopy = function(){
 		$http({
 			method: 'GET',
-			url : 'Tpl/rest/copies/book/' + bookId,
+			url : '/Tpl/rest/copies/book/' + bookId,
 			headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
 		}).success(function(data, status, headers, config){
 			if (status == 200){

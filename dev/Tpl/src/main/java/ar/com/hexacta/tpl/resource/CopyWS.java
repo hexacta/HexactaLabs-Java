@@ -4,8 +4,11 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import ar.com.hexacta.tpl.model.BookCopy;
 import ar.com.hexacta.tpl.service.IBookCopiesService;
 
@@ -26,8 +29,8 @@ public class CopyWS {
 	@GET
 	@Path("/book/{bookId}")
 	@Produces("application/json")
-	public BookCopy findFreeBookCopy(long bookId){
-		return bookCopyService.findFreeCopyByBook(bookId);
+	public BookCopy findFreeBookCopyByBook(@PathParam("bookId") final String bookId){
+		return bookCopyService.findFreeCopyByBook(new Long(bookId));
 	}
 
 }
