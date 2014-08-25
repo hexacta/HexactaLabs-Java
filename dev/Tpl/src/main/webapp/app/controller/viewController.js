@@ -1,7 +1,9 @@
-booksApp.controller('viewController', function($scope, $http, $sessionStorage ){
+booksApp.controller('viewController', function($scope, $http, $rootScope, $sessionStorage ){
 
+	sessionStorage.loggedIn = false;
+	$rootScope.loggedIn = false;
 	
-	$scope.mostrarLogin = function(){
+/*	$scope.mostrarLogin = function(){
 		return !sessionStorage.loggedIn;
 	};
 
@@ -13,7 +15,7 @@ booksApp.controller('viewController', function($scope, $http, $sessionStorage ){
 		if(sessionStorage.loggedIn){
 			return $scope.user = JSON.parse(sessionStorage.user).username; 
 		}	
-	};
+	};*/
 
 	$scope.validateUser = function(user){
 		var toEncode = user.username + ":" + user.password;
@@ -27,6 +29,8 @@ booksApp.controller('viewController', function($scope, $http, $sessionStorage ){
 				//TODO:
 				sessionStorage.user = JSON.stringify(data);
 				sessionStorage.loggedIn = true;
+				$rootScope.loggedIn = true;
+				$scope.user = JSON.parse(sessionStorage.user).username; 
 			}
 		}).error(function(data, status, headers, config){
 			console.log("An Error occurred while trying to login");

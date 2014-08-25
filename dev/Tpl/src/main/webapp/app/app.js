@@ -35,28 +35,7 @@ booksApp.directive('userIngreso',function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'app/views/loginView.html',
-		controller: ['$scope', '$http', '$location', function($scope, $http, $location) {
-		
-			$scope.user = {};	
-	
-			$scope.validateUser = function(aUser) {
-				  			  
-				data = {name: aUser.username, pass: aUser.password, sessionKey: "123456"}
-					var jsonUser = angular.toJson(aUser);
-				
-					//$http.post('/Tpl/rest/login', jsonUser).success(
-					//		function(data, status, headers, config) {
-					//			if (status = 200) {
-									$scope.sessionData = data;
-									// Ok message and go back
-									var usuario = $scope.sessionData;
-					//				$location.path("/");
-					//			}
-					//		}).error(function(data, status, headers, config) {
-					//	console.log("An Error occurred while trying to store the user:" + jsonUser);
-					//});
-				}
-		}]
+
 	}
 
 });

@@ -2,7 +2,7 @@
 <div ng-controller="bookListCtrl" >
 
 	<div id="feedbackPanel" />
-	<div ng-controller="viewController" ng-hide="sessionData">
+	<div ng-show="loggedIn">
 			<div class="row">
 				<form role="form" class="col-md-12">
 					<div class="form-group col-md-9">					
@@ -24,7 +24,6 @@
 							<th class="text-center"> Editorial </th>
 							<th class="text-center"> ISBN </th>
 							<th class="text-center"> Categor&iacute;a </th>
-							<!--  este colspan es temporal, buscar una solucion mas elegante -->
 							<th class="text-center" colspan="3"> Acciones </th>
 						</tr>
 					</thead>

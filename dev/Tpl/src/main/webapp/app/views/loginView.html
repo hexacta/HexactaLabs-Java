@@ -1,7 +1,7 @@
 
 <div ng-controller="viewController">
 
-	<form class="navbar-form navbar-right" ng-hide="sessionData" novalidate 
+	<form class="navbar-form navbar-right" ng-hide="loggedIn" novalidate 
 		name="logInForm" role="search"  ng-submit="logInForm.$valid && validateUser(user)">
 		<div class="form-group">
 			<input type="text" ng-model="user.username" ng-minlength="3"
@@ -13,8 +13,8 @@
 	</form>
 	
 	<form class="navbar-form navbar-right" novalidate name="logForm">
-		<div id="UsuarioBox" ng-show="sessionData">
-			<label id="Usuario" ng-bind="usuario">{{sessionData.username}}</label>
+		<div id="UsuarioBox" ng-show="loggedIn">
+			<label id="Usuario" ng-bind="usuario">{{user}}</label>
 		</div>
 	</form>
 
