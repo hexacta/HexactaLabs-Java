@@ -1,26 +1,17 @@
-booksApp.controller('viewController', function($scope, $http){
+booksApp.controller('viewController', function($scope, $http, $sessionStorage ){
 
 	$scope.mostrarLogin = function(){
-		if($scope.sessionData == undefined){
-			return true;
-		}else {
-			return false;
-		}
-
+		return !sessionStorage.loggedIn;
 	};
 
 	$scope.mostrarUser = function(){
-		if($scope.sessionData == undefined){
-			return false;
-		}else {
-			return true;
-		}
+		return sessionStorage.loggedIn;
 	};
 
 	$scope.getNombreUsuario = function(){
-		if($scope.sessionData != undefined){
-			return $scope.user = $scope.sessionData.username; 
-		}			
+		if(sessionStorage.loggedIn){
+			return $scope.user = JSON.parse(sessionStorage.user).username; 
+		}	
 	};
 
 	$scope.validateUser = function(user){
@@ -33,7 +24,8 @@ booksApp.controller('viewController', function($scope, $http){
 		}).success(function(data, status, headers, config){
 			if(status == 200){
 				//TODO:
-				$scope.sessionData = user; 
+				sessionStorage.user = JSON.stringify(data);
+				sessionStorage.loggedIn = true;
 			}
 		}).error(function(data, status, headers, config){
 			console.log("An Error occurred while trying to login");
