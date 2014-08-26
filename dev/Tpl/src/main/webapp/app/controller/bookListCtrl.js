@@ -43,6 +43,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	    	}) ;
 		
 		
+		
 		//image from google rest service
 		var find = '-';
 		var re = new RegExp(find, 'g');

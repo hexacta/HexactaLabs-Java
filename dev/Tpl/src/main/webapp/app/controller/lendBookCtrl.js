@@ -2,6 +2,7 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 	
 	$scope.books = $rootScope.books;
 	$scope.bookId = $routeParams.bookId;
+	var bookId = $scope.bookId;
 	$scope.book = null;
 	$scope.copyCode = null;
 	
@@ -15,7 +16,7 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 			url: '/Tpl/rest/users',
 			headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
 		}).success(function(data, status, headers, config){
-			if(status = 200)
+			if(status == 200)
 			{
 				$rootScope.users = [];
 				$rootScope.users = data;
@@ -30,13 +31,13 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 	$scope.loadBook = function(){
 		$http({
 			method : 'GET',
-			url : '/Tpl/rest/books/1',
+			url : '/Tpl/rest/books/' + bookId,
 			headers : {
 				'Content-type' : 'application/json',
 				'Accept' : 'application/json'
 			}
 		}).success(function(data, status, headers, config) {
-			if (status = 200) {
+			if (status == 200) {
 				$scope.currentBook = data;
 				$scope.copyCode = $scope.currentBook.freeBookCopy;
 			}
@@ -45,6 +46,21 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 		});
 	}
 	$scope.loadBook();
+	
+	$scope.loadFreeCopy = function(){
+		$http({
+			method: 'GET',
+			url : '/Tpl/rest/copies/book/' + bookId,
+			headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
+		}).success(function(data, status, headers, config){
+			if (status == 200){
+				$scope.freeCopy = data;
+			}
+		}).error(function(data, status, headers, config){
+			console.log("An error ocurred while trying to get free copy from book: " + bookId);
+		});
+	}
+	$scope.loadFreeCopy();
 	
 
 });
