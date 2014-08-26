@@ -12,6 +12,6 @@ public interface BookCopyRepository {
 
 	List<BookCopy> findAll();
 
-	BookCopy findFreeCopy(long bookId);
+	BookCopy findFreeCopy(Long bookId);
 
 }

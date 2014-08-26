@@ -1,5 +1,6 @@
 package ar.com.hexacta.tpl.model.builder;
 
+import ar.com.hexacta.tpl.model.Book;
 import ar.com.hexacta.tpl.model.BookCopy;
 
 /**
@@ -14,9 +15,11 @@ public class BookCopyBuilder {
     private String state = BookCopy.STATE_FREE;
 
     private boolean enabled = true;
-
+    
+    private Book book = new Book();
+    		
     public BookCopy build() {
-        return new BookCopy(code, bookRate, state, enabled);
+        return new BookCopy(code, bookRate, state, enabled, book);
     }
 
     public BookCopyBuilder withCode(final String aCode) {
