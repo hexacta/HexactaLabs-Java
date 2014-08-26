@@ -1,34 +1,42 @@
+const BOOKID = ":bookId";  
 var booksApp = angular.module('booksApp', ['ngRoute','ui.bootstrap', 'ngStorage']);
 
 booksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 	$routeProvider.
-		when('/', {	
+		when('/' , {	
 			templateUrl: 'app/views/bookListPage.html',
-			controller: 'bookListCtrl' 
+			controller: 'bookListCtrl',
+			publicAccess: true
 		}).
-	   	when('/createBook', { 
+	   	when('/createBook' , { 
 	   		templateUrl: 'app/views/createBookPage.html', 
-	   		controller: 'createBookCtrl'
+	   		controller: 'createBookCtrl',
+	   		publicAccess: false
 	   	}).
-		when('/editBook/:bookId', {
+		when('/editBook/' + BOOKID, {
 			templateUrl: 'app/views/editBookPage.html',
-			controller: 'editBookCtrl'
+			controller: 'editBookCtrl',
+			publicAccess: false
 		}).
-        when('/lendBook/:bookId', {
+        when('/lendBook/' + BOOKID, {
             templateUrl: 'app/views/lendBookPage.html',
-            controller: 'lendBookCtrl'
+            controller: 'lendBookCtrl',
+            publicAccess: false
         }).
-        when('/deleteBook/:bookId', {
+        when('/deleteBook/' + BOOKID, {
             templateUrl: 'app/views/deleteBookPage.html',
-            controller: 'deleteBookCtrl'
+            controller: 'deleteBookCtrl',
+            publicAccess: false
         }).
         when('/register', {
             templateUrl: 'app/views/registerPage.html',
-            controller: 'registerCtrl'
+            controller: 'registerCtrl',
+            publicAccess: true
         }).
 		otherwise({
 			redirectTo: '/'
 		});
+	
 }]);
 
 booksApp.directive('userIngreso',function() {
@@ -62,6 +70,24 @@ booksApp.directive('userIngreso',function() {
 
 });
 
-booksApp.run(function($rootScope,$http) {
+booksApp.run(function($rootScope,$http, $route, $location) {
 	$rootScope.books = [];
+	
+	$rootScope.$on('$routeChangeStart', function (event) {
+		var path = $location.path();
+		var currentRoute = $route.routes[path];
+		if (!currentRoute){
+			path = path.replace(/[\d+]$/g, '');
+			path += ":bookId";
+		}
+		currentRoute = $route.routes[path];
+		if (!currentRoute || currentRoute.publicAccess){
+			return;
+		}
+		
+	    if (!sessionStorage.loggedIn) {
+	        $location.path('/');
+	    }
+	});	
 });
+
