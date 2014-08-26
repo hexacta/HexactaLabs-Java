@@ -1,8 +1,10 @@
 booksApp.controller('viewController', function($scope, $http, $rootScope, $sessionStorage ){
 
-	sessionStorage.loggedIn = false;
 	$rootScope.loggedIn = false;
-	
+	$rootScope.loggedIn = $sessionStorage.user !== undefined;
+	if( $sessionStorage.user !== undefined){
+		$rootScope.usuario = "Bienvenido: " + JSON.parse($sessionStorage.user).username + "!"; 
+	}
 /*	$scope.mostrarLogin = function(){
 		return !sessionStorage.loggedIn;
 	};
@@ -17,6 +19,12 @@ booksApp.controller('viewController', function($scope, $http, $rootScope, $sessi
 		}	
 	};*/
 
+	$scope.desloguearse = function(){
+		$rootScope.loggedIn = false;
+		$rootScope.usuario = undefined; 
+		delete $sessionStorage.user;
+	};
+
 	$scope.validateUser = function(user){
 		var toEncode = user.username + ":" + user.password;
 		var encoded = btoa(toEncode);
@@ -27,10 +35,11 @@ booksApp.controller('viewController', function($scope, $http, $rootScope, $sessi
 		}).success(function(data, status, headers, config){
 			if(status == 200){
 				//TODO:
-				sessionStorage.user = JSON.stringify(data);
-				sessionStorage.loggedIn = true;
+				$sessionStorage.user = JSON.stringify(data);
+				//$sessionStorage.loggedIn = true;
+				$scope.usuario = "Bienvenido: " + JSON.parse($sessionStorage.user).username + "!"; 
 				$rootScope.loggedIn = true;
-				$scope.user = "Bienvenido: " + JSON.parse(sessionStorage.user).username + "!"; 
+				
 			}
 		}).error(function(data, status, headers, config){
 			alert("El usuario " + user.username + " no esta registrado o escribio mal la password.");

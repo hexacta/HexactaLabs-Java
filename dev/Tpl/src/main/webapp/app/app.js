@@ -48,7 +48,7 @@ booksApp.directive('userIngreso',function() {
 
 });
 
-booksApp.run(function($rootScope,$http, $route, $location) {
+booksApp.run(function($rootScope,$http, $route, $location, $rootScope) {
 	$rootScope.books = [];
 	
 	$rootScope.$on('$routeChangeStart', function (event) {
@@ -63,7 +63,7 @@ booksApp.run(function($rootScope,$http, $route, $location) {
 			return;
 		}
 		
-	    if (!sessionStorage.loggedIn) {
+	    if (!$rootScope.loggedIn) {
 	        $location.path('/');
 	    }
 	});	

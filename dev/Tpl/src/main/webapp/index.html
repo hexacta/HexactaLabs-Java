@@ -66,7 +66,8 @@
 						<li><a href="#">Otra Seccion</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#/register">Registrarse</a></li>
+						<li><a href="#/register" ng-hide="loggedIn">Registrarse</a></li>
+						<li><a href="#" ng-controller="viewController" ng-click="desloguearse()" ng-show="loggedIn">Log Out</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span><span
 								class="caret"></span></a>
