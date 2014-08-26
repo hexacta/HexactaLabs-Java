@@ -10,17 +10,20 @@
 		<id name="id" column="BOOK_COPY_ID">
 			<generator class="identity" />
 		</id>
-	
-		<version name="version" column="VERSION" type="long"/>	
 		
-		<property name="code" column="CODE" unique="true" not-null="true" type="java.lang.String"/>
+		<many-to-one name="book" class="ar.com.hexacta.tpl.model.Book" fetch="select" lazy="false">
+			<column name="BOOK_ID" not-null="true"/>
+		</many-to-one> 
+			
+		<property name="version" column="VERSION" />
 		
-		<property name="bookRate" column="BOOK_RATE" type="java.lang.String"/>
+		<property name="code" column="CODE" />
 		
-		<property name="state" column="STATE" type="java.lang.String"/>
+		<property name="state"	column="STATE"/>
 		
-		<property name="enabled" column="ENABLED"/>
+		<property name="enabled" column="ENABLED" type="java.lang.Boolean"/>
 		
+		<property name="bookRate" column="BOOK_RATE"/>
 	</class>
 	
 </hibernate-mapping>
