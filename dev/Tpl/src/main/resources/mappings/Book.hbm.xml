@@ -30,10 +30,10 @@
 			<many-to-many column="BOOK_CATEGORY_ID" class="ar.com.hexacta.tpl.model.BookCategory" />
 		</set>
 		
-		<set name="bookCopies" table="BOOK_COPY" cascade="all">
+		<!-- <set name="bookCopies" table="BOOK_COPIES" cascade="all">
 			<key column="BOOK_ID" />
-			<many-to-many column="BOOK_COPY_ID" class="ar.com.hexacta.tpl.model.BookCopy" />		
-		</set>
+			<one-to-many class="ar.com.hexacta.tpl.model.BookCopy" />		
+		</set> -->
 		
  	</class>
 	

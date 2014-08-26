@@ -30,6 +30,7 @@ public class BookCopy extends Entidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private Book book;
     // @Column(name = "CODE")
     private String code = "";
 
@@ -46,19 +47,18 @@ public class BookCopy extends Entidad implements Serializable {
     	super();
     }
 
-    public BookCopy(final String code, final String bookRate, final String state) {
-        this();
-        this.code = code;
-        this.bookRate = bookRate;
-        this.state = state;
-        enabled = true;
-    }
-
-    public BookCopy(final String code, final String bookRate, final String state, final boolean enabled) {
+    public BookCopy(final String code, final String bookRate, final String state, final Book book) {
         super();
         this.code = code;
         this.bookRate = bookRate;
         this.state = state;
+        enabled = true;
+        this.book = book;
+    }
+
+    public BookCopy(final String code, final String bookRate, final String state, final boolean enabled, 
+    		final Book book) {
+        this(code, bookRate, state, book);
         this.enabled = enabled;
     }
 
@@ -88,6 +88,13 @@ public class BookCopy extends Entidad implements Serializable {
 
     public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
+    }
+    
+    public Book getBook(){
+    	return book;
+    }
+    public void setBook(final Book book){
+    	this.book = book;
     }
 
     /*
