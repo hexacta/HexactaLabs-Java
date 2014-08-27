@@ -29,7 +29,7 @@
 				<div class="form-group">
 					<label class="">ISBN: </label> <input type="text"
 						class="form-control" ng-model="newBook.isbn"
-						ng-required="true" id="isbn" />
+						ng-required="true" id="isbn" ng-minlength="1" ng-pattern="/^[0-9\-]*$/"/>
 
 				</div>			
 				<!-- SELECT PAISES -->
