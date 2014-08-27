@@ -56,7 +56,7 @@ booksApp.run(function($rootScope,$http, $route, $location, $rootScope) {
 		var currentRoute = $route.routes[path];
 		if (!currentRoute){
 			path = path.replace(/[\d+]$/g, '');
-			path += ":bookId";
+			path += BOOKID;
 		}
 		currentRoute = $route.routes[path];
 		if (!currentRoute || currentRoute.publicAccess){
