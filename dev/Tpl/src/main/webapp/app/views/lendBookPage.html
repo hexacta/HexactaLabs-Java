@@ -10,13 +10,20 @@
 					<label>Copia numero:</label>
 					<label>{{freeCopy.code}}</label>
 				</div>
-				<!-- SELECT USUARIOS -->
+				<!-- SELECT USUARIOS 
 				<div class="form-group">
 					<label class="">Prestar a: </label> 
 					<select class="form-control" ng-required="true" >
 						<option ng-repeat="user in users" ng-show="user.enabled" 
 						ng-required="true" ng-model="user.selected" value="{{user}}">{{user.username}}</option>
 					</select>
+				</div>-->
+				
+				<div class="form-group">
+					<label class="">Prestar a:</label>
+					<select class="form-control" ng-change="selectAction()" ng-model="users" 
+					ng-options="user.id as user.username for user in users">
+				</select>
 				</div>
 				<!-- SELECT TIME -->		
 			    <h4>Desde:</h4>
