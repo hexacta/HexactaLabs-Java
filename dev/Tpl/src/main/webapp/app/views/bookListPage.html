@@ -9,7 +9,7 @@
 						<input type="text" class="form-control col-md-12" placeholder="Ingrese el libro que desea buscar" ng-model="query">				
 					</div>
 					<div class="form-group col-md-3">
-						<button type="button" class="btn btn-hexacta-primary col-md-12" ng-click="linkToCreateBook()" ng-show="actionsAllowed()">Crear Nuevo Libro</button>
+						<button type="button" class="btn btn-hexacta-primary col-md-12" ng-click="linkToCreateBook()" ng-show="loggedIn">Crear Nuevo Libro</button>
 					</div>
 				</form>
 			</div>
@@ -97,19 +97,19 @@
 									<footer>{{comment.user}}</footer>
 								</blockquote>
 							</div>
-							<form role="form" name="commentForm" ng-show="actionsAllowed()" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
-								<div class="form-group">
+							<form role="form" name="commentForm" ng-show="loggedIn" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
+								<div ng-show="loggedIn" class="form-group">
 									<label for="txtCommentText">Comentario</label>
 									<textarea ng-model="comment.body" class="form-control"
 										placeholder="Escriba aqu&iacute; su comentario"
 										id="txtCommentText" required></textarea>
 								</div>
-								<div class="form-group">
+								<div ng-show="loggedIn" class="form-group">
 									<label for="txtCommentAuthor">Email:</label> 
 									<input type="email" ng-model="comment.user" class="form-control" placeholder="ejemplo@hexacta.com" id="txtCommentAuthor" required/>
 								</div>
 								
-								<input type="submit" value="Crear comentario" class="btn btn-hexacta-green btn-sm" />
+								<input ng-show="loggedIn" type="submit" value="Crear comentario" class="btn btn-hexacta-green btn-sm" />
 							</form>
 						</div>
 						
