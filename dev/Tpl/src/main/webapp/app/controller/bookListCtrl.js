@@ -111,5 +111,10 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		$scope.comment = {};
 	};
 	
-	});	
+	});
+	
+	$scope.actionsAllowed = function(){
+		return sessionStorage.loggedIn;
+	};
+	
 });

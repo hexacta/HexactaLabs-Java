@@ -8,7 +8,7 @@
 						<input type="text" class="form-control col-md-12" placeholder="Ingrese el libro que desea buscar" ng-model="query">				
 					</div>
 					<div class="form-group col-md-3">
-						<button type="button" class="btn btn-hexacta-primary col-md-12" ng-click="linkToCreateBook()">Crear Nuevo Libro</button>
+						<button type="button" class="btn btn-hexacta-primary col-md-12" ng-click="linkToCreateBook()" ng-show="actionsAllowed()">Crear Nuevo Libro</button>
 					</div>
 				</form>
 			</div>
@@ -24,7 +24,7 @@
 							<th class="text-center"> ISBN </th>
 							<th class="text-center"> Categor&iacute;a </th>
 							<!--  este colspan es temporal, buscar una solucion mas elegante -->
-							<th class="text-center" colspan="3"> Acciones </th>
+							<th class="text-center" colspan="3" ng-show="actionsAllowed()"> Acciones </th>
 						</tr>
 					</thead>
 					<tbody ng-repeat="book in books | filter:query">
@@ -51,13 +51,13 @@
 							<!-- End Fields -->
 	
 							<!-- Buttons --> 
-							<td>
+							<td ng-show="actionsAllowed()">
 								<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToEditBook(book.id)">Editar</button>
 							</td>
-							<td>
+							<td ng-show="actionsAllowed()">
 								<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToDeleteBook(book.id)">Borrar</button>
 							</td>
-							<td>
+							<td ng-show="actionsAllowed()">
 								<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToLendBook(book.id)">Prestar</button>
 							</td>
 							<!-- End Buttons -->
@@ -92,7 +92,7 @@
 									<footer>{{comment.user}}</footer>
 								</blockquote>
 							</div>
-							<form role="form" name="commentForm" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
+							<form role="form" name="commentForm" ng-show="actionsAllowed()" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
 								<div class="form-group">
 									<label for="txtCommentText">Comentario</label>
 									<textarea ng-model="comment.body" class="form-control"
