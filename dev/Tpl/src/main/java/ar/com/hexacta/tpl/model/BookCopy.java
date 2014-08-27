@@ -1,46 +1,49 @@
-/**
- *
- */
 package ar.com.hexacta.tpl.model;
 
 import java.io.Serializable;
 
-// @Entity
-// @Table(name = "BOOK_COPIES")
-public class BookCopy extends Entidad implements Serializable {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
-    /*
-     * @Id
-     *
-     * @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-     *
-     * @Version private Long version;
-     */
-    public static final String BOOK_RATE_BAD = "Bad";
-
-    public static final String BOOK_RATE_NORMAL = "Normal";
-
-    public static final String BOOK_RATE_GOOD = "Good";
-
-    public static final String BOOK_RATE_VERY_GOOD = "Very good";
-
-    public static final String STATE_LOANED = "Loaned";
-
-    public static final String STATE_FREE = "Free";
-
+@Entity
+@Table(name = "BOOK_COPIES")
+public class BookCopy implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public static final String BOOK_RATE_BAD = "Bad";
+    public static final String BOOK_RATE_NORMAL = "Normal";
+    public static final String BOOK_RATE_GOOD = "Good";
+    public static final String BOOK_RATE_VERY_GOOD = "Very good";
+    public static final String STATE_LOANED = "Loaned";
+    public static final String STATE_FREE = "Free";
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Long id;
+    
+    @Version 
+    @Column(name = "VERSION")
+    private Long version;
+   
+    @ManyToOne
     private Book book;
-    // @Column(name = "CODE")
+    
+    @Column(name = "CODE")
     private String code = "";
 
-    // @Column(name = "BOOK_RATE", unique=true, nullable=false)
+    @Column(name = "BOOK_RATE", nullable=false)
     private String bookRate;
 
-    // @Column(name = "STATE")
+    @Column(name = "STATE")
     private String state;
 
-    // @Column(name = "ENABLED")
+    @Column(name = "ENABLED")
     private boolean enabled;
 
     public BookCopy() {
@@ -97,13 +100,27 @@ public class BookCopy extends Entidad implements Serializable {
     	this.book = book;
     }
 
-    /*
-     * public Long getId() { return id; }
-     * 
-     * public void setId(final Long id) { this.id = id; }
-     * 
-     * public Long getVersion() { return version; }
-     * 
-     * public void setVersion(final Long version) { this.version = version; }
-     */
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setBookRate(String bookRate) {
+		this.bookRate = bookRate;
+	}
 }

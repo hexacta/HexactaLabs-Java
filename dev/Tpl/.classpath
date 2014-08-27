@@ -4,6 +4,7 @@
   <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
   <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
   <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar" sourcepath="M2_REPO/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/ws/rs/javax.ws.rs-api/2.0-m10/javax.ws.rs-api-2.0-m10.jar" sourcepath="M2_REPO/javax/ws/rs/javax.ws.rs-api/2.0-m10/javax.ws.rs-api-2.0-m10-sources.jar"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-core/4.3.6.Final/hibernate-core-4.3.6.Final.jar" sourcepath="M2_REPO/org/hibernate/hibernate-core/4.3.6.Final/hibernate-core-4.3.6.Final-sources.jar"/>
@@ -17,6 +18,8 @@
   <classpathentry kind="var" path="M2_REPO/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar" sourcepath="M2_REPO/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/antlr/antlr/2.7.7/antlr-2.7.7.jar" sourcepath="M2_REPO/antlr/antlr/2.7.7/antlr-2.7.7-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/jandex/1.1.0.Final/jandex-1.1.0.Final.jar" sourcepath="M2_REPO/org/jboss/jandex/1.1.0.Final/jandex-1.1.0.Final-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-validator/5.1.2.Final/hibernate-validator-5.1.2.Final.jar" sourcepath="M2_REPO/org/hibernate/hibernate-validator/5.1.2.Final/hibernate-validator-5.1.2.Final-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/classmate/1.0.0/classmate-1.0.0.jar" sourcepath="M2_REPO/com/fasterxml/classmate/1.0.0/classmate-1.0.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hsqldb/hsqldb/2.3.2/hsqldb-2.3.2.jar" sourcepath="M2_REPO/org/hsqldb/hsqldb/2.3.2/hsqldb-2.3.2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/postgresql/postgresql/9.1-901.jdbc4/postgresql-9.1-901.jdbc4.jar" sourcepath="M2_REPO/postgresql/postgresql/9.1-901.jdbc4/postgresql-9.1-901.jdbc4-sources.jar">
     <attributes>

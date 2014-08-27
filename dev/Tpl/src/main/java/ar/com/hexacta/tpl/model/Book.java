@@ -3,48 +3,57 @@ package ar.com.hexacta.tpl.model;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-// @Entity
-public class Book extends Entidad implements Serializable {
+@Entity
+@Table(name = "BOOKS")
+public class Book implements Serializable {
 
     private static final long serialVersionUID = 604529088687479075L;
 
-    // @Id
-    // @Column(name = "BOOK_ID")
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long id;
+    @Id
+    @Column(name = "BOOK_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    // @Version
-    // @Column(name = "VERSION")
-    // private Long version;
+    @Version
+    @Column(name = "VERSION")
+    private Long version;
 
-    // @Column(name = "NAME")
+    @Column(name = "NAME")
     private String name;
 
-    // @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION")
     private String description;
 
-    // @Column(name = "PUBLISHER")
+    @Column(name = "PUBLISHER")
     private String publisher;
 
-    // @Column(name = "COUNTRY")
+    @Column(name = "COUNTRY")
     private String country;
     
+    @Column(name = "ISBN")
     private String isbn;
-
+    
+    @Column(name = "ENABLED")
     private Boolean enabled;
 
-    // @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    // @Column(name = "BOOK_CATEGORY")
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<BookCategory> bookCategories;
 
-    // @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    // @Column(name = "BOOK_COPY")
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<BookCopy> bookCopies;
 
-
-    // Hibernate needs this
 
     public Book() {
         super();
@@ -133,5 +142,29 @@ public class Book extends Entidad implements Serializable {
     public boolean getEnabled(){
     	return this.enabled;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
     
 }

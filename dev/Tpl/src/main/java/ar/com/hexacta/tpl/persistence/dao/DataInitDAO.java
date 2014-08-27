@@ -2,9 +2,9 @@ package ar.com.hexacta.tpl.persistence.dao;
 
 import java.util.Date;
 import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.hexacta.tpl.model.Book;
 import ar.com.hexacta.tpl.model.BookCategory;
@@ -36,7 +36,6 @@ public class DataInitDAO implements DataInitRepository {
 	@Autowired
 	private GenericDAO genericDAO;
 
-	@Transactional
 	private void createData() {
 		// Categorias
 		BookCategory eBookCategory = new BookCategoryBuilder()
@@ -113,6 +112,7 @@ public class DataInitDAO implements DataInitRepository {
 		try {
 			createData();
 		} catch (Exception e) {
+			e.printStackTrace();
 			success = false;
 		}
 		return success;

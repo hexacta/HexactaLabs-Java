@@ -2,32 +2,40 @@ package ar.com.hexacta.tpl.model;
 
 import java.io.Serializable;
 
-// @Entity
-// @Table (name = "USERS")
-public class User extends Entidad implements Serializable {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
+@Entity
+@Table (name = "USERS")
+public class User implements Serializable {
     private static final long serialVersionUID = -2599013520313365015L;
 
-    /*
-     * @Id
-     *
-     * @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-     *
-     * @Version private Long version;
-     */
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Version
+    @Column(name = "VERSION")
+    private Long version;
 
-    // @Column(name = "USERNAME")
+    @Column(name = "USERNAME")
     private String username;
 
-    // @Column(name = "EMAIL")
+    @Column(name = "EMAIL")
     private String email;
 
-    // @Column(name = "PASSWOD")
+    @Column(name = "PASSWOD")
     private String password;
 
-    // @Column(name = "ENABLED")
+    @Column(name = "ENABLED")
     private Boolean enabled;
 
-    // Hibernate needs
     public User() {
         super();
     }
@@ -80,4 +88,20 @@ public class User extends Entidad implements Serializable {
     public void setEnabled(final Boolean enabled) {
         this.enabled = enabled;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 }
