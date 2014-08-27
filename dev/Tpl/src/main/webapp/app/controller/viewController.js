@@ -30,7 +30,7 @@ booksApp.controller('viewController', function($scope, $http, $sessionStorage ){
 		}).error(function(data, status, headers, config){
 			console.log("An Error occurred while trying to login");
 			$scope.invalidLogin = true;
-			
+			user.password = "";
 		});
 	};
 
