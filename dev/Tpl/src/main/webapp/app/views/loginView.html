@@ -1,7 +1,9 @@
 
 <div ng-controller="viewController">
 <form class="navbar-form navbar-right" ng-show="mostrarLogin()" novalidate name="logInForm" role="search"  ng-submit="logInForm.$valid && validateUser(user)">
+
 	<div class="form-group">
+		<label ng-show="invalidLogin" style="color:red"> Login inv&aacute;lido </label>
 		<input type="text" ng-model="user.username" ng-minlength="6" class="form-control input-sm" placeholder="User" />
 		<input type="password" ng-model="user.password" ng-pattern="/^[A-Za-z0-9][A-Za-z0-9]{5,11}$/" class="form-control input-sm" placeholder="Password" />
 	</div>
