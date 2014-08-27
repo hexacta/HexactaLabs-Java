@@ -2,34 +2,31 @@
 ## Eclipse
 #################
 
-*.pydevproject
-.project
-.metadata
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.classpath
-.settings/
-.loadpath
+dev/Tpl/*.pydevproject
+dev/Tpl/.project
+dev/Tpl/.metadata
+dev/Tpl/bin/
+dev/Tpl/tmp/
+dev/Tpl/*.tmp
+dev/Tpl/*.bak
+dev/Tpl/*.swp
+dev/Tpl/*~.nib
+dev/Tpl/local.properties
+dev/Tpl/.settings/
+dev/Tpl/.loadpath
+dev/Tpl/.classpath
 
 # External tool builders
-.externalToolBuilders/
+dev/Tpl/.externalToolBuilders/
 
 # Locally stored "Eclipse launch configurations"
-*.launch
+dev/Tpl/*.launch
 
 # CDT-specific
-.cproject
+dev/Tpl/.cproject
 
 # PDT-specific
-<<<<<<< HEAD
-.buildpath 
-=======
-.buildpath
+dev/Tpl/.buildpath
 
 
 #################
@@ -216,4 +213,4 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-dev/Tpl/.classpath
+
