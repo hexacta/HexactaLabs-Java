@@ -8,13 +8,13 @@
 				<!-- SHOW AVAILABLE COPY -->
 				<div class="form-group">
 					<label>Copia numero:</label>
-					<label>{{freeCopy.code}}</label>
+					<label>{{newLoan.code}}</label>
 				</div>
 				<!-- SELECT USER -->
 				<div class="form-group">
 					<label class="">Prestar a:</label>
-					<select class="form-control" ng-model="user"
-					ng-options="value.id as value.username for value in users">
+					<select class="form-control" ng-model="user" ng-change="selectAction(newLoan)"
+					ng-options="value as value.username for value in users">
 					</select>
 				</div>
 				<!-- SELECT TIME -->		

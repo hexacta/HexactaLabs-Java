@@ -21,6 +21,7 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 				$rootScope.users = [];
 				$rootScope.users = data;
 				$scope.users = $rootScope.users;
+				
 			}
 		}).error(function(data, status, headers, config){
 			console.log("An Error occurred while trying to get all users");
@@ -40,7 +41,6 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 			if (status == 200) {
 				$scope.currentBook = data;
 				$scope.copyCode = $scope.currentBook.freeBookCopy;
-				$scope.newLoan.copy_id = $scope.copyCode;
 			}
 		}).error(function(data, status, headers, config){
 			console.log("An Error occurred while trying to get book:" + $scope.bookId);
@@ -56,6 +56,7 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 		}).success(function(data, status, headers, config){
 			if (status == 200){
 				$scope.freeCopy = data;
+				$scope.newLoan.book = data;
 			}
 		}).error(function(data, status, headers, config){
 			console.log("An error ocurred while trying to get free copy from book: " + bookId);
@@ -66,7 +67,6 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 	
 	$scope.saveLoan = function(newLoan){
 		saveDate(newLoan);
-		saveIds(newLoan);
 		var jsonLoan = angular.toJson(newLoan);
 		console.log(jsonLoan);
 		$http.post('/Tpl/rest/loans', jsonLoan).success(
@@ -84,12 +84,11 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 		loan.fromDate = $scope.fromDate;
 		loan.toDate = $scope.toDate;
 	};
-	
-	saveIds = function(loan){
-		loan.copy_id = $scope.freeCopy.id;
-		loan.user_id = $scope.user;
-	};
-	
+
+	$scope.selectAction = function(loan){
+		console.log($scope.user);
+		$scope.newLoan.user = $scope.user;
+	}
 	$scope.selectedDate = function(){
 		
 	};
@@ -121,7 +120,6 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 	};
 
 	 $scope.initDate = new Date('2016-15-20');
-	 //$scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 	 $scope.format = 'dd/MM/yyyy';
 });
 
