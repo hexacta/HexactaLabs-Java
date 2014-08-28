@@ -67,13 +67,12 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 	$scope.saveLoan = function(newLoan){
 		saveDate(newLoan);
 		saveIds(newLoan);
-		newLoan.user_id = $scope.users;
 		var jsonLoan = angular.toJson(newLoan);
 		console.log(jsonLoan);
 		$http.post('/Tpl/rest/loans', jsonLoan).success(
 				function(data, status, headers, config){
 					if(status == 201){
-						console.log("saving complete !");
+						console.log("saving complete!");
 						$scope.backToHome();
 					}
 				}).error(function(data,status,headers,config){
@@ -82,30 +81,26 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 	};
 	
 	saveDate = function(loan){
-		loan.fromDt = $scope.fromDt;
-		loan.untilDt = $scope.untilDt;
-	};
-	
-	$scope.selectAction = function() {
-	    console.log($scope.users);   
+		loan.fromDate = $scope.fromDate;
+		loan.toDate = $scope.toDate;
 	};
 	
 	saveIds = function(loan){
 		loan.copy_id = $scope.freeCopy.id;
-		//loan.user_id = $scope.user.selected;
+		loan.user_id = $scope.user;
 	};
 	
 	$scope.selectedDate = function(){
 		
 	};
 	$scope.today = function() {
-		$scope.fromDt = new Date();
+		$scope.fromDate = new Date();
 	};
 	$scope.today();
 
 	$scope.clear = function () {
-		$scope.fromDt = null;
-		$scope.untilDt = null;
+		$scope.fromDate = null;
+		$scope.toDate = null;
 	};
 
 	$scope.openFrom = function($event) {
@@ -126,7 +121,7 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 	};
 
 	 $scope.initDate = new Date('2016-15-20');
-	 $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-	 $scope.format = $scope.formats[2];
+	 //$scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+	 $scope.format = 'dd/MM/yyyy';
 });
 

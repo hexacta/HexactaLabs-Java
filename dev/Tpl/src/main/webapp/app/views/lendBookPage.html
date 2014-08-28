@@ -10,20 +10,12 @@
 					<label>Copia numero:</label>
 					<label>{{freeCopy.code}}</label>
 				</div>
-				<!-- SELECT USUARIOS 
-				<div class="form-group">
-					<label class="">Prestar a: </label> 
-					<select class="form-control" ng-required="true" >
-						<option ng-repeat="user in users" ng-show="user.enabled" 
-						ng-required="true" ng-model="user.selected" value="{{user}}">{{user.username}}</option>
-					</select>
-				</div>-->
-				
+				<!-- SELECT USER -->
 				<div class="form-group">
 					<label class="">Prestar a:</label>
-					<select class="form-control" ng-change="selectAction()" ng-model="users" 
-					ng-options="user.id as user.username for user in users">
-				</select>
+					<select class="form-control" ng-model="user"
+					ng-options="value.id as value.username for value in users">
+					</select>
 				</div>
 				<!-- SELECT TIME -->		
 			    <h4>Desde:</h4>
@@ -31,7 +23,7 @@
 			        <div class="col-md-11">
 			            <p class="input-group">
 			              <input type="text" class="form-control" datepicker-popup="{{format}}" 
-			              ng-model="fromDt" is-open="openedFrom" min-date="fromDt" datepicker-options="dateOptions" 
+			              ng-model="fromDate" is-open="openedFrom" min-date="fromDate" datepicker-options="dateOptions" 
 			              date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" date-type="string"/> 
 			              <span class="input-group-btn">
 			              	<button type="button" class="btn btn-default" ng-click="openFrom($event)">
@@ -44,8 +36,8 @@
 			    <div class="row">
 			      <div class="col-md-11">
 			        <p class="input-group">
-			          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="untilDt" 
-			          is-open="openedUntil" min-date="fromDt" datepicker-options="dateOptions" 
+			          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="toDate" 
+			          is-open="openedUntil" min-date="fromDate" datepicker-options="dateOptions" 
 			          date-disabled="disabled(date,mode)" ng-required="true" close-text="Close" date-type="string"/>
 			          <span class="input-group-btn">
 			            <button type="button" class="btn btn-default" ng-click="openUntil($event)">
