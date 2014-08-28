@@ -211,11 +211,18 @@ input.ng-invalid.ng-dirty {
 	bottom: 10px;
 }
 
+#UsuarioBox
+{
+	padding-top: 6px;
+	padding-right: 12px;
+	background-color: transparent;
+}
+
 #Usuario
 {
+	border: 0px;
 	vertical-align: middle;
-	padding-top: 7px;
-	padding-right: 12px;"
+	background-color: transparent;
 }
 
 .ng-invalid.ng-dirty{

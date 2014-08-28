@@ -51,7 +51,5 @@ public class LoginWS {
         } catch (IOException e) {
             return Response.status(401).build();
         }
-
     }
-
 }
