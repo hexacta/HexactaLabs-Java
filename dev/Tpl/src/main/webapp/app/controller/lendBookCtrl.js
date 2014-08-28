@@ -68,7 +68,6 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 	$scope.saveLoan = function(newLoan){
 		saveDate(newLoan);
 		var jsonLoan = angular.toJson(newLoan);
-		console.log(jsonLoan);
 		$http.post('/Tpl/rest/loans', jsonLoan).success(
 				function(data, status, headers, config){
 					if(status == 201){
@@ -86,7 +85,6 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 	};
 
 	$scope.selectAction = function(loan){
-		console.log($scope.user);
 		$scope.newLoan.user = $scope.user;
 	}
 	$scope.selectedDate = function(){
