@@ -1,5 +1,6 @@
 package ar.com.hexacta.tpl.persistence.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -12,7 +13,7 @@ import ar.com.hexacta.tpl.persistence.repository.LoanRepository;
 @Repository
 public class LoanDAO extends AbstractDAO<Loan> implements LoanRepository {
     @Override
-    public void deleteById(final Long loanId) {
+    public void deleteById(final Serializable loanId) {
         super.deleteById(loanId);
     }
 

@@ -1,35 +1,40 @@
-/**
- *
- */
 package ar.com.hexacta.tpl.model;
 
 import java.io.Serializable;
 
-// @Entity
-// @Table(name = "COMMENTS")
-public class Comment extends Entidad implements Serializable {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
+@Entity
+@Table(name = "COMMENTS")
+public class Comment implements Serializable {
 
     private static final long serialVersionUID = 537917183637872456L;
 
-    // @Id
-    // @Column(name = "COMMENT_ID")
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long id;
+    @Id
+    @Column(name = "COMMENT_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    // @Version
-    // @Column(name = "VERSION")
-    // private Long version;
+    @Version
+    @Column(name = "VERSION")
+    private Long version;
 
-    // @Column(name = "BOOK")
+    @ManyToOne
     private Book book;
 
-    // @Column(name = "USER")
+    @Column(name = "USER")
     private String user;
 
-    // @Column(name = "BODY")
+    @Column(name = "BODY")
     private String body;
 
-    // Hibernate needs
     public Comment() {
         super();
     }
@@ -64,5 +69,21 @@ public class Comment extends Entidad implements Serializable {
     public void setBook(final Book book) {
         this.book = book;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
     
 }

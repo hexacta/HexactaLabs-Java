@@ -43,34 +43,12 @@ booksApp.directive('userIngreso',function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'app/views/loginView.html',
-		controller: ['$scope', '$http', '$location', function($scope, $http, $location) {
-		
-			$scope.user = {};	
-	
-			$scope.validateUser = function(aUser) {
-				  			  
-				data = {name: aUser.name, pass: aUser.pass, sessionKey: "123456"}
-					var jsonUser = angular.toJson(aUser);
-				
-					//$http.post('/Tpl/rest/login', jsonUser).success(
-					//		function(data, status, headers, config) {
-					//			if (status = 200) {
-									$scope.sessionData = data;
-									// Ok message and go back
-									var usuario = $scope.sessionData;
-					//				$location.path("/");
-					//			}
-					//		}).error(function(data, status, headers, config) {
-					//	console.log("An Error occurred while trying to store the user:" + jsonUser);
-					//});
-				}
 
-		}]
 	}
 
 });
 
-booksApp.run(function($rootScope,$http, $route, $location) {
+booksApp.run(function($rootScope,$http, $route, $location, $rootScope) {
 	$rootScope.books = [];
 	
 	$rootScope.$on('$routeChangeStart', function (event) {
@@ -78,14 +56,14 @@ booksApp.run(function($rootScope,$http, $route, $location) {
 		var currentRoute = $route.routes[path];
 		if (!currentRoute){
 			path = path.replace(/[\d+]$/g, '');
-			path += ":bookId";
+			path += BOOKID;
 		}
 		currentRoute = $route.routes[path];
 		if (!currentRoute || currentRoute.publicAccess){
 			return;
 		}
 		
-	    if (!sessionStorage.loggedIn) {
+	    if (!$rootScope.loggedIn) {
 	        $location.path('/');
 	    }
 	});	

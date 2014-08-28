@@ -1,5 +1,6 @@
 package ar.com.hexacta.tpl.persistence.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -15,7 +16,7 @@ public class CommentDAO extends AbstractDAO<Comment> implements
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public Comment findById(final Long commentId) {
+	public Comment findById(final Serializable commentId) {
 		DetachedCriteria criteria = this.createCriteria();
 		criteria.add(Restrictions.like("id", commentId));
 		List<Comment> result = (List<Comment>) this.getHibernateTemplate().findByCriteria(criteria);
@@ -28,7 +29,7 @@ public class CommentDAO extends AbstractDAO<Comment> implements
 	}
 
 	@Override
-	public void deleteById(final Long commentId) {
+	public void deleteById(final Serializable commentId) {
 		System.out.println("CommentDAO.deleteById( " + commentId + " )...");
 		super.deleteById(commentId);
 		System.out.println("<< OK >>");

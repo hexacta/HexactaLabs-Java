@@ -22,6 +22,7 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 		console.log(jsonBook );
 		$http.post('/Tpl/rest/books', jsonBook).success(
 				function(data, status, headers, config) {
+
 					if (status == 201) {
 						$location.path("/");
 					}
@@ -54,6 +55,7 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 				book.bookCategories.splice(index,1);
 			}
 		}
+
 	};
 
 });

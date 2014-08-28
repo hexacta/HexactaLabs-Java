@@ -26,7 +26,8 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 
 	$scope.modifyModal=function(book){
 		$scope.selectedBook = book;
-		
+		$scope.selectedBook.image = "";
+
 		//Getting comments
 		var bookId = $scope.selectedBook.id;
 		$http({
@@ -111,5 +112,10 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		$scope.comment = {};
 	};
 	
-	});	
+	});
+	
+	$scope.actionsAllowed = function(){
+		return sessionStorage.loggedIn;
+	};
+	
 });

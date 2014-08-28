@@ -1,16 +1,32 @@
 
 <div ng-controller="viewController">
-<form class="navbar-form navbar-right" ng-show="mostrarLogin()" novalidate name="logInForm" role="search"  ng-submit="logInForm.$valid && validateUser(user)">
+
+<!--form class="navbar-form navbar-right" ng-show="mostrarLogin()" novalidate name="logInForm" role="search"  ng-submit="logInForm.$valid && validateUser(user)">
+
 	<div class="form-group">
-		<input type="text" ng-model="user.username" ng-minlength="6" class="form-control input-sm" placeholder="User" />
+		<label ng-show="invalidLogin" style="color:red"> Login inv&aacute;lido </label>
+		<input type="text" ng-model="user.username" ng-minlength="3" class="form-control input-sm" placeholder="User" />
 		<input type="password" ng-model="user.password" ng-pattern="/^[A-Za-z0-9][A-Za-z0-9]{5,11}$/" class="form-control input-sm" placeholder="Password" />
 	</div>
 	<button type="submit" class="btn btn-hexacta-primary input-sm">Entrar</button>
-</form>
+</form-->
 
-<form class="navbar-form navbar-right" novalidate name="logForm">
-	<div ng-show="mostrarUser()">
-		<div id="Usuario" >Bienvenido: {{getNombreUsuario()}} </div>
-	</div>
-</form>
+	<form class="navbar-form navbar-right" ng-hide="loggedIn" novalidate 
+		name="logInForm" role="search"  ng-submit="logInForm.$valid && validateUser(user)">
+		<div class="form-group">
+			<label ng-show="invalidLogin" style="color:red"> Login inv&aacute;lido </label>
+			<input type="text" ng-model="user.username" ng-minlength="3" name="username"
+			 	class="form-control input-sm" ng-required="true" placeholder="User" />
+			<input type="password" ng-model="user.password" ng-pattern="/^[A-Za-z0-9][A-Za-z0-9]{3,12}$/" 
+				class="form-control input-sm" name="password" ng-required="true" placeholder="Password" />
+		</div>
+		<button type="submit" class="btn btn-hexacta-primary input-sm">Entrar</button>
+	</form>
+	
+	<form class="navbar-form navbar-right" novalidate name="logForm">
+		<div id="UsuarioBox" ng-show="loggedIn">
+			<label id="Usuario" ng-bind="usuario"></label>
+		</div>
+	</form>
+
 </div>
