@@ -2,13 +2,14 @@
 <div ng-controller="bookListCtrl" >
 
 	<div id="feedbackPanel" />
+	<div>
 			<div class="row">
 				<form role="form" class="col-md-12">
 					<div class="form-group col-md-9">					
 						<input type="text" class="form-control col-md-12" placeholder="Ingrese el libro que desea buscar" ng-model="query">				
 					</div>
 					<div class="form-group col-md-3">
-						<button type="button" class="btn btn-hexacta-primary col-md-12" ng-click="linkToCreateBook()" ng-show="actionsAllowed()">Crear Nuevo Libro</button>
+						<button type="button" class="btn btn-hexacta-primary col-md-12" ng-click="linkToCreateBook()" ng-show="loggedIn">Crear Nuevo Libro</button>
 					</div>
 				</form>
 			</div>
@@ -23,8 +24,8 @@
 							<th class="text-center"> Editorial </th>
 							<th class="text-center"> ISBN </th>
 							<th class="text-center"> Categor&iacute;a </th>
-							<!--  este colspan es temporal, buscar una solucion mas elegante -->
-							<th class="text-center" colspan="3" ng-show="actionsAllowed()"> Acciones </th>
+
+						<th class="text-center" colspan="3" ng-show="loggedIn"> Acciones </th>
 						</tr>
 					</thead>
 					<tbody ng-repeat="book in books | filter:query">
@@ -51,15 +52,18 @@
 							<!-- End Fields -->
 	
 							<!-- Buttons --> 
-							<td ng-show="actionsAllowed()">
+
+							<td ng-show="loggedIn">
+
 								<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToEditBook(book.id)">Editar</button>
 							</td>
-							<td ng-show="actionsAllowed()">
+							<td ng-show="loggedIn">
 								<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToDeleteBook(book.id)">Borrar</button>
 							</td>
-							<td ng-show="actionsAllowed()">
+							<td ng-show="loggedIn">
 								<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToLendBook(book.id)">Prestar</button>
 							</td>
+							
 							<!-- End Buttons -->
 							
 						</tr>
@@ -76,35 +80,36 @@
 						</div>
 						<div class="modal-body">
 						
-							<div>
+							<div class="col-md-9">
 								<h4>{{selectedBook.description}}</h4>
 								<cite>- {{selectedBook.publisher}}</cite>
 								<h4>ISBN: {{selectedBook.isbn}}</h4>
 								<h4>Pa&iacute;s de Origen: {{selectedBook.country}}</h4>
 							</div>
 							
-							<img ng-src="{{selectedBook.image}}"></img>						
+							<img class="col-md-3 img-responsive img-circle" ng-src="{{selectedBook.image}}"></img>						
 							
-							<div>
+							<div class="col-md-12">
+
 								Comentarios:
 								<blockquote ng-repeat="comment in selectedBook.bookComments" >
 									<p>{{comment.body}}</p>
 									<footer>{{comment.user}}</footer>
 								</blockquote>
 							</div>
-							<form role="form" name="commentForm" ng-show="actionsAllowed()" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
-								<div class="form-group">
+							<form role="form" name="commentForm" ng-show="loggedIn" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
+								<div ng-show="loggedIn" class="form-group">
 									<label for="txtCommentText">Comentario</label>
 									<textarea ng-model="comment.body" class="form-control"
 										placeholder="Escriba aqu&iacute; su comentario"
 										id="txtCommentText" required></textarea>
 								</div>
-								<div class="form-group">
+								<div ng-show="loggedIn" class="form-group">
 									<label for="txtCommentAuthor">Email:</label> 
 									<input type="email" ng-model="comment.user" class="form-control" placeholder="ejemplo@hexacta.com" id="txtCommentAuthor" required/>
 								</div>
 								
-								<input type="submit" value="Crear comentario" class="btn btn-hexacta-green btn-sm" />
+								<input ng-show="loggedIn" type="submit" value="Crear comentario" class="btn btn-hexacta-green btn-sm" />
 							</form>
 						</div>
 						
@@ -115,6 +120,8 @@
 				</div>
 			</div>
 	</div>
+</div>
+
 
 
 </section>

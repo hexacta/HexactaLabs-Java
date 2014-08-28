@@ -24,8 +24,8 @@ import ar.com.hexacta.tpl.persistence.repository.UserRepository;
 
 @Repository
 public class DataInitDAO implements DataInitRepository {
-	private static final Logger LOG = Logger.getLogger(DataInitDAO.class.getName());
 
+	private static final Logger LOG = Logger.getLogger(DataInitDAO.class.getName());
 
 	@Autowired
 	private BookRepository bookDAO;
@@ -78,8 +78,7 @@ public class DataInitDAO implements DataInitRepository {
 				.withDescription(
 						"Best-seller del escritor frances Antoine de Saint-Exupery.")
 				.withPublisher("Editorial Planeta")
-				.withCategory(physicalCategory)
-				.withCountry("EEUU")
+				.withCategory(physicalCategory).withCountry("EEUU")
 				.withISBN("978-0-152-16415-7")
 				.withBookCopy(bookCopy1, bookCopy2)
 				.build();
@@ -116,10 +115,10 @@ public class DataInitDAO implements DataInitRepository {
 		bookDAO.saveOrUpdate(book4);
 		LOG.info("Created book " + book4.getId());
 
-		//Users
+		// Users
 		User userAdmin = new User("admin", "admin", "admin@hexacta.com");
 		userDAO.save(userAdmin);
-		
+
 		User user2 = new User("edu", "malvino", "emalvino@hexacta.com", false);
 		userDAO.save(user2);
 

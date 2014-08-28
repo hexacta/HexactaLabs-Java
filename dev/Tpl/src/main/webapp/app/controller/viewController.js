@@ -1,5 +1,10 @@
-booksApp.controller('viewController', function($scope, $http, $sessionStorage ){
+booksApp.controller('viewController', function($scope, $http, $rootScope, $sessionStorage ){
 
+	$rootScope.loggedIn = false;
+	$rootScope.loggedIn = $sessionStorage.user !== undefined;
+	if( $sessionStorage.user !== undefined){
+		$rootScope.usuario = "Bienvenido: " + JSON.parse($sessionStorage.user).username + "!"; 
+	}
 	$scope.mostrarLogin = function(){
 		return !sessionStorage.loggedIn;
 	};
@@ -14,6 +19,12 @@ booksApp.controller('viewController', function($scope, $http, $sessionStorage ){
 		}	
 	};
 
+	$scope.desloguearse = function(){
+		$rootScope.loggedIn = false;
+		$rootScope.usuario = undefined; 
+		delete $sessionStorage.user;
+	};
+
 	$scope.validateUser = function(user){
 		var toEncode = user.username + ":" + user.password;
 		var encoded = btoa(toEncode);
@@ -23,15 +34,21 @@ booksApp.controller('viewController', function($scope, $http, $sessionStorage ){
 			headers : {'Authorization' : 'Basic ' + encoded, 'Accept' : 'application/json'}
 		}).success(function(data, status, headers, config){
 			if(status == 200){
-				sessionStorage.user = JSON.stringify(data);
-				sessionStorage.loggedIn = true;
+				//TODO:
+				$sessionStorage.user = JSON.stringify(data);
+				//$sessionStorage.loggedIn = true;
+				$scope.usuario = "Bienvenido: " + JSON.parse($sessionStorage.user).username + "!"; 
+				$rootScope.loggedIn = true;
 				$scope.invalidLogin = false;
+				
 			}
 		}).error(function(data, status, headers, config){
 			console.log("An Error occurred while trying to login");
+			$scope.user.password="";
 			$scope.invalidLogin = true;
-			user.password = "";
+
 		});
 	};
 
 });
+
