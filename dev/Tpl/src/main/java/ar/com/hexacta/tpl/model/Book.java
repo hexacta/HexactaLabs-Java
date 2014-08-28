@@ -3,6 +3,7 @@ package ar.com.hexacta.tpl.model;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,10 +49,10 @@ public class Book implements Serializable {
     @Column(name = "ENABLED")
     private Boolean enabled;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<BookCategory> bookCategories;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<BookCopy> bookCopies;
 
 
@@ -124,14 +125,6 @@ public class Book implements Serializable {
 
     public void setCountry(final String country) {
         this.country = country;
-    }
-
-    public void setISBN (final String isbn){
-    	this.isbn = isbn;
-    }
-    
-    public String getISBN (){
-    	return this.isbn;
     }
 
     public void setEnabled(Boolean enable){

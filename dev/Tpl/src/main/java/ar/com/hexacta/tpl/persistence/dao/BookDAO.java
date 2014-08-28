@@ -1,5 +1,6 @@
 package ar.com.hexacta.tpl.persistence.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -21,7 +22,7 @@ public class BookDAO extends AbstractDAO<Book> implements BookRepository {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public Book findById(final Long bookId) {
+	public Book findById(final Serializable bookId) {
 		DetachedCriteria criteria = this.createCriteria();
 		criteria.add(Restrictions.like("id", bookId));
 		criteria.add(Restrictions.eq("enabled", true));
@@ -35,7 +36,7 @@ public class BookDAO extends AbstractDAO<Book> implements BookRepository {
 	}
 
 	@Override
-	public void deleteById(final Long bookId) {
+	public void deleteById(final Serializable bookId) {
 		super.deleteById(bookId);
 	}
 	

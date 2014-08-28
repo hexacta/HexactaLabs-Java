@@ -24,10 +24,6 @@
        http://www.springframework.org/schema/lang
        http://www.springframework.org/schema/lang/spring-lang-2.0.xsd">	    
        
-<!-- 	<context:spring-configured/> -->
-<!--     <context:annotation-config/> -->
-<!--     <aop:aspectj-autoproxy/>  -->
-   	
    	<context:annotation-config />
 	<context:component-scan base-package="ar.com.hexacta.tpl" />
    	

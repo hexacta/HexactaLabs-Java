@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.hexacta.tpl.model.Book;
+import ar.com.hexacta.tpl.service.IDataInitService;
 import ar.com.hexacta.tpl.service.IBooksService;
 import ar.com.hexacta.tpl.service.impl.BooksServiceImpl;
 
@@ -33,7 +34,9 @@ public class BookWS {
 
     public BookWS() {
     }
-
+    @Autowired
+    private IDataInitService initService;
+    
     @Autowired
     private IBooksService bookService;
 

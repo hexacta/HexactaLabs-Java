@@ -8,7 +8,9 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
-public abstract class AbstractDAO<T> extends HibernateDaoSupport {
+import ar.com.hexacta.tpl.persistence.repository.Repository;
+
+public abstract class AbstractDAO<T> extends HibernateDaoSupport implements Repository<T> {
 
     private static final String UNCHECKED = "unchecked";
     

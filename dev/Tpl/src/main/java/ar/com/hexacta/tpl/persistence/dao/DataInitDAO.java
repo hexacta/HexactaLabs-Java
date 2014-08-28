@@ -14,7 +14,13 @@ import ar.com.hexacta.tpl.model.User;
 import ar.com.hexacta.tpl.model.builder.BookBuilder;
 import ar.com.hexacta.tpl.model.builder.BookCategoryBuilder;
 import ar.com.hexacta.tpl.model.builder.BookCopyBuilder;
+import ar.com.hexacta.tpl.persistence.repository.BookCategoryRepository;
+import ar.com.hexacta.tpl.persistence.repository.BookCopyRepository;
+import ar.com.hexacta.tpl.persistence.repository.BookRepository;
+import ar.com.hexacta.tpl.persistence.repository.CommentRepository;
 import ar.com.hexacta.tpl.persistence.repository.DataInitRepository;
+import ar.com.hexacta.tpl.persistence.repository.LoanRepository;
+import ar.com.hexacta.tpl.persistence.repository.UserRepository;
 
 @Repository
 public class DataInitDAO implements DataInitRepository {
@@ -22,19 +28,22 @@ public class DataInitDAO implements DataInitRepository {
 
 
 	@Autowired
-	private BookDAO bookDAO;
+	private BookRepository bookDAO;
 
 	@Autowired
-	private CommentDAO commentDAO;
+	private CommentRepository commentDAO;
 
 	@Autowired
-	private BookCategoryDAO bookCategoryDAO;
+	private BookCategoryRepository bookCategoryDAO;
 	
 	@Autowired
-	private UserDAO userDAO;
-
+	private BookCopyRepository bookCopyDAO;
+	
 	@Autowired
-	private GenericDAO genericDAO;
+	private UserRepository userDAO;
+	
+	@Autowired
+	private LoanRepository loanDAO;
 
 	private void createData() {
 		// Categorias
@@ -51,13 +60,19 @@ public class DataInitDAO implements DataInitRepository {
 		// Copias
 		BookCopy bookCopy1 = new BookCopyBuilder().withCode("1")
 				.withState(BookCopy.STATE_FREE).build();
+		bookCopyDAO.saveOrUpdate(bookCopy1);
 		BookCopy bookCopy2 = new BookCopyBuilder().withCode("2")
 				.withState(BookCopy.STATE_LOANED).build();
+		bookCopyDAO.saveOrUpdate(bookCopy2);
 		BookCopy bookCopy3 = new BookCopyBuilder().withCode("3").build();
+		bookCopyDAO.saveOrUpdate(bookCopy3);
 		BookCopy bookCopy4 = new BookCopyBuilder().withCode("4").build();
+		bookCopyDAO.saveOrUpdate(bookCopy4);
 		BookCopy bookCopy5 = new BookCopyBuilder().withCode("5").build();
-		
+		bookCopyDAO.saveOrUpdate(bookCopy5);
+
 		// Libros
+
 		Book book1 = new BookBuilder()
 				.withName("El principito")
 				.withDescription(
@@ -66,7 +81,8 @@ public class DataInitDAO implements DataInitRepository {
 				.withCategory(physicalCategory)
 				.withCountry("EEUU")
 				.withISBN("978-0-152-16415-7")
-				.withBookCopy(bookCopy1, bookCopy2).build();
+				.withBookCopy(bookCopy1, bookCopy2)
+				.build();
 		bookDAO.saveOrUpdate(book1);
 		LOG.info("Created book " + book1.getId());
 		Book book2 = new BookBuilder().withName("El codigo Da Vinci")
@@ -74,7 +90,9 @@ public class DataInitDAO implements DataInitRepository {
 				.withPublisher("Editorial Estrada")
 				.withCountry("EEUU")
 				.withISBN("84-95618-60-5")
-				.withCategory(physicalCategory).withBookCopy(bookCopy3).build();
+				.withCategory(physicalCategory)
+				.withBookCopy(bookCopy3)
+				.build();
 		bookDAO.saveOrUpdate(book2);
 		LOG.info("Created book " + book2.getId());
 
@@ -83,14 +101,18 @@ public class DataInitDAO implements DataInitRepository {
 				.withPublisher("Editorial Atlantida")
 				.withCountry("United Kingdom")
 				.withISBN("84-450-7037-1")
-				.withCategory(eBookCategory).withBookCopy(bookCopy4).build();
+				.withCategory(eBookCategory)
+				.withBookCopy(bookCopy4)
+				.build();
 		bookDAO.saveOrUpdate(book3);
 		LOG.info("Created book " + book3.getId());
 
 		Book book4 = new BookBuilder().withName("Ender's Game")
 				.withDescription("Novela de ciencia ficción de Scott")
 				.withPublisher("Editorial pepin")
-				.withCategory(physicalCategory).withBookCopy(bookCopy5).build();
+				.withCategory(physicalCategory)
+				.withBookCopy(bookCopy5)
+				.build();
 		bookDAO.saveOrUpdate(book4);
 		LOG.info("Created book " + book4.getId());
 
@@ -100,10 +122,10 @@ public class DataInitDAO implements DataInitRepository {
 		
 		User user2 = new User("edu", "malvino", "emalvino@hexacta.com", false);
 		userDAO.save(user2);
-		
+
 		Loan loan = new Loan(userAdmin, bookCopy1, new Date(), new Date());
-		genericDAO.saveOrUpdate(loan);
-		genericDAO.saveOrUpdate(book1);
+		loanDAO.saveOrUpdate(loan);
+		bookDAO.saveOrUpdate(book1);
 	}
 
 	@Override
@@ -128,9 +150,5 @@ public class DataInitDAO implements DataInitRepository {
 
 	public void setCommentDAO(final CommentDAO commentDAO) {
 		this.commentDAO = commentDAO;
-	}
-
-	public void setGenericDAO(final GenericDAO genericDAO) {
-		this.genericDAO = genericDAO;
 	}
 }

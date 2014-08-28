@@ -31,7 +31,7 @@ public class BookCopy implements Serializable {
     @Column(name = "VERSION")
     private Long version;
    
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Book book;
     
     @Column(name = "CODE")
