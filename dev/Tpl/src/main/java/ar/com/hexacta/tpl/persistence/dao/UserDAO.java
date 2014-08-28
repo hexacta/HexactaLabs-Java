@@ -1,5 +1,6 @@
 package ar.com.hexacta.tpl.persistence.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -13,13 +14,13 @@ import ar.com.hexacta.tpl.persistence.repository.UserRepository;
 public class UserDAO extends AbstractDAO<User> implements UserRepository{
 
 	@Override
-	public void deleteById(Long userId) {
+	public void deleteById(Serializable userId) {
 		super.deleteById(userId);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public User findById(Long userId) {
+	public User findById(Serializable userId) {
 		DetachedCriteria criteria = this.createCriteria();
 		criteria.add(Restrictions.like("id", userId));
 		List<User> result = (List<User>) this.getHibernateTemplate().findByCriteria(criteria);
