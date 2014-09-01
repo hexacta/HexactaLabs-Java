@@ -22,7 +22,7 @@ INSERT INTO `book_copies` VALUES (1,'Good','1','','Free',0,NULL),(2,'Good','2',
 -- Dumping data for table `books`
 --
 
-INSERT INTO `books` VALUES (1,'EEUU','Best-seller del escritor frances Antoine de Saint-Exupery.','','978-0-152-16415-7','El principito','Editorial Planeta',0),(2,'EEUU','Novela de misterio del escritor Dan Brown.','','84-95618-60-5','El codigo Da Vinci','Editorial Estrada',0),(3,'United Kingdom','Novela fantastica de J. R. R. Tolkien.','','84-450-7037-1','El Hobbit','Editorial Atlantida',0),(4,'defaultCountry','Novela de ciencia ficción de Scott','','defaultISBN','Ender\'s Game','Editorial pepin',0);
+INSERT INTO `books` VALUES (1,'EEUU','Best-seller del escritor frances Antoine de Saint-Exupery.','','978-0-152-16415-7','El principito','Editorial Planeta',0),(2,'EEUU','Novela de misterio del escritor Dan Brown.','','84-95618-60-5','El codigo Da Vinci','Editorial Estrada',0),(3,'United Kingdom','Novela fantastica de J. R. R. Tolkien.','','84-450-7037-1','El Hobbit','Editorial Atlantida',0),(4,'defaultCountry','Novela de ciencia ficcion de Scott','','978-0812550702','Enders Game','Editorial pepin',0);
 
 --
 -- Dumping data for table `books_book_categories`
