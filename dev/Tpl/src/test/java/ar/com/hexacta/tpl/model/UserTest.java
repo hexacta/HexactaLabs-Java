@@ -20,9 +20,9 @@ import org.springframework.transaction.support.TransactionTemplate;
 import ar.com.hexacta.tpl.persistence.dao.UserDAO;
 
 public class UserTest {
-	static final String USERNAME = "username";
-	static final String PASSWORD = "password";
-	static final String EMAIL = "email@email.com";
+	private static final String USERNAME = "username";
+	private static final String PASSWORD = "password";
+	private static final String EMAIL = "email@email.com";
 	
 	private User testUser;
 	private UserDAO dao;
