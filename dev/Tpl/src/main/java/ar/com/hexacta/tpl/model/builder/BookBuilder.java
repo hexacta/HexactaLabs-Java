@@ -24,10 +24,9 @@ public class BookBuilder {
 
     private Set<BookCopy> bookCopies = new HashSet<BookCopy>(0);
 
-    private Set<Comment> bookComments = new HashSet<Comment>(0);
 
     public Book build() {
-        return new Book(name, description, publisher, country, isbn, bookCategories, bookCopies, bookComments);
+        return new Book(name, description, publisher, country, isbn, bookCategories, bookCopies);
     }
 
     public BookBuilder withBookCopy(final BookCopy... aCopy) {
