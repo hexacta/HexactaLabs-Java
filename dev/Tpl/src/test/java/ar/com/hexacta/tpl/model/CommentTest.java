@@ -1,9 +1,13 @@
 package ar.com.hexacta.tpl.model;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import ar.com.hexacta.tpl.model.Book;
 import ar.com.hexacta.tpl.model.Comment;
+import ar.com.hexacta.tpl.persistence.dao.BookDAO;
 import ar.com.hexacta.tpl.persistence.dao.CommentDAO;
 
 public class CommentTest {
@@ -25,7 +30,9 @@ public class CommentTest {
 	private String testUser;
 	private String testBody;
 	private Book testBook;
+	private Comment testComment;
 	private CommentDAO dao;
+	private BookDAO bookDao;
 	private AbstractApplicationContext applicationContext; 
 	
 	@Autowired
@@ -35,145 +42,216 @@ public class CommentTest {
 	@Before
 	public void setup(){
 		applicationContext = new ClassPathXmlApplicationContext("spring/spring-persistence-test.xml");
-        
+        	
         dao = (CommentDAO) applicationContext.getBean(CommentDAO.class);
+        bookDao = (BookDAO) applicationContext.getBean(BookDAO.class);
         txManager = (PlatformTransactionManager) applicationContext.getBean(PlatformTransactionManager.class);
+        
 		testUser = "test@mail.com";
         testBody = "Test comment body";
         testBook = new Book("Test Book");
+        testComment = new Comment(testBook, testUser, testBody);
+        
+        TransactionTemplate tmpl = new TransactionTemplate(txManager);
+        tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				bookDao.save(testBook);
+			}
+		});
+        
 	}
 	
 	@After
 	public void tearDown(){
 		applicationContext.close();
-		dao = null;
+		
 	}
 	
-    @Test
-    public void testCommentCreation() {
-        Comment comment = new Comment();
-
-        Assert.assertNotNull(comment);
-    }
-
-    @Test
-    public void testParamCommentCreation() {
-
-        Comment comment = new Comment(testBook, testUser, testBody);
-
-        Assert.assertTrue(comment.getUser() == testUser);
-        Assert.assertTrue(comment.getBody() == testBody);
-        Assert.assertTrue(comment.getBook() == testBook);
-        
-    }
-    
-    @Test
+	@Test
+	@Transactional(readOnly = true)
+	public void testCommentCreation(){
+		assertNotNull(testComment);
+	}
+	
+	@Test
+	@Transactional(readOnly = true)
+	public void testParameterCretion(){
+		assertTrue(testComment.getBook() == testBook);
+		assertTrue(testComment.getBody().equals(testBody));
+		assertTrue(testComment.getUser().equals(testUser));
+	}
+	
+	@Test
     @Transactional(readOnly = true)
     public void testCommentDAOEmpty(){
-    	Assert.assertTrue(dao.findAll().isEmpty());
+    	assertTrue(dao.findAll().isEmpty());
     }
 
-    
-    @Test
+	@Test
     @Transactional
-    public void testCommentDAOSaveOne() {
-    	
-    	TransactionTemplate tmpl = new TransactionTemplate(txManager);
-        tmpl.execute(new TransactionCallbackWithoutResult() {
-            @Override
-            protected void doInTransactionWithoutResult(TransactionStatus status) {
-            	Comment comment = new Comment(testBook, testUser, testBody);
-            	dao.save(comment);
-            	List <Comment> testList = dao.findAll();
-            	Assert.assertTrue(testList.size() == 1);
-            	Assert.assertTrue(testList.contains(comment));
-            	Assert.assertNotNull(dao.findById(1));
-            }
-        });
-    }
-    
-    
-    @Test
+    public void testCommentDAOSaveOne(){
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				dao.save(testComment);
+				List <Comment> results = dao.findAll();
+				assertFalse(results.isEmpty());
+				assertTrue(results.size() == 1);
+				assertTrue(results.contains(testComment));
+				dao.delete(testComment);
+			}
+		});
+	}
+	
+	@Test
     @Transactional
-    public void testCommentDAOSaveMany() {
-    	Comment comment1 = new Comment(new Book(), "user", "the body");
-    	Comment comment2 = new Comment(new Book(), "user", "body");
-    	Comment comment3 = new Comment(new Book(), "user", "other body");
-    	dao.save(comment1);
-    	dao.save(comment2);
-    	dao.save(comment3);
-    	List <Comment> testList = dao.findAll(); 
-    	Assert.assertTrue(testList.size() == 3);
-    	Assert.assertTrue(testList.contains(comment1) && testList.contains(comment2) && testList.contains(comment3));
-    }
-    
-    @Test
+    public void testUserDAOSaveMany(){
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				Comment comment1 = new Comment();
+				Comment comment2 = new Comment();
+				Comment comment3 = new Comment();
+				dao.save(comment1);
+				dao.save(comment2);
+				dao.save(comment3);
+				List <Comment> results = dao.findAll();
+				assertTrue(results.size() == 3);
+				assertTrue(results.contains(comment1) && results.contains(comment2) && results.contains(comment3));
+				dao.delete(comment1);
+				dao.delete(comment2);
+				dao.delete(comment3);
+			}
+		});
+	}
+	
+	@Test
     @Transactional
-    public void testCommentDAOSaveManyOfSameBook() {
-    	Comment comment1 = new Comment(testBook, testUser, testBody);
-    	Comment comment2 = new Comment(testBook, "user", "body");
-    	Comment comment3 = new Comment(testBook, "user", "other body");
-    	dao.save(comment1);
-    	dao.save(comment2);
-    	dao.save(comment3);
-    	List <Comment> testList = dao.findByBookId(new Long(1)); 
-    	Assert.assertTrue(testList.size() == 3);
-    	Assert.assertTrue(testList.contains(comment1) && testList.contains(comment2) && testList.contains(comment3));
-    }
-    
-    @Test
+    public void testUserDAOSaveAndSearch(){
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				dao.save(testComment);
+				Comment searchedComment = dao.findById(testComment.getId());
+				assertTrue(testComment == searchedComment);
+				dao.delete(testComment);
+			}
+		});
+	}
+	
+	@Test
     @Transactional
-    public void testCommentDAOSaveManyOfDifferentBooks() {
-    	Comment comment1 = new Comment(testBook, testUser, testBody);
-    	Comment comment2 = new Comment(testBook, "user", "body");
-    	Comment comment3 = new Comment(new Book(), "user", "other body");
-    	dao.save(comment1);
-    	dao.save(comment2);
-    	dao.save(comment3);
-    	List <Comment> testList = dao.findByBookId(new Long (1)); 
-    	Assert.assertTrue(testList.size() == 2);
-    	Assert.assertTrue(testList.contains(comment1) && testList.contains(comment2) && !testList.contains(comment3));
-    }
-    
-    @Test
+    public void testUserDAOSaveAndDelete(){
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				dao.save(testComment);
+				dao.delete(testComment);
+				assertTrue(dao.findAll().isEmpty());
+			}
+		});
+	}
+	
+	@Test
     @Transactional
-    public void testCommentDAOSaveAndUpdate(){
-    	Comment comment = new Comment(testBook, testUser, "initial body");
-    	dao.save(comment);
-    	Long id = new Long(1);
-    	comment = dao.findById(id);
-    	comment.setBody("updated body");
-    	dao.update(comment);
-    	comment = dao.findById(id);
-    	Assert.assertTrue(comment.getBody().equals("updated body"));    	
-    }
-    
-    @Test
+    public void testUserDAOSaveManyAndDeleteOne(){
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				Comment otherComment = new Comment();
+				dao.save(testComment);
+				dao.save(otherComment);
+				dao.delete(testComment);
+				assertNull(dao.findById(testComment.getId()));
+				assertFalse(dao.findAll().isEmpty());
+				assertTrue(dao.findAll().contains(otherComment));
+				dao.delete(otherComment);
+			}
+		});
+	}
+	
+	@Test
     @Transactional
-    public void testCommentDAOSaveAndDelete(){
-    	Comment comment = new Comment(testBook, testUser, "initial body");
-    	dao.save(comment);
-    	Long id = new Long(1);
-    	dao.deleteById(id);
-    	comment = dao.findById(id);
-    	Assert.assertNull(comment);    
-    }
-    
-    @Test
-    @Transactional 
-    public void testCommentDAOSaveManyAndDeleteOne(){
-    	Comment comment = new Comment(testBook, testUser, "initial body");
-    	Comment comment2 = new Comment(testBook, "user", "body");
-    	Comment comment3 = new Comment(new Book(), "user", "other body");
-    	dao.save(comment);
-    	dao.save(comment2);
-    	dao.save(comment3);
-    	Long id = new Long(1);
-    	dao.deleteById(id);
-    	comment = dao.findById(id);
-    	Assert.assertNull(comment);
-    	Assert.assertTrue(dao.findAll().size() == 2);
-    }
-    
+    public void testUserDAOSaveAndUpdate(){
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				dao.save(testComment);
+				Comment searchedComment = dao.findById(testComment.getId());
+				searchedComment.setBody("new body");
+				dao.update(searchedComment);
+				Comment updatedComment = dao.findById(testComment.getId());
+				assertTrue(updatedComment.getBody().equals("new body"));
+				System.out.println(updatedComment.getBody());
+				dao.delete(testComment);
+			}
+		});
+	}
+		
+	@Test
+    @Transactional
+    public void testUserDAOSaveAndUpdateBook(){
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				dao.save(testComment);
+				Comment searchedComment = dao.findByBookId(testBook.getId()).get(0);
+				Book newBook = new Book();
+				bookDao.save(newBook);
+				
+				searchedComment.setBook(newBook);
+				dao.update(searchedComment);
+				assertTrue(dao.findByBookId(testBook.getId()).isEmpty());
+				Comment updatedComment = dao.findByBookId(newBook.getId()).get(0);
+				assertNotNull(updatedComment);
+				dao.delete(testComment);
+			}
+		});
+	}
+	
+	@Test
+    @Transactional
+    public void testUserDAOSearchByBook(){
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				Comment comment1 = new Comment();
+				Comment comment2 = new Comment();
+				Comment comment3 = new Comment();
+				Book book1 = new Book();
+				Book book2 = new Book();
+				comment1.setBook(book1);
+				comment2.setBook(book1);
+				comment3.setBook(book2);
+				
+				bookDao.save(book1);
+				bookDao.save(book2);
+				dao.save(comment1);
+				dao.save(comment2);
+				dao.save(comment3);
+				
+				List<Comment> searchBook1 = dao.findByBookId(book1.getId());
+				assertTrue(searchBook1.size() == 2);
+				assertTrue(searchBook1.contains(comment1) && searchBook1.contains(comment2));
+				
+				List<Comment> searchBook2 = dao.findByBookId(book2.getId());
+				assertTrue(searchBook2.size() == 1);
+				assertTrue(searchBook2.contains(comment3));
+				
+				dao.delete(comment1);
+				dao.delete(comment2);
+				dao.delete(comment3);
+			}
+		});
+	}
     
 }
