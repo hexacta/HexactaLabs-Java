@@ -40,6 +40,17 @@ public class BookCategoryTest {
 		applicationContext = new ClassPathXmlApplicationContext("spring/spring-persistence-test.xml");
 		dao = (BookCategoryDAO) applicationContext.getBean(BookCategoryDAO.class);
 		txManager = (PlatformTransactionManager) applicationContext.getBean(PlatformTransactionManager.class);
+		
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				List<BookCategory> categories = dao.findAll();
+				for (BookCategory category : categories){
+					dao.delete(category);
+				}
+			}
+		});
 	}
 	
 	@After
@@ -62,13 +73,13 @@ public class BookCategoryTest {
 	
 	@Test
     @Transactional(readOnly = true)
-    public void testUserDAOEmpty(){
+    public void testBookCategoryDAOEmpty(){
     	assertTrue(dao.findAll().isEmpty());
     }
 	
 	@Test
     @Transactional
-    public void testUserDAOSaveOne(){
+    public void testBookCategoryDAOSaveOne(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -85,7 +96,7 @@ public class BookCategoryTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOSaveMany(){
+    public void testBookCategoryDAOSaveMany(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -108,7 +119,7 @@ public class BookCategoryTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOSaveAndSearch(){
+    public void testBookCategoryDAOSaveAndSearch(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -123,7 +134,7 @@ public class BookCategoryTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOSaveAndDelete(){
+    public void testBookCategoryDAOSaveAndDelete(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -137,7 +148,7 @@ public class BookCategoryTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOSaveManyAndDeleteOne(){
+    public void testBookCategoryDAOSaveManyAndDeleteOne(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -156,7 +167,7 @@ public class BookCategoryTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOSaveAndUpdate(){
+    public void testBookCategoryDAOSaveAndUpdate(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override

@@ -68,7 +68,6 @@ public class BookTest {
 	@After
 	public void tearDown(){
 		applicationContext.close();
-		
 	}
 	
 	@Test
