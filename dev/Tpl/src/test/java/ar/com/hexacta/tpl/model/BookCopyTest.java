@@ -354,4 +354,34 @@ public class BookCopyTest {
 			}
 		});
 	}
+	
+	@Test
+    @Transactional
+    public void testUserDAOFreeByBookChangeState(){
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				BookCopy copy = new BookCopy();
+				copy.setBookRate(BookCopy.BOOK_RATE_GOOD);
+				Book book = new Book();
+				copy.setBook(book);
+				copy.changeToFree();
+				
+				bookDao.save(book);
+				dao.save(copy);
+				
+				BookCopy searchBookCopy = dao.findFreeCopy(book.getId());
+				assertTrue(searchBookCopy == copy);
+				copy.changeToLoaned();
+				dao.update(copy);
+				assertNull(dao.findFreeCopy(book.getId()));
+				copy.changeToFree();
+				dao.update(copy);
+				assertNotNull(dao.findFreeCopy(book.getId()));
+				
+				dao.delete(copy);
+			}
+		});
+	}
 }
