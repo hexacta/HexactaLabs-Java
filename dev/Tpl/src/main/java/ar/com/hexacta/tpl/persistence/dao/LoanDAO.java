@@ -32,4 +32,5 @@ public class LoanDAO extends AbstractDAO<Loan> implements LoanRepository {
         criteria.add(Restrictions.ilike("user", user));
         return (List<Loan>) this.getHibernateTemplate().findByCriteria(criteria);
     }
+
 }

@@ -20,18 +20,21 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ar.com.hexacta.tpl.model.BookCopy;
 import ar.com.hexacta.tpl.model.Loan;
+import ar.com.hexacta.tpl.service.IBookCopiesService;
 import ar.com.hexacta.tpl.service.ILoansService;
 
 @Service
 public class LoansWS {
 
+	public static int HTTP_OK = 200;
     public LoansWS() {
-
-    }
-
+    } 		
     @Autowired
     private ILoansService loanService;
+    @Autowired
+    private IBookCopiesService copyService;
 
     @GET
     @Path("/")
@@ -59,16 +62,19 @@ public class LoansWS {
     @Consumes("application/json")
     public Response createLoan(@Multipart(value = "newLoan", type = "application/json") final String jsonLoan) {
         try {
-            loanService.createLoan(parseLoan(jsonLoan));
+        	BookCopy copy = (parseLoan(jsonLoan)).getBook();
+        	copy = copyService.findCopy(copy.getId());
+        	copy.changeToLoaned();
+        	makeUpdate(copy, HTTP_OK);
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
         }
         return Response.ok().build();
-
     }
 
-    @PUT
+
+	@PUT
     @Path("/{loanId}")
     @Consumes("application/json")
     public Response updateLoan(@PathParam("loanId") final String loanId, final String jsonLoan) {
@@ -76,7 +82,6 @@ public class LoansWS {
             Loan loan = parseLoan(jsonLoan);
             loan.setId(new Long(loanId));
             loanService.updateLoan(loan);
-
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
@@ -96,6 +101,11 @@ public class LoansWS {
         newLoan = mapper.readValue(jsonLoan, Loan.class);
         return newLoan;
     }
+    
+    private Response makeUpdate(BookCopy copy, int responseCode) {
+    	copyService.updateCopy(copy);
+		return Response.status(responseCode).build();
+	}
 
     public ILoansService getLoanService() {
         return loanService;
@@ -104,5 +114,13 @@ public class LoansWS {
     public void setLoanService(final ILoansService loanService) {
         this.loanService = loanService;
     }
-
+    
+    public IBookCopiesService getBookCopyService(){
+    	return copyService;
+    }
+   
+    public void setBookCopiesService(final IBookCopiesService copyService){
+    	this.copyService = copyService;
+    }
+ 
 }

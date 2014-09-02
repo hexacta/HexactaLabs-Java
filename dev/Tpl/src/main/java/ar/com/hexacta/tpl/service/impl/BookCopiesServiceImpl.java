@@ -25,10 +25,23 @@ public class BookCopiesServiceImpl implements IBookCopiesService{
 	public List<BookCopy> findAllCopies() {
 		return bookCopyRepository.findAll();
 	}
+	 @Override
+	 @Transactional(readOnly = true)
+	 public BookCopy findCopy(final Long copyId) {
+	     return bookCopyRepository.findById(copyId);
+	 }
 
 	@Override
 	@Transactional(readOnly = true)
 	public BookCopy findFreeCopyByBook(long bookId) {
 		return bookCopyRepository.findFreeCopy(bookId);
 	}
+
+	@Override
+	@Transactional
+	public void updateCopy(BookCopy copy) {
+		bookCopyRepository.saveOrUpdate(copy);
+	}
+	
+
 }

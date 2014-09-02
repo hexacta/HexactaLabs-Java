@@ -8,4 +8,5 @@ public interface LoanRepository extends Repository<Loan>{
     List<Loan> findByBookId(Long bookId);
 
     List<Loan> findByUser(String user);
+
 }
