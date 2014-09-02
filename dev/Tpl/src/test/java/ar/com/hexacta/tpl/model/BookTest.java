@@ -44,6 +44,23 @@ public class BookTest {
 	@Qualifier("transactionManager")
 	private PlatformTransactionManager txManager;
 	
+	public BookTest(){
+		applicationContext = new ClassPathXmlApplicationContext("spring/spring-persistence-test.xml");
+		dao = (BookDAO) applicationContext.getBean(BookDAO.class);
+		txManager = (PlatformTransactionManager) applicationContext.getBean(PlatformTransactionManager.class);
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				List<Book> books = dao.findAll();
+				int i = books.size();
+				for (Book book : books){
+					dao.delete(book);
+				}
+			}
+		});
+	}
+	
 	@Before
 	public void setUp(){
 		CATEGORIES = new HashSet<BookCategory> ();
@@ -58,9 +75,13 @@ public class BookTest {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				categoryDao.save(CATEGORY);
+				/*List<Book> books = dao.findAll();
+				for (Book book : books){
+					dao.delete(book);
+				}*/
 			}
 		});
-			
+		
 		dao = (BookDAO) applicationContext.getBean(BookDAO.class);
 		
 	}

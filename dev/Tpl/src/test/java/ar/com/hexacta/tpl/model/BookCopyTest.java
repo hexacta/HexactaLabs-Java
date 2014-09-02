@@ -36,6 +36,22 @@ public class BookCopyTest {
 	@Qualifier("transactionManager")
 	private PlatformTransactionManager txManager;
 	
+	public BookCopyTest(){
+		applicationContext = new ClassPathXmlApplicationContext("spring/spring-persistence-test.xml");
+		dao = (BookCopyDAO) applicationContext.getBean(BookCopyDAO.class);
+		txManager = (PlatformTransactionManager) applicationContext.getBean(PlatformTransactionManager.class);
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				List<BookCopy> copies = dao.findAll();
+				for (BookCopy copy : copies){
+					dao.delete(copy);
+				}
+			}
+		});
+	}
+	
 	@Before
 	public void setUp(){
 		testBook = new Book();

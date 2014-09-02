@@ -32,6 +32,22 @@ public class UserTest {
 	@Qualifier("transactionManager")
 	private PlatformTransactionManager txManager;
 	
+	public UserTest(){
+		applicationContext = new ClassPathXmlApplicationContext("spring/spring-persistence-test.xml");
+		txManager = (PlatformTransactionManager) applicationContext.getBean(PlatformTransactionManager.class);
+		dao = (UserDAO) applicationContext.getBean(UserDAO.class);
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				List<User> users = dao.findAll();
+				for (User user : users){
+					dao.delete(user);
+				}
+			}
+		});
+	}
+	
 	@Before
 	public void setUp(){
 		testUser = new User(USERNAME, PASSWORD, EMAIL);
