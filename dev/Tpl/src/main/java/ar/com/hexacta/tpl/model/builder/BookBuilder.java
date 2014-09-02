@@ -6,7 +6,6 @@ import java.util.Set;
 import ar.com.hexacta.tpl.model.Book;
 import ar.com.hexacta.tpl.model.BookCategory;
 import ar.com.hexacta.tpl.model.BookCopy;
-import ar.com.hexacta.tpl.model.Comment;
 
 public class BookBuilder {
 
