@@ -210,7 +210,7 @@ public class BookCopyTest {
 		
 	@Test
     @Transactional
-    public void testUserDAOFreeByBookWhenOnlyOneFree(){
+    public void testBookCopyDAOFreeByBookWhenOnlyOneFree(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -254,7 +254,7 @@ public class BookCopyTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOFreeByBookWhenManyFree(){
+    public void testBookCopyDAOFreeByBookWhenManyFree(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -297,7 +297,7 @@ public class BookCopyTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOFreeByBookWhenAllLoaned(){
+    public void testBookCopyDAOFreeByBookWhenAllLoaned(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -333,7 +333,7 @@ public class BookCopyTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOFreeByBookWhenNoCopyForBook(){
+    public void testBookCopyDAOFreeByBookWhenNoCopyForBook(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -373,7 +373,7 @@ public class BookCopyTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOFreeByBookChangeState(){
+    public void testBookCopyDAOFreeByBookChangeState(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override

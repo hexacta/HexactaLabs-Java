@@ -53,7 +53,6 @@ public class BookTest {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				List<Book> books = dao.findAll();
-				int i = books.size();
 				for (Book book : books){
 					dao.delete(book);
 				}

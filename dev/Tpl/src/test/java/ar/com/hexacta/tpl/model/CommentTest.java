@@ -107,7 +107,7 @@ public class CommentTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOSaveMany(){
+    public void testCommentDAOSaveMany(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -130,7 +130,7 @@ public class CommentTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOSaveAndSearch(){
+    public void testCommentDAOSaveAndSearch(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -145,7 +145,7 @@ public class CommentTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOSaveAndDelete(){
+    public void testCommentDAOSaveAndDelete(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -159,7 +159,7 @@ public class CommentTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOSaveManyAndDeleteOne(){
+    public void testCommentDAOSaveManyAndDeleteOne(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -178,7 +178,7 @@ public class CommentTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOSaveAndUpdate(){
+    public void testCommentDAOSaveAndUpdate(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -197,7 +197,7 @@ public class CommentTest {
 		
 	@Test
     @Transactional
-    public void testUserDAOSaveAndUpdateBook(){
+    public void testCommentDAOSaveAndUpdateBook(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -219,7 +219,7 @@ public class CommentTest {
 	
 	@Test
     @Transactional
-    public void testUserDAOSearchByBook(){
+    public void testCommentDAOSearchByBook(){
 		TransactionTemplate tmpl = new TransactionTemplate(txManager);
 		tmpl.execute(new TransactionCallbackWithoutResult() {
 			@Override
