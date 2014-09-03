@@ -18,7 +18,7 @@ public class CommentDAO extends AbstractDAO<Comment> implements
 	@SuppressWarnings("unchecked")
 	public Comment findById(final Serializable commentId) {
 		DetachedCriteria criteria = this.createCriteria();
-		criteria.add(Restrictions.like("id", commentId));
+		criteria.add(Restrictions.eq("id", commentId));
 		List<Comment> result = (List<Comment>) this.getHibernateTemplate().findByCriteria(criteria);
 		if(result.size() == 0){
 			return null;
@@ -39,7 +39,7 @@ public class CommentDAO extends AbstractDAO<Comment> implements
 	@Override
 	public List<Comment> findByBookId(final Long bookId) {
 		DetachedCriteria criteria = this.createCriteria();
-		criteria.add(Restrictions.like("book.id", bookId));
+		criteria.add(Restrictions.eq("book.id", bookId));
 		return (List<Comment>) this.getHibernateTemplate().findByCriteria(criteria);
 	}
 
