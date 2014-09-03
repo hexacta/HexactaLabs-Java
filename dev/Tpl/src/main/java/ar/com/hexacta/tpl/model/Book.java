@@ -67,7 +67,7 @@ public class Book implements Serializable {
 	public Book(final String aName, final String aDescription,
 			final String aPublisher, final String aCountry, final String isbn,
 			final Set<BookCategory> bookCategories,
-			final Set<BookCopy> bookCopies, final Set<Comment> bookComments) {
+			final Set<BookCopy> bookCopies) {
 		this(aName);
 		description = aDescription;
 		publisher = aPublisher;
@@ -151,11 +151,11 @@ public class Book implements Serializable {
 		this.version = version;
 	}
 
-	public String getISBN() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setISBN(final String isbn) {
+	public void setIsbn(final String isbn) {
 		this.isbn = isbn;
 	}
 
