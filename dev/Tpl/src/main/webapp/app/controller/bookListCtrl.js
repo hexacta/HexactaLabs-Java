@@ -18,6 +18,8 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		$location.path("/register");
 	};
 	
+	
+	
 	$http({
 		method : 'GET',
 		url: '/Tpl/rest/books',
@@ -43,8 +45,6 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	    		$scope.selectedBook.comments = "";
 	    	}) ;
 		
-		
-		
 		//image from google rest service
 		var find = '-';
 		var re = new RegExp(find, 'g');
@@ -64,21 +64,9 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	};
 	
 	$scope.loadBooks = function(){
-		$http({
-			method : 'GET',
-			url: '/Tpl/rest/books',
-			headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
-		}).success(function(data, status, headers, config){
-
-			if(status == 200){
-				$rootScope.books = [];
-				$rootScope.books = data;
-				$scope.books = $rootScope.books;
-			}
-
-		}).error(function(data, status, headers, config){
-			console.log("An Error occurred while trying to get all books");
-		});
+		$rootScope.books = [];
+		$rootScope.books = data;
+		$scope.books = $rootScope.books;
 	}
 	$scope.loadBooks();
 	
