@@ -215,9 +215,10 @@ public class LoanTest {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				dao.save(testLoan);
-				List<Loan> results = dao.findByBookId(testBook.getId());
+				List<Loan> results = dao.findByBookId(testCopy.getId());
 				assertFalse(results.isEmpty());
 				assertTrue(results.contains(testLoan));
+				dao.delete(testLoan);
 			}
 		});
 	}
