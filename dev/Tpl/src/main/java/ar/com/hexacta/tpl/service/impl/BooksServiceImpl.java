@@ -19,7 +19,11 @@ public class BooksServiceImpl implements IBooksService {
     @Override
     @Transactional
     public void createBook(final Book book) {
-        // TODO: Add validation logic
+    	// TODO: Add validation logic
+        if (!validateISBN(book.getISBN())){
+        	return;
+        }
+        	
         booksRepository.save(book);
     }
 
@@ -39,6 +43,9 @@ public class BooksServiceImpl implements IBooksService {
     @Transactional
     public void updateBook(final Book book) {
         // TODO: Add validation logic
+    	if (!validateISBN(book.getISBN())){
+        	return;
+        }
         booksRepository.save(book);
     }
     
@@ -58,4 +65,13 @@ public class BooksServiceImpl implements IBooksService {
         booksRepository = bookRepository;
     }
 
+    private boolean validateISBN(String isbn){
+    	if (isbn.isEmpty()){
+    		return false;
+    	}
+    	if (!isbn.matches("^[0-9\\-]*")){
+    		return false;
+    	}
+    	return true;
+    }
 }

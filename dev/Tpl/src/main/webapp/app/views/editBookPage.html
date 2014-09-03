@@ -26,11 +26,11 @@
 							ng-model="currentBook.publisher" type="text" id="publisher"
 							class="form-control" />
 					</div>
-					<!-- EDITORIAL -->
+					<!-- ISBN -->
 					<div class="form-group">
 						<label class="">ISBN: </label> <input ng-required="true"
 							ng-model="currentBook.isbn" type="text" id="isbn"
-							class="form-control" />
+							class="form-control" ng-minlength="1" ng-pattern="/^[0-9\-]*$/"/>
 					</div>
 					<!-- SELECT PAISES -->
 					<div class="form-group">
