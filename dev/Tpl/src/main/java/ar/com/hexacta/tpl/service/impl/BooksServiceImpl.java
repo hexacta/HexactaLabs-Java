@@ -19,15 +19,16 @@ public class BooksServiceImpl implements IBooksService {
 	@Autowired
 	private BookRepository booksRepository;
 
-	@Override
-	@Transactional
-	public void createBook(final Book book) {
-		// TODO: Add validation logic
-		if (!validateISBN(book.getISBN()))
-			return;
-
-		booksRepository.save(book);
-	}
+    @Override
+    @Transactional
+    public void createBook(final Book book) {
+    	// TODO: Add validation logic
+        if (!validateISBN(book.getIsbn())){
+        	return;
+        }
+        	
+        booksRepository.save(book);
+    }
 
 	@Override
 	@Transactional
@@ -41,15 +42,16 @@ public class BooksServiceImpl implements IBooksService {
 		booksRepository.deleteById(bookId);
 	}
 
-	@Override
-	@Transactional
-	public void updateBook(final Book book) {
-		// TODO: Add validation logic
-		if (!validateISBN(book.getISBN()))
-			return;
-		booksRepository.save(book);
-	}
-
+    @Override
+    @Transactional
+    public void updateBook(final Book book) {
+        // TODO: Add validation logic
+    	if (!validateISBN(book.getIsbn())){
+        	return;
+        }
+        booksRepository.save(book);
+    }
+    
 	@Override
 	@Transactional(readOnly = true)
 	public List<Book> findAllBooks() {

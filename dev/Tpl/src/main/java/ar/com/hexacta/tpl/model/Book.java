@@ -151,11 +151,11 @@ public class Book implements Serializable {
 		this.version = version;
 	}
 
-	public String getISBN() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setISBN(final String isbn) {
+	public void setIsbn(final String isbn) {
 		this.isbn = isbn;
 	}
 
