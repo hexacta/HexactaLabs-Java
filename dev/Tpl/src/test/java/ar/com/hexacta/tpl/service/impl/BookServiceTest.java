@@ -98,8 +98,6 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.ValidationException;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -129,7 +127,7 @@ public class BookServiceTest {
 		book.setName("name");
 		book.setDescription("desc");
 		book.setCountry("EEUU");
-		book.setISBN("1345");
+		book.setIsbn("1345");
 		book.setPublisher("publisher");
 		book.setId(1L);
 
@@ -163,22 +161,47 @@ public class BookServiceTest {
 		Assert.assertEquals(ubook.getDescription(), "desc");
 		Assert.assertEquals(ubook.getPublisher(), "publisher");
 		Assert.assertEquals(ubook.getName(), "name");
-		Assert.assertEquals(ubook.getISBN(), "1345");
+		Assert.assertEquals(ubook.getIsbn(), "1345");
 		Assert.assertEquals(ubook.getCountry(), "EEUU");
 		Assert.assertTrue(ubook.getId() == 1);
 
 	}
 
-	@Test(expected = ValidationException.class)
+	@Test
 	public void testCreateBook() {
+		Book ubook = new Book("aName", "aDescription", "aPublisher",
+				"aCountry", "12345", null, null);
+		service.createBook(ubook);
+		Assert.assertNotNull(ubook);
 
-		service.createBook(new Book());
 	}
 
-	@Test(expected = ValidationException.class)
-	public void testDeleteBook() {
+	@Test
+	public void testDeleteBookById() {
 
 		service.deleteBookById(1L);
+		Book ubook = service.findBook(1L);
+		Assert.assertNotNull(ubook);
 	}
 
+	@Test
+	public void testDeleteBook() {
+
+		Book ubook = new Book();
+		service.deleteBook(ubook);
+		Assert.assertNotNull(ubook);
+	}
+
+	@Test
+	public void testUpdateBook() {
+		Book ubook = new Book("aName", "aDescription", "aPublisher",
+				"aCountry", "12345", null, null);
+		service.createBook(ubook);
+		Book ubook2 = ubook;
+		// new Book("aName", "aDescription", "aPublisher",
+		// "aCountry", "12345", null, null);
+		service.updateBook(ubook);
+		Assert.assertEquals(ubook, ubook2);
+
+	}
 }
