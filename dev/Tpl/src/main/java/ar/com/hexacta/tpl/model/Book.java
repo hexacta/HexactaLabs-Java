@@ -52,7 +52,7 @@ public class Book implements Serializable {
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Set<BookCategory> bookCategories;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "BOOK")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<BookCopy> bookCopies;
 
 	public Book() {
