@@ -48,12 +48,7 @@ public class LoansServiceImpl implements ILoansService {
     }
 
     @Override
-    public List<Loan> findLoansByBookId(final Long bookId) {
-        return loanRepository.findByBookId(bookId);
-    }
-
-    @Override
-    public List<Loan> findLoansByUser(final String user) {
-        return loanRepository.findByUser(user);
+    public List<Loan> findLoansByBookId(final Long bookCopyId) {
+        return loanRepository.findByBookId(bookCopyId);
     }
 }

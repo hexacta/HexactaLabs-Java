@@ -19,18 +19,9 @@ public class LoanDAO extends AbstractDAO<Loan> implements LoanRepository {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Loan> findByBookId(final Long bookId) {
+    public List<Loan> findByBookId(final Long bookCopyId) {
         DetachedCriteria criteria = this.createCriteria();
-        criteria.add(Restrictions.ilike("book", bookId));
+        criteria.add(Restrictions.eq("book.id", bookCopyId));
         return (List<Loan>) this.getHibernateTemplate().findByCriteria(criteria);
     }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Loan> findByUser(final String user) {
-        DetachedCriteria criteria = this.createCriteria();
-        criteria.add(Restrictions.ilike("user", user));
-        return (List<Loan>) this.getHibernateTemplate().findByCriteria(criteria);
-    }
-
 }

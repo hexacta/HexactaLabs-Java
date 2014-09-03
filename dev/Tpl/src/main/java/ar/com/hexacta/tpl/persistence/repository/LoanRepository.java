@@ -5,8 +5,7 @@ import java.util.List;
 import ar.com.hexacta.tpl.model.Loan;
 
 public interface LoanRepository extends Repository<Loan>{
-    List<Loan> findByBookId(Long bookId);
+    List<Loan> findByBookId(Long bookCopyId);
 
-    List<Loan> findByUser(String user);
 
 }

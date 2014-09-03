@@ -16,7 +16,6 @@ public interface ILoansService {
 
     void deleteLoanById(Long loanId);
 
-    List<Loan> findLoansByBookId(Long bookId);
+    List<Loan> findLoansByBookId(Long bookCopyId);
 
-    List<Loan> findLoansByUser(String user);
 }

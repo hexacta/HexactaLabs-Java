@@ -53,8 +53,8 @@ public class LoansWS {
     @GET
     @Path("/byBook/{bookId}")
     @Produces("application/json")
-    public List<Loan> findLoansByBookId(@PathParam("bookId") final String bookId) {
-        return loanService.findLoansByBookId(new Long(bookId));
+    public List<Loan> findLoansByBookId(@PathParam("bookCopyId") final String bookCopyId) {
+        return loanService.findLoansByBookId(new Long(bookCopyId));
     }
 
     @POST
