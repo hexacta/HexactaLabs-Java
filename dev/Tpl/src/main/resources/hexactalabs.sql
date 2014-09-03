@@ -16,7 +16,7 @@ INSERT INTO `book_categories` VALUES (1,'Libro en formato electronico','ebook',0
 -- Dumping data for table `book_copies`
 --
 
-INSERT INTO `book_copies` VALUES (1,'Good','1','','Free',0,NULL),(2,'Good','2','','Loaned',0,NULL),(3,'Good','3','','Free',0,NULL),(4,'Good','4','','Free',0,NULL),(5,'Good','5','','Free',0,NULL);
+INSERT INTO `book_copies` VALUES (1,'Good','1','','Free',0,1),(2,'Good','2','','Loaned',0,1),(3,'Good','3','','Free',0,1),(4,'Good','4','','Free',0,1),(5,'Good','5','','Free',0,1);
 
 --
 -- Dumping data for table `books`

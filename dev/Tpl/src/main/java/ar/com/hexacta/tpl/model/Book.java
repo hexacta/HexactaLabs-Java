@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -22,7 +23,7 @@ public class Book implements Serializable {
 	private static final long serialVersionUID = 604529088687479075L;
 
 	@Id
-	@Column(name = "BOOK_ID")
+	@Column(name = "BOOK_ID", unique = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
@@ -51,7 +52,7 @@ public class Book implements Serializable {
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Set<BookCategory> bookCategories;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "BOOK")
 	private Set<BookCopy> bookCopies;
 
 	public Book() {
