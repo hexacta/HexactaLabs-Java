@@ -205,22 +205,8 @@ public class LoanTest {
 			}
 		});
 	}
-	/*
-	@Test
-    @Transactional
-    public void testLoanDAOFindByUser(){
-		TransactionTemplate tmpl = new TransactionTemplate(txManager);
-		tmpl.execute(new TransactionCallbackWithoutResult() {
-			@Override
-			protected void doInTransactionWithoutResult(TransactionStatus status) {
-				dao.save(testLoan);
-				List<Loan> results = dao.findByUser(testUser.getUsername());
-				assertFalse(results.isEmpty());
-				assertTrue(results.contains(testLoan));
-			}
-		});
-	}
-
+	
+	
 	@Test
     @Transactional
     public void testLoanDAOFindByBook(){
@@ -234,5 +220,5 @@ public class LoanTest {
 				assertTrue(results.contains(testLoan));
 			}
 		});
-	}*/
+	}
 }
