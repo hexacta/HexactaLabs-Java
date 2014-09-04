@@ -87,7 +87,7 @@ public class BookCopyTest {
 	@Test
 	@Transactional(readOnly = true)
 	public void testParameterCretion(){
-		assertTrue(testCopy.getBook() == testBook);
+		assertTrue(testCopy.getBook().equals(testBook));
 		assertTrue(testCopy.getState().equals(BookCopy.STATE_FREE));
 		assertTrue(testCopy.getBookRate().equals(BookCopy.BOOK_RATE_NORMAL));
 	}
@@ -150,7 +150,7 @@ public class BookCopyTest {
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				dao.save(testCopy);
 				BookCopy searchedCopy = dao.findById(testCopy.getId());
-				assertTrue(testCopy == searchedCopy);
+				assertTrue(testCopy.equals(searchedCopy));
 				dao.delete(testCopy);
 			}
 		});
@@ -239,11 +239,11 @@ public class BookCopyTest {
 				
 				BookCopy searchBookCopy1 = dao.findFreeCopy(book1.getId());
 				assertNotNull(searchBookCopy1);
-				assertTrue(searchBookCopy1 == copy1 );
+				assertTrue(searchBookCopy1.equals(copy1) );
 				
 				BookCopy searchBookCopy2 = dao.findFreeCopy(book2.getId());
 				assertNotNull(searchBookCopy2);
-				assertTrue(searchBookCopy2 == copy3 );
+				assertTrue(searchBookCopy2.equals(copy3));
 				
 				dao.delete(copy1);
 				dao.delete(copy2);
@@ -285,7 +285,7 @@ public class BookCopyTest {
 				
 				BookCopy searchBookCopy = dao.findFreeCopy(book1.getId());
 				assertNotNull(searchBookCopy);
-				assertTrue(searchBookCopy == copy1 || searchBookCopy == copy2 || searchBookCopy == copy3);
+				assertTrue(searchBookCopy.equals(copy1) || searchBookCopy.equals(copy2) || searchBookCopy.equals(copy3));
 				
 				dao.delete(copy1);
 				dao.delete(copy2);
@@ -388,7 +388,7 @@ public class BookCopyTest {
 				dao.save(copy);
 				
 				BookCopy searchBookCopy = dao.findFreeCopy(book.getId());
-				assertTrue(searchBookCopy == copy);
+				assertTrue(searchBookCopy.equals(copy));
 				copy.changeToLoaned();
 				dao.update(copy);
 				assertNull(dao.findFreeCopy(book.getId()));

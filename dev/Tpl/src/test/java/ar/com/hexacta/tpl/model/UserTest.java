@@ -132,9 +132,9 @@ public class UserTest {
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				dao.save(testUser);
 				User searchedUser = dao.findByUser(testUser.getUsername());
-				assertTrue(testUser == searchedUser);
+				assertTrue(testUser.equals(searchedUser));
 				searchedUser = dao.findById(testUser.getId());
-				assertTrue(testUser == searchedUser);
+				assertTrue(testUser.equals(searchedUser));
 				dao.delete(testUser);
 			}
 		});

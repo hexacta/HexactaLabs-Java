@@ -100,7 +100,7 @@ public class BookTest {
 		assertTrue(testBook.getPublisher().equals(PUBLISHER));
 		assertTrue(testBook.getCountry().equals(COUNTRY));
 		assertTrue(testBook.getIsbn().equals(ISBN));
-		assertTrue(testBook.getBookCategories() == CATEGORIES);
+		assertTrue(testBook.getBookCategories().equals(CATEGORIES));
 	}
 	
 	@Test
@@ -158,7 +158,7 @@ public class BookTest {
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				dao.save(testBook);
 				Book searchedBook = dao.findById(testBook.getId());
-				assertTrue(testBook == searchedBook);
+				assertTrue(testBook.equals(searchedBook));
 				dao.delete(testBook);
 			}
 		});
