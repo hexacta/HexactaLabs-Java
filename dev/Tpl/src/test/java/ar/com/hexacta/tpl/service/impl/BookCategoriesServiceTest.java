@@ -1,6 +1,5 @@
 package ar.com.hexacta.tpl.service.impl;
 
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -41,9 +40,6 @@ public class BookCategoriesServiceTest {
 
 		// getTodosLosUsuarios
 		when(dao.findAll()).thenReturn(todosLosUsuarios);
-
-		// getUsuario
-		when(dao.findById(anyInt())).thenReturn(bookCat);
 
 	}
 

@@ -1,6 +1,6 @@
 package ar.com.hexacta.tpl.service.impl;
 
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class BookCopiesServiceTest {
 		when(dao.findAll()).thenReturn(todosLosUsuarios);
 
 		// getUsuario
-		when(dao.findById(anyInt())).thenReturn(bookcopy);
+		when(dao.findFreeCopy(anyLong())).thenReturn(bookcopy);
 
 	}
 

@@ -1,6 +1,6 @@
 package ar.com.hexacta.tpl.service.impl;
 
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -40,11 +40,7 @@ public class LoginServiceTest {
 		List<User> todosLosUsuarios = new ArrayList<User>();
 		todosLosUsuarios.add(login);
 
-		// getTodosLosUsuarios
-		when(dao.findAll()).thenReturn(todosLosUsuarios);
-
-		// getUsuario
-		when(dao.findById(anyInt())).thenReturn(login);
+		when(dao.findByUser(anyString())).thenReturn(login);
 
 	}
 
