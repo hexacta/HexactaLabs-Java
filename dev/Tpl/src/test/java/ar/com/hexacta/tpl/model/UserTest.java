@@ -110,6 +110,9 @@ public class UserTest {
 				User user1 = new User();
 				User user2 = new User();
 				User user3 = new User();
+				user1.setEnabled(true);
+				user2.setEnabled(true);
+				user3.setEnabled(true);
 				dao.save(user1);
 				dao.save(user2);
 				dao.save(user3);
@@ -163,12 +166,29 @@ public class UserTest {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				User otherUser = new User();
+				otherUser.setEnabled(true);
 				dao.save(testUser);
 				dao.save(otherUser);
 				dao.delete(testUser);
 				assertNull(dao.findByUser(testUser.getUsername()));
 				assertFalse(dao.findAll().isEmpty());
 				assertTrue(dao.findAll().contains(otherUser));
+				dao.delete(otherUser);
+			}
+		});
+	}
+	
+	@Test
+    @Transactional
+    public void testUserDAOSaveDisabled(){
+		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+		tmpl.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				User otherUser = new User();
+				otherUser.setEnabled(false);
+				dao.save(otherUser);
+				assertTrue(dao.findAll().isEmpty());
 				dao.delete(otherUser);
 			}
 		});
