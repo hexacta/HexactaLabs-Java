@@ -74,10 +74,6 @@ public class BookTest {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				categoryDao.save(CATEGORY);
-				/*List<Book> books = dao.findAll();
-				for (Book book : books){
-					dao.delete(book);
-				}*/
 			}
 		});
 		
@@ -176,7 +172,7 @@ public class BookTest {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				dao.save(testBook);
-				dao.delete(testBook);
+				dao.deleteById(testBook.getId());
 				assertTrue(dao.findAll().isEmpty());
 			}
 		});
