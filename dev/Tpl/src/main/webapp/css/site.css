@@ -225,6 +225,15 @@ input.ng-invalid.ng-dirty {
 	background-color: transparent;
 }
 
+.text-center .headcolumn
+{
+	color:#009292;
+}
+
+th:hover {
+	color:#007500;
+}
+
 .ng-invalid.ng-dirty{
 	border-color: 'red';
 }

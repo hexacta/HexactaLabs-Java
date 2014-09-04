@@ -19,7 +19,6 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	};
 	
 	
-	
 	$http({
 		method : 'GET',
 		url: '/Tpl/rest/books',
@@ -43,9 +42,9 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 			}).error(function(data, status, headers, config){
 	    		console.log("An Error occurred while trying to get comments for the book " + $scope.selectedBook.name);
 	    		$scope.selectedBook.comments = "";
-	    	}) ;
+	    	});
 		
-		//image from google rest service
+		// Get image from google rest service
 		var find = '-';
 		var re = new RegExp(find, 'g');
 		var isbn = $scope.selectedBook.isbn.replace(re , '');
@@ -63,6 +62,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	    	}) ;
 	};
 	
+	//Cargo los libros en el scope
 	$scope.loadBooks = function(){
 		$rootScope.books = [];
 		$rootScope.books = data;
@@ -70,7 +70,12 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	}
 	$scope.loadBooks();
 	
+	$scope.predicate = 'name';
+	$scope.reverse = false;
+	
 	$scope.comment = {};
+	
+	//Para agregar comentarios
 	$scope.addComment = function(book){
 		var comments = book.bookComments;
 		delete book.bookComments;
@@ -101,9 +106,5 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	};
 	
 	});
-	
-	$scope.actionsAllowed = function(){
-		return sessionStorage.loggedIn;
-	};
 	
 });
