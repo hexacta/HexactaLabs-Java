@@ -133,6 +133,8 @@ public class UserTest {
 				dao.save(testUser);
 				User searchedUser = dao.findByUser(testUser.getUsername());
 				assertTrue(testUser == searchedUser);
+				searchedUser = dao.findById(testUser.getId());
+				assertTrue(testUser == searchedUser);
 				dao.delete(testUser);
 			}
 		});
@@ -146,8 +148,9 @@ public class UserTest {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				dao.save(testUser);
-				dao.delete(testUser);
+				dao.deleteById(testUser.getId());
 				assertTrue(dao.findAll().isEmpty());
+				assertNull(dao.findById(testUser.getId()));
 			}
 		});
 	}

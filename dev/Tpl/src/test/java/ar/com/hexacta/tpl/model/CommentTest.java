@@ -151,7 +151,7 @@ public class CommentTest {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				dao.save(testComment);
-				dao.delete(testComment);
+				dao.deleteById(testComment.getId());
 				assertTrue(dao.findAll().isEmpty());
 			}
 		});
