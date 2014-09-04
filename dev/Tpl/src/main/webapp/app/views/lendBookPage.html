@@ -4,17 +4,12 @@
 		<form novalidate name="createLoanForm" id="bookLendingForm" ng-submit="saveLoan(newLoan)">
 			<div class="col-md-8 col-md-offset-2" id="feedbackPanel"/>
 			<fieldset>
-				<legend>Prestar un libro</legend>
-				<!-- SHOW AVAILABLE COPY -->
-				<div class="form-group">
-					<label>Copia numero:</label>
-					<label>{{newLoan.code}}</label>
-				</div>
+				<legend>Prestar libro "{{currentBook.name}}"</legend>
 				<!-- SELECT USER -->
 				<div class="form-group">
 					<label class="">Prestar a:</label>
 					<select class="form-control" ng-model="user" ng-change="selectAction(newLoan)"
-					ng-options="value as value.username for value in users">
+					ng-options="value as value.username for value in users | filter:{enabled:'true'}">
 					</select>
 				</div>
 				<!-- SELECT TIME -->		

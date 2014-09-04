@@ -29,7 +29,7 @@ public class Loan implements Serializable {
     private User user;
 
     @ManyToOne
-    private BookCopy book;
+    private BookCopy bookCopy;
 
     @Column(name = "FROM_DATE")
     private Date fromDate;
@@ -41,10 +41,10 @@ public class Loan implements Serializable {
         super();
     }
 
-    public Loan(final User user, final BookCopy book, final Date fromDate, final Date toDate) {
+    public Loan(final User user, final BookCopy bookCopy, final Date fromDate, final Date toDate) {
         super();
         this.user = user;
-        this.book = book;
+        this.bookCopy = bookCopy;
         this.fromDate = fromDate;
         this.toDate = toDate;
     }
@@ -54,7 +54,7 @@ public class Loan implements Serializable {
     }
 
     public BookCopy getBook() {
-        return book;
+        return bookCopy;
     }
 
     public Date getFromDate() {
@@ -85,8 +85,8 @@ public class Loan implements Serializable {
 		this.user = user;
 	}
 
-	public void setBook(BookCopy book) {
-		this.book = book;
+	public void setBook(BookCopy bookCopy) {
+		this.bookCopy = bookCopy;
 	}
 
 	public void setFromDate(Date fromDate) {

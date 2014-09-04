@@ -25,7 +25,8 @@ import ar.com.hexacta.tpl.persistence.repository.UserRepository;
 @Repository
 public class DataInitDAO implements DataInitRepository {
 
-	private static final Logger LOG = Logger.getLogger(DataInitDAO.class.getName());
+	private static final Logger LOG = Logger.getLogger(DataInitDAO.class
+			.getName());
 
 	@Autowired
 	private BookRepository bookDAO;
@@ -35,13 +36,13 @@ public class DataInitDAO implements DataInitRepository {
 
 	@Autowired
 	private BookCategoryRepository bookCategoryDAO;
-	
+
 	@Autowired
 	private BookCopyRepository bookCopyDAO;
-	
+
 	@Autowired
 	private UserRepository userDAO;
-	
+
 	@Autowired
 	private LoanRepository loanDAO;
 
@@ -49,12 +50,12 @@ public class DataInitDAO implements DataInitRepository {
 		// Categorias
 		BookCategory eBookCategory = new BookCategoryBuilder()
 				.withName("ebook")
-				.withDescription("Libro en formato electronico").buid();
+				.withDescription("Libro en formato electronico").build();
 		bookCategoryDAO.saveOrUpdate(eBookCategory);
 
 		BookCategory physicalCategory = new BookCategoryBuilder()
 				.withName("fisico").withDescription("Libro en formato fisico")
-				.buid();
+				.build();
 		bookCategoryDAO.saveOrUpdate(physicalCategory);
 
 		// Copias
@@ -80,38 +81,29 @@ public class DataInitDAO implements DataInitRepository {
 				.withPublisher("Editorial Planeta")
 				.withCategory(physicalCategory).withCountry("EEUU")
 				.withISBN("978-0-152-16415-7")
-				.withBookCopy(bookCopy1, bookCopy2)
-				.build();
+				.withBookCopy(bookCopy1, bookCopy2).build();
 		bookDAO.saveOrUpdate(book1);
 		LOG.info("Created book " + book1.getId());
 		Book book2 = new BookBuilder().withName("El codigo Da Vinci")
 				.withDescription("Novela de misterio del escritor Dan Brown.")
-				.withPublisher("Editorial Estrada")
-				.withCountry("EEUU")
-				.withISBN("84-95618-60-5")
-				.withCategory(physicalCategory)
-				.withBookCopy(bookCopy3)
-				.build();
+				.withPublisher("Editorial Estrada").withCountry("EEUU")
+				.withISBN("84-95618-60-5").withCategory(physicalCategory)
+				.withBookCopy(bookCopy3).build();
 		bookDAO.saveOrUpdate(book2);
 		LOG.info("Created book " + book2.getId());
 
 		Book book3 = new BookBuilder().withName("El Hobbit")
 				.withDescription("Novela fantastica de J. R. R. Tolkien.")
 				.withPublisher("Editorial Atlantida")
-				.withCountry("United Kingdom")
-				.withISBN("84-450-7037-1")
-				.withCategory(eBookCategory)
-				.withBookCopy(bookCopy4)
-				.build();
+				.withCountry("United Kingdom").withISBN("84-450-7037-1")
+				.withCategory(eBookCategory).withBookCopy(bookCopy4).build();
 		bookDAO.saveOrUpdate(book3);
 		LOG.info("Created book " + book3.getId());
 
 		Book book4 = new BookBuilder().withName("Ender's Game")
 				.withDescription("Novela de ciencia ficción de Scott")
 				.withPublisher("Editorial pepin")
-				.withCategory(physicalCategory)
-				.withBookCopy(bookCopy5)
-				.build();
+				.withCategory(physicalCategory).withBookCopy(bookCopy5).build();
 		bookDAO.saveOrUpdate(book4);
 		LOG.info("Created book " + book4.getId());
 

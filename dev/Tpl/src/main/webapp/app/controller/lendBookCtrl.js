@@ -1,10 +1,6 @@
 booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $routeParams, $http) {
 	
-	$scope.books = $rootScope.books;
-	$scope.bookId = $routeParams.bookId;
-	var bookId = $scope.bookId;
-	$scope.book = null;
-	$scope.copyCode = null;
+	var bookId = $routeParams.bookId;
 	$scope.newLoan = {};
 	
 	$scope.backToHome = function(){
@@ -18,10 +14,7 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 		}).success(function(data, status, headers, config){
 			if(status == 200)
 			{
-				$rootScope.users = [];
-				$rootScope.users = data;
-				$scope.users = $rootScope.users;
-				
+				$scope.users = data;
 			}
 		}).error(function(data, status, headers, config){
 			console.log("An Error occurred while trying to get all users");
@@ -40,10 +33,9 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 		}).success(function(data, status, headers, config) {
 			if (status == 200) {
 				$scope.currentBook = data;
-				$scope.copyCode = $scope.currentBook.freeBookCopy;
 			}
 		}).error(function(data, status, headers, config){
-			console.log("An Error occurred while trying to get book:" + $scope.bookId);
+			console.log("An Error occurred while trying to get book:" + bookId);
 		});
 	}
 	$scope.loadBook();
@@ -55,14 +47,12 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 			headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
 		}).success(function(data, status, headers, config){
 			if (status == 200){
-				$scope.freeCopy = data;
 				$scope.newLoan.book = data;
 			}
 		}).error(function(data, status, headers, config){
 			console.log("An error ocurred while trying to get free copy from book: " + bookId);
 		});
 	}
-	
 	$scope.loadFreeCopy();
 	
 	$scope.saveLoan = function(newLoan){
@@ -70,7 +60,7 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 		var jsonLoan = angular.toJson(newLoan);
 		$http.post('/Tpl/rest/loans', jsonLoan).success(
 				function(data, status, headers, config){
-					if(status == 201){
+					if(status == 201 || status == 200){
 						console.log("saving complete!");
 						$scope.backToHome();
 					}

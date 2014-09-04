@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -22,7 +23,7 @@ public class Book implements Serializable {
 	private static final long serialVersionUID = 604529088687479075L;
 
 	@Id
-	@Column(name = "BOOK_ID")
+	@Column(name = "BOOK_ID", unique = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
@@ -48,15 +49,15 @@ public class Book implements Serializable {
 	@Column(name = "ENABLED")
 	private Boolean enabled;
 
-	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<BookCategory> bookCategories;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<BookCopy> bookCopies;
 
 	public Book() {
 		super();
-		this.enabled = Boolean.TRUE;
+		enabled = Boolean.TRUE;
 	}
 
 	public Book(final String name) {
@@ -69,9 +70,9 @@ public class Book implements Serializable {
 			final Set<BookCategory> bookCategories,
 			final Set<BookCopy> bookCopies) {
 		this(aName);
-		this.description = aDescription;
-		this.publisher = aPublisher;
-		this.country = aCountry;
+		description = aDescription;
+		publisher = aPublisher;
+		country = aCountry;
 		this.bookCategories = bookCategories;
 		this.bookCopies = bookCopies;
 		this.isbn = isbn;
@@ -87,7 +88,7 @@ public class Book implements Serializable {
 
 	@JsonIgnore
 	public Set<BookCopy> getBookCopies() {
-		return this.bookCopies;
+		return bookCopies;
 	}
 
 	public String getName() {
@@ -126,20 +127,20 @@ public class Book implements Serializable {
 		this.country = country;
 	}
 
-	public void setEnabled(Boolean enable) {
-		this.enabled = enable;
+	public void setEnabled(final Boolean enable) {
+		enabled = enable;
 	}
 
 	@JsonIgnore
 	public boolean getEnabled() {
-		return this.enabled;
+		return enabled;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(final Long id) {
 		this.id = id;
 	}
 
@@ -147,7 +148,7 @@ public class Book implements Serializable {
 		return version;
 	}
 
-	public void setVersion(Long version) {
+	public void setVersion(final Long version) {
 		this.version = version;
 	}
 
@@ -155,7 +156,7 @@ public class Book implements Serializable {
 		return isbn;
 	}
 
-	public void setIsbn(String isbn) {
+	public void setIsbn(final String isbn) {
 		this.isbn = isbn;
 	}
 
