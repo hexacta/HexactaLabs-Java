@@ -18,8 +18,8 @@ public class BookCopyDAO extends AbstractDAO<BookCopy> implements BookCopyReposi
 	@SuppressWarnings("unchecked")
 	public BookCopy findFreeCopy(final Long bookId) {
 		DetachedCriteria criteria = this.createCriteria();
-		criteria.add(Restrictions.eq("book.id", bookId));
-		criteria.add(Restrictions.like("state", "Free"));
+		criteria.add(Restrictions.like("book.id", bookId));
+		criteria.add(Restrictions.like("state", BookCopy.STATE_FREE));
 		List<BookCopy> result = (List<BookCopy>) this.getHibernateTemplate().findByCriteria(criteria);
 		if(result.size()==0){
 			return null;

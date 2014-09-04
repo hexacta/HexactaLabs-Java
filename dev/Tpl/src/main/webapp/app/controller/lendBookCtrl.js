@@ -60,7 +60,8 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 		var jsonLoan = angular.toJson(newLoan);
 		$http.post('/Tpl/rest/loans', jsonLoan).success(
 				function(data, status, headers, config){
-					if(status == 200){
+					if(status == 201 || status == 200){
+						console.log("saving complete!");
 						$scope.backToHome();
 					}
 				}).error(function(data,status,headers,config){

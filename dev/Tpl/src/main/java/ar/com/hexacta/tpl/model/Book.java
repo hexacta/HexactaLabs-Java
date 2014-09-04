@@ -49,7 +49,7 @@ public class Book implements Serializable {
 	@Column(name = "ENABLED")
 	private Boolean enabled;
 
-	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<BookCategory> bookCategories;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -57,7 +57,7 @@ public class Book implements Serializable {
 
 	public Book() {
 		super();
-		this.enabled = Boolean.TRUE;
+		enabled = Boolean.TRUE;
 	}
 
 	public Book(final String name) {
@@ -68,11 +68,11 @@ public class Book implements Serializable {
 	public Book(final String aName, final String aDescription,
 			final String aPublisher, final String aCountry, final String isbn,
 			final Set<BookCategory> bookCategories,
-			final Set<BookCopy> bookCopies, final Set<Comment> bookComments) {
+			final Set<BookCopy> bookCopies) {
 		this(aName);
-		this.description = aDescription;
-		this.publisher = aPublisher;
-		this.country = aCountry;
+		description = aDescription;
+		publisher = aPublisher;
+		country = aCountry;
 		this.bookCategories = bookCategories;
 		this.bookCopies = bookCopies;
 		this.isbn = isbn;
@@ -88,7 +88,7 @@ public class Book implements Serializable {
 
 	@JsonIgnore
 	public Set<BookCopy> getBookCopies() {
-		return this.bookCopies;
+		return bookCopies;
 	}
 
 	public String getName() {
@@ -127,20 +127,20 @@ public class Book implements Serializable {
 		this.country = country;
 	}
 
-	public void setEnabled(Boolean enable) {
-		this.enabled = enable;
+	public void setEnabled(final Boolean enable) {
+		enabled = enable;
 	}
 
 	@JsonIgnore
 	public boolean getEnabled() {
-		return this.enabled;
+		return enabled;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(final Long id) {
 		this.id = id;
 	}
 
@@ -148,7 +148,7 @@ public class Book implements Serializable {
 		return version;
 	}
 
-	public void setVersion(Long version) {
+	public void setVersion(final Long version) {
 		this.version = version;
 	}
 
@@ -156,7 +156,7 @@ public class Book implements Serializable {
 		return isbn;
 	}
 
-	public void setIsbn(String isbn) {
+	public void setIsbn(final String isbn) {
 		this.isbn = isbn;
 	}
 

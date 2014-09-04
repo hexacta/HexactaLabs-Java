@@ -14,6 +14,7 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 				$scope.categories[i].selected = false;
 			}
 		}
+		$scope.getBooks();
 	}).error(function(data, status, headers, config){
 		console.log("An Error occurred while trying to get all categories");
 	});
@@ -31,6 +32,7 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 	$scope.bookId = $routeParams.bookId;
 	$scope.currentBook = null;
 
+	$scope.getBooks = function(){
 	$http({
 		method : 'GET',
 		url : '/Tpl/rest/books/' + $scope.bookId,
@@ -49,6 +51,7 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 	}).error(function(data, status, headers, config){
 		console.log("An Error occurred while trying to get book:" + $scope.bookId);
 	});
+	}
     
     $scope.save = function(aBook) {
     	for (var i = 0; i < aBook.bookCategories.length; i++){
