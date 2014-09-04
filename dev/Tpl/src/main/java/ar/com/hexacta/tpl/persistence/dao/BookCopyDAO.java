@@ -2,6 +2,8 @@ package ar.com.hexacta.tpl.persistence.dao;
 
 import java.util.List;
 
+
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -25,6 +27,5 @@ public class BookCopyDAO extends AbstractDAO<BookCopy> implements BookCopyReposi
 			return result.get(0);
 		}
 	}
-
 
 }

@@ -27,14 +27,14 @@ INSERT INTO `books` VALUES (1,'EEUU','Best-seller del escritor frances Antoine d
 --
 -- Dumping data for table `books_book_categories`
 --
-
-INSERT INTO `books_book_categories` VALUES (3,1),(1,2),(2,2),(4,2);
+--
+--INSERT INTO `books_book_categories` VALUES (3,1),(1,2),(2,2),(4,2);
 
 --
 -- Dumping data for table `books_book_copies`
 --
 
-INSERT INTO `books_book_copies` VALUES (1,1),(2,3),(3,4),(4,5);
+--INSERT INTO `books_book_copies` VALUES (1,1),(2,3),(3,4),(4,5);
 
 --
 -- Dumping data for table `loans`
