@@ -46,5 +46,12 @@ public class UserDAO extends AbstractDAO<User> implements UserRepository{
 		}
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<User> findAll() {
+		DetachedCriteria criteria = createCriteria();
+		criteria.add(Restrictions.eq("enabled", true));
+		return (List<User>) getHibernateTemplate().findByCriteria(criteria);
+	}
 	
 }
