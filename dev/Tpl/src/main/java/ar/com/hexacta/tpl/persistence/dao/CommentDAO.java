@@ -30,9 +30,7 @@ public class CommentDAO extends AbstractDAO<Comment> implements
 
 	@Override
 	public void deleteById(final Serializable commentId) {
-		System.out.println("CommentDAO.deleteById( " + commentId + " )...");
 		super.deleteById(commentId);
-		System.out.println("<< OK >>");
 	}
 
 	@SuppressWarnings("unchecked")

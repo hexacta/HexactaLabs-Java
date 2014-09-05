@@ -162,7 +162,7 @@ public class LoanTest {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				dao.save(testLoan);
-				dao.delete(testLoan);
+				dao.deleteById(testLoan.getId());
 				assertTrue(dao.findAll().isEmpty());
 			}
 		});
