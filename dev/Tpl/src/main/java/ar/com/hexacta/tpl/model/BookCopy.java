@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name = "BOOK_COPIES")
 public class BookCopy implements Serializable {
@@ -95,7 +97,7 @@ public class BookCopy implements Serializable {
         this.enabled = enabled;
     }
     
-    
+    @JsonIgnore
     public Book getBook(){
     	return book;
     }

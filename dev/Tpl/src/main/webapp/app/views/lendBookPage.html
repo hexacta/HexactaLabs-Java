@@ -1,7 +1,12 @@
 <section id="lendBook">
 	<div class="container jumbotron col-md-6 col-md-offset-3"
-		ng-controller="lendBookCtrl">
-		<form novalidate name="createLoanForm" id="bookLendingForm" ng-submit="saveLoan(newLoan)">
+		ng-controller="lendBookCtrl" >
+		<div class="col-md-8 col-md-offset-2" id="feedbackPanel" ng-show="!isAvailable(newLoan)">
+		<label>Sin Copias!</label>
+		<button type="button" class="btn btn-default btn-block"	ng-click="backToHome()">Volver</button>
+		</div>
+		
+		<form novalidate name="createLoanForm" id="bookLendingForm" ng-submit="saveLoan(newLoan)" ng-show="isAvailable(newLoan)">
 			<div class="col-md-8 col-md-offset-2" id="feedbackPanel"/>
 			<fieldset>
 				<legend>Prestar libro "{{currentBook.name}}"</legend>
