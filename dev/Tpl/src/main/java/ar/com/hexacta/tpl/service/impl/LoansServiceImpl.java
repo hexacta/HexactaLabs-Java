@@ -17,11 +17,13 @@ public class LoansServiceImpl implements ILoansService {
     LoanRepository loanRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Loan> findAllLoans() {
         return loanRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Loan findLoan(final Long loanId) {
         return loanRepository.findById(loanId);
     }
@@ -48,6 +50,7 @@ public class LoansServiceImpl implements ILoansService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Loan> findLoansByBookId(final Long bookCopyId) {
         return loanRepository.findByBookId(bookCopyId);
     }

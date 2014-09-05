@@ -63,16 +63,13 @@ public class LoansWS {
     public Response createLoan(@Multipart(value = "newLoan", type = "application/json") final String jsonLoan) {
         try {
         	BookCopy copy = (parseLoan(jsonLoan)).getBook();
-        	copy = copyService.findCopy(copy.getId());
-        	copy.changeToLoaned();
-        	makeUpdate(copy, HTTP_OK);
+        	updateBookCopyState(copy);
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
         }
         return Response.ok().build();
     }
-
 
 	@PUT
     @Path("/{loanId}")
@@ -105,6 +102,12 @@ public class LoansWS {
     private Response makeUpdate(BookCopy copy, int responseCode) {
     	copyService.updateCopy(copy);
 		return Response.status(responseCode).build();
+	}
+    
+    private void updateBookCopyState(BookCopy copy) {
+		copy = copyService.findCopy(copy.getId());
+		copy.changeToLoaned();
+		makeUpdate(copy, HTTP_OK);	
 	}
 
     public ILoansService getLoanService() {
