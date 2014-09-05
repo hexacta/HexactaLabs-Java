@@ -4,11 +4,10 @@ import java.util.List;
 
 import ar.com.hexacta.tpl.model.BookCopy;
 
-
 public interface IBookCopiesService {
-	
-	List <BookCopy> findAllCopies();
-	
+
+	List<BookCopy> findAllCopies();
+
 	BookCopy findFreeCopyByBook(long bookId);
 
 	void updateCopy(final BookCopy copy);

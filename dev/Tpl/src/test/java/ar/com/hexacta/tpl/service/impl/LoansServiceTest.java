@@ -1,7 +1,7 @@
 package ar.com.hexacta.tpl.service.impl;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,7 +37,9 @@ public class LoansServiceTest {
 	public void prepare() {
 
 		loan = new Loan();
-		loan.setBook(new BookCopy());
+		BookCopy book = new BookCopy();
+		book.setId(2L);
+		loan.setBook(book);
 		loan.setUser(new User());
 		Calendar c = new GregorianCalendar(2013, 1, 1);
 		Date d1 = c.getTime();
@@ -47,25 +49,26 @@ public class LoansServiceTest {
 		loan.setToDate(d2);
 		loan.setId(1L);
 
-		List<Loan> todosLosUsuarios = new ArrayList<Loan>();
-		todosLosUsuarios.add(loan);
+		List<Loan> todosLosPrestamos = new ArrayList<Loan>();
+		todosLosPrestamos.add(loan);
 
-		// getTodosLosUsuarios
-		when(dao.findAll()).thenReturn(todosLosUsuarios);
+		// getTodosLosPrestamos
+		when(dao.findAll()).thenReturn(todosLosPrestamos);
 
-		// getUsuario
+		// getPrestamo
 		when(dao.findById(anyInt())).thenReturn(loan);
 
+		when(dao.findByBookId(anyLong())).thenReturn(todosLosPrestamos);
 	}
 
 	@Test
 	public void testFindAll() {
-		List<Loan> todosLosUsuarios = service.findAllLoans();
+		List<Loan> todosLosPrestamos = service.findAllLoans();
 
-		Assert.assertNotNull(todosLosUsuarios);
-		Assert.assertTrue(todosLosUsuarios.size() > 0);
+		Assert.assertNotNull(todosLosPrestamos);
+		Assert.assertTrue(todosLosPrestamos.size() > 0);
 
-		Assert.assertTrue(todosLosUsuarios.get(0).getId() == 1L);
+		Assert.assertTrue(todosLosPrestamos.get(0).getId().equals(1L));
 
 	}
 
@@ -80,7 +83,7 @@ public class LoansServiceTest {
 		c.add(Calendar.DATE, 1);
 		Date d2 = c.getTime();
 		Assert.assertEquals(uloan.getToDate(), d2);
-		Assert.assertTrue(uloan.getId() == 1);
+		Assert.assertTrue(uloan.getId().equals(1L));
 
 	}
 
@@ -92,7 +95,7 @@ public class LoansServiceTest {
 		Date d2 = c.getTime();
 		Loan uloan = new Loan(new User(), new BookCopy(), d1, d2);
 		service.createLoan(uloan);
-		Assert.assertNotNull(uloan);
+		verify(dao, atLeastOnce()).save(uloan);
 
 	}
 
@@ -100,21 +103,25 @@ public class LoansServiceTest {
 	public void testDeleteLoanById() {
 
 		service.deleteLoanById(1L);
-		Loan uloan = service.findLoan(1L);
-		Assert.assertNotNull(uloan);
+		verify(dao, atLeastOnce()).deleteById(1L);
 	}
 
 	@Test
 	public void testUpdateLoan() {
-		Calendar c = new GregorianCalendar(2013, 1, 1);
-		Date d1 = c.getTime();
-		c.add(Calendar.DATE, 1);
-		Date d2 = c.getTime();
-		Loan uloan = new Loan(new User(), new BookCopy(), d1, d2);
-		service.createLoan(uloan);
-		Loan uloan2 = uloan;
-		service.updateLoan(uloan2);
-		Assert.assertEquals(uloan, uloan2);
+
+		service.updateLoan(loan);
+		verify(dao, atLeastOnce()).update(loan);
+
+	}
+
+	@Test
+	public void testFindLoansByBookId() {
+		List<Loan> todosLosPrestamos = service.findLoansByBookId(2L);
+
+		Assert.assertNotNull(todosLosPrestamos);
+		Assert.assertTrue(todosLosPrestamos.size() > 0);
+
+		Assert.assertTrue(todosLosPrestamos.get(0).getBook().getId().equals(2L));
 
 	}
 }

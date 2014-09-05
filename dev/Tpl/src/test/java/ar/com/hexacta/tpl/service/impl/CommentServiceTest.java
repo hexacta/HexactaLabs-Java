@@ -1,7 +1,7 @@
 package ar.com.hexacta.tpl.service.impl;
 
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +67,7 @@ public class CommentServiceTest {
 		Assert.assertNotNull(ucomment);
 		Assert.assertEquals(ucomment.getUser(), "User");
 		Assert.assertEquals(ucomment.getBody(), "Body");
-		Assert.assertTrue(ucomment.getId() == 1);
+		Assert.assertTrue(ucomment.getId().equals(1L));
 
 	}
 
@@ -75,7 +75,7 @@ public class CommentServiceTest {
 	public void testCreateComment() {
 		Comment ucomment = new Comment(new Book(), "aUser", "aBody");
 		service.createComment(ucomment);
-		Assert.assertNotNull(ucomment);
+		verify(dao, atLeastOnce()).save(ucomment);
 
 	}
 
@@ -83,17 +83,15 @@ public class CommentServiceTest {
 	public void testDeleteCommentById() {
 
 		service.deleteCommentById(1L);
-		Comment ucomment = service.findComment(1L);
-		Assert.assertNotNull(ucomment);
+		verify(dao, atLeastOnce()).deleteById(1L);
+
 	}
 
 	@Test
 	public void testUpdateComment() {
-		Comment ucomment = new Comment(new Book(), "aUser", "aBody");
-		service.createComment(ucomment);
-		Comment ucomment2 = ucomment;
-		service.updateComment(ucomment2);
-		Assert.assertEquals(ucomment, ucomment2);
+
+		service.updateComment(comment);
+		verify(dao, atLeastOnce()).update(comment);
 
 	}
 }
