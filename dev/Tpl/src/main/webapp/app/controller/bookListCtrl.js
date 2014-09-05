@@ -25,10 +25,13 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
 	}).success(function(data, status, headers, config){
 
+		console.log(data);
+		
+		//Modal
 	$scope.modifyModal=function(book){
 		$scope.selectedBook = book;
 		$scope.selectedBook.image = "";
-
+		
 		//Getting comments
 		var bookId = $scope.selectedBook.id;
 		$http({
