@@ -98,18 +98,18 @@
 								</blockquote>
 							</div>
 							<form role="form" name="commentForm" ng-show="loggedIn" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
-								<div ng-show="loggedIn" class="form-group">
+								<div class="form-group">
 									<label for="txtCommentText">Comentario</label>
 									<textarea ng-model="comment.body" class="form-control"
 										placeholder="Escriba aqu&iacute; su comentario"
 										id="txtCommentText" required></textarea>
 								</div>
-								<div ng-show="loggedIn" class="form-group">
+								<div  class="form-group">
 									<label for="txtCommentAuthor">Email:</label> 
 									<input type="email" ng-model="comment.user" class="form-control" placeholder="ejemplo@hexacta.com" id="txtCommentAuthor" required/>
 								</div>
 								
-								<input ng-show="loggedIn" type="submit" value="Crear comentario" class="btn btn-hexacta-green btn-sm" />
+								<input  type="submit" value="Crear comentario" class="btn btn-hexacta-green btn-sm" />
 							</form>
 						</div>
 						

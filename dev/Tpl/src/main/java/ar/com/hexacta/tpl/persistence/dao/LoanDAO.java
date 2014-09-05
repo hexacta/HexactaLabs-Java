@@ -21,7 +21,7 @@ public class LoanDAO extends AbstractDAO<Loan> implements LoanRepository {
     @SuppressWarnings("unchecked")
     public List<Loan> findByBookId(final Long bookCopyId) {
         DetachedCriteria criteria = this.createCriteria();
-        criteria.add(Restrictions.eq("book.id", bookCopyId));
+        criteria.add(Restrictions.eq("bookCopy.id", bookCopyId));
         return (List<Loan>) this.getHibernateTemplate().findByCriteria(criteria);
     }
 }

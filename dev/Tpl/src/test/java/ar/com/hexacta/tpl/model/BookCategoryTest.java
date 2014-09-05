@@ -126,7 +126,7 @@ public class BookCategoryTest {
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				dao.save(testBookCategory);
 				BookCategory searchedUser = dao.findById(testBookCategory.getId());
-				assertTrue(testBookCategory == searchedUser);
+				assertTrue(testBookCategory.equals(searchedUser));
 				dao.delete(testBookCategory);
 			}
 		});

@@ -32,7 +32,7 @@ public class BookTest {
 	private static final String ISBN = "123456789";
 	private static HashSet<BookCategory> CATEGORIES;
 	private static final HashSet<BookCopy> COPIES = new HashSet<BookCopy> ();
-	private static final BookCategory CATEGORY = new BookCategory();
+	private static BookCategory CATEGORY;
 	
 	
 	private Book testBook;
@@ -62,9 +62,10 @@ public class BookTest {
 	
 	@Before
 	public void setUp(){
+		CATEGORY = new BookCategory();
 		CATEGORIES = new HashSet<BookCategory> ();
-		testBook = new Book(NAME, DESCRIPTION, PUBLISHER, COUNTRY, ISBN, CATEGORIES, COPIES);
 		CATEGORIES.add(CATEGORY);
+		testBook = new Book(NAME, DESCRIPTION, PUBLISHER, COUNTRY, ISBN, CATEGORIES, COPIES);
 		applicationContext = new ClassPathXmlApplicationContext("spring/spring-persistence-test.xml");
 		categoryDao = (BookCategoryDAO) applicationContext.getBean(BookCategoryDAO.class);
 		txManager = (PlatformTransactionManager) applicationContext.getBean(PlatformTransactionManager.class);
@@ -100,7 +101,7 @@ public class BookTest {
 		assertTrue(testBook.getPublisher().equals(PUBLISHER));
 		assertTrue(testBook.getCountry().equals(COUNTRY));
 		assertTrue(testBook.getIsbn().equals(ISBN));
-		assertTrue(testBook.getBookCategories() == CATEGORIES);
+		assertTrue(testBook.getBookCategories().equals(CATEGORIES));
 	}
 	
 	@Test
@@ -158,7 +159,7 @@ public class BookTest {
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				dao.save(testBook);
 				Book searchedBook = dao.findById(testBook.getId());
-				assertTrue(testBook == searchedBook);
+				assertTrue(testBook.equals(searchedBook));
 				dao.delete(testBook);
 			}
 		});
@@ -225,7 +226,9 @@ public class BookTest {
 				dao.save(testBook);
 				BookCategory newCategory = new BookCategory("other category", "other description");
 				categoryDao.save(newCategory);
+				
 				testBook.getBookCategories().add(newCategory);
+				
 				dao.update(testBook);
 				assertTrue(dao.findById(testBook.getId()).getBookCategories().size() == 2);
 				dao.delete(testBook);
@@ -233,5 +236,5 @@ public class BookTest {
 		});
 		
 	}
-	
+
 }
