@@ -2,9 +2,6 @@ package ar.com.hexacta.tpl.model.builder;
 
 import ar.com.hexacta.tpl.model.BookCopy;
 
-/**
- * TODO: description
- */
 public class BookCopyBuilder {
 
     private String code = "defaultCode";

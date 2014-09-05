@@ -95,7 +95,6 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
     	}) ;
 		book.bookComments = comments;
 		$scope.selectedBook.image = image;
-		book.bookComments.push($scope.comment); //FIXME: SACAR ESTO
 		$scope.loadBooks();
 		
 		$scope.comment = {};

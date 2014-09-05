@@ -3,7 +3,7 @@ package ar.com.hexacta.tpl.model.exceptions;
 import ar.com.hexacta.tpl.model.Book;
 
 /**
- * TODO: description
+ * Exception thrown then there's no book copy 
  */
 public class NoBookCopyException extends RuntimeException {
 
