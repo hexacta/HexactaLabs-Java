@@ -22,7 +22,6 @@ public class BooksServiceImpl implements IBooksService {
     @Override
     @Transactional
     public void createBook(final Book book) {
-    	// TODO: Add validation logic
         if (!validateISBN(book.getIsbn())){
         	return;
         }
@@ -45,7 +44,6 @@ public class BooksServiceImpl implements IBooksService {
     @Override
     @Transactional
     public void updateBook(final Book book) {
-        // TODO: Add validation logic
     	if (!validateISBN(book.getIsbn())){
         	return;
         }
