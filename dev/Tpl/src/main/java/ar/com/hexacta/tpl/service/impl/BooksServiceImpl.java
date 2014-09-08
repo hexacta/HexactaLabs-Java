@@ -22,7 +22,6 @@ public class BooksServiceImpl implements IBooksService {
     @Override
     @Transactional
     public void createBook(final Book book) {
-    	// TODO: Add validation logic
         if (!validateISBN(book.getIsbn())){
         	return;
         }
@@ -45,7 +44,6 @@ public class BooksServiceImpl implements IBooksService {
     @Override
     @Transactional
     public void updateBook(final Book book) {
-        // TODO: Add validation logic
     	if (!validateISBN(book.getIsbn())){
         	return;
         }
@@ -56,9 +54,9 @@ public class BooksServiceImpl implements IBooksService {
 	@Transactional(readOnly = true)
 	public List<Book> findAllBooks() {
 		// Para que no muestre libros repetidos
-		Set set = new HashSet();
+		Set<Book> set = new HashSet<Book>();
 		set.addAll(booksRepository.findAll());
-		List list = new ArrayList();
+		List<Book> list = new ArrayList<Book>();
 		list.addAll(set);
 		return list;
 	}

@@ -52,7 +52,6 @@ booksApp.directive('userLogin',function() {
 						  
 			}
 				
-			// TODO: Use angular validation
 			function test(name, pass) {
 				
 				pass = (typeof pass === 'undefined') ? ' ' : pass;

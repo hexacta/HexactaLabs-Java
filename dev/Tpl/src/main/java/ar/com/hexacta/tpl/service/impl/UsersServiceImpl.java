@@ -85,7 +85,6 @@ public class UsersServiceImpl implements IUsersService {
 				return false;
 			}
 		}
-		//TODO: ver si hay mas validaciones para hacer
 		return true;
 	}
 	
@@ -96,7 +95,6 @@ public class UsersServiceImpl implements IUsersService {
 		if (password.contains(":")){
 			return false;
 		}
-		//TODO: ver si hay mas validaciones para hacer
 		return true;
 	}
 	

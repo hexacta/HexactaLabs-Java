@@ -1,7 +1,7 @@
 package ar.com.hexacta.tpl.model.exceptions;
 
 /**
- * TODO: description
+ * Exception thrown when maximum number of Loans its being exceeded 
  */
 public class MaximumLoansException extends RuntimeException {
 
