@@ -18,16 +18,4 @@ public interface ICommentService {
 
 	List<Comment> findCommentsByBookId(Long bookId);
 
-	/*
-	 * List<Comment> findCommentsByBookId(Long bookId);
-	 * 
-	 * // List<Comment> findCommentsByBook(Book book);
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * void deleteComment(final Comment comment);
-	 */
 }

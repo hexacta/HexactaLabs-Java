@@ -104,4 +104,13 @@ public class BookServiceTest {
 		service.updateBook(book);
 		verify(dao, atLeastOnce()).save(book);
 	}
+
+	@Test
+	public void testVerifyIsbn() {
+		Assert.assertTrue(service.validateISBN("123"));
+		Assert.assertTrue(service.validateISBN("1-2-3"));
+		Assert.assertFalse(service.validateISBN(""));
+		Assert.assertFalse(service.validateISBN("1asd2"));
+
+	}
 }

@@ -50,6 +50,7 @@ public class BookCopiesServiceTest {
 		// getUsuario
 		when(dao.findFreeCopy(anyLong())).thenReturn(bookcopy);
 
+		when(dao.findById(anyLong())).thenReturn(bookcopy);
 	}
 
 	@Test

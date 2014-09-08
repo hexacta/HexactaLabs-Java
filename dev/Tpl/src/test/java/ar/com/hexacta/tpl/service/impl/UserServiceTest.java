@@ -98,4 +98,24 @@ public class UserServiceTest {
 		service.updateUser(user);
 		verify(dao, atLeastOnce()).update(user);
 	}
+
+	@Test
+	public void testValidateUser() {
+		Assert.assertTrue(service.validateUser(user));
+	}
+
+	@Test
+	public void testValidateUsername() {
+		Assert.assertTrue(service.validateUsername("user", null));
+		Assert.assertFalse(service.validateUsername("sa", null));
+		Assert.assertFalse(service.validateUsername("Az$%@sa", null));
+	}
+
+	@Test
+	public void testValidatePassword() {
+		Assert.assertFalse(service.validatePassword("pa:sswd"));
+		Assert.assertFalse(service.validatePassword("sasa"));
+		Assert.assertTrue(service.validatePassword("password"));
+		Assert.assertTrue(service.validatePassword("Az$%@sa"));
+	}
 }
