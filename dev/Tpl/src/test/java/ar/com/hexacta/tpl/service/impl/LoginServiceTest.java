@@ -52,6 +52,6 @@ public class LoginServiceTest {
 		Assert.assertEquals(ulogin.getUsername(), "Username");
 		Assert.assertEquals(ulogin.getPassword(), "Password");
 		Assert.assertEquals(ulogin.getEmail(), "Email");
-		Assert.assertTrue(ulogin.getId() == 1);
+		Assert.assertTrue(ulogin.getId().equals(1L));
 	}
 }

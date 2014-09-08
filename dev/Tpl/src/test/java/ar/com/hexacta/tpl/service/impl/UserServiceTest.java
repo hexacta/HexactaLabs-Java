@@ -1,7 +1,7 @@
 package ar.com.hexacta.tpl.service.impl;
 
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,6 @@ public class UserServiceTest {
 
 		Assert.assertNotNull(todosLosUsuarios);
 		Assert.assertTrue(todosLosUsuarios.size() > 0);
-
 		Assert.assertEquals(todosLosUsuarios.get(0).getEmail(), "Email");
 
 	}
@@ -67,7 +66,7 @@ public class UserServiceTest {
 		Assert.assertEquals(uuser.getUsername(), "username");
 		Assert.assertEquals(uuser.getPassword(), "Password");
 		Assert.assertEquals(uuser.getEmail(), "Email");
-		Assert.assertTrue(uuser.getId() == 1);
+		Assert.assertTrue(uuser.getId().equals(1L));
 
 	}
 
@@ -75,7 +74,7 @@ public class UserServiceTest {
 	public void testCreateUser() {
 		User uuser = new User("aUsername", "aPassword", "aEmail");
 		service.createUser(uuser);
-		Assert.assertNotNull(uuser);
+		verify(dao, atLeastOnce()).save(uuser);
 
 	}
 
@@ -83,24 +82,20 @@ public class UserServiceTest {
 	public void testDeleteUserById() {
 
 		service.deleteUserById(1L);
-		User uuser = service.findUser(1L);
-		Assert.assertNotNull(uuser);
+		verify(dao, atLeastOnce()).deleteById(1L);
 	}
 
 	@Test
 	public void testDeleteUser() {
 
-		User uuser = new User();
-		service.deleteUser(uuser);
-		Assert.assertNotNull(uuser);
+		service.deleteUser(user);
+		verify(dao, atLeastOnce()).delete(user);
 	}
 
 	@Test
 	public void testUpdateUser() {
-		User uuser = new User("username", "aPassword", "aEmail");
-		service.createUser(uuser);
-		User uuser2 = uuser;
-		service.updateUser(uuser2);
-		Assert.assertEquals(uuser, uuser2);
+
+		service.updateUser(user);
+		verify(dao, atLeastOnce()).update(user);
 	}
 }
