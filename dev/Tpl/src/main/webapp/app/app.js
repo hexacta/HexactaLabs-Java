@@ -5,7 +5,6 @@ booksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
 	$routeProvider.
 		when('/' , {	
 			templateUrl: 'app/views/bookListPage.html',
-			controller: 'bookListCtrl',
 			publicAccess: true
 		}).
 	   	when('/createBook' , { 

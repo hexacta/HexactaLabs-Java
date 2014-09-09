@@ -77,7 +77,7 @@ public class CommentTest {
 	@Test
 	@Transactional(readOnly = true)
 	public void testParameterCretion(){
-		assertTrue(testComment.getBook() == testBook);
+		assertTrue(testComment.getBook().equals(testBook));
 		assertTrue(testComment.getBody().equals(testBody));
 		assertTrue(testComment.getUser().equals(testUser));
 	}
@@ -137,7 +137,7 @@ public class CommentTest {
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				dao.save(testComment);
 				Comment searchedComment = dao.findById(testComment.getId());
-				assertTrue(testComment == searchedComment);
+				assertTrue(testComment.equals(searchedComment));
 				dao.delete(testComment);
 			}
 		});

@@ -1,7 +1,7 @@
 package ar.com.hexacta.tpl.service.impl;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,29 +34,31 @@ public class CommentServiceTest {
 
 		comment = new Comment();
 		comment.setBook(new Book());
+		comment.getBook().setId(1L);
 		comment.setUser("User");
 		comment.setBody("Body");
 		comment.setId(1L);
 
-		List<Comment> todosLosUsuarios = new ArrayList<Comment>();
-		todosLosUsuarios.add(comment);
+		List<Comment> todosLosComentarios = new ArrayList<Comment>();
+		todosLosComentarios.add(comment);
 
-		// getTodosLosUsuarios
-		when(dao.findAll()).thenReturn(todosLosUsuarios);
+		// getTodosLosComentarios
+		when(dao.findAll()).thenReturn(todosLosComentarios);
 
-		// getUsuario
+		// getComentario
 		when(dao.findById(anyInt())).thenReturn(comment);
+
+		when(dao.findByBookId(anyLong())).thenReturn(todosLosComentarios);
 
 	}
 
 	@Test
 	public void testFindAll() {
-		List<Comment> todosLosUsuarios = service.findAllComments();
+		List<Comment> todosLosComentarios = service.findAllComments();
 
-		Assert.assertNotNull(todosLosUsuarios);
-		Assert.assertTrue(todosLosUsuarios.size() > 0);
-
-		Assert.assertEquals(todosLosUsuarios.get(0).getUser(), "User");
+		Assert.assertNotNull(todosLosComentarios);
+		Assert.assertTrue(todosLosComentarios.size() > 0);
+		Assert.assertEquals(todosLosComentarios.get(0).getUser(), "User");
 
 	}
 
@@ -67,7 +69,19 @@ public class CommentServiceTest {
 		Assert.assertNotNull(ucomment);
 		Assert.assertEquals(ucomment.getUser(), "User");
 		Assert.assertEquals(ucomment.getBody(), "Body");
-		Assert.assertTrue(ucomment.getId() == 1);
+		Assert.assertTrue(ucomment.getId().equals(1L));
+
+	}
+
+	@Test
+	public void testFindCommentsByBookId() {
+		List<Comment> todosLosComentarios = service.findCommentsByBookId(1L);
+
+		Assert.assertNotNull(todosLosComentarios);
+		Assert.assertTrue(todosLosComentarios.size() > 0);
+		Assert.assertEquals(todosLosComentarios.get(0).getUser(), "User");
+		Assert.assertTrue(todosLosComentarios.get(0).getBook().getId()
+				.equals(1L));
 
 	}
 
@@ -75,7 +89,7 @@ public class CommentServiceTest {
 	public void testCreateComment() {
 		Comment ucomment = new Comment(new Book(), "aUser", "aBody");
 		service.createComment(ucomment);
-		Assert.assertNotNull(ucomment);
+		verify(dao, atLeastOnce()).save(ucomment);
 
 	}
 
@@ -83,17 +97,15 @@ public class CommentServiceTest {
 	public void testDeleteCommentById() {
 
 		service.deleteCommentById(1L);
-		Comment ucomment = service.findComment(1L);
-		Assert.assertNotNull(ucomment);
+		verify(dao, atLeastOnce()).deleteById(1L);
+
 	}
 
 	@Test
 	public void testUpdateComment() {
-		Comment ucomment = new Comment(new Book(), "aUser", "aBody");
-		service.createComment(ucomment);
-		Comment ucomment2 = ucomment;
-		service.updateComment(ucomment2);
-		Assert.assertEquals(ucomment, ucomment2);
+
+		service.updateComment(comment);
+		verify(dao, atLeastOnce()).update(comment);
 
 	}
 }

@@ -86,10 +86,10 @@ public class LoanTest {
 	@Test
 	@Transactional(readOnly = true)
 	public void testParameterCretion(){
-		assertTrue(testLoan.getBook() == testCopy);
-		assertTrue(testLoan.getFromDate() == initDate);
-		assertTrue(testLoan.getToDate() == endDate);
-		assertTrue(testLoan.getUser() == testUser);
+		assertTrue(testLoan.getBook().equals(testCopy));
+		assertTrue(testLoan.getFromDate().equals(initDate));
+		assertTrue(testLoan.getToDate().equals(endDate));
+		assertTrue(testLoan.getUser().equals(testUser));
 	}
 	
 	@Test
@@ -148,7 +148,7 @@ public class LoanTest {
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
 				dao.save(testLoan);
 				Loan searchedLoan = dao.findById(testLoan.getId());
-				assertTrue(testLoan == searchedLoan);
+				assertTrue(testLoan.equals(searchedLoan));
 				dao.delete(testLoan);
 			}
 		});
@@ -200,7 +200,7 @@ public class LoanTest {
 				searchedLoan.setToDate(otherDate);
 				dao.update(searchedLoan);
 				Loan updatedLoan = dao.findById(testLoan.getId());
-				assertTrue(updatedLoan.getToDate() == otherDate);
+				assertTrue(updatedLoan.getToDate().equals(otherDate));
 				dao.delete(testLoan);
 			}
 		});

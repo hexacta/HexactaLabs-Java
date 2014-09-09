@@ -19,16 +19,14 @@ public class BooksServiceImpl implements IBooksService {
 	@Autowired
 	private BookRepository booksRepository;
 
-    @Override
-    @Transactional
-    public void createBook(final Book book) {
-    	// TODO: Add validation logic
-        if (!validateISBN(book.getIsbn())){
-        	return;
-        }
-        	
-        booksRepository.save(book);
-    }
+	@Override
+	@Transactional
+	public void createBook(final Book book) {
+		if (!validateISBN(book.getIsbn()))
+			return;
+
+		booksRepository.save(book);
+	}
 
 	@Override
 	@Transactional
@@ -42,23 +40,21 @@ public class BooksServiceImpl implements IBooksService {
 		booksRepository.deleteById(bookId);
 	}
 
-    @Override
-    @Transactional
-    public void updateBook(final Book book) {
-        // TODO: Add validation logic
-    	if (!validateISBN(book.getIsbn())){
-        	return;
-        }
-        booksRepository.save(book);
-    }
-    
+	@Override
+	@Transactional
+	public void updateBook(final Book book) {
+		if (!validateISBN(book.getIsbn()))
+			return;
+		booksRepository.save(book);
+	}
+
 	@Override
 	@Transactional(readOnly = true)
 	public List<Book> findAllBooks() {
 		// Para que no muestre libros repetidos
-		Set set = new HashSet();
+		Set<Book> set = new HashSet<Book>();
 		set.addAll(booksRepository.findAll());
-		List list = new ArrayList();
+		List<Book> list = new ArrayList<Book>();
 		list.addAll(set);
 		return list;
 	}
@@ -73,7 +69,7 @@ public class BooksServiceImpl implements IBooksService {
 		booksRepository = bookRepository;
 	}
 
-	private boolean validateISBN(final String isbn) {
+	public boolean validateISBN(final String isbn) {
 		if (isbn.isEmpty())
 			return false;
 		if (!isbn.matches("^[0-9\\-]*"))

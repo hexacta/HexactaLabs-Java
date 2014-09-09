@@ -34,9 +34,7 @@ booksApp.controller('viewController', function($scope, $http, $rootScope, $sessi
 			headers : {'Authorization' : 'Basic ' + encoded, 'Accept' : 'application/json'}
 		}).success(function(data, status, headers, config){
 			if(status == 200){
-				//TODO:
 				$sessionStorage.user = JSON.stringify(data);
-				//$sessionStorage.loggedIn = true;
 				$scope.usuario = "Bienvenido: " + JSON.parse($sessionStorage.user).username + "!"; 
 				$rootScope.loggedIn = true;
 				$scope.invalidLogin = false;

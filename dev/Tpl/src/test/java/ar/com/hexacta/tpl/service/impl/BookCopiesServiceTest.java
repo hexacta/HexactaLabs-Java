@@ -1,7 +1,7 @@
 package ar.com.hexacta.tpl.service.impl;
 
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,9 @@ public class BookCopiesServiceTest {
 	public void prepare() {
 
 		bookcopy = new BookCopy();
-		bookcopy.setBook(new Book());
+		Book book = new Book();
+		book.setId(2L);
+		bookcopy.setBook(book);
 		bookcopy.setCode("Code");
 		bookcopy.setBookRate("Good");
 		bookcopy.changeToFree();
@@ -48,6 +50,7 @@ public class BookCopiesServiceTest {
 		// getUsuario
 		when(dao.findFreeCopy(anyLong())).thenReturn(bookcopy);
 
+		when(dao.findById(anyLong())).thenReturn(bookcopy);
 	}
 
 	@Test
@@ -62,12 +65,31 @@ public class BookCopiesServiceTest {
 
 	@Test
 	public void testFindFreeCopyById() {
-		BookCopy ubookcopy = service.findFreeCopyByBook(1L);
+		BookCopy ubookcopy = service.findFreeCopyByBook(2L);
 
 		Assert.assertNotNull(ubookcopy);
 		Assert.assertEquals(ubookcopy.getCode(), "Code");
 		Assert.assertEquals(ubookcopy.getState(), "Free");
 		Assert.assertEquals(ubookcopy.getBookRate(), "Good");
-		Assert.assertTrue(ubookcopy.getId() == 1);
+		Assert.assertTrue(ubookcopy.getBook().getId().equals(2L));
+		Assert.assertTrue(ubookcopy.getId().equals(1L));
+	}
+
+	@Test
+	public void testFindCopyById() {
+		BookCopy ubookcopy = service.findCopy(1L);
+		verify(dao, atLeastOnce()).findById(1L);
+		Assert.assertNotNull(ubookcopy);
+		Assert.assertEquals(ubookcopy.getCode(), "Code");
+		Assert.assertEquals(ubookcopy.getState(), "Free");
+		Assert.assertEquals(ubookcopy.getBookRate(), "Good");
+		Assert.assertTrue(ubookcopy.getId().equals(1L));
+	}
+
+	@Test
+	public void testUpdateCopy() {
+		service.updateCopy(bookcopy);
+		verify(dao, atLeastOnce()).saveOrUpdate(bookcopy);
+
 	}
 }
