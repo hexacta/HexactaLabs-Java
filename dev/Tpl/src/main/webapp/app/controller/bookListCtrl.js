@@ -25,7 +25,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	}).success(function(data, status, headers, config){
 		
 		//Cargo los libros en el scope
-		$scope.loadBooks = function(){
+		//$scope.loadBooks = function(){
 			$rootScope.books = [];
 			$rootScope.books = data;
 			$scope.books = $rootScope.books;
@@ -33,60 +33,31 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 			$scope.reverse = false;
 			
 			$scope.comment = {};
-		}
-		$scope.loadBooks();
+		//}
+		//$scope.loadBooks();
 		
 		//Getting availables copies
 		$scope.availableBook = [];
-		$scope.copy = [];
 		
 		$scope.getCopies = function(){
 			angular.forEach($scope.books, function(value, key){
+				$scope.books[value.id-1].isAvailable = false;
 				$http({
 					method: 'GET',
 					url : '/Tpl/rest/copies/book/' + value.id,
 					headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
 				}).success(function(data, status, headers, config){
-					if (status == 200 || status == 204){
-						$scope.copy = data;
-						if(angular.equals($scope.copy.state, "free")){
-							$scope.availableBook.push($scope.copy);
-						}
+					if (status == 200){
+						$scope.books[value.id-1].isAvailable = true; 
 					}
 				}).error(function(data, status, headers, config){
 					console.log("An error ocurred while trying to get copies");
 				});
-				console.log($scope.availableBook);
-			});	
-		}
-
-		$scope.getCopies();
-		
-		
-		/*
-		$scope.copies = [];
-		$scope.getCopies = function(){
-			$http({
-				method: 'GET',
-				url : '/Tpl/rest/copies',
-				headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
-			}).success(function(data, status, headers, config){
-				if (status == 200 || status == 204){
-					$scope.copies = data;
-					$scope.getAvailables();
-				}
-			}).error(function(data, status, headers, config){
-				console.log("An error ocurred while trying to get copies");
 			});
-		}
+		};
 		$scope.getCopies();
-		$scope.getAvailables = function(){
-			angular.forEach($scope.copies, function(value, key){
-				if( angular.equals(value.state, "Free")){
-				
-			});
-		}
-	*/
+		console.log($scope.books);
+	
 		
 		//Modal
 		$scope.modifyModal=function(book){

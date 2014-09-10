@@ -58,7 +58,10 @@
 								<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToDeleteBook(book.id)">Borrar</button>
 							</td>
 							<td ng-show="loggedIn">
-								<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToLendBook(book.id)">Prestar</button>
+								<button type="button" class="btn btn-hexacta-green btn-sm" ng-class="{'btn-warn':!book.isAvailable}" 
+								ng-click="{book.isAvailable ? linkToLendBook(book.id)}" text="Prestar">
+								{{book.isAvailable ? 'Prestar' : 'Sin copias'}}
+								</button>
 							</td>
 							
 							<!-- End Buttons -->
