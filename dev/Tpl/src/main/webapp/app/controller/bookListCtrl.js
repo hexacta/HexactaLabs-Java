@@ -25,20 +25,16 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	}).success(function(data, status, headers, config){
 		
 		//Cargo los libros en el scope
-		//$scope.loadBooks = function(){
-			$rootScope.books = [];
-			$rootScope.books = data;
-			$scope.books = $rootScope.books;
-			$scope.predicate = 'name';
-			$scope.reverse = false;
-			
-			$scope.comment = {};
-		//}
-		//$scope.loadBooks();
+		$rootScope.books = [];
+		$rootScope.books = data;
+		$scope.books = $rootScope.books;
+		$scope.predicate = 'name';
+		$scope.reverse = false;
+		
+		$scope.comment = {};
+
 		
 		//Getting availables copies
-		$scope.availableBook = [];
-		
 		$scope.getCopies = function(){
 			angular.forEach($scope.books, function(value, key){
 				$scope.books[value.id-1].isAvailable = false;
@@ -56,7 +52,8 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 			});
 		};
 		$scope.getCopies();
-		console.log($scope.books);
+		
+		
 	
 		
 		//Modal

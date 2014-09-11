@@ -52,8 +52,8 @@ fieldset[disabled] .btn-hexacta-primary:active,
 .btn-hexacta-primary.disabled.active,
 .btn-hexacta-primary[disabled].active,
 fieldset[disabled] .btn-hexacta-primary.active {
-  background-color: #00CCBB;
-  border-color: #00BAAB;
+  background-color: gray;
+  border-color: gray;
 }
 
 .btn-hexacta-green {
@@ -61,6 +61,7 @@ fieldset[disabled] .btn-hexacta-primary.active {
   color: #fff;
   background-color: #228B22;
   border-color: #007500;
+  width: 90%;
 }
 
 .btn-hexacta-green:hover,
@@ -90,8 +91,8 @@ fieldset[disabled] .btn-hexacta-green:active,
 .btn-hexacta-green.disabled.active,
 .btn-hexacta-green[disabled].active,
 fieldset[disabled] .btn-hexacta-green.active {
-  background-color: #00CCBB;
-  border-color: #00BAAB;
+  background-color: #808080;
+  border-color:#606060;
 }
 
 button:active {
