@@ -101,6 +101,10 @@ public class BookCopy implements Serializable {
     public Book getBook(){
     	return book;
     }
+    
+    public Long getBookId(){
+    	return this.book.getId();
+    }
     public void setBook(final Book book){
     	this.book = book;
     }

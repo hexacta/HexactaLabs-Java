@@ -49,7 +49,6 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 			if (status == 200 || status == 204){
 				$scope.newLoan.book = data;
 				$scope.isAvailable($scope.newLoan.book);
-				console.log($scope.newLoan.book);
 			}
 		}).error(function(data, status, headers, config){
 			console.log("An error ocurred while trying to get free copy from book: " + bookId);
@@ -72,7 +71,6 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 	};
 	
 	$scope.isAvailable = function(bookCopy){
-		console.log(angular.isUndefined(bookCopy));
 		return angular.isDefined(bookCopy);
 	}
 	

@@ -33,10 +33,10 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		
 		$scope.comment = {};
 
-		
 		//Getting availables copies
 		$scope.getCopies = function(){
 			angular.forEach($scope.books, function(value, key){
+				
 				$scope.books[value.id-1].isAvailable = false;
 				$http({
 					method: 'GET',
@@ -52,9 +52,6 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 			});
 		};
 		$scope.getCopies();
-		
-		
-	
 		
 		//Modal
 		$scope.modifyModal=function(book){
