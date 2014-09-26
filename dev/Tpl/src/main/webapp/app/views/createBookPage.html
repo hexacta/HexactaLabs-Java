@@ -31,29 +31,18 @@
 						ng-required="true" id="isbn" ng-minlength="1" ng-pattern="/^[0-9\-]*$/"/>
 
 				</div>			
-				<!-- SELECT PAISES -->
+				<!-- SELECT GENERO -->
 				<div class="form-group">
-					<label class="">Pa&iacute;s: </label> <select class="form-control"
-						ng-model="newBook.country" ng-required="true">
-						<option>Argentina</option>
-						<option>Brasil</option>
-						<option>EEUU</option>
-						<option>Inglaterra</option>
-						<option>Uruguay</option>
+					<label class="">G&eacute;nero: </label> <select class="form-control"
+						ng-model="newBook.genre" ng-required="true">
+							<option>FABLE</option>
+							<option>CRIME</option>
+							<option>FANTASY</option>
+							<option>CRIME</option>
+							<option>MYSTERY</option>
 					</select>
 				</div>
-
-				<!-- CHECKBOX CATEGORIAS 
-				<div class="form-group">
-					<label class="">Categorias:</label>
-					<div class="col-md-8 col-md-offset-2 checkbox">
-						<label class="checkbox-inline"><input class=""
-							id="selectCheckBox1" type="checkbox" /> eBook</label> <label
-							class="checkbox-inline"><input class=""
-							id="selectCheckBox2" type="checkbox" /> F&iacute;sico</label>
-					</div>
-				</div>-->
-				
+				<!-- CHECKBOX CATEGORIAS -->
 				<div class="form-group">
 					<label class=""> Categorias:</label>
 					<div class="col-md-8 col-md-offset-2 checkbox" ng-repeat="category in categories">
@@ -63,7 +52,6 @@
 						{{category.name}}<br/>
 						</label>
 					</div>
-					
 				</div>
 				<!-- BOTONES -->
 				<div class="col-md-8 col-md-offset-2">
@@ -73,8 +61,6 @@
 					<button type="button" class="btn btn-default btn-block"
 						ng-click="backToHome()">Volver</button>
 				</div>
-
-
 			</fieldset>
 		</form>
 	</div>

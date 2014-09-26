@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,144 +22,143 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 @Table(name = "BOOKS")
 public class Book implements Serializable {
-	private static final long serialVersionUID = 604529088687479075L;
+    private static final long serialVersionUID = 604529088687479075L;
 
-	@Id
-	@Column(name = "BOOK_ID", unique = true)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "BOOK_ID", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Version
-	@Column(name = "VERSION")
-	private Long version;
+    @Column(name = "NAME")
+    private String name;
 
-	@Column(name = "NAME")
-	private String name;
+    @Column(name = "DESCRIPTION")
+    private String description;
 
-	@Column(name = "DESCRIPTION")
-	private String description;
+    @Column(name = "PUBLISHER")
+    private String publisher;
 
-	@Column(name = "PUBLISHER")
-	private String publisher;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "GENRE")
+    private BookGenre genre;
 
-	@Column(name = "COUNTRY")
-	private String country;
+    @Column(name = "ISBN")
+    private String isbn;
 
-	@Column(name = "ISBN")
-	private String isbn;
+    @Column(name = "ENABLED")
+    private Boolean enabled;
 
-	@Column(name = "ENABLED")
-	private Boolean enabled;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<BookCategory> bookCategories;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<BookCategory> bookCategories;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<BookCopy> bookCopies;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<BookCopy> bookCopies;
+    // Needed for "optimistic model" in Oracle databases
+    @Version
+    @Column(name = "VERSION")
+    private Long version;
 
-	public Book() {
-		super();
-		enabled = Boolean.TRUE;
-	}
+    public Book() {
+        super();
+        enabled = Boolean.TRUE;
+    }
 
-	public Book(final String name) {
-		this();
-		this.name = name;
-	}
+    public Book(final String name) {
+        this();
+        this.name = name;
+    }
 
-	public Book(final String aName, final String aDescription,
-			final String aPublisher, final String aCountry, final String isbn,
-			final Set<BookCategory> bookCategories,
-			final Set<BookCopy> bookCopies) {
-		this(aName);
-		description = aDescription;
-		publisher = aPublisher;
-		country = aCountry;
-		this.bookCategories = bookCategories;
-		this.bookCopies = bookCopies;
-		this.isbn = isbn;
-	}
+    public Book(final String aName, final String aDescription, final String aPublisher, final BookGenre aBookGenre,
+            final String isbn, final Set<BookCategory> bookCategories, final Set<BookCopy> bookCopies) {
+        this(aName);
+        description = aDescription;
+        publisher = aPublisher;
+        genre = aBookGenre;
+        this.bookCategories = bookCategories;
+        this.bookCopies = bookCopies;
+        this.isbn = isbn;
+    }
 
-	public Set<BookCategory> getBookCategories() {
-		return bookCategories;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
-	@JsonIgnore
-	public Set<BookCopy> getBookCopies() {
-		return bookCopies;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setName(final String name) {
+        this.name = name;
+    }
 
-	public String getPublisher() {
-		return publisher;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setBookCategories(final Set<BookCategory> bookCategories) {
-		this.bookCategories = bookCategories;
-	}
+    public void setDescription(final String description) {
+        this.description = description;
+    }
 
-	public void setBookCopies(final Set<BookCopy> bookCopies) {
-		this.bookCopies = bookCopies;
-	}
+    public String getPublisher() {
+        return publisher;
+    }
 
-	public void setDescription(final String description) {
-		this.description = description;
-	}
+    public void setPublisher(final String publisher) {
+        this.publisher = publisher;
+    }
 
-	public void setName(final String name) {
-		this.name = name;
-	}
+    public BookGenre getGenre() {
+        return genre;
+    }
 
-	public void setPublisher(final String publisher) {
-		this.publisher = publisher;
-	}
+    public void setGenre(final BookGenre genre) {
+        this.genre = genre;
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public String getIsbn() {
+        return isbn;
+    }
 
-	public void setCountry(final String country) {
-		this.country = country;
-	}
+    public void setIsbn(final String isbn) {
+        this.isbn = isbn;
+    }
 
-	public void setEnabled(final Boolean enable) {
-		enabled = enable;
-	}
+    @JsonIgnore
+    public boolean getEnabled() {
+        return enabled;
+    }
 
-	@JsonIgnore
-	public boolean getEnabled() {
-		return enabled;
-	}
+    public void setEnabled(final Boolean enable) {
+        enabled = enable;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Set<BookCategory> getBookCategories() {
+        return bookCategories;
+    }
 
-	public void setId(final Long id) {
-		this.id = id;
-	}
+    public void setBookCategories(final Set<BookCategory> bookCategories) {
+        this.bookCategories = bookCategories;
+    }
 
-	public Long getVersion() {
-		return version;
-	}
+    @JsonIgnore
+    public Set<BookCopy> getBookCopies() {
+        return bookCopies;
+    }
 
-	public void setVersion(final Long version) {
-		this.version = version;
-	}
+    public void setBookCopies(final Set<BookCopy> bookCopies) {
+        this.bookCopies = bookCopies;
+    }
 
-	public String getIsbn() {
-		return isbn;
-	}
+    public Long getVersion() {
+        return version;
+    }
 
-	public void setIsbn(final String isbn) {
-		this.isbn = isbn;
-	}
-
+    public void setVersion(final Long version) {
+        this.version = version;
+    }
 }
