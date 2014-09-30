@@ -1,6 +1,6 @@
 <section id="createBook">
 	<div class="container jumbotron col-md-6 col-md-offset-3">
-		<form name="createBookForm" id="createBookForm" ng-submit="save(newBook)" ng-class="{submitted:trySubmit}" novalidate>
+		<form name="createBookForm" ng-submit="save(newBook)" ng-class="{submitted:trySubmit}" novalidate>
 			<div class="col-md-8 col-md-offset-2" id="feedbackPanel" />
 			<fieldset>
 				<legend> Crear nuevo libro </legend>
@@ -8,13 +8,13 @@
 				<div class="form-group">
 					<label class="control-label">T&iacute;tulo: </label> <input
 						type="text" name="name" class="form-control" ng-model="newBook.name"
-						ng-required="true" id="name" maxlength="150" />
+						ng-required="true" maxlength="150" />
 					<div class="alert alert-danger" role="alert" ng-show="trySubmit && createBookForm.name.$error.required"> Este campo es <strong>obligatorio</strong> </div>
 				</div>
 				<!-- DESCRIPCION -->
 				<div class="form-group">
 					<label class="control-label">Descripci&oacute;n: </label>
-					<textarea rows="3" name="description" id="description" class="form-control noResize"
+					<textarea rows="3" name="description" class="form-control noResize"
 						ng-model="newBook.description" ng-required="true"> </textarea>
 					<div class="alert alert-danger" role="alert" ng-show="trySubmit && createBookForm.description.$error.required"> Este campo es <strong>obligatorio</strong> </div>										
 				</div>
@@ -22,14 +22,14 @@
 				<div class="form-group">
 					<label class="control-label">Editorial: </label> <input type="text"
 						name="publisher" class="form-control" ng-model="newBook.publisher"
-						ng-required="true" id="publisher" />
+						ng-required="true"/>
 					<div class="alert alert-danger" role="alert" ng-show="trySubmit && createBookForm.publisher.$error.required"> Este campo es <strong>obligatorio</strong> </div>
 				</div>
 				<!-- ISBN -->
 				<div class="form-group">
 					<label class="control-label">ISBN: </label> <input type="text"
 						name="isbn"	class="form-control" ng-model="newBook.isbn"
-						ng-required="true" id="isbn" ng-minlength="1" ng-pattern="/^[0-9\-]*$/"/>
+						ng-required="true" ng-minlength="1" ng-pattern="/^[0-9\-]*$/"/>
 						<div class="alert alert-danger" role="alert" ng-show="trySubmit && createBookForm.isbn.$error.required"> Este campo es <strong>obligatorio</strong> </div>
 				</div>			
 				<!-- SELECT GENERO -->
