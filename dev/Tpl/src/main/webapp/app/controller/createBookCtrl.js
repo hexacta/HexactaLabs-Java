@@ -14,7 +14,18 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 		console.log("An Error occurred while trying to get all categories");
 	});
 	
+	//Funcion que valida los datos cargados para el nuevo libro. Lo primero que hace es verificar el estado
+	//de los datos, en caso de que alguno sea incorrecto, devuelve falso sin hacer nada.
 	$scope.save = function(aBook) {
+		
+		console.log("Form submit control");
+		console.log($scope.createBookForm);
+		$scope.trySubmit = true;
+		
+		if ($scope.createBookForm.$invalid) {
+			return false;
+		}		
+		
 		for (var i = 0; i < aBook.bookCategories.length; i++){
 			delete aBook.bookCategories[i].selected;
 		}
