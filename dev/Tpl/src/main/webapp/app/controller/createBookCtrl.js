@@ -17,8 +17,6 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 	//This function saves the new book manually created by the admin into the database, but first
 	//it checks the validity of the data input in the form.
 	$scope.save = function(aBook) {
-		
-		console.log("Form submit control");
 		$scope.trySubmit = true;
 		
 		if ($scope.createBookForm.$invalid) {
@@ -29,7 +27,6 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 			delete aBook.bookCategories[i].selected;
 		}
 		var jsonBook = angular.toJson(aBook);
-		console.log(jsonBook );
 		$http.post('/Tpl/rest/books', jsonBook).success(
 				function(data, status, headers, config) {
 
