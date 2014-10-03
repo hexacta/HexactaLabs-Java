@@ -18,7 +18,6 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		$location.path("/register");
 	};
 	
-	
 	$http({
 		method : 'GET',
 		url: '/Tpl/rest/books',
