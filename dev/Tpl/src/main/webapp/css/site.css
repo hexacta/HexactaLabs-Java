@@ -111,16 +111,13 @@ textarea.vert { resize:vertical; }
 textarea.noResize { resize:none; }
 
 /* PARA VALIDACIONES CON ANGULARJS */
-input.ng-invalid.ng-dirty {
+form.submitted .ng-pristine.ng-invalid-required, input.ng-invalid.ng-dirty {
     border-color: red;
 }
 
 .ng-valid.ng-dirty {
     border-color: green;
 }
-
-
-
 
 .form-signin
 {

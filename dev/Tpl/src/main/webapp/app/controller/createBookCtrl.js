@@ -14,7 +14,17 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 		console.log("An Error occurred while trying to get all categories");
 	});
 	
+	//This function saves the new book manually created by the admin into the database, but first
+	//it checks the validity of the data input in the form.
 	$scope.save = function(aBook) {
+		
+		console.log("Form submit control");
+		$scope.trySubmit = true;
+		
+		if ($scope.createBookForm.$invalid) {
+			return false;
+		}		
+		
 		for (var i = 0; i < aBook.bookCategories.length; i++){
 			delete aBook.bookCategories[i].selected;
 		}

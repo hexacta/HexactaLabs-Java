@@ -15,102 +15,102 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ar.com.hexacta.tpl.model.Book;
+import ar.com.hexacta.tpl.model.BookGenre;
 import ar.com.hexacta.tpl.persistence.dao.BookDAO;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BookServiceTest {
 
-	private Book book;
+    private Book book;
 
-	@InjectMocks
-	private BooksServiceImpl service = new BooksServiceImpl();
+    @InjectMocks
+    private BooksServiceImpl service = new BooksServiceImpl();
 
-	@Mock
-	private BookDAO dao;
+    @Mock
+    private BookDAO dao;
 
-	@Before
-	public void prepare() {
+    @Before
+    public void prepare() {
 
-		book = new Book();
-		book.setName("name");
-		book.setDescription("desc");
-		book.setCountry("EEUU");
-		book.setIsbn("1345");
-		book.setPublisher("publisher");
-		book.setId(1L);
+        book = new Book();
+        book.setName("name");
+        book.setDescription("desc");
+        book.setGenre(BookGenre.HUMOR);
+        book.setIsbn("1345");
+        book.setPublisher("publisher");
+        book.setId(1L);
 
-		List<Book> todosLosUsuarios = new ArrayList<Book>();
-		todosLosUsuarios.add(book);
+        List<Book> todosLosUsuarios = new ArrayList<Book>();
+        todosLosUsuarios.add(book);
 
-		// getTodosLosUsuarios
-		when(dao.findAll()).thenReturn(todosLosUsuarios);
+        // getTodosLosUsuarios
+        when(dao.findAll()).thenReturn(todosLosUsuarios);
 
-		// getUsuario
-		when(dao.findById(anyInt())).thenReturn(book);
+        // getUsuario
+        when(dao.findById(anyInt())).thenReturn(book);
 
-	}
+    }
 
-	@Test
-	public void testFindAll() {
-		List<Book> todosLosUsuarios = service.findAllBooks();
+    @Test
+    public void testFindAll() {
+        List<Book> todosLosUsuarios = service.findAllBooks();
 
-		Assert.assertNotNull(todosLosUsuarios);
-		Assert.assertTrue(todosLosUsuarios.size() > 0);
-		Assert.assertEquals(todosLosUsuarios.get(0).getDescription(), "desc");
+        Assert.assertNotNull(todosLosUsuarios);
+        Assert.assertTrue(todosLosUsuarios.size() > 0);
+        Assert.assertEquals(todosLosUsuarios.get(0).getDescription(), "desc");
 
-	}
+    }
 
-	@Test
-	public void testFindById() {
-		Book ubook = service.findBook(1L);
+    @Test
+    public void testFindById() {
+        Book ubook = service.findBook(1L);
 
-		Assert.assertNotNull(ubook);
-		Assert.assertEquals(ubook.getDescription(), "desc");
-		Assert.assertEquals(ubook.getPublisher(), "publisher");
-		Assert.assertEquals(ubook.getName(), "name");
-		Assert.assertEquals(ubook.getIsbn(), "1345");
-		Assert.assertEquals(ubook.getCountry(), "EEUU");
-		Assert.assertTrue(ubook.getId().equals(1L));
+        Assert.assertNotNull(ubook);
+        Assert.assertEquals(ubook.getDescription(), "desc");
+        Assert.assertEquals(ubook.getPublisher(), "publisher");
+        Assert.assertEquals(ubook.getName(), "name");
+        Assert.assertEquals(ubook.getIsbn(), "1345");
+        Assert.assertEquals(ubook.getGenre(), "EEUU");
+        Assert.assertTrue(ubook.getId().equals(1L));
 
-	}
+    }
 
-	@Test
-	public void testCreateBook() {
-		Book ubook = new Book("aName", "aDescription", "aPublisher",
-				"aCountry", "12345", null, null);
-		service.createBook(ubook);
-		verify(dao, atLeastOnce()).save(ubook);
+    @Test
+    public void testCreateBook() {
+        Book ubook = new Book("aName", "aDescription", "aPublisher", BookGenre.HUMOR, "12345", null, null);
+        service.createBook(ubook);
+        verify(dao, atLeastOnce()).save(ubook);
 
-	}
+    }
 
-	@Test
-	public void testDeleteBookById() {
+    @Test
+    public void testDeleteBookById() {
 
-		service.deleteBookById(1L);
-		verify(dao, atLeastOnce()).deleteById(1L);
+        service.deleteBookById(1L);
+        verify(dao, atLeastOnce()).deleteById(1L);
 
-	}
+    }
 
-	@Test
-	public void testDeleteBook() {
+    @Test
+    public void testDeleteBook() {
 
-		service.deleteBook(book);
-		verify(dao, atLeastOnce()).delete(book);
-	}
+        service.deleteBook(book);
+        verify(dao, atLeastOnce()).delete(book);
+    }
 
-	@Test
-	public void testUpdateBook() {
+    @Test
+    public void testUpdateBook() {
 
-		service.updateBook(book);
-		verify(dao, atLeastOnce()).save(book);
-	}
+        service.updateBook(book);
+        verify(dao, atLeastOnce()).save(book);
+    }
 
-	@Test
-	public void testVerifyIsbn() {
-		Assert.assertTrue(service.validateISBN("123"));
-		Assert.assertTrue(service.validateISBN("1-2-3"));
-		Assert.assertFalse(service.validateISBN(""));
-		Assert.assertFalse(service.validateISBN("1asd2"));
+    @Test
+    public void testVerifyIsbn() {
+        Assert.assertTrue(service.validateISBN("123"));
+        Assert.assertTrue(service.validateISBN("1-2-3"));
+        Assert.assertFalse(service.validateISBN(""));
+        Assert.assertFalse(service.validateISBN("1asd2"));
 
-	}
+    }
 }
