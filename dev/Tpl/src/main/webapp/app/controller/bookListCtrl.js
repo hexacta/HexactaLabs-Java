@@ -25,15 +25,9 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
 	}).success(function(data, status, headers, config){
 
-		console.log(data);
 		
-		//Modal
-	$scope.modifyModal=function(book){
-		$scope.selectedBook = book;
-		$scope.selectedBook.image = "";
 		
-		//Getting comments
-		var bookId = $scope.selectedBook.id;
+	$scope.loadBookComments = function(bookId){
 		$http({
 			method : 'GET',
 			url: '/Tpl/rest/comments/byBook/' + bookId,
@@ -44,8 +38,19 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 				}
 			}).error(function(data, status, headers, config){
 	    		console.log("An Error occurred while trying to get comments for the book " + $scope.selectedBook.name);
-	    		$scope.selectedBook.comments = "";
+	    		$scope.selectedBook.bookComments = {};
 	    	});
+		
+	};
+		
+		//Modal
+	$scope.modifyModal=function(book){
+		$scope.selectedBook = book;
+		$scope.selectedBook.image = "";
+		
+		//Getting comments
+		var bookId = $scope.selectedBook.id;
+		$scope.loadBookComments($scope.selectedBook.id);
 		
 		// Get image from google rest service
 		var find = '-';
@@ -85,22 +90,21 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		
 		$scope.comment.book = book;
 		var image = $scope.selectedBook.image;
-		delete $scope.selectedBook.image;
+		delete book.image;
 			
 		var jsonComment = angular.toJson($scope.comment);
-		console.log(jsonComment);
+		
 		$http.post('/Tpl/rest/comments', jsonComment).success(function(data, status, headers, config){
     		if(status == 201){
+    			$scope.loadBookComments(book.id);
     			console.log("Comment Creation Completed.");
     		}
     	}).error(function(data, status, headers, config){
     		console.log("An Error occurred while trying to store a comment");
     	}) ;
 		book.bookComments = comments;
-		$scope.selectedBook.image = image;
-		$scope.loadBooks();
-		
-		$scope.comment = {};
+		book.image = image;
+		$scope.limpiarComentarios();
 	};
 	
 	$scope.limpiarComentarios = function(){
