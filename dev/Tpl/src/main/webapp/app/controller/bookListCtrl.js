@@ -29,6 +29,8 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		$scope.predicate = 'name';
 		$scope.reverse = false;
 		$scope.cleanComments();
+	}).error(function(data, status, headers, config){
+		console.log("An Error occurred while trying to load the books");
 	});	
 		
 		

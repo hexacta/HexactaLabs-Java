@@ -29,7 +29,7 @@ booksApp.controller('registerCtrl', function($scope, $location, $rootScope, $htt
 					function(data, status, headers, config) {
 						if (status == 201) {
 							// Ok message and go back
-							console.log("User Creation Completed.\n");
+							console.log("User Creation Completed.");
 							$location.path("/");
 						}
 					}).error(function(data, status, headers, config) {
