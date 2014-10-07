@@ -1,81 +1,71 @@
 <section id="createBook">
 	<div class="container jumbotron col-md-6 col-md-offset-3">
-		<form name="createBookForm" novalidate id="createBookForm"
-			ng-submit="createBookForm.$valid && save(newBook)">
-			<div class="col-md-8 col-md-offset-2" id="feedbackPanel" />
-			<fieldset>
-				<legend> Crear nuevo libro </legend>
-				<!-- TITULO -->
-				<div class="form-group">
-					<label class="control-label">T&iacute;tulo: </label> <input
-						type="text" class="form-control" ng-model="newBook.name"
-						ng-required="true" id="name" maxlength="150" />
-				</div>
-				<!-- DESCRIPCION -->
-				<div class="form-group">
-					<label class="">Descripci&oacute;n: </label>
-					<textarea rows="3" id="description" class="form-control noResize"
-						ng-model="newBook.description" ng-required="true"> </textarea>
-				</div>
-				<!-- EDITORIAL -->
-				<div class="form-group">
-					<label class="">Editorial: </label> <input type="text"
-						class="form-control" ng-model="newBook.publisher"
-						ng-required="true" id="publisher" />
-
-				</div>
-				<!-- ISBN -->
-				<div class="form-group">
-					<label class="">ISBN: </label> <input type="text"
-						class="form-control" ng-model="newBook.isbn"
-						ng-required="true" id="isbn" ng-minlength="1" ng-pattern="/^[0-9\-]*$/"/>
-
-				</div>			
-				<!-- SELECT PAISES -->
-				<div class="form-group">
-					<label class="">Pa&iacute;s: </label> <select class="form-control"
-						ng-model="newBook.country" ng-required="true">
-						<option>Argentina</option>
-						<option>Brasil</option>
-						<option>EEUU</option>
-						<option>Inglaterra</option>
-						<option>Uruguay</option>
-					</select>
-				</div>
-
-				<!-- CHECKBOX CATEGORIAS 
-				<div class="form-group">
-					<label class="">Categorias:</label>
-					<div class="col-md-8 col-md-offset-2 checkbox">
-						<label class="checkbox-inline"><input class=""
-							id="selectCheckBox1" type="checkbox" /> eBook</label> <label
-							class="checkbox-inline"><input class=""
-							id="selectCheckBox2" type="checkbox" /> F&iacute;sico</label>
+		<form name="createBookForm" ng-submit="save(newBook)" ng-class="{submitted:trySubmit}" novalidate>
+			<div class="col-md-8 col-md-offset-2">
+				<fieldset>
+					<legend> Crear nuevo libro </legend>
+					<!-- TITULO -->
+					<div class="form-group">
+						<label class="control-label">T&iacute;tulo: </label> <input
+							type="text" name="name" class="form-control" ng-model="newBook.name"
+							ng-required="true" maxlength="150" />
+						<div class="alert alert-danger" role="alert" ng-show="trySubmit && createBookForm.name.$error.required"> Este campo es <strong>obligatorio</strong> </div>
 					</div>
-				</div>-->
-				
-				<div class="form-group">
-					<label class=""> Categorias:</label>
-					<div class="col-md-8 col-md-offset-2 checkbox" ng-repeat="category in categories">
-						<label  class="checkbox-inline">
-						<input type="checkbox" name="selectedCategory[]" value="{{category}}" ng-model="category.selected"
-						ng-click="toggleSelection(category, newBook)" > 
-						{{category.name}}<br/>
-						</label>
+					<!-- DESCRIPCION -->
+					<div class="form-group">
+						<label class="control-label">Descripci&oacute;n: </label>
+						<textarea rows="3" name="description" class="form-control noResize"
+							ng-model="newBook.description" ng-required="true"> </textarea>
+						<div class="alert alert-danger" role="alert" ng-show="trySubmit && createBookForm.description.$error.required"> Este campo es <strong>obligatorio</strong> </div>										
 					</div>
-					
-				</div>
-				<!-- BOTONES -->
-				<div class="col-md-8 col-md-offset-2">
-					<button type="submit" class="btn btn-hexacta-primary btn-block">Guardar</button>
-					<button type="button" class="btn btn-default btn-block"
-						ng-click="reset()">Limpiar</button>
-					<button type="button" class="btn btn-default btn-block"
-						ng-click="backToHome()">Volver</button>
-				</div>
-
-
-			</fieldset>
+					<!-- EDITORIAL -->
+					<div class="form-group">
+						<label class="control-label">Editorial: </label> <input type="text"
+							name="publisher" class="form-control" ng-model="newBook.publisher"
+							ng-required="true"/>
+						<div class="alert alert-danger" role="alert" ng-show="trySubmit && createBookForm.publisher.$error.required"> Este campo es <strong>obligatorio</strong> </div>
+					</div>
+					<!-- ISBN -->
+					<div class="form-group">
+						<label class="control-label">ISBN: </label> <input type="text"
+							name="isbn"	class="form-control" ng-model="newBook.isbn"
+							ng-required="true" ng-minlength="1" ng-pattern="/^[0-9\-]*$/"/>
+							<div class="alert alert-danger" role="alert" ng-show="trySubmit && createBookForm.isbn.$error.required"> Este campo es <strong>obligatorio</strong> </div>
+					</div>			
+					<!-- SELECT GENERO -->
+					<div class="form-group">
+						<label class="control-label">G&eacute;nero: </label> <select class="form-control"
+							name="genre" ng-model="newBook.genre" ng-required="true">
+								<option>FABLE</option>
+								<option>CRIME</option>
+								<option>FANTASY</option>
+								<option>CRIME</option>
+								<option>MYSTERY</option>
+						</select>
+						<div class="alert alert-danger" role="alert" ng-show="trySubmit && createBookForm.genre.$error.required"> Debes seleccionar <strong>un g&eacute;nero</strong> </div>
+					</div>
+					<!-- CHECKBOX CATEGORIAS -->
+					<div class="form-group">
+						<label class="control-label"> Categorias:</label>
+						<div class="col-md-8 col-md-offset-2 checkbox" ng-repeat="category in categories">
+							<label  class="checkbox-inline">
+							<input type="checkbox" name="selectedCategory[]" value="{{category}}" ng-model="category.selected"
+							ng-click="toggleSelection(category, newBook)" ng-required="newBook.bookCategories.length == 0"> 
+							{{category.name}}<br/>
+							</label>
+						</div>
+						<div class="alert alert-danger" role="alert" ng-show="trySubmit && (newBook.bookCategories === undefined || newBook.bookCategories.length == 0)"> Debes seleccionar <strong>al menos una</strong> categor&iacute;a</div>
+					</div>
+					<!-- BOTONES -->
+					<div class="col-md-8 col-md-offset-2">
+						<button type="submit" class="btn btn-hexacta-primary btn-block">Guardar</button>
+						<button type="button" class="btn btn-default btn-block"
+							ng-click="reset()">Limpiar</button>
+						<button type="button" class="btn btn-default btn-block"
+							ng-click="backToHome()">Volver</button>
+					</div>
+				</fieldset>
+			</div>
 		</form>
 	</div>
 </section>

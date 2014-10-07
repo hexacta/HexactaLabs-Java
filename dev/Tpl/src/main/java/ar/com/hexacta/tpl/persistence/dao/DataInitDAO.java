@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import ar.com.hexacta.tpl.model.Book;
 import ar.com.hexacta.tpl.model.BookCategory;
 import ar.com.hexacta.tpl.model.BookCopy;
+import ar.com.hexacta.tpl.model.BookGenre;
 import ar.com.hexacta.tpl.model.Loan;
 import ar.com.hexacta.tpl.model.User;
 import ar.com.hexacta.tpl.model.builder.BookBuilder;
@@ -25,121 +26,107 @@ import ar.com.hexacta.tpl.persistence.repository.UserRepository;
 @Repository
 public class DataInitDAO implements DataInitRepository {
 
-	private static final Logger LOG = Logger.getLogger(DataInitDAO.class
-			.getName());
+    private static final Logger LOG = Logger.getLogger(DataInitDAO.class.getName());
 
-	@Autowired
-	private BookRepository bookDAO;
+    @Autowired
+    private BookRepository bookDAO;
 
-	@Autowired
-	private CommentRepository commentDAO;
+    @Autowired
+    private CommentRepository commentDAO;
 
-	@Autowired
-	private BookCategoryRepository bookCategoryDAO;
+    @Autowired
+    private BookCategoryRepository bookCategoryDAO;
 
-	@Autowired
-	private BookCopyRepository bookCopyDAO;
+    @Autowired
+    private BookCopyRepository bookCopyDAO;
 
-	@Autowired
-	private UserRepository userDAO;
+    @Autowired
+    private UserRepository userDAO;
 
-	@Autowired
-	private LoanRepository loanDAO;
+    @Autowired
+    private LoanRepository loanDAO;
 
-	private void createData() {
-		// Categorias
-		BookCategory eBookCategory = new BookCategoryBuilder()
-				.withName("ebook")
-				.withDescription("Libro en formato electronico").build();
-		bookCategoryDAO.saveOrUpdate(eBookCategory);
+    private void createData() {
+        // Categorias
+        BookCategory eBookCategory = new BookCategoryBuilder().withName("ebook")
+                .withDescription("Libro en formato electronico").build();
+        bookCategoryDAO.saveOrUpdate(eBookCategory);
 
-		BookCategory physicalCategory = new BookCategoryBuilder()
-				.withName("fisico").withDescription("Libro en formato fisico")
-				.build();
-		bookCategoryDAO.saveOrUpdate(physicalCategory);
+        BookCategory physicalCategory = new BookCategoryBuilder().withName("fisico")
+                .withDescription("Libro en formato fisico").build();
+        bookCategoryDAO.saveOrUpdate(physicalCategory);
 
-		// Copias
-		BookCopy bookCopy1 = new BookCopyBuilder().withCode("1")
-				.withState(BookCopy.STATE_FREE).build();
-		bookCopyDAO.saveOrUpdate(bookCopy1);
-		BookCopy bookCopy2 = new BookCopyBuilder().withCode("2")
-				.withState(BookCopy.STATE_LOANED).build();
-		bookCopyDAO.saveOrUpdate(bookCopy2);
-		BookCopy bookCopy3 = new BookCopyBuilder().withCode("3").build();
-		bookCopyDAO.saveOrUpdate(bookCopy3);
-		BookCopy bookCopy4 = new BookCopyBuilder().withCode("4").build();
-		bookCopyDAO.saveOrUpdate(bookCopy4);
-		BookCopy bookCopy5 = new BookCopyBuilder().withCode("5").build();
-		bookCopyDAO.saveOrUpdate(bookCopy5);
+        // Copias
+        BookCopy bookCopy1 = new BookCopyBuilder().withCode("1").withState(BookCopy.STATE_FREE).build();
+        bookCopyDAO.saveOrUpdate(bookCopy1);
+        BookCopy bookCopy2 = new BookCopyBuilder().withCode("2").withState(BookCopy.STATE_LOANED).build();
+        bookCopyDAO.saveOrUpdate(bookCopy2);
+        BookCopy bookCopy3 = new BookCopyBuilder().withCode("3").build();
+        bookCopyDAO.saveOrUpdate(bookCopy3);
+        BookCopy bookCopy4 = new BookCopyBuilder().withCode("4").build();
+        bookCopyDAO.saveOrUpdate(bookCopy4);
+        BookCopy bookCopy5 = new BookCopyBuilder().withCode("5").build();
+        bookCopyDAO.saveOrUpdate(bookCopy5);
 
-		// Libros
+        // Libros
 
-		Book book1 = new BookBuilder()
-				.withName("El principito")
-				.withDescription(
-						"Best-seller del escritor frances Antoine de Saint-Exupery.")
-				.withPublisher("Editorial Planeta")
-				.withCategory(physicalCategory).withCountry("EEUU")
-				.withISBN("978-0-152-16415-7")
-				.withBookCopy(bookCopy1, bookCopy2).build();
-		bookDAO.saveOrUpdate(book1);
-		LOG.info("Created book " + book1.getId());
-		Book book2 = new BookBuilder().withName("El codigo Da Vinci")
-				.withDescription("Novela de misterio del escritor Dan Brown.")
-				.withPublisher("Editorial Estrada").withCountry("EEUU")
-				.withISBN("84-95618-60-5").withCategory(physicalCategory)
-				.withBookCopy(bookCopy3).build();
-		bookDAO.saveOrUpdate(book2);
-		LOG.info("Created book " + book2.getId());
+        Book book1 = new BookBuilder().withName("El principito")
+                .withDescription("Best-seller del escritor frances Antoine de Saint-Exupery.")
+                .withPublisher("Editorial Planeta").withCategory(physicalCategory).withGenre(BookGenre.FANTASY)
+                .withISBN("978-0-152-16415-7").withBookCopy(bookCopy1, bookCopy2).build();
+        bookDAO.saveOrUpdate(book1);
+        LOG.info("Created book " + book1.getId());
+        Book book2 = new BookBuilder().withName("El codigo Da Vinci")
+                .withDescription("Novela de misterio del escritor Dan Brown.").withPublisher("Editorial Estrada")
+                .withGenre(BookGenre.MYSTERY).withISBN("84-95618-60-5").withCategory(physicalCategory)
+                .withBookCopy(bookCopy3).build();
+        bookDAO.saveOrUpdate(book2);
+        LOG.info("Created book " + book2.getId());
 
-		Book book3 = new BookBuilder().withName("El Hobbit")
-				.withDescription("Novela fantastica de J. R. R. Tolkien.")
-				.withPublisher("Editorial Atlantida")
-				.withCountry("United Kingdom").withISBN("84-450-7037-1")
-				.withCategory(eBookCategory).withBookCopy(bookCopy4).build();
-		bookDAO.saveOrUpdate(book3);
-		LOG.info("Created book " + book3.getId());
+        Book book3 = new BookBuilder().withName("El Hobbit").withDescription("Novela fantastica de J. R. R. Tolkien.")
+                .withPublisher("Editorial Atlantida").withGenre(BookGenre.FABLE).withISBN("84-450-7037-1")
+                .withCategory(eBookCategory).withBookCopy(bookCopy4).build();
+        bookDAO.saveOrUpdate(book3);
+        LOG.info("Created book " + book3.getId());
 
-		Book book4 = new BookBuilder().withName("Ender's Game")
-				.withDescription("Novela de ciencia ficción de Scott")
-				.withPublisher("Editorial pepin")
-				.withCategory(physicalCategory).withBookCopy(bookCopy5).build();
-		bookDAO.saveOrUpdate(book4);
-		LOG.info("Created book " + book4.getId());
+        Book book4 = new BookBuilder().withName("Ender's Game").withDescription("Novela de ciencia ficción de Scott")
+                .withPublisher("Editorial pepin").withCategory(physicalCategory).withBookCopy(bookCopy5).build();
+        bookDAO.saveOrUpdate(book4);
+        LOG.info("Created book " + book4.getId());
 
-		// Users
-		User userAdmin = new User("admin", "admin", "admin@hexacta.com");
-		userDAO.save(userAdmin);
+        // Users
+        User userAdmin = new User("admin", "admin", "admin@hexacta.com");
+        userDAO.save(userAdmin);
 
-		User user2 = new User("edu", "malvino", "emalvino@hexacta.com", false);
-		userDAO.save(user2);
+        User user2 = new User("edu", "malvino", "emalvino@hexacta.com", false);
+        userDAO.save(user2);
 
-		Loan loan = new Loan(userAdmin, bookCopy1, new Date(), new Date());
-		loanDAO.saveOrUpdate(loan);
-		bookDAO.saveOrUpdate(book1);
-	}
+        Loan loan = new Loan(userAdmin, bookCopy1, new Date(), new Date());
+        loanDAO.saveOrUpdate(loan);
+        bookDAO.saveOrUpdate(book1);
+    }
 
-	@Override
-	public boolean initializeData() {
-		boolean success = true;
-		try {
-			createData();
-		} catch (Exception e) {
-			e.printStackTrace();
-			success = false;
-		}
-		return success;
-	}
+    @Override
+    public boolean initializeData() {
+        boolean success = true;
+        try {
+            createData();
+        } catch (Exception e) {
+            e.printStackTrace();
+            success = false;
+        }
+        return success;
+    }
 
-	public void setBookCategoryDAO(final BookCategoryDAO bookCategoryDAO) {
-		this.bookCategoryDAO = bookCategoryDAO;
-	}
+    public void setBookCategoryDAO(final BookCategoryDAO bookCategoryDAO) {
+        this.bookCategoryDAO = bookCategoryDAO;
+    }
 
-	public void setBookDAO(final BookDAO bookDAO) {
-		this.bookDAO = bookDAO;
-	}
+    public void setBookDAO(final BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
+    }
 
-	public void setCommentDAO(final CommentDAO commentDAO) {
-		this.commentDAO = commentDAO;
-	}
+    public void setCommentDAO(final CommentDAO commentDAO) {
+        this.commentDAO = commentDAO;
+    }
 }

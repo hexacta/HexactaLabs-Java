@@ -8,7 +8,7 @@ booksApp.controller('deleteBookCtrl', function ($scope, $location, $routeParams,
 				function(data, status, headers, config) {
 
 					if (status == 204) {
-						console.log("Deletion Completed.\n");
+						console.log("Deletion Completed.");
 						$location.path("/");
 					}
 				}).error(function(data, status, headers, config) {

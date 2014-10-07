@@ -9,6 +9,11 @@ html,body{
 	min-height: calc(100% - 50px);
 }
 
+em.underline {
+	font-style: normal;
+	text-decoration: underline;
+}
+
 .btn-hexacta-primary {
   color: #fff;
   background-color: #009292;
@@ -112,7 +117,7 @@ textarea.vert { resize:vertical; }
 textarea.noResize { resize:none; }
 
 /* PARA VALIDACIONES CON ANGULARJS */
-input.ng-invalid.ng-dirty {
+form.submitted .ng-pristine.ng-invalid-required, input.ng-invalid.ng-dirty {
     border-color: red;
 }
 
@@ -120,9 +125,15 @@ input.ng-invalid.ng-dirty {
     border-color: green;
 }
 
+/*
+.ng-invalid.ng-dirty{
+	border-color: 'red';
+}
 
-
-
+.ng-valid.ng-dirty{
+	border-color: 'green';
+}
+*/
 .form-signin
 {
     max-width: 330px;
@@ -233,12 +244,4 @@ input.ng-invalid.ng-dirty {
 
 th:hover {
 	color:#007500;
-}
-
-.ng-invalid.ng-dirty{
-	border-color: 'red';
-}
-
-.ng-valid.ng-dirty{
-	border-color: 'green';
 }
