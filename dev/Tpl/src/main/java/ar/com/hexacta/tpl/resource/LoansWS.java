@@ -30,7 +30,7 @@ import ar.com.hexacta.tpl.service.ILoansService;
 @Service
 public class LoansWS {
 	private static final int HTTP_OK = 200;
-	private static final Logger logger = LogManager.getLogger(LoansWS.class.getName());
+	private static final Logger LOG = LogManager.getLogger(LoansWS.class.getName());
     public LoansWS() {
     }
     
@@ -53,7 +53,7 @@ public class LoansWS {
     	try{
     		return loanService.findLoan(new Long(loanId));
     	}catch(Exception e){
-    		logger.error("Se busca un prestamo que no existe.");
+    		LOG.error("Se busca un prestamo que no existe.");
     		return null;
     	}
     }
@@ -65,7 +65,7 @@ public class LoansWS {
     	try{
     		return loanService.findLoansByBookId(new Long(bookCopyId));
     	}catch(Exception e){
-    		logger.error("Se busca prestamos de un libro que no existe.");
+    		LOG.error("Se busca prestamos de un libro que no existe.");
     		return null;
     	}
     }
@@ -80,7 +80,7 @@ public class LoansWS {
         	copy.changeToLoaned();
         	makeUpdate(copy, HTTP_OK);
         } catch (Exception e) {
-            logger.error("No se pudo crear el prestamo para la copia y usuario indicados.");
+            LOG.error("No se pudo crear el prestamo para la copia y usuario indicados.");
             return Response.serverError().build();
         }
         return Response.ok().build();
@@ -96,7 +96,7 @@ public class LoansWS {
             loan.setId(new Long(loanId));
             loanService.updateLoan(loan);
         } catch (Exception e) {
-            logger.error("Se trata de actualizar prestamo que no existe.");
+            LOG.error("Se trata de actualizar prestamo que no existe.");
             return Response.serverError().build();
         }
         return Response.ok().build();
@@ -108,7 +108,7 @@ public class LoansWS {
     	try{
     		loanService.deleteLoanById(new Long(loanId));
     	}catch(Exception e){
-    		logger.error("Se intenta eliminar prestamo que no existe.");
+    		LOG.error("Se intenta eliminar prestamo que no existe.");
     	}
     }
 

@@ -19,7 +19,7 @@ import ar.com.hexacta.tpl.service.ILoginService;
 
 @Service
 public class LoginWS {
-	private static final Logger logger = LogManager.getLogger(LoginWS.class.getName());
+	private static final Logger LOG = LogManager.getLogger(LoginWS.class.getName());
 	private static final int HTTP_ERROR_UNAUTHORIZED = 401;
     @Autowired
     private ILoginService loginService;
@@ -42,17 +42,17 @@ public class LoginWS {
 
             User user = loginService.findUserByUsername(username);
             if (user == null){
-            	logger.error("Se intento loggear con usuario inexistente.");
+            	LOG.error("Se intento loggear con usuario inexistente.");
                 return Response.status(HTTP_ERROR_UNAUTHORIZED).build();
             }
             if (!user.getPassword().equals(password)){
-            	logger.error("Se intento loggear con contraseña incorrecta.");
+            	LOG.error("Se intento loggear con contraseña incorrecta.");
                 return Response.status(HTTP_ERROR_UNAUTHORIZED).build();
             }
             if (user.getEnabled()){
                 return Response.ok(user).build();
             }else{
-            	logger.error("Se intento loggear con usuario inhabilitado o eliminado.");
+            	LOG.error("Se intento loggear con usuario inhabilitado o eliminado.");
                 return Response.status(HTTP_ERROR_UNAUTHORIZED).build();
             }
         } catch (IOException e) {

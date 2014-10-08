@@ -27,7 +27,7 @@ import ar.com.hexacta.tpl.service.IUsersService;
 
 @Service
 public class UserWS {
-	private static final Logger logger = LogManager.getLogger(UserWS.class.getName());
+	private static final Logger LOG = LogManager.getLogger(UserWS.class.getName());
 	private static final int HTTP_OK_CREATED = 201;
 	private static final int HTTP_OK = 200;
 	private static final int HTTP_DELETE = 204;
@@ -53,7 +53,7 @@ public class UserWS {
 		try{
 			return userService.findUser(new Long(userId));
 		}catch(Exception e){
-			logger.error("Se intento buscar un usuario que no existe.");
+			LOG.error("Se intento buscar un usuario que no existe.");
 			return null;
 		}
 	}
@@ -68,11 +68,11 @@ public class UserWS {
 			if (validation){
 				return Response.status(HTTP_OK_CREATED).build();
 			}else{
-				logger.error("El usuario que quiere crearse no cumple las condiciones (ya existe nombre de usuario, o no cumple con las cantidades).");
+				LOG.error("El usuario que quiere crearse no cumple las condiciones (ya existe nombre de usuario, o no cumple con las cantidades).");
 				return Response.serverError().build();
 			}
 		} catch (Exception e) {
-			logger.error("Error al intentar crear el usuario.");
+			LOG.error("Error al intentar crear el usuario.");
 			return Response.serverError().build();
 		}
 	}
@@ -86,12 +86,14 @@ public class UserWS {
 			User user = parseUser(jsonUser);
 			user.setId(new Long(userId));
 
-			if (userService.findUser(new Long(userId)).getEnabled())
+			if (userService.findUser(new Long(userId)).getEnabled()){
 				return makeUpdate(user, HTTP_OK);
-			else
+			}else{
+				LOG.error("Se intento modificar un usuario que no esta habilitado - con baja logica.");
 				return Response.serverError().build();
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error("Se intento modificar un usuario que no existe.");
 			return Response.serverError().build();
 		}
 	}

@@ -33,7 +33,7 @@ public class BookWS {
 	private static final int HTTP_OK = 200;
 	private static final int HTTP_DELETE = 204;
 
-	private static final Logger logger = LogManager.getLogger(BookWS.class.getName()); 
+	private static final Logger LOG = LogManager.getLogger(BookWS.class.getName()); 
 	
 	public BookWS() {
 	}
@@ -65,7 +65,7 @@ public class BookWS {
 		try {
 			bookService.createBook(parseBook(jsonBook));
 		} catch (Exception e) {
-			logger.error("Error al crear el libro.");
+			LOG.error("Error al crear el libro.");
 			return Response.serverError().build();
 		}
 		return Response.status(HTTP_OK_CREATED).build();
@@ -84,12 +84,12 @@ public class BookWS {
 			if (persistedBook.getEnabled()) {
 				return makeUpdate(book, HTTP_OK);
 			} else {
-				logger.error("Se quiso acceder a un libro inhabilitado - que ya eliminado logicamente.");
+				LOG.error("Se quiso acceder a un libro inhabilitado - que ya eliminado logicamente.");
 				return Response.serverError().build();
 			}
 
 		} catch (Exception e) {
-			logger.error("Se quiso acceder a un libro que no existe.");
+			LOG.error("Se quiso acceder a un libro que no existe.");
 			return Response.serverError().build();
 		}
 	}
@@ -102,7 +102,7 @@ public class BookWS {
 			book.setEnabled(false);
 			return makeUpdate(book, HTTP_DELETE);
 		}catch(Exception e){
-			logger.error("Se quiso eliminar un libro que no existe.");
+			LOG.error("Se quiso eliminar un libro que no existe.");
 			return Response.serverError().build();
 		}
 	}

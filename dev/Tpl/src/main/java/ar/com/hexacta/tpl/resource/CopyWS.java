@@ -15,7 +15,7 @@ import ar.com.hexacta.tpl.model.BookCopy;
 import ar.com.hexacta.tpl.service.IBookCopiesService;
 
 public class CopyWS {
-	private static final Logger logger = LogManager.getLogger(CopyWS.class.getName());
+	private static final Logger LOG = LogManager.getLogger(CopyWS.class.getName());
 	public CopyWS(){}
 	
 	@Autowired
@@ -35,7 +35,7 @@ public class CopyWS {
 		try{
 			return bookCopyService.findFreeCopyByBook(new Long(bookId));
 		}catch(Exception e){
-			logger.error("Se buscan copias de un libro que no existe.");
+			LOG.error("Se buscan copias de un libro que no existe.");
 			return null;
 		}
 	}

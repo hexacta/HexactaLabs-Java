@@ -27,7 +27,7 @@ import ar.com.hexacta.tpl.service.ICommentService;
 
 @Service
 public class CommentWS {
-	private static final Logger logger = LogManager.getLogger(CommentWS.class.getName());
+	private static final Logger LOG = LogManager.getLogger(CommentWS.class.getName());
     private static final int HTTP_OK_CREATED = 201;
 
     public CommentWS() {
@@ -64,7 +64,7 @@ public class CommentWS {
         try {
             commentService.createComment(parseComment(jsonComment));
         } catch (Exception e) {
-            logger.error("Error al tratar de crear el comentario.");
+            LOG.error("Error al tratar de crear el comentario.");
             return Response.serverError().build();
         }
         return Response.status(HTTP_OK_CREATED).build();
@@ -81,7 +81,7 @@ public class CommentWS {
             commentService.updateComment(comment);
 
         } catch (Exception e) {
-            logger.error("Se quiso actualizar un libro que no existe.");
+            LOG.error("Se quiso actualizar un libro que no existe.");
             return Response.serverError().build();
         }
         return Response.ok().build();
@@ -93,7 +93,7 @@ public class CommentWS {
     	try{
     		commentService.deleteCommentById(new Long(commentId));
     	}catch(Exception e){
-    		logger.error("Se quiso eliminar un comentario que no existe.");
+    		LOG.error("Se quiso eliminar un comentario que no existe.");
     	}
     }
 
