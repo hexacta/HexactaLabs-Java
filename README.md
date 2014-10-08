@@ -49,6 +49,7 @@ Hoy en día la aplicación se encuentra en un estado de desarrollo, tiene implem
 
 
 ####Del Frontend:
+>>>>>>> 7e64e632bb9b09c376a14e6fd210e1037e4f362f
 * Pantalla de inicio que permite visualizar todos los libros disponibles, pudiendo acceder a los comentarios. En caso de iniciar sesión (por defecto, se puede hacer con usuario: '''admin''', password: '''admin'''), se pueden crear comentarios, y se permite acceder a la pantalla de edición de libro, creación de libro, eliminación de libro y préstamos del libro.
 * Pantalla de edición y creación de libro, con todos los campos necesarios para la creación del libro.
 * Modal de comentarios: permite visualizar los comentarios de un libro e información adicional del mismo (como una imagen cargada de la portada del libro), y en caso de haber iniciado sesión, permite crear un comentario del libro.
