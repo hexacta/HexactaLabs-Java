@@ -65,7 +65,7 @@ public class BookWS {
 		try {
 			bookService.createBook(parseBook(jsonBook));
 		} catch (Exception e) {
-			logger.trace("Error al crear el libro.");
+			logger.error("Error al crear el libro.");
 			return Response.serverError().build();
 		}
 		return Response.status(HTTP_OK_CREATED).build();
@@ -84,12 +84,12 @@ public class BookWS {
 			if (persistedBook.getEnabled()) {
 				return makeUpdate(book, HTTP_OK);
 			} else {
-				logger.trace("Se quiso acceder a un libro inhabilitado - que ya eliminado logicamente.");
+				logger.error("Se quiso acceder a un libro inhabilitado - que ya eliminado logicamente.");
 				return Response.serverError().build();
 			}
 
 		} catch (Exception e) {
-			logger.trace("Se quiso acceder a un libro que no existe.");
+			logger.error("Se quiso acceder a un libro que no existe.");
 			return Response.serverError().build();
 		}
 	}
@@ -102,7 +102,7 @@ public class BookWS {
 			book.setEnabled(false);
 			return makeUpdate(book, HTTP_DELETE);
 		}catch(Exception e){
-			logger.trace("Se quiso eliminar un libro que no existe.");
+			logger.error("Se quiso eliminar un libro que no existe.");
 			return Response.serverError().build();
 		}
 	}
