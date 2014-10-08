@@ -1,125 +1,119 @@
 <section id="bookListPage">
-<div ng-controller="bookListCtrl" >
-
-	<div id="feedbackPanel" />
-	<div>
-			<div class="row">
-				<form role="form" class="col-md-12">
-					<div class="form-group col-md-9">					
-						<input type="text" class="form-control col-md-12" placeholder="Ingrese el libro que desea buscar" ng-model="query">				
-					</div>
-					<div class="form-group col-md-3">
-						<button type="button" class="btn btn-hexacta-primary col-md-12" ng-click="linkToCreateBook()" ng-show="loggedIn">Crear Nuevo Libro</button>
-					</div>
-				</form>
-			</div>
-			
-			<div class="col-md-12">
-				<table class="table table-striped table-bordered table-hover text-center">
-					<caption> <strong> Libros Disponibles </strong> </caption>
-					<thead class="text-center headcolumn" >
-						<tr>
-							<th class="text-center" ng-click="predicate = 'name'; reverse=!reverse"> T&iacute;tulo </th>
-							<th class="text-center" ng-click="predicate = 'description'; reverse=!reverse"> Descripci&oacute;n </th>
-							<th class="text-center" ng-click="predicate = 'publisher'; reverse=!reverse"> Editorial </th>
-							<th class="text-center" ng-click="predicate = 'isbn'; reverse=!reverse"> ISBN </th>
-							<th class="text-center"> Categor&iacute;a </th>
-
-							<th class="text-center" colspan="3" ng-show="loggedIn"> Acciones </th>
-						</tr>
-					</thead>
-					<tbody ng-repeat="book in books | filter:query | orderBy:predicate:reverse">
-						<tr>											
-							<td>
-								<a data-toggle="modal" data-target="#myModal" ng-click="modifyModal(book)">{{book.name}}</a> 
-							</td>
-							<td>
-								{{book.description}}
-							</td>
-							<td>
-								{{book.publisher}}
-							</td>
-							<td>
-								{{book.isbn}}
-							</td>
-							<td id="categoria">
-								<ul ng-repeat="Categorie in book.bookCategories" class="list-inline">
-									<li>{{Categorie.name}}</li>
-								</ul>
-							</td>
-							<!-- End Fields -->
-	
-							<!-- Buttons --> 
-
-							<td ng-show="loggedIn">
-
-								<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToEditBook(book.id)">Editar</button>
-							</td>
-							<td ng-show="loggedIn">
-								<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToDeleteBook(book.id)">Borrar</button>
-							</td>
-							<td ng-show="loggedIn">
-								<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToLendBook(book.id)">Prestar</button>
-							</td>
-							
-							<!-- End Buttons -->
-							
-						</tr>
-					</tbody>
-			</table>
+	<div ng-controller="bookListCtrl" >
+		<div class="row">
+			<form role="form" class="col-md-12">
+				<div class="form-group col-md-9">					
+					<input type="text" class="form-control col-md-12" placeholder="Ingrese el libro que desea buscar" ng-model="query">				
+				</div>
+				<div class="form-group col-md-3">
+					<button type="button" class="btn btn-hexacta-primary col-md-12" ng-click="linkToCreateBook()" ng-show="loggedIn">Crear Nuevo Libro</button>
+				</div>
+			</form>
 		</div>
-
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h3 class="modal-title" id="myModalLabel">{{selectedBook.name}}</h3>
-						</div>
-						<div class="modal-body">
+		
+		<div class="col-md-12">
+			<table class="table table-striped table-bordered table-hover text-center">
+				<caption> <strong> Libros Disponibles </strong> </caption>
+				<thead class="text-center headcolumn" >
+					<tr>
+						<th class="text-center" ng-click="predicate = 'name'; reverse=!reverse"> T&iacute;tulo </th>
+						<th class="text-center" ng-click="predicate = 'description'; reverse=!reverse"> Descripci&oacute;n </th>
+						<th class="text-center" ng-click="predicate = 'publisher'; reverse=!reverse"> Editorial </th>
+						<th class="text-center" ng-click="predicate = 'isbn'; reverse=!reverse"> ISBN </th>
+						<th class="text-center"> Categor&iacute;a </th>
+	
+						<th class="text-center" colspan="3" ng-show="loggedIn"> Acciones </th>
+					</tr>
+				</thead>
+				<tbody ng-repeat="book in books | filter:query | orderBy:predicate:reverse">
+					<tr>											
+						<td>
+							<a data-toggle="modal" data-target="#myModal" ng-click="modifyModal(book)">{{book.name}}</a> 
+						</td>
+						<td>
+							{{book.description}}
+						</td>
+						<td>
+							{{book.publisher}}
+						</td>
+						<td>
+							{{book.isbn}}
+						</td>
+						<td id="categoria">
+							<ul ng-repeat="Categorie in book.bookCategories" class="list-inline">
+								<li>{{Categorie.name}}</li>
+							</ul>
+						</td>
+						<!-- End Fields -->
+	
+						<!-- Buttons --> 
+	
+						<td ng-show="loggedIn">
+	
+							<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToEditBook(book.id)">Editar</button>
+						</td>
+						<td ng-show="loggedIn">
+							<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToDeleteBook(book.id)">Borrar</button>
+						</td>
+						<td ng-show="loggedIn">
+							<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToLendBook(book.id)">Prestar</button>
+						</td>
 						
-							<div class="col-md-9">
-								<h4>{{selectedBook.description}}</h4>
-								<cite>- {{selectedBook.publisher}}</cite>
-								<h4><em class="underline">ISBN:</em> {{selectedBook.isbn}}</h4>
-								<h4>Pa&iacute;s de Origen: {{selectedBook.country}}</h4>
+						<!-- End Buttons -->
+						
+					</tr>
+				</tbody>
+		</table>
+	</div>
+	
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h3 class="modal-title" id="myModalLabel">{{selectedBook.name}}</h3>
+					</div>
+					<div class="modal-body">
+					
+						<div class="col-md-9">
+							<h4>{{selectedBook.description}}</h4>
+							<cite>- {{selectedBook.publisher}}</cite>
+							<h4><em class="underline">ISBN:</em> {{selectedBook.isbn}}</h4>
+							<h4>Pa&iacute;s de Origen: {{selectedBook.country}}</h4>
+						</div>
+						
+						<img ng-src="{{selectedBook.image}}"></img>						
+						
+						<div class="col-md-12">
+	
+							Comentarios:
+							<blockquote ng-repeat="comment in selectedBook.bookComments" >
+								<p>{{comment.body}}</p>
+								<footer>{{comment.user}}</footer>
+							</blockquote>
+						</div>
+						<form role="form" name="commentForm" ng-show="loggedIn" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
+							<div class="form-group">
+								<label for="txtCommentText">Comentario</label>
+								<textarea ng-model="comment.body" class="form-control"
+									placeholder="Escriba aqu&iacute; su comentario"
+									id="txtCommentText" required></textarea>
+							</div>
+							<div class="form-group">
+								<label for="txtCommentAuthor">Email:</label> 
+								<input type="email" ng-model="comment.user" class="form-control" placeholder="ejemplo@hexacta.com" id="txtCommentAuthor" required/>
 							</div>
 							
-							<img ng-src="{{selectedBook.image}}"></img>						
-							
-							<div class="col-md-12">
-
-								Comentarios:
-								<blockquote ng-repeat="comment in selectedBook.bookComments" >
-									<p>{{comment.body}}</p>
-									<footer>{{comment.user}}</footer>
-								</blockquote>
-							</div>
-							<form role="form" name="commentForm" ng-show="loggedIn" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
-								<div class="form-group">
-									<label for="txtCommentText">Comentario</label>
-									<textarea ng-model="comment.body" class="form-control"
-										placeholder="Escriba aqu&iacute; su comentario"
-										id="txtCommentText" required></textarea>
-								</div>
-								<div class="form-group">
-									<label for="txtCommentAuthor">Email:</label> 
-									<input type="email" ng-model="comment.user" class="form-control" placeholder="ejemplo@hexacta.com" id="txtCommentAuthor" required/>
-								</div>
-								
-								<input type="submit" value="Crear comentario" class="btn btn-hexacta-green btn-sm" />
-							</form>
-						</div>
-						
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="limpiarComentarios()">Cerrar</button>
-						</div>
+							<input type="submit" value="Crear comentario" class="btn btn-hexacta-green btn-sm" />
+						</form>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="limpiarComentarios()">Cerrar</button>
 					</div>
 				</div>
 			</div>
+		</div>
 	</div>
-</div>
-
-
 
 </section>

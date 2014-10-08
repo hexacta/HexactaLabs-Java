@@ -42,6 +42,7 @@
 <script type="text/javascript" src="app/controller/deleteBookCtrl.js"></script>
 <script type="text/javascript" src="app/controller/registerCtrl.js"></script>
 <script type="text/javascript" src="app/controller/viewController.js"></script>
+<script type="text/javascript" src="app/controller/loanListCtrl.js"></script>
 <!-- End Javascript -->
 
 </head>
@@ -63,7 +64,7 @@
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">Libros</a></li>
-						<li><a href="#">Otra Seccion</a></li>
+						<li><a href="#/loanList">Lista de pr&eacute;stamos</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#/register" ng-hide="loggedIn">Registrarse</a></li>
@@ -106,7 +107,7 @@
     	    		<div class="col-md-4">&copy; 2014</div>
 	    	    	<div style="padding-left:100px;" class="col-md-4">
    				         <ul class="nav nav-pills">
-              				<li class="active"><a href="#">About Us</a></li>
+              				<li><a href="#">About Us</a></li>
 				            <li><a href="#">Privacy Policy</a></li>
            				 </ul>
 			          </div>

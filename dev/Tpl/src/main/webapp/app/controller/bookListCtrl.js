@@ -17,7 +17,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	$scope.linkToRegister=function(){
 		$location.path("/register");
 	};
-	
+
 	$http({
 		method : 'GET',
 		url: '/Tpl/rest/books',
@@ -77,7 +77,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	};
 	
 	
-	//Para agregar comentarios
+	//Method to add comments
 	$scope.addComment = function(book){
 		var comments = book.bookComments;
 		delete book.bookComments;
