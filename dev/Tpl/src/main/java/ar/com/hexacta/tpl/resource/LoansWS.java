@@ -62,7 +62,7 @@ public class LoansWS {
     @Consumes("application/json")
     public Response createLoan(@Multipart(value = "newLoan", type = "application/json") final String jsonLoan) {
         try {
-        	BookCopy copy = (parseLoan(jsonLoan)).getBook();
+        	BookCopy copy = (parseLoan(jsonLoan)).getBookCopy();
         	copy = copyService.findCopy(copy.getId());
         	copy.changeToLoaned();
         	makeUpdate(copy, HTTP_OK);
