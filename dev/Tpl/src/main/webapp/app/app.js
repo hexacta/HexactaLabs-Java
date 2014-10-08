@@ -32,6 +32,11 @@ booksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
             controller: 'registerCtrl',
             publicAccess: true
         }).
+        when('/loanList', {
+        	templateUrl: 'app/views/loanListPage.html',
+        	controller: 'loanListCtrl',
+        	publicAccess: false
+        }).
 		otherwise({
 			redirectTo: '/'
 		});
