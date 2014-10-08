@@ -29,6 +29,7 @@ import ar.com.hexacta.tpl.service.ILoansService;
 
 @Service
 public class LoansWS {
+
 	private static final int HTTP_OK = 200;
 	private static final Logger LOG = LogManager.getLogger(LoansWS.class.getName());
     public LoansWS() {
@@ -36,6 +37,7 @@ public class LoansWS {
     
     @Autowired
     private ILoansService loanService;
+
     @Autowired
     private IBookCopiesService copyService;
 
@@ -75,10 +77,14 @@ public class LoansWS {
     @Consumes("application/json")
     public Response createLoan(@Multipart(value = "newLoan", type = "application/json") final String jsonLoan) {
         try {
-        	BookCopy copy = (parseLoan(jsonLoan)).getBookCopy();
-        	copy = copyService.findCopy(copy.getId());
-        	copy.changeToLoaned();
-        	makeUpdate(copy, HTTP_OK);
+            Loan newLoan = parseLoan(jsonLoan);
+
+            BookCopy copy = newLoan.getBookCopy();
+            copy = copyService.findCopy(copy.getId());
+            copy.changeToLoaned();
+            makeUpdate(copy, HTTP_OK);
+
+            loanService.createLoan(newLoan);
         } catch (Exception e) {
             LOG.error("No se pudo crear el prestamo para la copia y usuario indicados.");
             return Response.serverError().build();
@@ -86,8 +92,7 @@ public class LoansWS {
         return Response.ok().build();
     }
 
-
-	@PUT
+    @PUT
     @Path("/{loanId}")
     @Consumes("application/json")
     public Response updateLoan(@PathParam("loanId") final String loanId, final String jsonLoan) {
@@ -118,11 +123,11 @@ public class LoansWS {
         newLoan = mapper.readValue(jsonLoan, Loan.class);
         return newLoan;
     }
-    
-    private Response makeUpdate(BookCopy copy, int responseCode) {
-    	copyService.updateCopy(copy);
-		return Response.status(responseCode).build();
-	}
+
+    private Response makeUpdate(final BookCopy copy, final int responseCode) {
+        copyService.updateCopy(copy);
+        return Response.status(responseCode).build();
+    }
 
     public ILoansService getLoanService() {
         return loanService;
@@ -131,13 +136,13 @@ public class LoansWS {
     public void setLoanService(final ILoansService loanService) {
         this.loanService = loanService;
     }
-    
-    public IBookCopiesService getBookCopyService(){
-    	return copyService;
+
+    public IBookCopiesService getBookCopyService() {
+        return copyService;
     }
-   
-    public void setBookCopiesService(final IBookCopiesService copyService){
-    	this.copyService = copyService;
+
+    public void setBookCopiesService(final IBookCopiesService copyService) {
+        this.copyService = copyService;
     }
- 
+
 }

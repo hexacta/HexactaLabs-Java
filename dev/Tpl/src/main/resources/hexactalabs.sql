@@ -16,7 +16,7 @@ INSERT INTO `book_categories` VALUES (1,'Libro en formato electronico','ebook',0
 -- Dumping data for table `books`
 --
 
-INSERT INTO `books` VALUES 	(1,'Best-seller del escritor frances Antoine de Saint-Exupery.',TRUE,'FABLE','978-0-152-16415-7','El principito','Editorial Planeta',0), (2,'Novela de misterio del escritor Dan Brown.',TRUE,'MYSTERY','84-95618-60-5','El codigo Da Vinci','Editorial Estrada',0), (3,'Novela fantastica de J. R. R. Tolkien.',TRUE,'FANTASY','84-450-7037-1','El Hobbit','Editorial Atlantida',0), (4,'Novela de ciencia ficcion de Scott',TRUE,'CRIME','978-0812550702','Enders Game','Editorial pepin',0);
+INSERT INTO `books` VALUES 	(1,'Best-seller del escritor frances Antoine de Saint-Exupery.',TRUE,'FABLE','978-0-152-16415-7','El principito','Editorial Planeta',0), (2,'Novela de misterio del escritor Dan Brown.',TRUE,'MYSTERY','84-95618-60-5','El codigo Da Vinci','Editorial Estrada',0), (3,'Novela fantastica de J. R. R. Tolkien.',TRUE,'FANTASY','84-450-7037-1','El Hobbit','Editorial Atlantida',0), (4,'Novela de ciencia ficcion de Scott',TRUE,'CRIME','978-0812550702','Enders Game','Editorial Pepin',0);
 
 --
 -- Dumping data for table `books_book_categories`
@@ -39,4 +39,4 @@ INSERT INTO `books_book_copies` VALUES (1,1),(1,2),(2,3),(3,4),(4,5);
 -- Dumping data for table `loans`
 --
 
-INSERT INTO `loans` VALUES (1,'2014-08-28 11:56:08','2014-08-28 11:56:08',0,1,1);
+INSERT INTO `loans` VALUES (1,'2014-08-28 11:56:08','2014-08-29 11:56:08',0,1,1);
