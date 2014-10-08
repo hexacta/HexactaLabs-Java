@@ -41,12 +41,16 @@
 			    </div>
    				<button type="button" class="btn btn-sm btn-hexacta-primary" ng-click="today()">Hoy</button>
    				<button type="button" class="btn btn-sm btn-hexacta-primary" ng-click="clear()">Borrar</button>
-  				<hr />
+  		
+  				<!-- FIXME: Mensaje de error cuando no quedan mas copias del libro -->		
+  				<div class="alert alert-danger" role="alert" ng-show="true"> 
+  					No quedan copias del libro.
+  			 	</div>
+  		
 				<!-- BOTONES -->
 				<div class="col-md-8 col-md-offset-2">
-					<button type="submit" class="btn btn-hexacta-green btn-block">Prestar</button>
-					<button type="button" class="btn btn-default btn-block"
-							ng-click="backToHome()">Volver</button>
+					<button type="submit" class="btn btn-hexacta-primary btn-block">Prestar</button>
+					<button type="button" class="btn btn-default btn-block"	ng-click="backToHome()">Volver</button>
 				</div>
 			</fieldset>
 		</form>

@@ -53,7 +53,7 @@ public class Loan implements Serializable {
         return user;
     }
 
-    public BookCopy getBook() {
+    public BookCopy getBookCopy() {
         return bookCopy;
     }
 

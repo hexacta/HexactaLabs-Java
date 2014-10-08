@@ -38,15 +38,19 @@ booksApp.controller('viewController', function($scope, $http, $rootScope, $sessi
 				$scope.usuario = "Bienvenido: " + JSON.parse($sessionStorage.user).username + "!"; 
 				$rootScope.loggedIn = true;
 				$scope.invalidLogin = false;
-				
+			}else if (status == 401){
+				$scope.loginError();
 			}
 		}).error(function(data, status, headers, config){
-			console.log("An Error occurred while trying to login");
-			$scope.user.password="";
-			$scope.invalidLogin = true;
-
+			$scope.loginError();
 		});
 	};
+	
+	$scope.loginError = function(){
+		console.log("An Error occurred while trying to login");
+		$scope.user.password="";
+		$scope.invalidLogin = true;
+	}
 
 });
 
