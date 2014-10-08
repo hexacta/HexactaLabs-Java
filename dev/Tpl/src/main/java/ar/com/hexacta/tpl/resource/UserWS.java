@@ -14,6 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -25,11 +27,11 @@ import ar.com.hexacta.tpl.service.IUsersService;
 
 @Service
 public class UserWS {
-
-	public static int HTTP_OK_CREATED = 201;
-	public static int HTTP_OK = 200;
-	public static int HTTP_DELETE = 204;
-
+	private static final Logger LOG = LogManager.getLogger(UserWS.class.getName());
+	private static final int HTTP_OK_CREATED = 201;
+	private static final int HTTP_OK = 200;
+	private static final int HTTP_DELETE = 204;
+	
 	@Autowired
 	private IUsersService userService;
 
@@ -47,8 +49,13 @@ public class UserWS {
 	@GET
 	@Path("/{userId}")
 	@Produces("application/json")
-	public User findComment(@PathParam("userId") final String userId) {
-		return userService.findUser(new Long(userId));
+	public User findUser(@PathParam("userId") final String userId) {
+		try{
+			return userService.findUser(new Long(userId));
+		}catch(Exception e){
+			LOG.error("Se intento buscar un usuario que no existe.");
+			return null;
+		}
 	}
 
 	@POST
@@ -58,13 +65,14 @@ public class UserWS {
 			@Multipart(value = "newUser", type = "application/json") final String jsonUser) {
 		try {
 			boolean validation = userService.createUser(parseUser(jsonUser));
-			if (validation)
+			if (validation){
 				return Response.status(HTTP_OK_CREATED).build();
-			else
+			}else{
+				LOG.error("El usuario que quiere crearse no cumple las condiciones (ya existe nombre de usuario, o no cumple con las cantidades).");
 				return Response.serverError().build();
-
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error("Error al intentar crear el usuario.");
 			return Response.serverError().build();
 		}
 	}
@@ -78,12 +86,14 @@ public class UserWS {
 			User user = parseUser(jsonUser);
 			user.setId(new Long(userId));
 
-			if (userService.findUser(new Long(userId)).getEnabled())
+			if (userService.findUser(new Long(userId)).getEnabled()){
 				return makeUpdate(user, HTTP_OK);
-			else
+			}else{
+				LOG.error("Se intento modificar un usuario que no esta habilitado - con baja logica.");
 				return Response.serverError().build();
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error("Se intento modificar un usuario que no existe.");
 			return Response.serverError().build();
 		}
 	}

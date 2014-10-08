@@ -121,7 +121,7 @@ public class LoansServiceTest {
 		Assert.assertNotNull(todosLosPrestamos);
 		Assert.assertTrue(todosLosPrestamos.size() > 0);
 
-		Assert.assertTrue(todosLosPrestamos.get(0).getBook().getId().equals(2L));
+		Assert.assertTrue(todosLosPrestamos.get(0).getBookCopy().getId().equals(2L));
 
 	}
 }

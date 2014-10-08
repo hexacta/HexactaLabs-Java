@@ -1,8 +1,9 @@
 package ar.com.hexacta.tpl.persistence.dao;
 
 import java.util.Date;
-import java.util.logging.Logger;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +27,7 @@ import ar.com.hexacta.tpl.persistence.repository.UserRepository;
 @Repository
 public class DataInitDAO implements DataInitRepository {
 
-    private static final Logger LOG = Logger.getLogger(DataInitDAO.class.getName());
+    private static final Logger LOG = LogManager.getLogger(DataInitDAO.class.getName());
 
     @Autowired
     private BookRepository bookDAO;
@@ -112,7 +113,7 @@ public class DataInitDAO implements DataInitRepository {
         try {
             createData();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error al inicializar los datos.");
             success = false;
         }
         return success;
