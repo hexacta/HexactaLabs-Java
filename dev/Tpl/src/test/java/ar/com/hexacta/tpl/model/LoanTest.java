@@ -86,7 +86,7 @@ public class LoanTest {
 	@Test
 	@Transactional(readOnly = true)
 	public void testParameterCretion(){
-		assertTrue(testLoan.getBook().equals(testCopy));
+		assertTrue(testLoan.getBookCopy().equals(testCopy));
 		assertTrue(testLoan.getFromDate().equals(initDate));
 		assertTrue(testLoan.getToDate().equals(endDate));
 		assertTrue(testLoan.getUser().equals(testUser));
