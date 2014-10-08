@@ -14,6 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -27,10 +29,11 @@ import ar.com.hexacta.tpl.service.ILoansService;
 
 @Service
 public class LoansWS {
-
-	public static int HTTP_OK = 200;
+	private static final int HTTP_OK = 200;
+	private static final Logger logger = LogManager.getLogger(LoansWS.class.getName());
     public LoansWS() {
-    } 		
+    }
+    
     @Autowired
     private ILoansService loanService;
     @Autowired
@@ -47,14 +50,24 @@ public class LoansWS {
     @Path("/{loanId}")
     @Produces("application/json")
     public Loan findLoan(@PathParam("loanId") final String loanId) {
-        return loanService.findLoan(new Long(loanId));
+    	try{
+    		return loanService.findLoan(new Long(loanId));
+    	}catch(Exception e){
+    		logger.error("Se busca un prestamo que no existe.");
+    		return null;
+    	}
     }
 
     @GET
     @Path("/byBook/{bookId}")
     @Produces("application/json")
     public List<Loan> findLoansByBookId(@PathParam("bookCopyId") final String bookCopyId) {
-        return loanService.findLoansByBookId(new Long(bookCopyId));
+    	try{
+    		return loanService.findLoansByBookId(new Long(bookCopyId));
+    	}catch(Exception e){
+    		logger.error("Se busca prestamos de un libro que no existe.");
+    		return null;
+    	}
     }
 
     @POST
@@ -67,7 +80,7 @@ public class LoansWS {
         	copy.changeToLoaned();
         	makeUpdate(copy, HTTP_OK);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("No se pudo crear el prestamo para la copia y usuario indicados.");
             return Response.serverError().build();
         }
         return Response.ok().build();
@@ -83,7 +96,7 @@ public class LoansWS {
             loan.setId(new Long(loanId));
             loanService.updateLoan(loan);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Se trata de actualizar prestamo que no existe.");
             return Response.serverError().build();
         }
         return Response.ok().build();
@@ -92,7 +105,11 @@ public class LoansWS {
     @DELETE
     @Path("/{loanId}")
     public void deleteLoan(@PathParam("loanId") final String loanId) {
-        loanService.deleteLoanById(new Long(loanId));
+    	try{
+    		loanService.deleteLoanById(new Long(loanId));
+    	}catch(Exception e){
+    		logger.error("Se intenta eliminar prestamo que no existe.");
+    	}
     }
 
     private Loan parseLoan(final String jsonLoan) throws JsonParseException, JsonMappingException, IOException {

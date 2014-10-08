@@ -8,6 +8,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,8 @@ import ar.com.hexacta.tpl.service.ILoginService;
 
 @Service
 public class LoginWS {
-
+	private static final Logger logger = LogManager.getLogger(LoginWS.class.getName());
+	private static final int HTTP_ERROR_UNAUTHORIZED = 401;
     @Autowired
     private ILoginService loginService;
 
@@ -38,18 +41,22 @@ public class LoginWS {
             String password = decoded.substring(decoded.indexOf(':') + 1);
 
             User user = loginService.findUserByUsername(username);
-            if (user == null)
-                return Response.serverError().build();
-            if (!user.getPassword().equals(password))
-                return Response.serverError().build();
-
-            if (user.getEnabled())
+            if (user == null){
+            	logger.error("Se intento loggear con usuario inexistente.");
+                return Response.status(HTTP_ERROR_UNAUTHORIZED).build();
+            }
+            if (!user.getPassword().equals(password)){
+            	logger.error("Se intento loggear con contraseña incorrecta.");
+                return Response.status(HTTP_ERROR_UNAUTHORIZED).build();
+            }
+            if (user.getEnabled()){
                 return Response.ok(user).build();
-            else
-                return Response.serverError().build();
-
+            }else{
+            	logger.error("Se intento loggear con usuario inhabilitado o eliminado.");
+                return Response.status(HTTP_ERROR_UNAUTHORIZED).build();
+            }
         } catch (IOException e) {
-            return Response.status(401).build();
+            return Response.status(HTTP_ERROR_UNAUTHORIZED).build();
         }
     }
 }

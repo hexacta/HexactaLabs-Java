@@ -14,6 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -25,8 +27,8 @@ import ar.com.hexacta.tpl.service.ICommentService;
 
 @Service
 public class CommentWS {
-
-    public static int HTTP_OK_CREATED = 201;
+	private static final Logger logger = LogManager.getLogger(CommentWS.class.getName());
+    private static final int HTTP_OK_CREATED = 201;
 
     public CommentWS() {
     }
@@ -60,11 +62,9 @@ public class CommentWS {
     @Consumes("application/json")
     public Response createComment(@Multipart(value = "newComment", type = "application/json") final String jsonComment) {
         try {
-
             commentService.createComment(parseComment(jsonComment));
-
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error al tratar de crear el comentario.");
             return Response.serverError().build();
         }
         return Response.status(HTTP_OK_CREATED).build();
@@ -81,7 +81,7 @@ public class CommentWS {
             commentService.updateComment(comment);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Se quiso actualizar un libro que no existe.");
             return Response.serverError().build();
         }
         return Response.ok().build();
@@ -90,7 +90,11 @@ public class CommentWS {
     @DELETE
     @Path("/{commentId}")
     public void deleteComment(@PathParam("commentId") final String commentId) {
-        commentService.deleteCommentById(new Long(commentId));
+    	try{
+    		commentService.deleteCommentById(new Long(commentId));
+    	}catch(Exception e){
+    		logger.error("Se quiso eliminar un comentario que no existe.");
+    	}
     }
 
     private Comment parseComment(final String jsonComment) throws JsonParseException, JsonMappingException, IOException {
