@@ -22,13 +22,19 @@ import ar.com.hexacta.tpl.service.IBooksService;
 import ar.com.hexacta.tpl.service.IDataInitService;
 import ar.com.hexacta.tpl.service.impl.BooksServiceImpl;
 
+//Import log4j classes.
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 @Service
 public class BookWS {
 
-	public static int HTTP_OK_CREATED = 201;
-	public static int HTTP_OK = 200;
-	public static int HTTP_DELETE = 204;
+	private static final int HTTP_OK_CREATED = 201;
+	private static final int HTTP_OK = 200;
+	private static final int HTTP_DELETE = 204;
 
+	private static final Logger logger = LogManager.getLogger(BookWS.class.getName()); 
+	
 	public BookWS() {
 	}
 
@@ -55,12 +61,11 @@ public class BookWS {
 	@POST
 	@Path("/")
 	@Consumes("application/json")
-	public Response createBook(
-			@Multipart(value = "book2", type = "application/json") final String jsonBook) {
+	public Response createBook(@Multipart(value = "book2", type = "application/json") final String jsonBook) {
 		try {
 			bookService.createBook(parseBook(jsonBook));
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.trace("Error al crear el libro.");
 			return Response.serverError().build();
 		}
 		return Response.status(HTTP_OK_CREATED).build();
@@ -79,11 +84,12 @@ public class BookWS {
 			if (persistedBook.getEnabled()) {
 				return makeUpdate(book, HTTP_OK);
 			} else {
+				logger.trace("Se quiso acceder a un libro inhabilitado - que ya eliminado logicamente.");
 				return Response.serverError().build();
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.trace("Se quiso acceder a un libro que no existe.");
 			return Response.serverError().build();
 		}
 	}
@@ -91,9 +97,14 @@ public class BookWS {
 	@DELETE
 	@Path("/{bookId}")
 	public Response deleteBook(@PathParam("bookId") final String bookId) {
-		Book book = bookService.findBook(new Long(bookId));
-		book.setEnabled(false);
-		return makeUpdate(book, HTTP_DELETE);
+		try{
+			Book book = bookService.findBook(new Long(bookId));
+			book.setEnabled(false);
+			return makeUpdate(book, HTTP_DELETE);
+		}catch(Exception e){
+			logger.trace("Se quiso eliminar un libro que no existe.");
+			return Response.serverError().build();
+		}
 	}
 
 	private Response makeUpdate(Book book, int responseCode) {
