@@ -64,7 +64,7 @@
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">Libros</a></li>
-						<li><a href="#/loanList">Lista de pr&eacute;stamos</a></li>
+						<li ng-show="loggedIn"><a href="#/loanList">Lista de pr&eacute;stamos</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#/register" ng-hide="loggedIn">Registrarse</a></li>

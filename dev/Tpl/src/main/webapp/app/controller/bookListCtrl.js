@@ -57,23 +57,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		//Getting comments
 		var bookId = $scope.selectedBook.id;
 		$scope.loadBookComments(book);
-		
-		// Get image from google rest service
-		var find = '-';
-		var re = new RegExp(find, 'g');
-		var isbn = $scope.selectedBook.isbn.replace(re , '');
-		$http({
-			method : 'GET',
-			url: 'https://www.googleapis.com/books/v1/volumes?q=isbn+' + isbn,
-			headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
-			}).success(function(data, status, headers, config){
-				if (status == 200 ){
-					$scope.selectedBook.image = data.items[0].volumeInfo.imageLinks.thumbnail;
-				}
-			}).error(function(data, status, headers, config){
-	    		console.log("An Error occurred while trying to connect to Google API");
-	    		$scope.selectedBook.image = "";
-	    	}) ;
+				
 	};
 	
 	

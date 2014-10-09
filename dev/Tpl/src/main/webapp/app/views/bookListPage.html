@@ -19,7 +19,6 @@
 						<th class="text-center" ng-click="predicate = 'name'; reverse=!reverse"> T&iacute;tulo </th>
 						<th class="text-center" ng-click="predicate = 'description'; reverse=!reverse"> Descripci&oacute;n </th>
 						<th class="text-center" ng-click="predicate = 'publisher'; reverse=!reverse"> Editorial </th>
-						<th class="text-center" ng-click="predicate = 'isbn'; reverse=!reverse"> ISBN </th>
 						<th class="text-center"> Categor&iacute;a </th>
 	
 						<th class="text-center" colspan="3" ng-show="loggedIn"> Acciones </th>
@@ -36,20 +35,16 @@
 						<td>
 							{{book.publisher}}
 						</td>
-						<td>
-							{{book.isbn}}
-						</td>
 						<td id="categoria">
-							<ul ng-repeat="Categorie in book.bookCategories" class="list-inline">
-								<li>{{Categorie.name}}</li>
+							<ul ng-repeat="categorie in book.bookCategories" class="list-inline">
+								<li>{{categorie.name}}</li>
 							</ul>
 						</td>
 						<!-- End Fields -->
 	
 						<!-- Buttons --> 
 	
-						<td ng-show="loggedIn">
-	
+						<td ng-show="loggedIn">	
 							<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToEditBook(book.id)">Editar</button>
 						</td>
 						<td ng-show="loggedIn">
@@ -78,8 +73,7 @@
 						<div class="col-md-9">
 							<h4>{{selectedBook.description}}</h4>
 							<cite>- {{selectedBook.publisher}}</cite>
-							<h4><em class="underline">ISBN:</em> {{selectedBook.isbn}}</h4>
-							<h4>Pa&iacute;s de Origen: {{selectedBook.country}}</h4>
+							<h4>G&eacute;nero: {{selectedBook.genre}}</h4>
 						</div>
 						
 						<img ng-src="{{selectedBook.image}}"></img>						
@@ -94,7 +88,6 @@
 						</div>
 						<form role="form" name="commentForm" ng-show="loggedIn" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
 							<div class="form-group">
-								<label for="txtCommentText">Comentario</label>
 								<textarea ng-model="comment.body" class="form-control"
 									placeholder="Escriba aqu&iacute; su comentario"
 									id="txtCommentText" required></textarea>
