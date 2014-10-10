@@ -25,14 +25,7 @@
 							ng-required="true"/>
 						<div class="alert alert-danger" role="alert" ng-show="trySubmit && createBookForm.publisher.$error.required"> Este campo es <strong>obligatorio</strong> </div>
 					</div>
-					<!-- ISBN -->
-					<div class="form-group">
-						<label class="control-label">ISBN: </label> <input type="text"
-							name="isbn"	class="form-control" ng-model="newBook.isbn"
-							ng-required="true" ng-minlength="1" ng-pattern="/^[0-9\-]*$/"/>
-							<div class="alert alert-danger" role="alert" ng-show="trySubmit && createBookForm.isbn.$error.required"> Este campo es <strong>obligatorio</strong> </div>
-					</div>			
-					<!-- SELECT GENERO -->
+					<!-- SELECT GÉNERO -->
 					<div class="form-group">
 						<label class="control-label">G&eacute;nero: </label> <select class="form-control"
 							name="genre" ng-model="newBook.genre" ng-required="true">

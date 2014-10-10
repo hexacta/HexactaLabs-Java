@@ -25,7 +25,7 @@
 				<tbody ng-repeat="loan in loans | filter:user | orderBy:predicate:reverse">
 					<tr>											
 						<td>
-							{{loan.book.book.name}}
+							{{loan.bookCopy.book.name}}
 						</td>
 						<td>
 							{{loan.fromDate | date:'dd/MM/yyyy'}}

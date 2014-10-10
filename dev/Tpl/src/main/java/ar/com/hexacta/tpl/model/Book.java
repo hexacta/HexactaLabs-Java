@@ -42,9 +42,6 @@ public class Book implements Serializable {
     @Column(name = "GENRE")
     private BookGenre genre;
 
-    @Column(name = "ISBN")
-    private String isbn;
-
     @Column(name = "ENABLED")
     private Boolean enabled;
 
@@ -70,14 +67,13 @@ public class Book implements Serializable {
     }
 
     public Book(final String aName, final String aDescription, final String aPublisher, final BookGenre aBookGenre,
-            final String isbn, final Set<BookCategory> bookCategories, final Set<BookCopy> bookCopies) {
+            final Set<BookCategory> bookCategories, final Set<BookCopy> bookCopies) {
         this(aName);
         description = aDescription;
         publisher = aPublisher;
         genre = aBookGenre;
         this.bookCategories = bookCategories;
         this.bookCopies = bookCopies;
-        this.isbn = isbn;
     }
 
     public Long getId() {
@@ -118,14 +114,6 @@ public class Book implements Serializable {
 
     public void setGenre(final BookGenre genre) {
         this.genre = genre;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(final String isbn) {
-        this.isbn = isbn;
     }
 
     @JsonIgnore
