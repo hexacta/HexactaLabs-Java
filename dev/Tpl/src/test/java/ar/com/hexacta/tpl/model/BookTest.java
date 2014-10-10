@@ -30,8 +30,6 @@ public class BookTest {
 
     private static final BookGenre GENRE = BookGenre.HUMOR;
 
-    private static final String ISBN = "123456789";
-
     private static HashSet<BookCategory> CATEGORIES;
 
     private static final HashSet<BookCopy> COPIES = new HashSet<BookCopy>();
@@ -71,7 +69,7 @@ public class BookTest {
         CATEGORY = new BookCategory();
         CATEGORIES = new HashSet<BookCategory>();
         CATEGORIES.add(CATEGORY);
-        testBook = new Book(NAME, DESCRIPTION, PUBLISHER, GENRE, ISBN, CATEGORIES, COPIES);
+        testBook = new Book(NAME, DESCRIPTION, PUBLISHER, GENRE, CATEGORIES, COPIES);
         applicationContext = new ClassPathXmlApplicationContext("spring/spring-persistence-test.xml");
         categoryDao = applicationContext.getBean(BookCategoryDAO.class);
         txManager = applicationContext.getBean(PlatformTransactionManager.class);
@@ -106,7 +104,6 @@ public class BookTest {
         assertTrue(testBook.getDescription().equals(DESCRIPTION));
         assertTrue(testBook.getPublisher().equals(PUBLISHER));
         assertTrue(testBook.getGenre().equals(GENRE));
-        assertTrue(testBook.getIsbn().equals(ISBN));
         assertTrue(testBook.getBookCategories().equals(CATEGORIES));
     }
 

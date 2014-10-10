@@ -18,14 +18,12 @@ public class BookBuilder {
 
     private BookGenre genre = BookGenre.HUMOR;
 
-    private String isbn = "defaultISBN";
-
     private Set<BookCategory> bookCategories = new HashSet<BookCategory>(0);
 
     private Set<BookCopy> bookCopies = new HashSet<BookCopy>(0);
 
     public Book build() {
-        return new Book(name, description, publisher, genre, isbn, bookCategories, bookCopies);
+        return new Book(name, description, publisher, genre, bookCategories, bookCopies);
     }
 
     public BookBuilder withBookCopy(final BookCopy... aCopy) {
@@ -71,8 +69,4 @@ public class BookBuilder {
         return this;
     }
 
-    public BookBuilder withISBN(final String aISBN) {
-        isbn = aISBN;
-        return this;
-    }
 }
