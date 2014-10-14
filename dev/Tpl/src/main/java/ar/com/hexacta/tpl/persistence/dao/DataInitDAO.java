@@ -71,25 +71,25 @@ public class DataInitDAO implements DataInitRepository {
 
         // Libros
 
-        Book book1 = new BookBuilder().withName("El principito")
+        Book book1 = new BookBuilder().withTitle("El principito")
                 .withDescription("Best-seller del escritor frances Antoine de Saint-Exupery.")
                 .withPublisher("Editorial Planeta").withCategory(physicalCategory).withGenre(BookGenre.FANTASY)
                 .withBookCopy(bookCopy1, bookCopy2).build();
         bookDAO.saveOrUpdate(book1);
         LOG.info("Created book " + book1.getId());
-        Book book2 = new BookBuilder().withName("El codigo Da Vinci")
+        Book book2 = new BookBuilder().withTitle("El codigo Da Vinci")
                 .withDescription("Novela de misterio del escritor Dan Brown.").withPublisher("Editorial Estrada")
                 .withGenre(BookGenre.MYSTERY).withCategory(physicalCategory).withBookCopy(bookCopy3).build();
         bookDAO.saveOrUpdate(book2);
         LOG.info("Created book " + book2.getId());
 
-        Book book3 = new BookBuilder().withName("El Hobbit").withDescription("Novela fantastica de J. R. R. Tolkien.")
+        Book book3 = new BookBuilder().withTitle("El Hobbit").withDescription("Novela fantastica de J. R. R. Tolkien.")
                 .withPublisher("Editorial Atlantida").withGenre(BookGenre.FABLE).withCategory(eBookCategory)
                 .withBookCopy(bookCopy4).build();
         bookDAO.saveOrUpdate(book3);
         LOG.info("Created book " + book3.getId());
 
-        Book book4 = new BookBuilder().withName("Ender's Game").withDescription("Novela de ciencia ficción de Scott")
+        Book book4 = new BookBuilder().withTitle("Ender's Game").withDescription("Novela de ciencia ficción de Scott")
                 .withPublisher("Editorial pepin").withCategory(physicalCategory).withBookCopy(bookCopy5).build();
         bookDAO.saveOrUpdate(book4);
         LOG.info("Created book " + book4.getId());

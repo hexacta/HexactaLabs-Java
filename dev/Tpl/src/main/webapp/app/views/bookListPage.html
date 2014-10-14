@@ -27,7 +27,7 @@
 				<tbody ng-repeat="book in books | filter:query | orderBy:predicate:reverse">
 					<tr>											
 						<td>
-							<a data-toggle="modal" data-target="#myModal" ng-click="modifyModal(book)">{{book.name}}</a> 
+							<a data-toggle="modal" data-target="#myModal" ng-click="modifyModal(book)">{{book.title}}</a> 
 						</td>
 						<td>
 							{{book.description}}

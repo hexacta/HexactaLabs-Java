@@ -33,7 +33,7 @@ public class BookServiceTest {
     public void prepare() {
 
         book = new Book();
-        book.setName("name");
+        book.setTitle("title");
         book.setDescription("desc");
         book.setGenre(BookGenre.HUMOR);
         book.setPublisher("publisher");
@@ -67,7 +67,7 @@ public class BookServiceTest {
         Assert.assertNotNull(ubook);
         Assert.assertEquals(ubook.getDescription(), "desc");
         Assert.assertEquals(ubook.getPublisher(), "publisher");
-        Assert.assertEquals(ubook.getName(), "name");
+        Assert.assertEquals(ubook.getTitle(), "title");
         Assert.assertEquals(ubook.getGenre(), "EEUU");
         Assert.assertTrue(ubook.getId().equals(1L));
 
