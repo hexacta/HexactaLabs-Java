@@ -16,7 +16,7 @@ INSERT INTO `book_categories` VALUES (1,'Libro en formato electronico','ebook',0
 -- Dumping data for table `books`
 --
 
-INSERT INTO `books` VALUES 	(1,'Best-seller del escritor frances Antoine de Saint-Exupery.',TRUE,'FABLE','El principito','Editorial Planeta',0), (2,'Novela de misterio del escritor Dan Brown.',TRUE,'MYSTERY','El codigo Da Vinci','Editorial Estrada',0), (3,'Novela fantastica de J. R. R. Tolkien.',TRUE,'FANTASY','El Hobbit','Editorial Atlantida',0), (4,'Novela de ciencia ficcion de Scott',TRUE,'CRIME','Enders Game','Editorial Pepin',0);
+INSERT INTO `books` VALUES 	(1,'Best-seller del escritor frances Antoine de Saint-Exupery.',TRUE,'FABLE','Editorial Planeta','El principito',0), (2,'Novela de misterio del escritor Dan Brown.',TRUE,'MYSTERY','Editorial Estrada','El codigo Da Vinci',0), (3,'Novela fantastica de J. R. R. Tolkien.',TRUE,'FANTASY','Editorial Atlantida','El Hobbit',0), (4,'Novela de ciencia ficcion de Scott',TRUE,'CRIME','Editorial Pepin','Enders Game',0);
 
 --
 -- Dumping data for table `books_book_categories`

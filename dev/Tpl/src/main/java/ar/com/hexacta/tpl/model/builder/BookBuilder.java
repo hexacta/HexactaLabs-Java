@@ -10,7 +10,7 @@ import ar.com.hexacta.tpl.model.BookGenre;
 
 public class BookBuilder {
 
-    private String name = "defaultName";
+    private String title = "defaultTitle";
 
     private String description = "defaultDescription";
 
@@ -23,7 +23,7 @@ public class BookBuilder {
     private Set<BookCopy> bookCopies = new HashSet<BookCopy>(0);
 
     public Book build() {
-        return new Book(name, description, publisher, genre, bookCategories, bookCopies);
+        return new Book(title, description, publisher, genre, bookCategories, bookCopies);
     }
 
     public BookBuilder withBookCopy(final BookCopy... aCopy) {
@@ -54,8 +54,8 @@ public class BookBuilder {
         return this;
     }
 
-    public BookBuilder withName(final String aName) {
-        name = aName;
+    public BookBuilder withTitle(final String aTitle) {
+        title = aTitle;
         return this;
     }
 
