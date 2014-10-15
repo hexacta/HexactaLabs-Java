@@ -21,7 +21,7 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 	$scope.save = function(aBook) {
 		$scope.trySubmit = true;
 		
-		if ($scope.createBookForm.$invalid) {
+		if ($scope.bookForm.$invalid) {
 			return false;
 		}		
 		

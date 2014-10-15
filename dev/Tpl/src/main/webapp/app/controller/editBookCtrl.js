@@ -56,6 +56,12 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 	}
     
     $scope.save = function(aBook) {
+		$scope.trySubmit = true;
+		
+		if ($scope.bookForm.$invalid) {
+			return false;
+		}		
+		
     	for (var i = 0; i < aBook.bookCategories.length; i++){
 			delete aBook.bookCategories[i].selected;
 		}
