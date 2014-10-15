@@ -29,8 +29,8 @@ public class Book implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NAME")
-    private String name;
+    @Column(name = "TITLE")
+    private String title;
 
     @Column(name = "DESCRIPTION")
     private String description;
@@ -61,14 +61,14 @@ public class Book implements Serializable {
         enabled = Boolean.TRUE;
     }
 
-    public Book(final String name) {
+    public Book(final String aTitle) {
         this();
-        this.name = name;
+        title = aTitle;
     }
 
-    public Book(final String aName, final String aDescription, final String aPublisher, final BookGenre aBookGenre,
+    public Book(final String aTitle, final String aDescription, final String aPublisher, final BookGenre aBookGenre,
             final Set<BookCategory> bookCategories, final Set<BookCopy> bookCopies) {
-        this(aName);
+        this(aTitle);
         description = aDescription;
         publisher = aPublisher;
         genre = aBookGenre;
@@ -84,12 +84,12 @@ public class Book implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(final String name) {
-        this.name = name;
+    public void setTitle(final String aTitle) {
+        title = aTitle;
     }
 
     public String getDescription() {
