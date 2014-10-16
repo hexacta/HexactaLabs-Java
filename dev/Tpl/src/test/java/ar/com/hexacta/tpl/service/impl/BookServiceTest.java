@@ -68,7 +68,7 @@ public class BookServiceTest {
         Assert.assertEquals(ubook.getDescription(), "desc");
         Assert.assertEquals(ubook.getPublisher(), "publisher");
         Assert.assertEquals(ubook.getTitle(), "title");
-        Assert.assertEquals(ubook.getGenre(), "EEUU");
+        Assert.assertEquals(ubook.getGenre(), BookGenre.HUMOR);
         Assert.assertTrue(ubook.getId().equals(1L));
 
     }
