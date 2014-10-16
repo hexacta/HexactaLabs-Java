@@ -7,7 +7,7 @@ public class BookGenreTest {
 
     @Test
     public void testGenreCreation() {
-        Assert.assertTrue(BookGenre.HUMOR.toString() == "Humor");
+        Assert.assertEquals(BookGenre.HUMOR.toString(), "HUMOR");
     }
 
 }
