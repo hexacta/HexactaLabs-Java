@@ -18,6 +18,9 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		});		
 	};
 	
-	$scope.loadBooks();
+	
+	
+	//$scope.loadBooks();
 	
 });
+
