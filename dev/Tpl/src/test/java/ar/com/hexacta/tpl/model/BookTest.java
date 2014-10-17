@@ -22,15 +22,13 @@ import ar.com.hexacta.tpl.persistence.dao.BookCategoryDAO;
 import ar.com.hexacta.tpl.persistence.dao.BookDAO;
 
 public class BookTest {
-    private static final String NAME = "Test Book";
+    private static final String TITLE = "Test Book";
 
     private static final String DESCRIPTION = "Test Book Description";
 
     private static final String PUBLISHER = "TEST PUBLISHER";
 
     private static final BookGenre GENRE = BookGenre.HUMOR;
-
-    private static final String ISBN = "123456789";
 
     private static HashSet<BookCategory> CATEGORIES;
 
@@ -71,7 +69,7 @@ public class BookTest {
         CATEGORY = new BookCategory();
         CATEGORIES = new HashSet<BookCategory>();
         CATEGORIES.add(CATEGORY);
-        testBook = new Book(NAME, DESCRIPTION, PUBLISHER, GENRE, ISBN, CATEGORIES, COPIES);
+        testBook = new Book(TITLE, DESCRIPTION, PUBLISHER, GENRE, CATEGORIES, COPIES);
         applicationContext = new ClassPathXmlApplicationContext("spring/spring-persistence-test.xml");
         categoryDao = applicationContext.getBean(BookCategoryDAO.class);
         txManager = applicationContext.getBean(PlatformTransactionManager.class);
@@ -102,11 +100,10 @@ public class BookTest {
     @Test
     @Transactional(readOnly = true)
     public void testParameterCretion() {
-        assertTrue(testBook.getName().equals(NAME));
+        assertTrue(testBook.getTitle().equals(TITLE));
         assertTrue(testBook.getDescription().equals(DESCRIPTION));
         assertTrue(testBook.getPublisher().equals(PUBLISHER));
         assertTrue(testBook.getGenre().equals(GENRE));
-        assertTrue(testBook.getIsbn().equals(ISBN));
         assertTrue(testBook.getBookCategories().equals(CATEGORIES));
     }
 

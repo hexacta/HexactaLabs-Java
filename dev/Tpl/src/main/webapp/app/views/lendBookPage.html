@@ -1,15 +1,9 @@
 <section id="lendBook">
-	<div class="container jumbotron col-md-6 col-md-offset-3"
-		ng-controller="lendBookCtrl" >
-		<div class="col-md-8 col-md-offset-2" id="feedbackPanel" ng-show="!isAvailable(newLoan)">
-		<label>Sin Copias!</label>
-		<button type="button" class="btn btn-default btn-block"	ng-click="backToHome()">Volver</button>
-		</div>
-		
-		<form novalidate name="createLoanForm" id="bookLendingForm" ng-submit="saveLoan(newLoan)" ng-show="isAvailable(newLoan)">
+	<div class="container jumbotron col-md-6 col-md-offset-3">
+		<form novalidate name="createLoanForm" id="bookLendingForm" ng-submit="saveLoan(newLoan)">
 			<div class="col-md-8 col-md-offset-2" id="feedbackPanel"/>
 			<fieldset>
-				<legend>Prestar libro "{{currentBook.name}}"</legend>
+				<legend>Prestar libro "{{currentBook.title}}"</legend>
 				<!-- SELECT USER -->
 				<div class="form-group">
 					<label class="">Prestar a:</label>
@@ -47,12 +41,16 @@
 			    </div>
    				<button type="button" class="btn btn-sm btn-hexacta-primary" ng-click="today()">Hoy</button>
    				<button type="button" class="btn btn-sm btn-hexacta-primary" ng-click="clear()">Borrar</button>
-  				<hr />
+  		
+  				<!-- FIXME: Mensaje de error cuando no quedan mas copias del libro -->		
+  				<div class="alert alert-danger" role="alert" ng-show="true"> 
+  					No quedan copias del libro.
+  			 	</div>
+  		
 				<!-- BOTONES -->
 				<div class="col-md-8 col-md-offset-2">
-					<button type="submit" class="btn btn-hexacta-green btn-block">Prestar</button>
-					<button type="button" class="btn btn-default btn-block"
-							ng-click="backToHome()">Volver</button>
+					<button type="submit" class="btn btn-hexacta-primary btn-block">Prestar</button>
+					<button type="button" class="btn btn-default btn-block"	ng-click="backToHome()">Volver</button>
 				</div>
 			</fieldset>
 		</form>

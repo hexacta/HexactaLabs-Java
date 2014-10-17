@@ -189,7 +189,6 @@ public class CommentTest {
 				dao.update(searchedComment);
 				Comment updatedComment = dao.findById(testComment.getId());
 				assertTrue(updatedComment.getBody().equals("new body"));
-				System.out.println(updatedComment.getBody());
 				dao.delete(testComment);
 			}
 		});

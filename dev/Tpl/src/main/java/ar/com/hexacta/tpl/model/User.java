@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 @Entity
 @Table (name = "USERS")
 public class User implements Serializable {
@@ -62,8 +60,7 @@ public class User implements Serializable {
     public String getUsername() {
         return username;
     }
-    
-    @JsonIgnore
+
     public String getPassword() {
         return password;
     }
@@ -83,7 +80,7 @@ public class User implements Serializable {
     public void setEmail(final String email) {
         this.email = email;
     }
-    
+
     public Boolean getEnabled() {
         return enabled;
     }

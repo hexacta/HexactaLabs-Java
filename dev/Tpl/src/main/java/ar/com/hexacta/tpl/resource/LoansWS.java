@@ -14,6 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -28,11 +30,14 @@ import ar.com.hexacta.tpl.service.ILoansService;
 @Service
 public class LoansWS {
 
-	public static int HTTP_OK = 200;
+	private static final int HTTP_OK = 200;
+	private static final Logger LOG = LogManager.getLogger(LoansWS.class.getName());
     public LoansWS() {
-    } 		
+    }
+    
     @Autowired
     private ILoansService loanService;
+
     @Autowired
     private IBookCopiesService copyService;
 
@@ -47,14 +52,24 @@ public class LoansWS {
     @Path("/{loanId}")
     @Produces("application/json")
     public Loan findLoan(@PathParam("loanId") final String loanId) {
-        return loanService.findLoan(new Long(loanId));
+    	try{
+    		return loanService.findLoan(new Long(loanId));
+    	}catch(Exception e){
+    		LOG.error("Se busca un prestamo que no existe.");
+    		return null;
+    	}
     }
 
     @GET
     @Path("/byBook/{bookId}")
     @Produces("application/json")
     public List<Loan> findLoansByBookId(@PathParam("bookCopyId") final String bookCopyId) {
-        return loanService.findLoansByBookId(new Long(bookCopyId));
+    	try{
+    		return loanService.findLoansByBookId(new Long(bookCopyId));
+    	}catch(Exception e){
+    		LOG.error("Se busca prestamos de un libro que no existe.");
+    		return null;
+    	}
     }
 
     @POST
@@ -62,16 +77,22 @@ public class LoansWS {
     @Consumes("application/json")
     public Response createLoan(@Multipart(value = "newLoan", type = "application/json") final String jsonLoan) {
         try {
-        	BookCopy copy = (parseLoan(jsonLoan)).getBook();
-        	updateBookCopyState(copy);
+            Loan newLoan = parseLoan(jsonLoan);
+
+            BookCopy copy = newLoan.getBookCopy();
+            copy = copyService.findCopy(copy.getId());
+            copy.changeToLoaned();
+            makeUpdate(copy, HTTP_OK);
+
+            loanService.createLoan(newLoan);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("No se pudo crear el prestamo para la copia y usuario indicados.");
             return Response.serverError().build();
         }
         return Response.ok().build();
     }
 
-	@PUT
+    @PUT
     @Path("/{loanId}")
     @Consumes("application/json")
     public Response updateLoan(@PathParam("loanId") final String loanId, final String jsonLoan) {
@@ -80,7 +101,7 @@ public class LoansWS {
             loan.setId(new Long(loanId));
             loanService.updateLoan(loan);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Se trata de actualizar prestamo que no existe.");
             return Response.serverError().build();
         }
         return Response.ok().build();
@@ -89,7 +110,11 @@ public class LoansWS {
     @DELETE
     @Path("/{loanId}")
     public void deleteLoan(@PathParam("loanId") final String loanId) {
-        loanService.deleteLoanById(new Long(loanId));
+    	try{
+    		loanService.deleteLoanById(new Long(loanId));
+    	}catch(Exception e){
+    		LOG.error("Se intenta eliminar prestamo que no existe.");
+    	}
     }
 
     private Loan parseLoan(final String jsonLoan) throws JsonParseException, JsonMappingException, IOException {
@@ -98,17 +123,11 @@ public class LoansWS {
         newLoan = mapper.readValue(jsonLoan, Loan.class);
         return newLoan;
     }
-    
-    private Response makeUpdate(BookCopy copy, int responseCode) {
-    	copyService.updateCopy(copy);
-		return Response.status(responseCode).build();
-	}
-    
-    private void updateBookCopyState(BookCopy copy) {
-		copy = copyService.findCopy(copy.getId());
-		copy.changeToLoaned();
-		makeUpdate(copy, HTTP_OK);	
-	}
+
+    private Response makeUpdate(final BookCopy copy, final int responseCode) {
+        copyService.updateCopy(copy);
+        return Response.status(responseCode).build();
+    }
 
     public ILoansService getLoanService() {
         return loanService;
@@ -117,13 +136,13 @@ public class LoansWS {
     public void setLoanService(final ILoansService loanService) {
         this.loanService = loanService;
     }
-    
-    public IBookCopiesService getBookCopyService(){
-    	return copyService;
+
+    public IBookCopiesService getBookCopyService() {
+        return copyService;
     }
-   
-    public void setBookCopiesService(final IBookCopiesService copyService){
-    	this.copyService = copyService;
+
+    public void setBookCopiesService(final IBookCopiesService copyService) {
+        this.copyService = copyService;
     }
- 
+
 }

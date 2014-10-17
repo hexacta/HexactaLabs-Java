@@ -1,6 +1,8 @@
 booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 		$http) {
-
+	
+	$scope.pageTitle = 'Crear Nuevo Libro';
+	
 	$http({
 		method : 'GET',
 		url: '/Tpl/rest/categories',
@@ -19,7 +21,7 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 	$scope.save = function(aBook) {
 		$scope.trySubmit = true;
 		
-		if ($scope.createBookForm.$invalid) {
+		if ($scope.bookForm.$invalid) {
 			return false;
 		}		
 		
@@ -39,7 +41,7 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 	};
 
 	$scope.reset = function() {
-		$scope.newBook = {};
+		$scope.book = {};
 	};
 
 	$scope.reset();

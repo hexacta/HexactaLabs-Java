@@ -9,7 +9,7 @@ booksApp.controller('deleteBookCtrl', function ($scope, $location, $routeParams,
 
 					if (status == 204) {
 						console.log("Deletion Completed.");
-						$location.path("/");
+						console.log(data);
 					}
 				}).error(function(data, status, headers, config) {
 					console.log("An Error occurred while trying to store a book");

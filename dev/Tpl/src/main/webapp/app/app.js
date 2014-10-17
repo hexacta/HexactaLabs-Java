@@ -8,12 +8,12 @@ booksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
 			publicAccess: true
 		}).
 	   	when('/createBook' , { 
-	   		templateUrl: 'app/views/createBookPage.html', 
+	   		templateUrl: 'app/views/createOrEditBookPage.html', 
 	   		controller: 'createBookCtrl',
 	   		publicAccess: false
 	   	}).
 		when('/editBook/' + BOOKID, {
-			templateUrl: 'app/views/editBookPage.html',
+			templateUrl: 'app/views/createOrEditBookPage.html',
 			controller: 'editBookCtrl',
 			publicAccess: false
 		}).
@@ -31,6 +31,11 @@ booksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
             templateUrl: 'app/views/registerPage.html',
             controller: 'registerCtrl',
             publicAccess: true
+        }).
+        when('/loanList', {
+        	templateUrl: 'app/views/loanListPage.html',
+        	controller: 'loanListCtrl',
+        	publicAccess: false
         }).
 		otherwise({
 			redirectTo: '/'

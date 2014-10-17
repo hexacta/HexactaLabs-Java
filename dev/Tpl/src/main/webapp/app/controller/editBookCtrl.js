@@ -2,6 +2,8 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 		$routeParams, $http) {
 	$scope.books = $rootScope.books;
 	
+	$scope.pageTitle = 'Editar Libro';
+		
 	$http({
 		method : 'GET',
 		url: '/Tpl/rest/categories',
@@ -14,7 +16,7 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 				$scope.categories[i].selected = false;
 			}
 		}
-		$scope.getBooks();
+		$scope.getBook();
 	}).error(function(data, status, headers, config){
 		console.log("An Error occurred while trying to get all categories");
 	});
@@ -24,15 +26,15 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 	};
 
 	$scope.reset = function() {
-		$scope.newBook = {};
+		$scope.book = {};
 	};
 
 	$scope.reset();
 
 	$scope.bookId = $routeParams.bookId;
-	$scope.currentBook = null;
+	$scope.book = {};
 
-	$scope.getBooks = function(){
+	$scope.getBook = function(){
 	$http({
 		method : 'GET',
 		url : '/Tpl/rest/books/' + $scope.bookId,
@@ -43,9 +45,9 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 	}).success(function(data, status, headers, config) {
 
 		if (status == 200) {
-			$scope.currentBook = data;
-			for (var i = 0; i < $scope.currentBook.bookCategories.length; i++){
-				$scope.categories[$scope.currentBook.bookCategories[i].id -1].selected = true;
+			$scope.book = data;
+			for (var i = 0; i < $scope.book.bookCategories.length; i++){
+				$scope.categories[$scope.book.bookCategories[i].id -1].selected = true;
 			}
 		}
 	}).error(function(data, status, headers, config){
@@ -54,6 +56,12 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 	}
     
     $scope.save = function(aBook) {
+		$scope.trySubmit = true;
+		
+		if ($scope.bookForm.$invalid) {
+			return false;
+		}		
+		
     	for (var i = 0; i < aBook.bookCategories.length; i++){
 			delete aBook.bookCategories[i].selected;
 		}

@@ -1,0 +1,63 @@
+<section id="createBook">
+	<div class="container jumbotron col-md-6 col-md-offset-3">
+		<form name="bookForm" ng-submit="save(book)" ng-class="{submitted:trySubmit}" novalidate>
+			<div class="col-md-8 col-md-offset-2">
+				<fieldset>
+					<legend> {{pageTitle}}</legend>
+					<!-- TITULO -->
+					<div class="form-group">
+						<label class="control-label">T&iacute;tulo: </label> 
+						<input	type="text" name="title" class="form-control" ng-model="book.title" ng-required="true" maxlength="150" />
+						<div class="alert alert-danger" role="alert" ng-show="trySubmit && bookForm.title.$error.required"> Este campo es <strong>obligatorio</strong> </div>
+					</div>
+					<!-- DESCRIPCION -->
+					<div class="form-group">
+						<label class="control-label">Descripci&oacute;n: </label>
+						<textarea rows="3" name="description" class="form-control noResize"
+							ng-model="book.description" ng-required="true"> </textarea>
+						<div class="alert alert-danger" role="alert" ng-show="trySubmit && bookForm.description.$error.required"> Este campo es <strong>obligatorio</strong> </div>										
+					</div>
+					<!-- EDITORIAL -->
+					<div class="form-group">
+						<label class="control-label">Editorial: </label> <input type="text"
+							name="publisher" class="form-control" ng-model="book.publisher"
+							ng-required="true"/>
+						<div class="alert alert-danger" role="alert" ng-show="trySubmit && bookForm.publisher.$error.required"> Este campo es <strong>obligatorio</strong> </div>
+					</div>
+					<!-- SELECT GÉNERO -->
+					<div class="form-group">
+						<label class="control-label">G&eacute;nero: </label> <select class="form-control"
+							name="genre" ng-model="book.genre" ng-required="true">
+								<option>FABLE</option>
+								<option>CRIME</option>
+								<option>FANTASY</option>
+								<option>CRIME</option>
+								<option>MYSTERY</option>
+						</select>
+						<div class="alert alert-danger" role="alert" ng-show="trySubmit && bookForm.genre.$error.required"> Debes seleccionar <strong>un g&eacute;nero</strong> </div>
+					</div>
+					<!-- CHECKBOX CATEGORIAS -->
+					<div class="form-group">
+						<label class="control-label"> Categorias:</label>
+						<div class="col-md-8 col-md-offset-2 checkbox" ng-repeat="category in categories">
+							<label  class="checkbox-inline">
+							<input type="checkbox" name="selectedCategory[]" value="{{category}}" ng-model="category.selected"
+							ng-click="toggleSelection(category, book)" ng-required="book.bookCategories.length == 0"> 
+							{{category.name}}<br/>
+							</label>
+						</div>
+						<div class="alert alert-danger" role="alert" ng-show="trySubmit && (book.bookCategories === undefined || book.bookCategories.length == 0)"> Debes seleccionar <strong>al menos una</strong> categor&iacute;a</div>
+					</div>
+					<!-- BOTONES -->
+					<div class="col-md-8 col-md-offset-2">
+						<button type="submit" class="btn btn-hexacta-primary btn-block">Guardar</button>
+						<button type="button" class="btn btn-default btn-block"
+							ng-click="reset()">Limpiar</button>
+						<button type="button" class="btn btn-default btn-block"
+							ng-click="backToHome()">Volver</button>
+					</div>
+				</fieldset>
+			</div>
+		</form>
+	</div>
+</section>

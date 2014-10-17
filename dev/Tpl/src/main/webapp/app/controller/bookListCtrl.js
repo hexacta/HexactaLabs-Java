@@ -23,7 +23,6 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		url: '/Tpl/rest/books',
 		headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
 	}).success(function(data, status, headers, config){
-
 		$rootScope.books = [];
 		$rootScope.books = data;
 		$scope.books = $rootScope.books;
@@ -58,26 +57,11 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		//Getting comments
 		var bookId = $scope.selectedBook.id;
 		$scope.loadBookComments(book);
-		
-		// Get image from google rest service
-		var find = '-';
-		var re = new RegExp(find, 'g');
-		var isbn = $scope.selectedBook.isbn.replace(re , '');
-		$http({
-			method : 'GET',
-			url: 'https://www.googleapis.com/books/v1/volumes?q=isbn+' + isbn,
-			headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
-			}).success(function(data, status, headers, config){
-				if (status == 200 ){
-					$scope.selectedBook.image = data.items[0].volumeInfo.imageLinks.thumbnail;
-				}
-			}).error(function(data, status, headers, config){
-	    		console.log("An Error occurred while trying to connect to Google API");
-	    		$scope.selectedBook.image = "";
-	    	}) ;
+				
 	};
 	
-	//Para agregar comentarios
+	
+	//Method to add comments
 	$scope.addComment = function(book){
 		var comments = book.bookComments;
 		delete book.bookComments;
@@ -97,7 +81,6 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
     		console.log("An Error occurred while trying to store a comment");
     	}) ;
 		book.bookComments = comments;
-
 		book.image = image;
 		$scope.cleanComments();
 	};
@@ -105,4 +88,6 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	$scope.cleanComments = function(){
 		$scope.comment = {};
 	};
+	
+	
 });

@@ -29,8 +29,8 @@ public class Book implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NAME")
-    private String name;
+    @Column(name = "TITLE")
+    private String title;
 
     @Column(name = "DESCRIPTION")
     private String description;
@@ -41,9 +41,6 @@ public class Book implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "GENRE")
     private BookGenre genre;
-
-    @Column(name = "ISBN")
-    private String isbn;
 
     @Column(name = "ENABLED")
     private Boolean enabled;
@@ -64,20 +61,19 @@ public class Book implements Serializable {
         enabled = Boolean.TRUE;
     }
 
-    public Book(final String name) {
+    public Book(final String aTitle) {
         this();
-        this.name = name;
+        title = aTitle;
     }
 
-    public Book(final String aName, final String aDescription, final String aPublisher, final BookGenre aBookGenre,
-            final String isbn, final Set<BookCategory> bookCategories, final Set<BookCopy> bookCopies) {
-        this(aName);
+    public Book(final String aTitle, final String aDescription, final String aPublisher, final BookGenre aBookGenre,
+            final Set<BookCategory> bookCategories, final Set<BookCopy> bookCopies) {
+        this(aTitle);
         description = aDescription;
         publisher = aPublisher;
         genre = aBookGenre;
         this.bookCategories = bookCategories;
         this.bookCopies = bookCopies;
-        this.isbn = isbn;
     }
 
     public Long getId() {
@@ -88,12 +84,12 @@ public class Book implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(final String name) {
-        this.name = name;
+    public void setTitle(final String aTitle) {
+        title = aTitle;
     }
 
     public String getDescription() {
@@ -118,14 +114,6 @@ public class Book implements Serializable {
 
     public void setGenre(final BookGenre genre) {
         this.genre = genre;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(final String isbn) {
-        this.isbn = isbn;
     }
 
     @JsonIgnore

@@ -46,9 +46,8 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 			url : '/Tpl/rest/copies/book/' + bookId,
 			headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
 		}).success(function(data, status, headers, config){
-			if (status == 200 || status == 204){
+			if (status == 200){
 				$scope.newLoan.book = data;
-				$scope.isAvailable($scope.newLoan.book);
 			}
 		}).error(function(data, status, headers, config){
 			console.log("An error ocurred while trying to get free copy from book: " + bookId);
@@ -61,7 +60,7 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 		var jsonLoan = angular.toJson(newLoan);
 		$http.post('/Tpl/rest/loans', jsonLoan).success(
 				function(data, status, headers, config){
-					if(status == 201){
+					if(status == 201 || status == 200){
 						console.log("saving complete!");
 						$scope.backToHome();
 					}
@@ -69,10 +68,6 @@ booksApp.controller('lendBookCtrl', function ($scope, $location, $rootScope, $ro
 					console.log("An error ocurred while trying to make the Loan ");
 				});
 	};
-	
-	$scope.isAvailable = function(bookCopy){
-		return angular.isDefined(bookCopy);
-	}
 	
 	saveDate = function(loan){
 		loan.fromDate = $scope.fromDate;

@@ -33,10 +33,9 @@ public class BookServiceTest {
     public void prepare() {
 
         book = new Book();
-        book.setName("name");
+        book.setTitle("title");
         book.setDescription("desc");
         book.setGenre(BookGenre.HUMOR);
-        book.setIsbn("1345");
         book.setPublisher("publisher");
         book.setId(1L);
 
@@ -68,16 +67,15 @@ public class BookServiceTest {
         Assert.assertNotNull(ubook);
         Assert.assertEquals(ubook.getDescription(), "desc");
         Assert.assertEquals(ubook.getPublisher(), "publisher");
-        Assert.assertEquals(ubook.getName(), "name");
-        Assert.assertEquals(ubook.getIsbn(), "1345");
-        Assert.assertEquals(ubook.getGenre(), "EEUU");
+        Assert.assertEquals(ubook.getTitle(), "title");
+        Assert.assertEquals(ubook.getGenre(), BookGenre.HUMOR);
         Assert.assertTrue(ubook.getId().equals(1L));
 
     }
 
     @Test
     public void testCreateBook() {
-        Book ubook = new Book("aName", "aDescription", "aPublisher", BookGenre.HUMOR, "12345", null, null);
+        Book ubook = new Book("aName", "aDescription", "aPublisher", BookGenre.HUMOR, null, null);
         service.createBook(ubook);
         verify(dao, atLeastOnce()).save(ubook);
 
@@ -105,12 +103,4 @@ public class BookServiceTest {
         verify(dao, atLeastOnce()).save(book);
     }
 
-    @Test
-    public void testVerifyIsbn() {
-        Assert.assertTrue(service.validateISBN("123"));
-        Assert.assertTrue(service.validateISBN("1-2-3"));
-        Assert.assertFalse(service.validateISBN(""));
-        Assert.assertFalse(service.validateISBN("1asd2"));
-
-    }
 }
