@@ -14,7 +14,7 @@
 						<th class="text-center" ng-click="predicate = 'name'; reverse=!reverse"> T&iacute;tulo </th>
 						<th class="text-center" ng-click="predicate = 'description'; reverse=!reverse"> Descripci&oacute;n </th>
 						<th class="text-center" ng-click="predicate = 'publisher'; reverse=!reverse"> Editorial </th>
-						<th class="text-center"> Categor&iacute;a </th>
+						<th class="text-center" ng-click="predicate = 'genre'; reverse=!reverse"> G&eacute;nero </th>
 					</tr>
 				</thead>
 				<tbody ng-repeat="book in books | filter:query | orderBy:predicate:reverse">
@@ -28,12 +28,9 @@
 						<td>
 							{{book.publisher}}
 						</td>
-						<td id="categoria">
-							<ul ng-repeat="categorie in book.bookCategories" class="list-inline">
-								<li>{{categorie.name}}</li>
-							</ul>
-						</td>
-						
+						<td>
+							{{book.genre}}
+						</td>					
 					</tr>
 				</tbody>
 			</table>

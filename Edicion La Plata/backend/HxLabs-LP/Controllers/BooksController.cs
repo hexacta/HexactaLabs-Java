@@ -16,31 +16,34 @@ namespace HxLabs_LP.Controllers
 
         public BooksController()
         {
-            
-            books.Add( new Book { 
-                id = 1,
-                title = "El Principito", 
-                description = "Best-seller del escritor frances Antoine de Saint-Exupery. ",
-                genre = "Fabula", 
-                publisher = "Editorial Planeta"
-            });
-            books.Add(new Book
+            if (PageLoad == 1)
             {
-                id = 2,
-                title = "El Hobbit",
-                description = "Novela fantastica de J. R. R. Tolkien. ",
-                genre = "Fantasía",
-                publisher = "Editorial Atlantida"
-            });
-
-            books.Add(new Book
-            {
-                id = 3,
-                title = "El Código de Da Vinci",
-                description = "Novela de misterio del escritor Dan Brown. ",
-                genre = "Misterio",
-                publisher = "Editorial Estrada"
-            });
+                books.Add(new Book
+                {
+                    id = 1,
+                    title = "El Principito",
+                    description = "Best-seller del escritor frances Antoine de Saint-Exupery. ",
+                    genre = "Fabula",
+                    publisher = "Editorial Planeta"
+                });
+                books.Add(new Book
+                {
+                    id = 2,
+                    title = "El Hobbit",
+                    description = "Novela fantastica de J. R. R. Tolkien. ",
+                    genre = "Fantasía",
+                    publisher = "Editorial Atlantida"
+                });
+                books.Add(new Book
+                {
+                    id = 3,
+                    title = "El Código de Da Vinci",
+                    description = "Novela de misterio del escritor Dan Brown. ",
+                    genre = "Misterio",
+                    publisher = "Editorial Estrada"
+                });
+                PageLoad++;
+            }
         }
 
         //
