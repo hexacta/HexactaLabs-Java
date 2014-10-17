@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="booksApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>Books App - Powered by Hexacta</title>
+
+<!--  sheets -->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+<link href="css/datatables/demo_page.css" rel="stylesheet"
+	type="text/css" />
+<link href="css/datatables/demo_table.css" rel="stylesheet"
+	type="text/css" />
+<link href="css/datatables/demo_table_jui.css" rel="stylesheet"
+	type="text/css" />
+<link type="text/css" href="css/datatables/jquery.dataTables.css"
+	rel="stylesheet" />
+<link type="text/css" href="css/jquery-ui.css" rel="stylesheet" />
+<link type="text/css"
+	href="css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+<link href="css/site.css" rel="stylesheet" type="text/css" />
+<!-- End Style sheets -->
+
+<!-- Javascript -->
+<script src="js/angular.min.js"></script>
+<script src="js/angular-route.min.js"></script>
+<script src="js/ngStorage.min.js"></script>
+<script src="js/angular-animate.min.js"></script>
+<script src="js/angular-touch.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/site.js"></script>
+<!-- <script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.0.min.js"></script> -->
+<script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.0.js"></script>
+<script type="text/javascript" src="app/app.js"></script>
+<script src="js/customDirectives.js"></script>
+<script type="text/javascript" src="app/controller/bookListCtrl.js"></script>
+<!-- End Javascript -->
+
+</head>
+<body class="contaniner">
+	<div class="col-md-12">
+		<nav class="navbar navbar-default" role="navigation" >
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Hexacta E-Bookstore </a>
+				</div>
+			</div>
+		</nav>
+		<hr />
+	</div>
+
+	<div class="container" ng-view></div>
+
+</body>
+
+		<footer id="footer">
+	        <div class="container">
+	    	    <div class="row">
+    	    		<div class="col-md-4">&copy; 2014</div>
+	    	    	<div style="padding-left:100px;" class="col-md-4">
+   				         <ul class="nav nav-pills">
+              				<li><a href="#">About Us</a></li>
+				            <li><a href="#">Privacy Policy</a></li>
+           				 </ul>
+			          </div>
+     	  			<div class="col-md-4">
+    			        <h4 class="text-right">Hexacta E-Bookstore</h4>
+      		    	</div>
+        		</div>
+        	</div>
+      </footer>
+
+</html>
