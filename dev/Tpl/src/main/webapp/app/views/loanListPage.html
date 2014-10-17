@@ -20,7 +20,6 @@
 						<th class="text-center" ng-click="predicate = 'since'; reverse=!reverse"> Desde </th>
 						<th class="text-center" ng-click="predicate = 'through'; reverse=!reverse"> Hasta </th>
 						<th class="text-center" ng-click="predicate = 'user'; reverse=!reverse"> Usuario </th>
-						<th class="text-center" ng-click="predicate = 'devolution'; reverse=!reverse"> Devoluci&oacute;n </th>
 					</tr>
 				</thead>
 				<tbody ng-repeat="loan in loans | filter:user | orderBy:predicate:reverse">
@@ -36,9 +35,6 @@
 						</td>
 						<td>
 							{{loan.user.username}}
-						</td>
-						<td>
-							Pr&oacute;xima
 						</td>
 						<!-- End Fields -->				
 					</tr>
