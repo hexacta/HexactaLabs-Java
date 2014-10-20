@@ -5,12 +5,26 @@ using System.Web;
 
 namespace HxLabs_LP.Models
 {
+   
     public class Book
     {
-        public int id { get; set; }
-        public string title { get; set; }
-        public string description { get; set; }
-        public string genre { get; set; }
-        public string publisher { get; set; }
+        private static int ID = 0;
+        public int id;
+        public string title;
+        public string description;
+        public string genre; 
+        public string publisher;
+
+        public Book(string title, string description, string genre, string publisher)
+        {
+            this.title = title;
+            this.description = description;
+            this.genre = genre;
+            this.publisher = publisher;
+            this.id = System.Threading.Interlocked.Increment(ref ID);
+            
+        }
+      
+
     }
 }
