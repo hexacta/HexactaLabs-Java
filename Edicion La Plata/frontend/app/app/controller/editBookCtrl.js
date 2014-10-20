@@ -27,7 +27,6 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 			'Accept' : 'application/json'
 		}
 	}).success(function(data, status, headers, config) {
-
 		if (status == HTTP_OK) {
 			$scope.book = data;
 		}
@@ -45,23 +44,20 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 		if ($scope.bookForm.$invalid) {
 			return false;
 		}
-		
-		$scope.backToHome();
-		return true;
-		
+				
        	var jsonBook = angular.toJson(aBook);
-       	$http.put('http://localhost:4515/api/Books' + $scope.bookId, jsonBook).success(function(data, status, headers, config){
+       	$http.put('http://localhost:4515/api/Books/' + $scope.bookId, jsonBook).success(function(data, status, headers, config){
        		if(status == HTTP_OK)
        		{
        	    	console.log("Book Saved");
-       	    	$location.path("/");
+       	    	$scope.backToHome();
        		}
        	}).error(function(data, status, headers, config){
        		console.log("An Error occurred while trying to update book id: " + 
 			$scope.bookId);
     	});
        	$scope.newBook = angular.copy(aBook);
-		$rootScope.books[$rootScope.books.length] = aBook;	
+		//$rootScope.books[$rootScope.books.length] = aBook;	
     };
     
 });
