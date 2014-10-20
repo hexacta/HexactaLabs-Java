@@ -12,9 +12,9 @@
 					</select>
 				</div>
 				<!-- SELECT TIME -->		
-			    <h4>Desde:</h4>
+			    <label>Desde:</label>
 			    <div class="row">
-			        <div class="col-md-11">
+			        <div class="col-md-12">
 			            <p class="input-group">
 			              <input type="text" class="form-control" datepicker-popup="{{format}}" 
 			              ng-model="fromDate" is-open="openedFrom" min-date="fromDate" datepicker-options="dateOptions" 
@@ -26,9 +26,9 @@
 			            </p>
 			        </div>
 			    </div>
-			    <h4>Hasta:</h4>
+			    <label>Hasta:</label>
 			    <div class="row">
-			      <div class="col-md-11">
+			      <div class="col-md-12">
 			        <p class="input-group">
 			          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="toDate" 
 			          is-open="openedUntil" min-date="fromDate" datepicker-options="dateOptions" 
@@ -44,13 +44,13 @@
   		
   				<!-- FIXME: Mensaje de error cuando no quedan mas copias del libro -->		
   				<div class="alert alert-danger" role="alert" ng-show="true"> 
-  					No quedan copias del libro. FIX ME: EJERCICIO 11
+  					No quedan copias del libro.
   			 	</div>
   		
 				<!-- BOTONES -->
-				<div class="col-md-8 col-md-offset-2">
-					<button type="submit" class="btn btn-hexacta-primary btn-block">Prestar</button>
-					<button type="button" class="btn btn-default btn-block"	ng-click="backToHome()">Volver</button>
+				<div class="col-md-12">
+					<button type="submit" class="btn btn-hexacta-primary pull-right">Prestar</button>
+					<button type="button" class="btn btn-default"	ng-click="backToHome()">Volver</button>
 				</div>
 			</fieldset>
 		</form>

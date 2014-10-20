@@ -7,8 +7,8 @@
 					<!-- TITULO -->
 					<div class="form-group">
 						<label class="control-label">T&iacute;tulo: </label> 
-						<input	type="text" name="title" class="form-control" ng-model="book.title" ng-required="true" maxlength="150" />
-						<div class="alert alert-danger" role="alert" ng-show="trySubmit && bookForm.title.$error.required"> Este campo es <strong>obligatorio</strong> </div>
+						<input	type="text" name="name" class="form-control" ng-model="book.name" ng-required="true" maxlength="150" />
+						<div class="alert alert-danger" role="alert" ng-show="trySubmit && bookForm.name.$error.required"> Este campo es <strong>obligatorio</strong> </div>
 					</div>
 					<!-- DESCRIPCION -->
 					<div class="form-group">
@@ -39,7 +39,7 @@
 					<!-- CHECKBOX CATEGORIAS -->
 					<div class="form-group">
 						<label class="control-label"> Categorias:</label>
-						<div class="col-md-8 col-md-offset-2 checkbox" ng-repeat="category in categories">
+						<div class="checkbox" ng-repeat="category in categories">
 							<label  class="checkbox-inline">
 							<input type="checkbox" name="selectedCategory[]" value="{{category}}" ng-model="category.selected"
 							ng-click="toggleSelection(category, book)" ng-required="book.bookCategories.length == 0"> 
@@ -49,12 +49,13 @@
 						<div class="alert alert-danger" role="alert" ng-show="trySubmit && (book.bookCategories === undefined || book.bookCategories.length == 0)"> Debes seleccionar <strong>al menos una</strong> categor&iacute;a</div>
 					</div>
 					<!-- BOTONES -->
-					<div class="col-md-8 col-md-offset-2">
-						<button type="submit" class="btn btn-hexacta-primary btn-block">Guardar</button>
-						<button type="button" class="btn btn-default btn-block"
-							ng-click="reset()">Limpiar</button>
-						<button type="button" class="btn btn-default btn-block"
+					<div class="col-md-12">
+						<button type="submit" class="btn btn-hexacta-primary pull-right">Guardar</button>
+						<button type="button" class="btn btn-default"
 							ng-click="backToHome()">Volver</button>
+						<button type="button" class="btn btn-default"
+							ng-click="reset()">Limpiar</button>
+						
 					</div>
 				</fieldset>
 			</div>
