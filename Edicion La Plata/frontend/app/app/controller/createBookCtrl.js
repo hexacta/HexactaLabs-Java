@@ -1,7 +1,6 @@
 var HTTP_CREATE_OK = 201;
 
-booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
-		$http) {
+booksApp.controller('createBookCtrl', function($scope, $location, $rootScope, $http) {
 	
 	$scope.pageTitle = 'Crear Nuevo Libro';
 	
@@ -13,21 +12,16 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 		if ($scope.bookForm.$invalid) {
 			return false;
 		}		
-		
-		$scope.backToHome();
-		return true;
-		
-		for (var i = 0; i < aBook.bookCategories.length; i++){
-			delete aBook.bookCategories[i].selected;
-		}
+				
 		var jsonBook = angular.toJson(aBook);
-		$http.post('/Tpl/rest/books', jsonBook).success(
-				function(data, status, headers, config) {
-
-					if (status == HTTP_CREATE_OK) {
-						$scope.backToHome();
-					}
-				}).error(function(data, status, headers, config) {
+		$http.post('http://localhost:4515/api/Books', jsonBook)
+		.success(function(data, status, headers, config) {
+			if (status == HTTP_CREATE_OK) {
+				$scope.backToHome();
+			}
+			$scope.backToHome();
+		})
+		.error(function(data, status, headers, config) {
 			console.log("An Error occurred while trying to store a book");
 		});
 	};
