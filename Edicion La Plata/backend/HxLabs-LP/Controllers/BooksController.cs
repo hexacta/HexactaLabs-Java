@@ -50,6 +50,13 @@ namespace HxLabs_LP.Controllers
 
             }
         }
+        // Handle OPTIONS requests
+        public HttpResponseMessage Options()
+        {
+            var response = new HttpResponseMessage();
+            response.StatusCode = HttpStatusCode.OK;
+            return response;
+        }
 
         //
         // GET: /Books/
