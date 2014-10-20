@@ -18,7 +18,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		});		
 	};
 	
-	//$scope.loadBooks();
+	$scope.loadBooks();
 	
 	$scope.linkToEditBook=function(bookId){
 		$location.path("/editbook/" + bookId);
@@ -28,15 +28,5 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		$location.path("/createbook");
 	};
 	
-	$scope.books = [
-		{
-			title: 'el principito',
-			publisher: 'alguno',
-			description: 'description',
-			genre: 'Fable',
-			id: 1
-		}
-	];
-	$rootScope.books = $scope.books;
 });
 
