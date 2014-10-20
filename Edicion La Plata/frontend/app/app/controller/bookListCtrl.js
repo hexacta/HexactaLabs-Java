@@ -22,6 +22,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 	
 	$scope.linkToCreateBook=function(){
 		$location.path("/createbook");
-	};	
+	};
+	
 });
 
