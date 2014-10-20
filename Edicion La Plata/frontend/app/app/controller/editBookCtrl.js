@@ -21,7 +21,7 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 	$scope.getBook = function(){
 	$http({
 		method : 'GET',
-		url : 'http://localhost:4515/api/Books' + $scope.bookId,
+		url : 'http://localhost:4515/api/Books/' + $scope.bookId,
 		headers : {
 			'Content-type' : 'application/json',
 			'Accept' : 'application/json'
