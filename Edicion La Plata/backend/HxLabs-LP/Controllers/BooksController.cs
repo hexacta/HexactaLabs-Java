@@ -60,15 +60,10 @@ namespace HxLabs_LP.Controllers
 
         //
         // GET: /Books/Details/5
-        public IHttpActionResult Details(int id)
+        public Book Get(int id)
         {
             Book book = books.FirstOrDefault((p) => p.id == id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-            
-            return Ok(book);
+            return book;
         }
 
         //
