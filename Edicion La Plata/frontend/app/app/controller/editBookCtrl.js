@@ -21,7 +21,7 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 	$scope.getBook = function(){
 	$http({
 		method : 'GET',
-		url : '/Tpl/rest/books/' + $scope.bookId,
+		url : 'http://localhost:4515/api/Books' + $scope.bookId,
 		headers : {
 			'Content-type' : 'application/json',
 			'Accept' : 'application/json'
@@ -50,7 +50,7 @@ booksApp.controller('editBookCtrl', function($scope, $location, $rootScope,
 		return true;
 		
        	var jsonBook = angular.toJson(aBook);
-       	$http.put('/Tpl/rest/books/'+$scope.bookId, jsonBook).success(function(data, status, headers, config){
+       	$http.put('http://localhost:4515/api/Books' + $scope.bookId, jsonBook).success(function(data, status, headers, config){
        		if(status == HTTP_OK)
        		{
        	    	console.log("Book Saved");

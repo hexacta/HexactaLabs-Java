@@ -21,7 +21,7 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 			delete aBook.bookCategories[i].selected;
 		}
 		var jsonBook = angular.toJson(aBook);
-		$http.post('/Tpl/rest/books', jsonBook).success(
+		$http.post('http://localhost:4515/api/Books', jsonBook).success(
 				function(data, status, headers, config) {
 
 					if (status == HTTP_CREATE_OK) {
