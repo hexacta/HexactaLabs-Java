@@ -13,14 +13,15 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope, $h
 			return false;
 		}		
 				
-		$http.post('http://localhost:4515/api/Books', jsonBook)
-		.success(function(data, status, headers, config) {
-			if (status == HTTP_CREATE_OK) {
-				$scope.backToHome();
-			}
-		})
-		.error(function(data, status, headers, config) {
-			console.log("An Error occurred while trying to store a book");
+		var jsonBook = angular.toJson(aBook);
+		console.log(aBook);
+		$http.post('http://localhost:4515/api/Books', jsonBook).success(
+			function(data, status, headers, config) {
+				if (status == HTTP_CREATE_OK) {
+					$scope.backToHome();
+				}
+			}).error(function(data, status, headers, config) {
+				console.log("An Error occurred while trying to store a book");
 		});
 	};
 
