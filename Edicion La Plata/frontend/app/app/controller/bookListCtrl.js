@@ -1,11 +1,11 @@
 booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http) {
 	
-	$scope.books = [];
+	$scope.books = $rootScope.books === undefined? [] : $rootScope.books;
 	
 	$scope.loadBooks = function(){
 		$http({
 			method : 'GET',
-			url: '/Tpl/rest/books',
+			url: 'http://localhost:4515/api/Books',
 			headers : {'Content-type' : 'application/json', 'Accept' : 'application/json'}
 		}).success(function(data, status, headers, config){
 			$rootScope.books = [];
@@ -18,9 +18,25 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		});		
 	};
 	
-	
-	
 	//$scope.loadBooks();
 	
+	$scope.linkToEditBook=function(bookId){
+		$location.path("/editbook/" + bookId);
+	};
+	
+	$scope.linkToCreateBook=function(){
+		$location.path("/createbook");
+	};
+	
+	$scope.books = [
+		{
+			title: 'el principito',
+			publisher: 'alguno',
+			description: 'description',
+			genre: 'Fable',
+			id: 1
+		}
+	];
+	$rootScope.books = $scope.books;
 });
 

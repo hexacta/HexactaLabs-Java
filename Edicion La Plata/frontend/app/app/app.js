@@ -6,6 +6,16 @@ booksApp.config(['$routeProvider', '$locationProvider', function ($routeProvider
 			controller: 'bookListCtrl',
 			publicAccess: true
 		}).
+		when('/createbook' , {	
+			templateUrl: 'app/views/createOrEditBookPage.html',
+			controller: 'createBookCtrl',
+			publicAccess: true
+		}).
+		when('/editbook/:bookId' , {	
+			templateUrl: 'app/views/createOrEditBookPage.html',
+			controller: 'editBookCtrl',
+			publicAccess: true
+		}).
 		otherwise({
 			redirectTo: '/'
 		});
