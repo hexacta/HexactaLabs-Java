@@ -16,7 +16,7 @@ namespace HxLabs_LP.Controllers
     public class BooksController : ApiController
     {
         public static List<Book> books = new List<Book>();
-        public static int PageLoad = 1;
+        public static int PageLoad = 1, lastId = 3;
 
         public BooksController()
         {
@@ -47,6 +47,7 @@ namespace HxLabs_LP.Controllers
                     publisher = "Editorial Estrada"
                 });
                 PageLoad++;
+
             }
         }
 
@@ -74,7 +75,9 @@ namespace HxLabs_LP.Controllers
         //POST: /Books/
         public HttpResponseMessage PostBook(Book book)
         {
+            book.id = lastId;
             books.Add(book);
+            lastId++;
             var response = Request.CreateResponse<Book>(HttpStatusCode.Created, book);
             return response;
 
