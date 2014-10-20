@@ -1,11 +1,12 @@
 <section id="bookListPage">
-	<div ng-controller="bookListCtrl" >
+<!-- <h4>Libros Disponibles</h4> -->
+	<div ng-controller="bookListCtrl">
 		<div class="row">
 			<form role="form" class="col-md-12">
-				<div class="form-group col-md-9">					
+				<div class="form-group col-md-9 col-xs-9">					
 					<input type="text" class="form-control col-md-12" placeholder="Ingrese el libro que desea buscar" ng-model="query">				
 				</div>
-				<div class="form-group col-md-3">
+				<div class="form-group col-md-3 col-xs-3">
 					<button type="button" class="btn btn-hexacta-primary col-md-12" ng-click="linkToCreateBook()" ng-show="loggedIn">Crear Nuevo Libro</button>
 				</div>
 			</form>
@@ -13,7 +14,6 @@
 		
 		<div class="col-md-12">
 			<table class="table table-striped table-bordered table-hover text-center">
-				<caption> <strong> Libros Disponibles </strong> </caption>
 				<thead class="text-center headcolumn" >
 					<tr>
 						<th class="text-center" ng-click="predicate = 'name'; reverse=!reverse"> T&iacute;tulo </th>
@@ -43,13 +43,15 @@
 						<!-- End Fields -->
 	
 						<!-- Buttons --> 
+						
+						<td ng-show="loggedIn">
+							<button type="button" class="btn btn-default btn-sm" ng-click="linkToDeleteBook(book.id)">Borrar</button>
+						</td>
 	
 						<td ng-show="loggedIn">	
 							<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToEditBook(book.id)">Editar</button>
 						</td>
-						<td ng-show="loggedIn">
-							<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToDeleteBook(book.id)">Borrar</button>
-						</td>
+						
 						<td ng-show="loggedIn">
 							<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToLendBook(book.id)">Prestar</button>
 						</td>
@@ -70,17 +72,17 @@
 					</div>
 					<div class="modal-body">
 					
-						<div class="col-md-9">
+						<div class="col-md-12">
 							<h4>{{selectedBook.description}}</h4>
-							<cite>- {{selectedBook.publisher}}</cite>
-							<h4>G&eacute;nero: {{selectedBook.genre}}</h4>
+							<cite>{{selectedBook.publisher}}</cite>
+							<p>G&eacute;nero: {{selectedBook.genre}}</p>
 						</div>
 						
 						<img ng-src="{{selectedBook.image}}"></img>						
 						
 						<div class="col-md-12">
 	
-							Comentarios:
+							
 							<blockquote ng-repeat="comment in selectedBook.bookComments" >
 								<p>{{comment.body}}</p>
 								<footer>{{comment.user}}</footer>
@@ -88,6 +90,7 @@
 						</div>
 						<form role="form" name="commentForm" ng-show="loggedIn" ng-submit="commentForm.$valid && addComment(selectedBook)" novalidate>
 							<div class="form-group">
+								<label>Comentarios:</label>
 								<textarea ng-model="comment.body" class="form-control"
 									placeholder="Escriba aqu&iacute; su comentario"
 									id="txtCommentText" required></textarea>

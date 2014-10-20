@@ -13,11 +13,17 @@ em.underline {
 	font-style: normal;
 	text-decoration: underline;
 }
-
+.btn{
+	height: 32px;
+}
+.btn-default{
+	background: #FFFFFF;
+}
 .btn-hexacta-primary {
   color: #fff;
-  background-color: #009292;
-  border-color: #008080;
+  background-color: #00aa9c;
+  border:none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
 }
 .btn-hexacta-primary:hover,
 .btn-hexacta-primary:focus,
@@ -27,7 +33,7 @@ em.underline {
 .btn-hexacta-primary.active,
 .open > .dropdown-toggle.btn-hexacta-primary {
   color: #fff;
-  background-color: #008080;
+  background-color: #02BBAC;
   border-color: #007a74;
 }
 .btn-hexacta:hover,
@@ -64,8 +70,9 @@ fieldset[disabled] .btn-hexacta-primary.active {
 .btn-hexacta-green {
 
   color: #fff;
-  background-color: #228B22;
-  border-color: #007500;
+  background-color: #00aa9c;
+  border:none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
 }
 
 .btn-hexacta-green:hover,
@@ -76,7 +83,7 @@ fieldset[disabled] .btn-hexacta-primary.active {
 .btn-hexacta-green.active,
 .open > .dropdown-toggle.btn-hexacta-green {
   color: #fff;
-  background-color: #007500;
+  background-color: #02BBAC;
   border-color: #006400;
 }
 
@@ -216,7 +223,7 @@ form.submitted .ng-pristine.ng-invalid-required, input.ng-invalid.ng-dirty {
 
 #footer
 {
-	padding-left: 40px; 
+	padding: 0 20px;
 	position: relative;
 	height: 50px;
 	bottom: 10px;
@@ -243,4 +250,142 @@ form.submitted .ng-pristine.ng-invalid-required, input.ng-invalid.ng-dirty {
 
 th:hover {
 	color:#007500;
+}
+
+
+/*NEW STYLES*/
+
+/*Clases genéricas*/
+.p5{padding: 5px;}
+.p10{padding: 10px;}
+.p15{padding: 15px;}
+
+
+.checkbox{
+	display: inline-block !important;
+	margin-left:5px;
+}
+.jumbotron {
+	padding: 30px;
+	margin-bottom: 30px;
+	color: inherit;
+	background-color: #F9F9F9;
+	border: 1px solid rgb(213, 213, 213);
+	box-shadow: 0px 2px 2px rgb(228, 228, 228);
+}
+.btn-block{
+	display:inline-block;
+	width: 32%;
+}
+h4{
+	padding: 0px 35px !important;
+}
+.row{
+	margin: 0px;
+}
+.table{
+	text-align: left;
+	margin-top: 0px;
+	font-size: 12px;
+}
+.table > tbody + tbody {
+	border-top: 1px solid #ddd;
+}
+tbody{
+	background: rgb(249, 249, 249);
+}
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > td {
+	border-left:none !important;
+	border-right:none !important;
+}
+.table-bordered > tbody > tr > td:first-child {
+	padding: 0px 35px;
+}
+.navbar .container-fluid{
+	padding-right: 5px !important;
+	padding-left: 33px !important;
+}
+thead{
+	background: whitesmoke !important;
+	border-top: 1px solid rgb(208, 208, 208);
+}
+thead > tr > th:first-child{
+	text-align: left;
+	padding: 10px 35px;
+}
+thead > tr > th{
+	text-align: left !important;
+}
+td#categoria{
+	justify-content: inherit !important;
+	padding-top: 10px;
+}
+form{
+	padding: 0px 20px;
+}
+.form-group.col-md-3, .form-group.col-md-9{
+	display:inline-block;
+}
+.form-group.col-md-9{
+	height: 100%;
+	margin-top: -15px;
+	padding: 15px;
+	border-right: 1px solid rgb(199, 199, 199);
+	margin-bottom:0px;
+}
+.form-control{
+	border: none;
+	height: 32px;
+}
+form .form-control{
+	border: 1px solid rgb(210, 210, 210);
+}
+
+ul.dropdown-menu.ng-pristine.ng-valid.ng-valid-date.ng-valid-date-disabled  thead > tr > th:first-child{
+	padding:0px !important;
+}
+ul.dropdown-menu.ng-pristine.ng-valid.ng-valid-date.ng-valid-date-disabled  table:focus{
+	outline:none;
+}
+#myModal h4, #myModal p, #myModal cite {
+	padding: 0px 25px !important;
+}
+#myModal .modal-header{
+	padding: 15px 20px;
+	border:none;
+}
+#myModal .modal-footer{
+	padding: 15px 35px;
+}
+#bookListPage, #loanListPage{
+	font-family: Arial;
+	background: #d9d9d9;
+	padding: 15px 0px 0px;
+	margin-top: -20px;
+	border-top: 1px solid rgb(208, 208, 208);
+}
+
+.alert-danger{
+	font-family: Arial;
+	margin-top: 15px;
+	padding: 10px 12px;
+	font-size: 12px;
+	background: #F4F0F0;
+}
+footer{
+	background: #555555;
+	position: fixed !important;
+	bottom: 0px !important;
+	width: 100%;
+	border-top: 1px solid rgb(208, 208, 208);
+	box-shadow: 0px -2px 2px rgb(232, 232, 232);
+	color:white;
+	font-size: 12px;
+}
+footer .nav > li > a{
+	color:white;
+}
+footer .nav > li > a:hover{
+	background:none;
+	color:#ccc;
 }
