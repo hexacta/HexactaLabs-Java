@@ -24,19 +24,19 @@ namespace HxLabs_LP.Controllers
                 books.Add(new Book(
                     "El Principito",
                     "Best-seller del escritor frances Antoine de Saint-Exupery. ",
-                    "Fabula",
+                    "FABLE",
                     "Editorial Planeta"
                 ));
                 books.Add(new Book(
                    "El Hobbit",
                    "Novela fantastica de J. R. R. Tolkien.",
-                   "Fantasía",
+                   "FANTASY",
                    "Editorial Atlantida"
                ));
                 books.Add(new Book(
                    "El Código de Da Vinci",
                    "Novela de misterio del escritor Dan Brown.",
-                   "Misterio",
+                   "MISTERY",
                    "Editorial Estrada"
                ));
                 PageLoad++;
@@ -74,6 +74,25 @@ namespace HxLabs_LP.Controllers
             var response = Request.CreateResponse<Book>(HttpStatusCode.Created, book);
             return response;
 
+        }
+
+        //
+        //PUT: /Books/1
+        public bool Put(int id, Book book)
+        {
+            book.id = id;
+            if (book == null)
+            {
+                throw new ArgumentNullException("book");
+            }
+            int index = books.FindIndex(p => p.id == book.id);
+            if (index == -1)
+            {
+                return false;
+            }
+            books.RemoveAt(index);
+            books.Add(book);
+            return true;
         }
 
 
