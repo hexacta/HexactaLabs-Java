@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using HxLabs_LP.Controllers;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using System.Net;
 
 
 namespace HxLabs_LP.Controllers
@@ -68,5 +69,17 @@ namespace HxLabs_LP.Controllers
             
             return Ok(book);
         }
+
+        //
+        //POST: /Books/
+        public HttpResponseMessage PostBook(Book book)
+        {
+            books.Add(book);
+            var response = Request.CreateResponse<Book>(HttpStatusCode.Created, book);
+            return response;
+
+        }
+
+
     }
 }
