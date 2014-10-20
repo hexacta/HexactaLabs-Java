@@ -1,11 +1,16 @@
 <section id="bookListPage">
 	<div>
 		<div class="row">
-			<form role="form" class="col-md-12">			
+			<form role="form" class="col-md-12">
+				<div class="form-group col-md-9">					
 					<input type="text" class="form-control col-md-12" placeholder="Ingrese el libro que desea buscar" ng-model="query">				
+				</div>
+				<div class="form-group col-md-3">
+					<button type="button" class="btn btn-hexacta-primary col-md-12" ng-click="linkToCreateBook()">Crear Nuevo Libro</button>
+				</div>
 			</form>
 		</div>
-		
+				
 		<div class="col-md-12">
 			<table class="table table-striped table-bordered table-hover text-center">
 				<caption> <strong> Libros Disponibles </strong> </caption>
@@ -14,7 +19,8 @@
 						<th class="text-center" ng-click="predicate = 'name'; reverse=!reverse"> T&iacute;tulo </th>
 						<th class="text-center" ng-click="predicate = 'description'; reverse=!reverse"> Descripci&oacute;n </th>
 						<th class="text-center" ng-click="predicate = 'publisher'; reverse=!reverse"> Editorial </th>
-						<th class="text-center"> Categor&iacute;a </th>
+						<th class="text-center" ng-click="predicate = 'genre'; reverse=!reverse"> G&eacute;nero </th>
+						<th class="text-center" > Acciones </th>
 					</tr>
 				</thead>
 				<tbody ng-repeat="book in books | filter:query | orderBy:predicate:reverse">
@@ -28,12 +34,13 @@
 						<td>
 							{{book.publisher}}
 						</td>
-						<td id="categoria">
-							<ul ng-repeat="categorie in book.bookCategories" class="list-inline">
-								<li>{{categorie.name}}</li>
-							</ul>
+						<td>
+							{{book.genre}}
 						</td>
 						
+						<td>	
+							<button type="button" class="btn btn-hexacta-green btn-sm" ng-click="linkToEditBook(book.id)">Editar</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>
