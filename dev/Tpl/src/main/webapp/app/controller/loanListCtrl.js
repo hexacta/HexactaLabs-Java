@@ -12,7 +12,7 @@ booksApp.controller('loanListCtrl', function ($scope,$location,$rootScope,$http)
 		$rootScope.loans = [];
 		$rootScope.loans = data;
 		$scope.loans = $rootScope.loans;
-		$scope.predicate = 'name';
+		$scope.predicate = 'title';
 		$scope.reverse = false;
 	}).error(function(data, status, headers, config){
 		console.log("An Error occurred while trying to load the loans");
