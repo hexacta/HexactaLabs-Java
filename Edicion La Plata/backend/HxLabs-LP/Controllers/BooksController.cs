@@ -36,7 +36,7 @@ namespace HxLabs_LP.Controllers
                 books.Add(new Book(
                    "El Código de Da Vinci",
                    "Novela de misterio del escritor Dan Brown.",
-                   "MISTERY",
+                   "MYSTERY",
                    "Editorial Estrada"
                ));
                 PageLoad++;
