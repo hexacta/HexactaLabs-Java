@@ -26,7 +26,7 @@ booksApp.controller('bookListCtrl', function ($scope,$location,$rootScope,$http)
 		$rootScope.books = [];
 		$rootScope.books = data;
 		$scope.books = $rootScope.books;
-		$scope.predicate = 'name';
+		$scope.predicate = 'title';
 		$scope.reverse = false;
 		$scope.cleanComments();
 	}).error(function(data, status, headers, config){
