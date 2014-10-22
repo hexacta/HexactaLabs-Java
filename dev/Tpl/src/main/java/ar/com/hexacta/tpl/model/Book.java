@@ -20,7 +20,7 @@ import javax.persistence.Version;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
-@Table(name = "BOOKS")
+@Table(name = "books")
 public class Book implements Serializable {
     private static final long serialVersionUID = 604529088687479075L;
 
