@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -58,7 +59,9 @@ public abstract class AbstractDAO<T> extends HibernateDaoSupport implements Repo
     }
 
     protected DetachedCriteria createCriteria() {
-        return DetachedCriteria.forClass(this.getPersistentClass());
+    	DetachedCriteria criteria = DetachedCriteria.forClass(this.getPersistentClass());
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+    	return criteria;
     }
     
     @Autowired
