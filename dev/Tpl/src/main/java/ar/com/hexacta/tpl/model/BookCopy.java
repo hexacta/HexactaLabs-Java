@@ -41,9 +41,6 @@ public class BookCopy implements Serializable {
     @JoinColumn(name = "BOOK_ID")
     private Book book;
 
-    @Column(name = "CODE")
-    private String code = "";
-
     @Column(name = "BOOK_RATE", nullable = false)
     private String bookRate;
 
@@ -57,17 +54,17 @@ public class BookCopy implements Serializable {
         super();
     }
 
-    public BookCopy(final String code, final String bookRate, final String state, final Book book) {
+    public BookCopy(final Book book, final String bookRate, final String state) {
         super();
-        this.code = code;
+        this.book = book;
         this.bookRate = bookRate;
         this.state = state;
         enabled = true;
         this.book = book;
     }
 
-    public BookCopy(final String code, final String bookRate, final String state, final boolean enabled, final Book book) {
-        this(code, bookRate, state, book);
+    public BookCopy(final Book book, final String bookRate, final String state, final boolean enabled) {
+        this(book, bookRate, state);
         this.enabled = enabled;
     }
 
@@ -81,10 +78,6 @@ public class BookCopy implements Serializable {
 
     public String getBookRate() {
         return bookRate;
-    }
-
-    public String getCode() {
-        return code;
     }
 
     public String getState() {
@@ -121,10 +114,6 @@ public class BookCopy implements Serializable {
 
     public void setVersion(final Long version) {
         this.version = version;
-    }
-
-    public void setCode(final String code) {
-        this.code = code;
     }
 
     public void setBookRate(final String bookRate) {
