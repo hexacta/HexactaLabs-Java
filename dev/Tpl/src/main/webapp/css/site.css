@@ -216,9 +216,7 @@ form.submitted .ng-pristine.ng-invalid-required, input.ng-invalid.ng-dirty {
 #categoria
 {
 	padding-top: 20px;
-	display: flex; 
 	justify-content: center; 
-	border: 0px none;
 }
 
 #footer
