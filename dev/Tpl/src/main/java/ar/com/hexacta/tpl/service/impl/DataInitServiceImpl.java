@@ -1,5 +1,6 @@
 package ar.com.hexacta.tpl.service.impl;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,28 +14,32 @@ import ar.com.hexacta.tpl.persistence.repository.DataInitRepository;
 import ar.com.hexacta.tpl.service.IDataInitService;
 
 @Service
-public class DataInitServiceImpl implements IDataInitService{
+public class DataInitServiceImpl implements IDataInitService, InitializingBean {
 
-	@Autowired
+    @Autowired
     private DataInitRepository repository;
-	
-	@Autowired
-	@Qualifier("transactionManager")
-	private PlatformTransactionManager txManager;
-	
-	//@PostConstruct
-	@Transactional
-	public void init() throws Exception {
-		TransactionTemplate tmpl = new TransactionTemplate(txManager);
+
+    @Autowired
+    @Qualifier("transactionManager")
+    private PlatformTransactionManager txManager;
+
+    @Transactional
+    public void init() throws Exception {
+        TransactionTemplate tmpl = new TransactionTemplate(txManager);
         tmpl.execute(new TransactionCallbackWithoutResult() {
             @Override
-            protected void doInTransactionWithoutResult(TransactionStatus status) {
-            	repository.initializeData();
+            protected void doInTransactionWithoutResult(final TransactionStatus status) {
+                repository.initializeData();
             }
         });
-	}
+    }
 
-	public void setRepository(final DataInitRepository repository) {
+    public void setRepository(final DataInitRepository repository) {
         this.repository = repository;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        init();
     }
 }
