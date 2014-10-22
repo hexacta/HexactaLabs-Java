@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "COMMENTS")
+@Table(name = "comments")
 public class Comment implements Serializable {
 
     private static final long serialVersionUID = 537917183637872456L;
@@ -70,20 +70,20 @@ public class Comment implements Serializable {
         this.book = book;
     }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
-	public Long getVersion() {
-		return version;
-	}
+    public Long getVersion() {
+        return version;
+    }
 
-	public void setVersion(Long version) {
-		this.version = version;
-	}
-    
+    public void setVersion(final Long version) {
+        this.version = version;
+    }
+
 }
