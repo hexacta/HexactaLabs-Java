@@ -3,7 +3,6 @@ package ar.com.hexacta.tpl.persistence.dao;
 import java.io.Serializable;
 import java.util.List;
 
-import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -36,7 +35,6 @@ public class CommentDAO extends AbstractDAO<Comment> implements CommentRepositor
     public List<Comment> findByBookId(final Long bookId) {
         DetachedCriteria criteria = createCriteria();
         criteria.add(Restrictions.eq("book.id", bookId));
-        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         return (List<Comment>) getHibernateTemplate().findByCriteria(criteria);
     }
 

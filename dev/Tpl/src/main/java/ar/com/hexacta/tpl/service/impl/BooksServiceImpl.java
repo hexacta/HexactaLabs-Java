@@ -1,9 +1,6 @@
 package ar.com.hexacta.tpl.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,12 +43,7 @@ public class BooksServiceImpl implements IBooksService {
     @Override
     @Transactional(readOnly = true)
     public List<Book> findAllBooks() {
-        // Para que no muestre libros repetidos
-        Set<Book> set = new HashSet<Book>();
-        set.addAll(booksRepository.findAll());
-        List<Book> list = new ArrayList<Book>();
-        list.addAll(set);
-        return list;
+        return booksRepository.findAll();
     }
 
     @Override
