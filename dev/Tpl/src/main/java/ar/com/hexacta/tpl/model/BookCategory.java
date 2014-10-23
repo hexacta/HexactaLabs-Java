@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "BOOK_CATEGORIES")
+@Table(name = "book_categories")
 public class BookCategory implements Serializable {
 
     private static final long serialVersionUID = -8084614446913836469L;
@@ -56,19 +56,19 @@ public class BookCategory implements Serializable {
         this.description = description;
     }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
-	public Long getVersion() {
-		return version;
-	}
+    public Long getVersion() {
+        return version;
+    }
 
-	public void setVersion(Long version) {
-		this.version = version;
-	}
+    public void setVersion(final Long version) {
+        this.version = version;
+    }
 }

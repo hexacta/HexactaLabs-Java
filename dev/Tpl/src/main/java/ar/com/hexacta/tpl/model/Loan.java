@@ -13,18 +13,18 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "LOANS")
+@Table(name = "loans")
 public class Loan implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Version
     private Long version;
-    
+
     @ManyToOne
     private User user;
 
@@ -65,35 +65,35 @@ public class Loan implements Serializable {
         return toDate;
     }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
-	public Long getVersion() {
-		return version;
-	}
+    public Long getVersion() {
+        return version;
+    }
 
-	public void setVersion(Long version) {
-		this.version = version;
-	}
+    public void setVersion(final Long version) {
+        this.version = version;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setUser(final User user) {
+        this.user = user;
+    }
 
-	public void setBook(BookCopy bookCopy) {
-		this.bookCopy = bookCopy;
-	}
+    public void setBook(final BookCopy bookCopy) {
+        this.bookCopy = bookCopy;
+    }
 
-	public void setFromDate(Date fromDate) {
-		this.fromDate = fromDate;
-	}
+    public void setFromDate(final Date fromDate) {
+        this.fromDate = fromDate;
+    }
 
-	public void setToDate(Date toDate) {
-		this.toDate = toDate;
-	}
+    public void setToDate(final Date toDate) {
+        this.toDate = toDate;
+    }
 }

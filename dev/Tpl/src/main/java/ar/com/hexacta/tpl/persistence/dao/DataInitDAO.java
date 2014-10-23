@@ -1,6 +1,8 @@
 package ar.com.hexacta.tpl.persistence.dao;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,44 +59,66 @@ public class DataInitDAO implements DataInitRepository {
                 .withDescription("Libro en formato fisico").build();
         bookCategoryDAO.saveOrUpdate(physicalCategory);
 
+        // Libros
+        Book bookElPrincipito = new BookBuilder().withTitle("El principito")
+                .withDescription("Best-seller del escritor frances Antoine de Saint-Exupery.")
+                .withPublisher("Editorial Planeta").withCategory(physicalCategory).withGenre(BookGenre.FANTASY).build();
+        bookDAO.saveOrUpdate(bookElPrincipito);
+        LOG.info("Created book " + bookElPrincipito.getId());
+
+        Book bookCodigoDaVinci = new BookBuilder().withTitle("El codigo Da Vinci")
+                .withDescription("Novela de misterio del escritor Dan Brown.").withPublisher("Editorial Estrada")
+                .withGenre(BookGenre.MYSTERY).withCategory(physicalCategory).build();
+        bookDAO.saveOrUpdate(bookCodigoDaVinci);
+        LOG.info("Created book " + bookCodigoDaVinci.getId());
+
+        Book bookElHobbit = new BookBuilder().withTitle("El Hobbit")
+                .withDescription("Novela fantastica de J. R. R. Tolkien.").withPublisher("Editorial Atlantida")
+                .withGenre(BookGenre.FABLE).withCategory(eBookCategory).build();
+        bookDAO.saveOrUpdate(bookElHobbit);
+        LOG.info("Created book " + bookElHobbit.getId());
+
+        Book bookEndersGame = new BookBuilder().withTitle("Ender's Game")
+                .withDescription("Novela de ciencia ficción de Scott").withPublisher("Editorial Pepin")
+                .withCategory(physicalCategory).build();
+        bookDAO.saveOrUpdate(bookEndersGame);
+        LOG.info("Created book " + bookEndersGame.getId());
+
         // Copias
-        BookCopy bookCopy1 = new BookCopyBuilder().withCode("1").withState(BookCopy.STATE_FREE).build();
+        BookCopy bookCopy1 = new BookCopyBuilder().withBook(bookElPrincipito).withState(BookCopy.STATE_FREE).build();
         bookCopyDAO.saveOrUpdate(bookCopy1);
-        BookCopy bookCopy2 = new BookCopyBuilder().withCode("2").withState(BookCopy.STATE_LOANED).build();
+        BookCopy bookCopy2 = new BookCopyBuilder().withBook(bookElPrincipito).withState(BookCopy.STATE_LOANED).build();
         bookCopyDAO.saveOrUpdate(bookCopy2);
-        BookCopy bookCopy3 = new BookCopyBuilder().withCode("3").build();
+        BookCopy bookCopy3 = new BookCopyBuilder().withBook(bookCodigoDaVinci).build();
         bookCopyDAO.saveOrUpdate(bookCopy3);
-        BookCopy bookCopy4 = new BookCopyBuilder().withCode("4").build();
+        BookCopy bookCopy4 = new BookCopyBuilder().withBook(bookElHobbit).build();
         bookCopyDAO.saveOrUpdate(bookCopy4);
-        BookCopy bookCopy5 = new BookCopyBuilder().withCode("5").build();
+        BookCopy bookCopy5 = new BookCopyBuilder().withBook(bookEndersGame).build();
         bookCopyDAO.saveOrUpdate(bookCopy5);
 
-        // Libros
+        // Definir y asignar sets de copias por cada libro
+        // El Principito
+        Set<BookCopy> copiasElPrincipito = new HashSet<BookCopy>();
+        copiasElPrincipito.add(bookCopy1);
+        copiasElPrincipito.add(bookCopy2);
+        bookElPrincipito.setBookCopies(copiasElPrincipito);
 
-        Book book1 = new BookBuilder().withTitle("El principito")
-                .withDescription("Best-seller del escritor frances Antoine de Saint-Exupery.")
-                .withPublisher("Editorial Planeta").withCategory(physicalCategory).withGenre(BookGenre.FANTASY)
-                .withBookCopy(bookCopy1, bookCopy2).build();
-        bookDAO.saveOrUpdate(book1);
-        LOG.info("Created book " + book1.getId());
-        Book book2 = new BookBuilder().withTitle("El codigo Da Vinci")
-                .withDescription("Novela de misterio del escritor Dan Brown.").withPublisher("Editorial Estrada")
-                .withGenre(BookGenre.MYSTERY).withCategory(physicalCategory).withBookCopy(bookCopy3).build();
-        bookDAO.saveOrUpdate(book2);
-        LOG.info("Created book " + book2.getId());
+        // Codigo Da Vinci
+        Set<BookCopy> copiasCodigoDaVinci = new HashSet<BookCopy>();
+        copiasCodigoDaVinci.add(bookCopy3);
+        bookCodigoDaVinci.setBookCopies(copiasCodigoDaVinci);
 
-        Book book3 = new BookBuilder().withTitle("El Hobbit").withDescription("Novela fantastica de J. R. R. Tolkien.")
-                .withPublisher("Editorial Atlantida").withGenre(BookGenre.FABLE).withCategory(eBookCategory)
-                .withBookCopy(bookCopy4).build();
-        bookDAO.saveOrUpdate(book3);
-        LOG.info("Created book " + book3.getId());
+        // El Hobbit
+        Set<BookCopy> copiasElHobbit = new HashSet<BookCopy>();
+        copiasElHobbit.add(bookCopy4);
+        bookElHobbit.setBookCopies(copiasElHobbit);
 
-        Book book4 = new BookBuilder().withTitle("Ender's Game").withDescription("Novela de ciencia ficción de Scott")
-                .withPublisher("Editorial pepin").withCategory(physicalCategory).withBookCopy(bookCopy5).build();
-        bookDAO.saveOrUpdate(book4);
-        LOG.info("Created book " + book4.getId());
+        // Enders Game
+        Set<BookCopy> copiasEndersGame = new HashSet<BookCopy>();
+        copiasEndersGame.add(bookCopy5);
+        bookEndersGame.setBookCopies(copiasEndersGame);
 
-        // Users
+        // Crear usuarios
         User userAdmin = new User("admin", "admin", "admin@hexacta.com");
         userDAO.save(userAdmin);
 
@@ -103,7 +127,7 @@ public class DataInitDAO implements DataInitRepository {
 
         Loan loan = new Loan(userAdmin, bookCopy1, new Date(), new Date());
         loanDAO.saveOrUpdate(loan);
-        bookDAO.saveOrUpdate(book1);
+        bookDAO.saveOrUpdate(bookElPrincipito);
     }
 
     @Override

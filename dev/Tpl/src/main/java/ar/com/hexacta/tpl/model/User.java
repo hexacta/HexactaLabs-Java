@@ -11,15 +11,14 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table (name = "USERS")
+@Table(name = "users")
 public class User implements Serializable {
     private static final long serialVersionUID = -2599013520313365015L;
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Version
     @Column(name = "VERSION")
     private Long version;
@@ -43,8 +42,8 @@ public class User implements Serializable {
     public User(final String username, final String pass) {
         this();
         this.username = username;
-        this.password = pass;
-        this.enabled = true;
+        password = pass;
+        enabled = true;
     }
 
     public User(final String username, final String pass, final String email) {
@@ -89,19 +88,19 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
-	public Long getVersion() {
-		return version;
-	}
+    public Long getVersion() {
+        return version;
+    }
 
-	public void setVersion(Long version) {
-		this.version = version;
-	}
+    public void setVersion(final Long version) {
+        this.version = version;
+    }
 }
