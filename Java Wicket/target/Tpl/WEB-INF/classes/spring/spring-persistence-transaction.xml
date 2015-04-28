@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       
+      <!-- Transaction manager for a single JDBC DataSource -->
+      <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+            <property name="sessionFactory" ref="sessionFactory" />
+            <property name="jdbcExceptionTranslator" ref="jdbcExceptionTranslator" />
+      </bean>
+      
+      <bean name="jdbcExceptionTranslator" class="org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator">
+            <constructor-arg>
+                  <ref bean="dbSource" />
+            </constructor-arg>
+      </bean>
+      
+      <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+</beans>

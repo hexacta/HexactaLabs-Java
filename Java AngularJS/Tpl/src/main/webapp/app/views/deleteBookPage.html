@@ -1,0 +1,25 @@
+<section id="deleteBook">
+	<div class="container jumbotron col-md-6 col-md-offset-3"
+		ng-controller="deleteBookCtrl">
+		<form novalidate id="bookLendingForm">
+			<div class="col-md-8 col-md-offset-2" id="feedbackPanel" />
+			<fieldset>
+				<legend>BORRAR un libro</legend>
+				<!-- SELECT USUARIOS -->
+				<div class="form-group">
+					<label class="">Seguro que quiere borrar?</label>
+				</div>
+				<!-- BOTONES -->
+				<div class="col-md-12">
+					<button type="button" class="btn btn-hexacta-primary pull-right"
+						ng-click="borrar()">Borrar</button>
+					<!-- <button type="button" class="btn btn-default btn-block"
+						ng-click="reset()">Cancelar</button> -->
+					<button type="button" class="btn btn-default"
+						ng-click="backToHome()">Volver</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>
+

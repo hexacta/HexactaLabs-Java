@@ -2,31 +2,58 @@
 ## Eclipse
 #################
 
-dev/Tpl/*.pydevproject
-dev/Tpl/.project
-dev/Tpl/.metadata
-dev/Tpl/bin/
-dev/Tpl/tmp/
-dev/Tpl/*.tmp
-dev/Tpl/*.bak
-dev/Tpl/*.swp
-dev/Tpl/*~.nib
-dev/Tpl/local.properties
-dev/Tpl/.settings/
-dev/Tpl/.loadpath
-dev/Tpl/.classpath
+Java AngularJS/*.pydevproject
+Java AngularJS/.project
+Java AngularJS/.metadata
+Java AngularJS/bin/
+Java AngularJS/tmp/
+Java AngularJS/*.tmp
+Java AngularJS/*.bak
+Java AngularJS/*.swp
+Java AngularJS/*~.nib
+Java AngularJS/local.properties
+Java AngularJS/.settings/
+Java AngularJS/.loadpath
+Java AngularJS/.classpath
 
 # External tool builders
-dev/Tpl/.externalToolBuilders/
+Java AngularJS/.externalToolBuilders/
 
 # Locally stored "Eclipse launch configurations"
-dev/Tpl/*.launch
+Java AngularJS/*.launch
 
 # CDT-specific
-dev/Tpl/.cproject
+Java AngularJS/.cproject
 
 # PDT-specific
-dev/Tpl/.buildpath
+Java Wicket/.buildpath
+
+
+Java Wicket/*.pydevproject
+Java Wicket/.project
+Java Wicket/.metadata
+Java Wicket/bin/
+Java Wicket/tmp/
+Java Wicket/*.tmp
+Java Wicket/*.bak
+Java Wicket/*.swp
+Java Wicket/*~.nib
+Java Wicket/local.properties
+Java Wicket/.settings/
+Java Wicket/.loadpath
+Java Wicket/.classpath
+
+# External tool builders
+Java Wicket/.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+Java Wicket/*.launch
+
+# CDT-specific
+Java Wicket/.cproject
+
+# PDT-specific
+Java Wicket/.buildpath
 
 
 #################

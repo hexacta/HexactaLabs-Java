@@ -1,0 +1,27 @@
+<wicket:panel>
+	<div class="busquedas">
+		<form wicket:id="bookLendingForm" id="bookLendingForm">
+		
+		<br>
+				<label>
+    				<h5><wicket:message key="selectUserMessage"/></h5>
+		    	</label>
+				<select wicket:id="usersdropdown">
+	    		</select>
+				<br />
+
+
+			  	<br />
+			    <div class="linea">
+					<div class="botones">
+				    	<input type="submit" wicket:message="value:cancelButtonText" wicket:id="cancelButton" id="cancelButton" />
+				        <input type="submit" wicket:message="value:lendBookButtonText" wicket:id="lendBookButton" id="lendBookButton" />
+				        <br>
+				        <br>
+					</div>
+				</div>              
+			   	<div class="Clear"></div>
+
+	     </form>
+	    </div>
+</wicket:panel>
