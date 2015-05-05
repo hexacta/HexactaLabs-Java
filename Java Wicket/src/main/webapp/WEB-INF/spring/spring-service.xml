@@ -22,29 +22,34 @@
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security-3.0.2.xsd
        http://www.springframework.org/schema/lang
-       http://www.springframework.org/schema/lang/spring-lang-2.0.xsd">    
+       http://www.springframework.org/schema/lang/spring-lang-2.0.xsd">
 
-	
-	<bean id="db.dao.book" class="ar.com.hexacta.tpl.persistence.dao.BookDAO">		
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	
-	<bean id="db.dao.bookCategory" class="ar.com.hexacta.tpl.persistence.dao.BookCategoryDAO">		
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+	<bean id="service.bookCategories" class="ar.com.hexacta.tpl.service.impl.BooksCategoriesServiceImpl">
+			<property name="bookCategoriesRepository" ref="db.dao.bookCategory"/>
+	</bean> 
 
+	<bean id="service.bookCopies" class="ar.com.hexacta.tpl.service.impl.BooksCopiesServiceImpl">
+			<property name="bookCopiesRepository" ref="db.dao.bookCopy"/>
+	</bean> 
+
+    <bean id="service.books" class="ar.com.hexacta.tpl.service.impl.BooksServiceImpl">
+		<property name="bookRepository" ref="db.dao.book"/>
+	</bean> 
 	
-	<bean id="db.dao.user" class="ar.com.hexacta.tpl.persistence.dao.UserDAO">		
-		<property name="sessionFactory" ref="sessionFactory" />
+	<bean id="service.comment" class="ar.com.hexacta.tpl.service.impl.CommentServiceImpl">
+			<property name="commentRepository" ref="db.dao.comment"/>
+	</bean> 
+		
+	<bean id="service.dataInit" class="ar.com.hexacta.tpl.service.impl.DataInitServiceImpl">
+		<property name="repository" ref="db.dao.dataInit"/>
 	</bean>
 	
-		<bean id="db.dao.generic" class="ar.com.hexacta.tpl.persistence.dao.GenericDAO">		
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	<bean id="db.dao.dataInit" class="ar.com.hexacta.tpl.persistence.dao.DataInitDAO">
-		<property name="userDAO" ref="db.dao.user"/>
-		<property name="bookDAO" ref="db.dao.book"/>
-		<property name="bookCategoryDAO" ref="db.dao.bookCategory"/>
-		<property name="genericDAO" ref="db.dao.generic"/>
-	</bean>			
+	<bean id="service.loan" class="ar.com.hexacta.tpl.service.impl.LoansServiceImpl">
+			<property name="loanRepository" ref="db.dao.loan"/>
+	</bean> 
+	
+	<bean id="service.user" class="ar.com.hexacta.tpl.service.impl.UsersServiceImpl">
+			<property name="usersRepository" ref="db.dao.user"/>
+	</bean> 
+	
 </beans>

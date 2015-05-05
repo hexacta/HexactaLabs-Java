@@ -1,81 +1,154 @@
 package ar.com.hexacta.tpl.model;
 
-import java.util.HashSet;
+import java.io.Serializable;
 import java.util.Set;
 
-public class Book extends Entity {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
-    private static final long serialVersionUID = 604529088687479075L;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
-    private String name;
+@Entity
+@Table(name = "books")
+public class Book implements Serializable {
+	private static final long serialVersionUID = 604529088687479075L;
 
-    private String description;
+	@Id
+	@Column(name = "BOOK_ID", unique = true)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String publisher;
+	@Column(name = "TITLE")
+	private String title;
 
-    private Set<BookCategory> bookCategories = new HashSet<BookCategory>(0);
+	@Column(name = "DESCRIPTION")
+	private String description;
 
-    private Set<BookCopy> bookCopies = new HashSet<BookCopy>(0);
+	@Column(name = "PUBLISHER")
+	private String publisher;
 
-    // Hibernate needs
-    public Book() {
-        super();
-    }
+	@Enumerated(EnumType.STRING)
+	@Column(name = "GENRE")
+	private BookGenre genre;
 
-    public Book(final String name) {
-        super();
-        this.name = name;
-    }
+	@Column(name = "ENABLED")
+	private Boolean enabled;
 
-    public Book(final String aName, final String aDescription, final String aPublisher,
-            final Set<BookCategory> bookCategories, final Set<BookCopy> aBookCopies) {
-        super();
-        name = aName;
-        description = aDescription;
-        publisher = aPublisher;
-        this.bookCategories = bookCategories;
-        bookCopies = aBookCopies;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<BookCategory> bookCategories;
 
-    }
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<BookCopy> bookCopies;
 
-    public Set<BookCategory> getBookCategories() {
-        return bookCategories;
-    }
+	// Needed for "optimistic model" in Oracle databases
+	@Version
+	@Column(name = "VERSION")
+	private Long version;
 
-    public String getDescription() {
-        return description;
-    }
+	public Book() {
+		super();
+		enabled = Boolean.TRUE;
+	}
 
-    public BookCopy getFreeBookCopy() {
-        for (BookCopy bookCopy : bookCopies) {
-            if (bookCopy.getState().equals(BookCopy.STATE_FREE)) {
-                return bookCopy;
-            }
-        }
-        return null;
-    }
+	public Book(final String aTitle) {
+		this();
+		title = aTitle;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Book(final String aTitle, final String aDescription,
+			final String aPublisher, final BookGenre aBookGenre,
+			final Set<BookCategory> bookCategories,
+			final Set<BookCopy> bookCopies) {
+		this(aTitle);
+		description = aDescription;
+		publisher = aPublisher;
+		genre = aBookGenre;
+		this.bookCategories = bookCategories;
+		this.bookCopies = bookCopies;
+	}
 
-    public String getPublisher() {
-        return publisher;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setBookCategories(final Set<BookCategory> bookCategories) {
-        this.bookCategories = bookCategories;
-    }
+	public void setId(final Long id) {
+		this.id = id;
+	}
 
-    public void setDescription(final String description) {
-        this.description = description;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setName(final String name) {
-        this.name = name;
-    }
+	public void setTitle(final String aTitle) {
+		title = aTitle;
+	}
 
-    public void setPublisher(final String publisher) {
-        this.publisher = publisher;
-    }
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(final String description) {
+		this.description = description;
+	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(final String publisher) {
+		this.publisher = publisher;
+	}
+
+	public BookGenre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(final BookGenre genre) {
+		this.genre = genre;
+	}
+
+	@JsonIgnore
+	public boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(final Boolean enable) {
+		enabled = enable;
+	}
+
+	public Set<BookCategory> getBookCategories() {
+		return bookCategories;
+	}
+
+	public void setBookCategories(final Set<BookCategory> bookCategories) {
+		this.bookCategories = bookCategories;
+	}
+
+	@JsonIgnore
+	public Set<BookCopy> getBookCopies() {
+		return bookCopies;
+	}
+
+	public void setBookCopies(final Set<BookCopy> bookCopies) {
+		this.bookCopies = bookCopies;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(final Long version) {
+		this.version = version;
+	}
 }

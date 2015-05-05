@@ -1,52 +1,105 @@
-/**
- * 
- */
 package ar.com.hexacta.tpl.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author clopez
- * 
- */
-public class Loan extends Entity {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
-    private static final long serialVersionUID = 1L;
+@Entity
+@Table(name = "loans")
+public class Loan implements Serializable {
 
-    private User user;
+	private static final long serialVersionUID = 1L;
 
-    private BookCopy book;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private Date fromDate;
+	@Version
+	private Long version;
 
-    private Date toDate;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "USER_ID")
+	private User user;
 
-    protected Loan() {
-        super();
-    }
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "BOOK_COPY_ID")
+	private BookCopy bookCopy;
 
-    public Loan(final User user, final BookCopy book, final Date fromDate, final Date toDate) {
-        super();
-        this.user = user;
-        this.book = book;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
-    }
+	@Column(name = "FROM_DATE")
+	private Date fromDate;
 
-    public User getUser() {
-        return user;
-    }
+	@Column(name = "TO_DATE")
+	private Date toDate;
 
-    public BookCopy getBook() {
-        return book;
-    }
+	public Loan() {
+		super();
+	}
 
-    public Date getFromDate() {
-        return fromDate;
-    }
+	public Loan(final User user, final BookCopy bookCopy, final Date fromDate,
+			final Date toDate) {
+		super();
+		this.user = user;
+		this.bookCopy = bookCopy;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+	}
 
-    public Date getToDate() {
-        return toDate;
-    }
+	public User getUser() {
+		return user;
+	}
 
+	public BookCopy getBookCopy() {
+		return bookCopy;
+	}
+
+	public Date getFromDate() {
+		return fromDate;
+	}
+
+	public Date getToDate() {
+		return toDate;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(final Long version) {
+		this.version = version;
+	}
+
+	public void setUser(final User user) {
+		this.user = user;
+	}
+
+	public void setBook(final BookCopy bookCopy) {
+		this.bookCopy = bookCopy;
+	}
+
+	public void setFromDate(final Date fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public void setToDate(final Date toDate) {
+		this.toDate = toDate;
+	}
 }

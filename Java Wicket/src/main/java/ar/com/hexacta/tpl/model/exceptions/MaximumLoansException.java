@@ -5,6 +5,6 @@ package ar.com.hexacta.tpl.model.exceptions;
  */
 public class MaximumLoansException extends RuntimeException {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 }

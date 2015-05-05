@@ -1,62 +1,123 @@
-/**
- * 
- */
 package ar.com.hexacta.tpl.model;
 
-/**
- * @author clopez
- * 
- */
-public class BookCopy extends Entity {
+import java.io.Serializable;
 
-    public static final String BOOK_RATE_BAD = "Bad";
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
-    public static final String BOOK_RATE_NORMAL = "Normal";
+@Entity
+@Table(name = "book_copies")
+public class BookCopy implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    public static final String BOOK_RATE_GOOD = "Good";
+	public static final String BOOK_RATE_BAD = "Bad";
 
-    public static final String BOOK_RATE_VERY_GOOD = "Very good";
+	public static final String BOOK_RATE_NORMAL = "Normal";
 
-    public static final String STATE_LOANED = "Loaned";
+	public static final String BOOK_RATE_GOOD = "Good";
 
-    public static final String STATE_FREE = "Free";
+	public static final String BOOK_RATE_VERY_GOOD = "Very good";
 
-    private static final long serialVersionUID = 1L;
+	public static final String STATE_LOANED = "Loaned";
 
-    private String code = "";
+	public static final String STATE_FREE = "Free";
 
-    private String bookRate;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String state;
+	@Version
+	@Column(name = "VERSION")
+	private Long version;
 
-    public BookCopy() {
+	@ManyToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Book.class)
+	private Book book;
 
-    }
+	@Column(name = "BOOK_RATE", nullable = false)
+	private String bookRate;
 
-    public BookCopy(final String code, final String bookRate, final String state) {
-        super();
-        this.code = code;
-        this.bookRate = bookRate;
-        this.state = state;
-    }
+	@Column(name = "STATE")
+	private String state;
 
-    public void changeToFree() {
-        state = STATE_FREE;
-    }
+	@Column(name = "ENABLED")
+	private boolean enabled;
 
-    public void changeToLoaned() {
-        state = STATE_LOANED;
-    }
+	public BookCopy() {
+		super();
+	}
 
-    public String getBookRate() {
-        return bookRate;
-    }
+	public BookCopy(final Book book, final String bookRate, final String state) {
+		super();
+		this.book = book;
+		this.bookRate = bookRate;
+		this.state = state;
+		enabled = true;
+		this.book = book;
+	}
 
-    public String getCode() {
-        return code;
-    }
+	public BookCopy(final Book book, final String bookRate, final String state,
+			final boolean enabled) {
+		this(book, bookRate, state);
+		this.enabled = enabled;
+	}
 
-    public String getState() {
-        return state;
-    }
+	public void changeToFree() {
+		state = STATE_FREE;
+	}
+
+	public void changeToLoaned() {
+		state = STATE_LOANED;
+	}
+
+	public String getBookRate() {
+		return bookRate;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(final boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(final Book book) {
+		this.book = book;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(final Long version) {
+		this.version = version;
+	}
+
+	public void setBookRate(final String bookRate) {
+		this.bookRate = bookRate;
+	}
 }

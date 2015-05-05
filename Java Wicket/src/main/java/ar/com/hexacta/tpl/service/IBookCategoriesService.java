@@ -6,6 +6,6 @@ import ar.com.hexacta.tpl.model.BookCategory;
 
 public interface IBookCategoriesService {
 
-    List<BookCategory> findAllCategories();
+	List<BookCategory> findAllCategories();
 
 }

@@ -22,8 +22,12 @@ public class DataInitPage extends BasePage {
         super();
         synchronized (initialized) {
             if (!initialized) {
-                dataInitService.initializeData();
-                initialized = true;
+                try{
+                	dataInitService.init();
+                	initialized = true;
+                } catch (Exception ex){
+                	initialized = false;
+                }
             }
         }
     }

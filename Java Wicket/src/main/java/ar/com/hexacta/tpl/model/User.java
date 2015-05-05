@@ -1,68 +1,107 @@
 package ar.com.hexacta.tpl.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.io.Serializable;
 
-import org.joda.time.DateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
-import ar.com.hexacta.tpl.model.exceptions.MaximumLoansException;
-import ar.com.hexacta.tpl.model.exceptions.NoBookCopyException;
+@Entity
+@Table(name = "users")
+public class User implements Serializable {
+	private static final long serialVersionUID = -2599013520313365015L;
 
-public class User extends Entity {
-    private static final long serialVersionUID = 1588265571172283477L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String username;
+	@Version
+	@Column(name = "VERSION")
+	private Long version;
 
-    private String email;
+	@Column(name = "USERNAME")
+	private String username;
 
-    private Collection<Loan> currentLoans = new ArrayList<Loan>();
+	@Column(name = "EMAIL")
+	private String email;
 
-    public User() {
-        super();
-    }
+	@Column(name = "PASSWOD")
+	private String password;
 
-    public User(final String aUserName, final String aPassword) {
-        this();
-        username = aUserName;
-        email = aPassword;
-    }
+	@Column(name = "ENABLED")
+	private Boolean enabled;
 
-    private void checkMaximumLoans() {
-        if (currentLoans.size() == 2) {
-            throw new MaximumLoansException();
-        }
+	public User() {
+		super();
+	}
 
-    }
+	public User(final String username, final String pass) {
+		this();
+		this.username = username;
+		password = pass;
+		enabled = true;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public User(final String username, final String pass, final String email) {
+		this(username, pass);
+		this.email = email;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public User(final String username, final String pass, final String email,
+			final boolean enabled) {
+		this(username, pass, email);
+		this.enabled = enabled;
+	}
 
-    public Loan loan(final Book book) {
-        this.checkMaximumLoans();
+	public String getUsername() {
+		return username;
+	}
 
-        BookCopy copy = book.getFreeBookCopy();
-        if (copy == null) {
-            throw new NoBookCopyException(book);
-        }
+	public String getPassword() {
+		return password;
+	}
 
-        DateTime now = new DateTime();
-        Loan loan = new Loan(this, copy, now.toDate(), now.plusDays(15).toDate());
-        copy.changeToLoaned();
-        currentLoans.add(loan);
-        return loan;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setEmail(final String email) {
-        this.email = email;
-    }
+	public void setUsername(final String user) {
+		username = user;
+	}
 
-    public void setUsername(final String name) {
-        username = name;
-    }
+	public void setPassword(final String pass) {
+		password = pass;
+	}
 
+	public void setEmail(final String email) {
+		this.email = email;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(final Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(final Long version) {
+		this.version = version;
+	}
 }
