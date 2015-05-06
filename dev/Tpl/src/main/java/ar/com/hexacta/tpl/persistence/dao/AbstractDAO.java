@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 public abstract class AbstractDAO<T> extends HibernateDaoSupport {
 
@@ -46,7 +47,7 @@ public abstract class AbstractDAO<T> extends HibernateDaoSupport {
 
     @SuppressWarnings(UNCHECKED)
     public List<T> findAll() {
-        return this.getHibernateTemplate().find("from " + this.getPersistentClass().getName() + " o");
+        return (List<T>) this.getHibernateTemplate().find("from " + this.getPersistentClass().getName() + " o");
     }
 
     public void deleteById(final Serializable id) {
@@ -59,8 +60,9 @@ public abstract class AbstractDAO<T> extends HibernateDaoSupport {
         this.getHibernateTemplate().clear();
     }
 
-    protected Criteria createCriteria() {
-        return this.getSession().createCriteria(this.getPersistentClass());
+    protected DetachedCriteria createCriteria() {
+    	DetachedCriteria criteria = DetachedCriteria.forClass(this.getPersistentClass());
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+    	return criteria;
     }
-
 }

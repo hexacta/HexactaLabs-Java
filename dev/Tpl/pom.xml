@@ -38,8 +38,8 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.version}</version>
 
 				<configuration>
@@ -75,122 +75,28 @@
 
 		<!-- PERSISTENCE DEPENDENCIES -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-tools</artifactId>
-			<version>3.2.3.GA</version>
-			<scope>compile</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>freemarker</artifactId>
-					<groupId>freemarker</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>1.8.0.10</version>
-		</dependency>
-
-		<dependency>
-			<groupId>postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>9.1-901.jdbc4</version>
-		</dependency>
-
-		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.18</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate</artifactId>
-			<version>3.2.6.ga</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>jta</artifactId>
-					<groupId>javax.transaction</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>cglib</artifactId>
-					<groupId>cglib</groupId>
-				</exclusion>
-			</exclusions>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
 		</dependency>
-
+		
 		<dependency>
-			<groupId>org.apache.geronimo.specs</groupId>
-			<artifactId>geronimo-jta_1.1_spec</artifactId>
-			<version>1.1.1</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.1.2.Final</version>
 		</dependency>
-
-		<dependency>
-			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache</artifactId>
-			<version>1.2.3</version>
-		</dependency>
-
-		<dependency>
-			<groupId>swarmcache</groupId>
-			<artifactId>swarmcache</artifactId>
-			<version>1.0RC2</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>asm</groupId>
-			<artifactId>asm-commons</artifactId>
-			<version>2.2.3</version>
-		</dependency>
-		<dependency>
-			<groupId>asm</groupId>
-			<artifactId>asm</artifactId>
-			<version>2.2.3</version>
-		</dependency>
-
-		<dependency>
-			<groupId>antlr</groupId>
-			<artifactId>antlr</artifactId>
-			<version>2.7.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.antlr</groupId>
-			<artifactId>antlr</artifactId>
-			<version>3.0.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time-hibernate</artifactId>
-			<version>1.2</version>
-			<exclusions>
-				<exclusion>
-					<groupId>ehcache</groupId>
-					<artifactId>ehcache</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
+		
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
-			<version>1.2.1</version>
-		</dependency>
-
-
+			<version>1.4</version>
+		</dependency>		
 		<!-- WICKET DEPENDENCIES -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
@@ -256,12 +162,6 @@
 
 		<!-- Varios -->
 		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>1.6.8</version>
-		</dependency>
-
-		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>1.6</version>
@@ -276,8 +176,6 @@
 			<artifactId>commons-collections</artifactId>
 			<version>3.2.1</version>
 		</dependency>
-		
-
 
 		<!-- SPRING -->
 		<dependency>
@@ -320,27 +218,6 @@
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
-
-		<!--Spring security ! -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>${spring-security.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>${spring-security.version}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>${spring-security.version}</version>
-			<scope>compile</scope>
-		</dependency>
-
 		<!-- Test -->
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -379,17 +256,15 @@
 	</dependencies>
 
 	<properties>
+		<hibernate.version>4.3.9.Final</hibernate.version>
 		<wicket.version>1.5.4</wicket.version>
-		<jetty.version>6.1.16</jetty.version>
+		<jetty.version>9.2.10.v20150310</jetty.version>
 
 		<!-- Application settings -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- Framework dependency versions -->
-		<spring.version>3.0.2.RELEASE</spring.version>
-
-		<!-- Spring Security -->
-		<spring-security.version>3.0.2.RELEASE</spring-security.version>
+		<spring.version>4.1.6.RELEASE</spring.version>
 
 		<!-- Maven compiler settings -->
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>

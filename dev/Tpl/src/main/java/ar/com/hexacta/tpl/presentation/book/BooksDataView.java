@@ -12,7 +12,6 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.springframework.security.access.AccessDeniedException;
 
 import ar.com.hexacta.tpl.model.Book;
 import ar.com.hexacta.tpl.model.BookCategory;
@@ -95,12 +94,7 @@ public class BooksDataView extends DataView<Book> {
 
             @Override
             protected void onSubmit(final AjaxRequestTarget target, final Form<?> form) {
-                try {
-
-                    booksService.deleteBook(item.getModelObject());
-                } catch (AccessDeniedException e) {
-                    this.error("Access denied");
-                }
+                booksService.deleteBook(item.getModelObject());
                 BooksDataView.this.navigateToHomePage();
             }
 

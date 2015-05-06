@@ -4,15 +4,12 @@
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
      default-lazy-init="false" default-autowire="no">
-		
-
-
 	
 	<bean id="simpleJDBCTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
 		<constructor-arg ref="dbSource"/>
 	</bean>
 	
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" lazy-init="default" autowire="default">
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" lazy-init="default" autowire="default">
 		<property name="dataSource" ref="dbSource" />
 		<property name="mappingLocations" value="classpath:mappings/*.hbm.xml" />
 		<property name="hibernateProperties">
@@ -25,7 +22,7 @@
 				<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
  				<prop key="hibernate.connection.autocommit">false</prop>
  				<prop key="hibernate.jdbc.batch_size">20</prop>
-				<prop key="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</prop>
+				<prop key="hibernate.query.factory_class">org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory</prop>
 			</props>
 		</property>
 	</bean>	
