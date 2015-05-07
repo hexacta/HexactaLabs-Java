@@ -15,10 +15,7 @@
 		<param-value>
 			classpath:spring/spring-properties-configurer.xml
 			classpath:spring/spring-presentation.xml			
-	 		classpath:spring/spring-service.xml
-	 		classpath:spring/spring-model.xml
-	 		classpath:spring/spring-persistence.xml
-			 		
+	 		classpath:spring/spring-persistence.xml			 		
 		</param-value>
 	</context-param>
  

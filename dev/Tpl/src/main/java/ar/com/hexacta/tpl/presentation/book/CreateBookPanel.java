@@ -26,10 +26,10 @@ public class CreateBookPanel extends Panel {
 
     private static final long serialVersionUID = 3474118583191544003L;
 
-    @SpringBean(name = "service.books")
+    @SpringBean
     private IBooksService booksService;
 
-    @SpringBean(name = "service.categories")
+    @SpringBean
     private IBookCategoriesService categoriesService;
 
     private FeedbackPanel feedbackPanel;

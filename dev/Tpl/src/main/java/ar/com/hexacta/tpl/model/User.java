@@ -1,21 +1,39 @@
 package ar.com.hexacta.tpl.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
 import org.joda.time.DateTime;
 
 import ar.com.hexacta.tpl.model.exceptions.MaximumLoansException;
 import ar.com.hexacta.tpl.model.exceptions.NoBookCopyException;
-
-public class User extends Entity {
+@Entity
+@Table(name = "users")
+public class User implements Serializable {
     private static final long serialVersionUID = 1588265571172283477L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Version
+    @Column(name = "VERSION")
+    private Long version;
+
+    @Column(name = "USERNAME")
     private String username;
 
+    @Column(name = "EMAIL")
     private String email;
-
-    private Collection<Loan> currentLoans = new ArrayList<Loan>();
 
     public User() {
         super();
@@ -27,34 +45,12 @@ public class User extends Entity {
         email = aPassword;
     }
 
-    private void checkMaximumLoans() {
-        if (currentLoans.size() == 2) {
-            throw new MaximumLoansException();
-        }
-
-    }
-
     public String getEmail() {
         return email;
     }
 
     public String getUsername() {
         return username;
-    }
-
-    public Loan loan(final Book book) {
-        this.checkMaximumLoans();
-
-        BookCopy copy = book.getFreeBookCopy();
-        if (copy == null) {
-            throw new NoBookCopyException(book);
-        }
-
-        DateTime now = new DateTime();
-        Loan loan = new Loan(this, copy, now.toDate(), now.plusDays(15).toDate());
-        copy.changeToLoaned();
-        currentLoans.add(loan);
-        return loan;
     }
 
     public void setEmail(final String email) {

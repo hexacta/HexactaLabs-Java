@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 public abstract class AbstractDAO<T> extends HibernateDaoSupport {
@@ -64,5 +65,10 @@ public abstract class AbstractDAO<T> extends HibernateDaoSupport {
     	DetachedCriteria criteria = DetachedCriteria.forClass(this.getPersistentClass());
         criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
     	return criteria;
+    }
+    
+    @Autowired
+    public void setSectionFactory(org.hibernate.SessionFactory sessionFactory){
+    	super.setSessionFactory(sessionFactory);
     }
 }

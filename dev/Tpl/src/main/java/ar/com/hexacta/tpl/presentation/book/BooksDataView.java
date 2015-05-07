@@ -23,7 +23,7 @@ public class BooksDataView extends DataView<Book> {
 
     private static final long serialVersionUID = -1407856626588256002L;
 
-    @SpringBean(name = "service.books")
+    @SpringBean
     private IBooksService booksService;
 
     public BooksDataView(final String id, final IDataProvider<Book> dataProvider) {

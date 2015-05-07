@@ -15,7 +15,7 @@ public class BooksListPanel extends Panel {
 
     private static final long serialVersionUID = 4249034740540883117L;
 
-    @SpringBean(name = "service.books")
+    @SpringBean
     private IBooksService booksService;
 
     private IDataProvider<Book> dataProvider;

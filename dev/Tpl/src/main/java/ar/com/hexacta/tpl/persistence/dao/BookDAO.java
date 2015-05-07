@@ -5,10 +5,11 @@ import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import ar.com.hexacta.tpl.model.Book;
 import ar.com.hexacta.tpl.persistence.repository.BookRepository;
-
+@Repository
 public class BookDAO extends AbstractDAO<Book> implements BookRepository {
 
 	@Override

@@ -77,6 +77,11 @@
       <attribute value="jar:file:/C:/Users/emalvino/.m2/repository/org/apache/wicket/wicket-auth-roles/1.5.4/wicket-auth-roles-1.5.4-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/cglib/cglib-nodep/2.2/cglib-nodep-2.2.jar" sourcepath="M2_REPO/cglib/cglib-nodep/2.2/cglib-nodep-2.2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/emalvino/.m2/repository/cglib/cglib-nodep/2.2/cglib-nodep-2.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/commons-lang/commons-lang/2.5/commons-lang-2.5.jar" sourcepath="M2_REPO/commons-lang/commons-lang/2.5/commons-lang-2.5-sources.jar">
     <attributes>
       <attribute value="jar:file:/C:/Users/emalvino/.m2/repository/commons-lang/commons-lang/2.5/commons-lang-2.5-javadoc.jar!/" name="javadoc_location"/>

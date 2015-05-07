@@ -1,20 +1,48 @@
 package ar.com.hexacta.tpl.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Book extends Entity {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
+@Entity
+@Table(name = "books")
+public class Book implements Serializable {
 
     private static final long serialVersionUID = 604529088687479075L;
+    @Id
+    @Column(name = "BOOK_ID", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Version
+    @Column(name = "VERSION")
+    private Long version;
+    
+    @Column(name = "TITLE")
+    private String title;
 
-    private String name;
-
+    @Column(name = "DESCRIPTION")
     private String description;
 
+    @Column(name = "PUBLISHER")
     private String publisher;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<BookCategory> bookCategories = new HashSet<BookCategory>(0);
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<BookCopy> bookCopies = new HashSet<BookCopy>(0);
 
     // Hibernate needs
@@ -24,13 +52,13 @@ public class Book extends Entity {
 
     public Book(final String name) {
         super();
-        this.name = name;
+        this.title = name;
     }
 
     public Book(final String aName, final String aDescription, final String aPublisher,
             final Set<BookCategory> bookCategories, final Set<BookCopy> aBookCopies) {
         super();
-        name = aName;
+        title = aName;
         description = aDescription;
         publisher = aPublisher;
         this.bookCategories = bookCategories;
@@ -56,7 +84,7 @@ public class Book extends Entity {
     }
 
     public String getName() {
-        return name;
+        return title;
     }
 
     public String getPublisher() {
@@ -72,10 +100,26 @@ public class Book extends Entity {
     }
 
     public void setName(final String name) {
-        this.name = name;
+        this.title = name;
     }
 
     public void setPublisher(final String publisher) {
         this.publisher = publisher;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 }

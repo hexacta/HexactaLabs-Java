@@ -19,7 +19,6 @@ public class HomePage extends BasePage {
 
     public HomePage() {
         super();
-        new DataInitPage();
         this.initialize();
 
     }

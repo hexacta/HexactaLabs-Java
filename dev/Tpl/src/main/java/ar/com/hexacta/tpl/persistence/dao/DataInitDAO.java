@@ -1,5 +1,7 @@
 package ar.com.hexacta.tpl.persistence.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.hexacta.tpl.model.Book;
@@ -11,18 +13,20 @@ import ar.com.hexacta.tpl.model.builder.BookBuilder;
 import ar.com.hexacta.tpl.model.builder.BookCategoryBuilder;
 import ar.com.hexacta.tpl.model.builder.BookCopyBuilder;
 import ar.com.hexacta.tpl.persistence.repository.DataInitRepository;
-
+@Repository
 public class DataInitDAO implements DataInitRepository {
-
+	@Autowired
     private UserDAO userDAO;
-
+	
+	@Autowired
     private BookDAO bookDAO;
 
+	@Autowired
     private BookCategoryDAO bookCategoryDAO;
 
+	@Autowired
     private GenericDAO genericDAO;
 
-    @Transactional
     private void createData() {
 
         // Users
@@ -41,10 +45,10 @@ public class DataInitDAO implements DataInitRepository {
         bookCategoryDAO.saveOrUpdate(physicalCategory);
 
         // Copias
-        BookCopy bookCopy1 = new BookCopyBuilder().withCode("1").withState(BookCopy.STATE_FREE).build();
-        BookCopy bookCopy2 = new BookCopyBuilder().withCode("2").withState(BookCopy.STATE_LOANED).build();
-        BookCopy bookCopy3 = new BookCopyBuilder().withCode("3").build();
-        BookCopy bookCopy4 = new BookCopyBuilder().withCode("4").build();
+        BookCopy bookCopy1 = new BookCopyBuilder().withState(BookCopy.STATE_FREE).build();
+        BookCopy bookCopy2 = new BookCopyBuilder().withState(BookCopy.STATE_LOANED).build();
+        BookCopy bookCopy3 = new BookCopyBuilder().build();
+        BookCopy bookCopy4 = new BookCopyBuilder().build();
 
         // Libros
         Book book1 = new BookBuilder().withName("El principito")
@@ -61,21 +65,16 @@ public class DataInitDAO implements DataInitRepository {
         Book book3 = new BookBuilder().withName("El Hobbit").withDescription("Novela fantastica de J. R. R. Tolkien.")
                 .withPublisher("Editorial Atlantida").withCategory(eBookCategory).withBookCopy(bookCopy4).build();
         bookDAO.saveOrUpdate(book3);
-
-        // Prestamos
-        Loan loan = user.loan(book1);
-        genericDAO.saveOrUpdate(loan);
-        genericDAO.saveOrUpdate(user);
-        genericDAO.saveOrUpdate(book1);
-
     }
 
     @Override
+    @Transactional
     public boolean initializeData() {
         boolean success = true;
         try {
             this.createData();
         } catch (Exception e) {
+        	e.printStackTrace();
             success = false;
         }
         return success;

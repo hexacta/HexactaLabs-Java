@@ -2,14 +2,16 @@ package ar.com.hexacta.tpl.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.hexacta.tpl.model.Book;
 import ar.com.hexacta.tpl.persistence.repository.BookRepository;
 import ar.com.hexacta.tpl.service.IBooksService;
-
+@Service
 public class BooksServiceImpl implements IBooksService {
-
+	@Autowired
     private BookRepository booksRepository;
 
     @Override
