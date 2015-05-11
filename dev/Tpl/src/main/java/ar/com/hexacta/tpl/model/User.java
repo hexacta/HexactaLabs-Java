@@ -37,7 +37,7 @@ public class User implements Serializable {
         username = aUserName;
         email = aPassword;
     }
-
+    
     public String getEmail() {
         return email;
     }

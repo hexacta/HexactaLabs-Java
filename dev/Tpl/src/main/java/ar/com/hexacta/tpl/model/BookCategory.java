@@ -34,10 +34,9 @@ public class BookCategory implements Serializable {
     }
 
     public BookCategory(final String aName, final String aDescription) {
-        super();
+        this();
         name = aName;
         description = aDescription;
-
     }
 
     public String getName() {

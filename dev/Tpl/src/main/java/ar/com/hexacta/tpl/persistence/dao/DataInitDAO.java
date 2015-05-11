@@ -71,7 +71,9 @@ public class DataInitDAO implements DataInitRepository {
     public boolean initializeData() {
         boolean success = true;
         try {
-            this.createData();
+        	if(bookDAO.findAll().isEmpty()){
+                this.createData();        		
+        	}
         } catch (Exception e) {
         	e.printStackTrace();
             success = false;

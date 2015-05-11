@@ -16,7 +16,6 @@ public class BookDAO extends AbstractDAO<Book> implements BookRepository {
 	@SuppressWarnings("unchecked")
 	public List<Book> findAll() {
 		DetachedCriteria criteria = createCriteria();
-		criteria.add(Restrictions.eq("enabled", true));
 		return (List<Book>) getHibernateTemplate().findByCriteria(criteria);
 	}
 
@@ -25,7 +24,6 @@ public class BookDAO extends AbstractDAO<Book> implements BookRepository {
 	public Book findById(final Serializable bookId) {
 		DetachedCriteria criteria = this.createCriteria();
 		criteria.add(Restrictions.like("id", bookId));
-		criteria.add(Restrictions.eq("enabled", true));
 		List<Book> result = (List<Book>) getHibernateTemplate().findByCriteria(criteria);
 		if (result.size() == 0){
 			return null;

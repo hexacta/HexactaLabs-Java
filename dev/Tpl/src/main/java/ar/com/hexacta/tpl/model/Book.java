@@ -63,7 +63,6 @@ public class Book implements Serializable {
         publisher = aPublisher;
         this.bookCategories = bookCategories;
         bookCopies = aBookCopies;
-
     }
 
     public Set<BookCategory> getBookCategories() {
