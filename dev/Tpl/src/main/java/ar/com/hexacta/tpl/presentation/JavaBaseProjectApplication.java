@@ -10,8 +10,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 public class JavaBaseProjectApplication extends WebApplication implements ApplicationContextAware {
-    private static final long serialVersionUID = -7489854575515312542L;
-
     private transient ApplicationContext context;
 
     private boolean initialized = false;

@@ -100,7 +100,6 @@ public class LendBookPanel extends Panel {
             @Override
             protected void onSubmit(final AjaxRequestTarget target, final Form<?> aForm) {
                 target.add(form);
-                User selectedUser = selected;
                 LendBookPanel.this.navigateToBooksPage();
             }
 

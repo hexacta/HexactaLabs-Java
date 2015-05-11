@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.com.hexacta.tpl.model.Book;
 import ar.com.hexacta.tpl.model.BookCategory;
 import ar.com.hexacta.tpl.model.BookCopy;
-import ar.com.hexacta.tpl.model.Loan;
 import ar.com.hexacta.tpl.model.User;
 import ar.com.hexacta.tpl.model.builder.BookBuilder;
 import ar.com.hexacta.tpl.model.builder.BookCategoryBuilder;
